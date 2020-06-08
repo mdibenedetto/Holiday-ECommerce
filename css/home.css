@@ -18,32 +18,18 @@
   border: 1px solid yellow;
   width: 100%;
   height: 100%;
-  display: none;
-
-  /* visibility:hidden;
-  background: center no-repeat;
-  background-size: cover;
-  border-radius: 3px;
-  box-shadow: 1px 1px 5px rgba(0,0,0,.4); 
-  transition: all .88s ease; */
+  display: none; 
 }
 
 .top-background .image-container.active {
-  display: block;
-    /* visibility: visible;
-    opacity: 1; */
-    /* animation: 1s fadeIn; */
+  display: block; 
 }
 
-@keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      visibility: visible;
-      opacity: 1;
-    }
-  }
+
+#carouselExampleCaptions{
+  width: 100%;
+}
+ 
 
 .top-background .title-container {
   height: fit-content;
