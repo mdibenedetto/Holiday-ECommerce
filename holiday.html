@@ -7,8 +7,92 @@
     <link rel="stylesheet" href="./css/holiday.css" />
   </head>
   <body>
+    Holiday place holder
     <section class="holiday-container">
-      Holiday place holder
+      <div class="container">
+        <div class="row">
+          <div class="col-8 container" id="templateContainer">
+            <template>
+              <div class="row">
+                <div class="col-sm">
+                  <!-- SUB TEMPLATE -->
+                  <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-6">
+                        <img src="..." class="card-img" alt="..." />
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">
+                            This is a wider card with supporting text below as a
+                            natural lead-in to additional content. This content
+                            is a little bit longer.
+                          </p>
+                          <p class="card-text">
+                            <small class="text-muted"
+                              >Last updated 3 mins ago</small
+                            >
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- SUB TEMPLATE -->
+                  <!-- SUB TEMPLATE -->
+                </div>
+                <div class="col-sm">
+                  <!-- SUB TEMPLATE -->
+                  <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-6">
+                        <img src="..." class="card-img" alt="..." />
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">
+                            This is a wider card with supporting text below as a
+                            natural lead-in to additional content. This content
+                            is a little bit longer.
+                          </p>
+                          <p class="card-text">
+                            <small class="text-muted"
+                              >Last updated 3 mins ago</small
+                            >
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- SUB TEMPLATE -->
+                </div>
+              </div>
+            </template>
+
+            <!-- TODO  REMOVE DUMMY CODE-->
+            <script>
+              var template = document.getElementsByTagName("template")[0];
+              var clon = template.content.cloneNode(true);
+
+              const templateContainer = document.querySelector(
+                "#templateContainer"
+              );
+
+              Array(10)
+                .fill("")
+                .forEach(() => {
+                  var clon = template.content.cloneNode(true);
+                  templateContainer.appendChild(clon);
+                });
+            </script>
+          </div>
+
+          <div class="col-4">
+            FILTERS
+          </div>
+        </div>
+      </div>
     </section>
     <script src="./js/common.js"></script>
   </body>

@@ -1,5 +1,21 @@
 .holiday-container {
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-  }
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.card {
+  min-width: 360px;
+  min-height: 196px;
+}
+
+.card img {
+  width: 167px;
+  height: 143px;
+  border: 1px solid;
+  display: inline-block;
+}
+
+.card-text{
+    font-size: 13px;
+}
