@@ -12,7 +12,8 @@
   display: inline-block;
   margin: auto 0;
   border-radius: 0 0 6px 6px;
-  box-shadow: 3px 3px 3px #001c35;
+  box-shadow: 1px 1px 1px #001c35;
+  background: radial-gradient(ellipse at center, #d73430 0%,#f1625e 100%);
 }
 
 .nav-bar ul {
