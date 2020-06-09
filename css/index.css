@@ -2,9 +2,64 @@
 /* @import url("./home.css"); */
 /* @import url("./home-gallery.css"); */
 
-.main-container{
-    display: flex;
-    justify-content: center;
-    padding: 40px;
+/* Add the decaration on top */
+a { 
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent; 
 }
 
+a {
+  transition: all 0.3s ease-in-out;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Page loader */
+body[data-loading="true"] .loader-container {
+  background-color: #c8dde4;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  opacity: 0.5;
+  z-index: 1000;
+}
+
+body[data-loading="true"] .loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

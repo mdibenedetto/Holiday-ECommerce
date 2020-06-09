@@ -1,3 +1,7 @@
+const pageLoader = `<div class="loader-container">
+  <div class="loader"></div>
+</div>`;
+
 const toolBar = `
    <header class="header-nav-bar">
       <nav class="nav-bar">
@@ -29,12 +33,27 @@ document.head.insertAdjacentHTML("afterbegin", scriptLinks);
 
 document.addEventListener(
   "DOMContentLoaded",
-  () => document.body.insertAdjacentHTML("afterbegin", toolBar),
+  () => {
+    initLayoutPage();
+    setLinkListener();
+  },
   false
 );
 
-// const links = document.querySelectorAll("a");
-// links.forEach((a) => a.addEventListener("click", (e) => e.preventDefault()));
+function initLayoutPage() {
+  document.body.insertAdjacentHTML("afterbegin", pageLoader);
+  document.body.insertAdjacentHTML("afterbegin", toolBar);
+  document.body.removeAttribute("data-loading");
+}
+
+function setLinkListener() {
+  const links = document.querySelectorAll("nav a");
+  links.forEach((a) =>
+    a.addEventListener("click", (e) => {
+      document.body.setAttribute("data-loading", "true");
+    })
+  );
+}
 
 // let currentIndex = 0;
 // const images = document.querySelectorAll(".image-container");

@@ -1,0 +1,87 @@
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  line-height: 1.66667;
+  font-weight: 300;
+  color: rgba(21, 21, 21, 0.8);
+  background-color: #ffffff;
+  letter-spacing: -0.03em;
+}
+
+p + p {
+  margin-top: 15px;
+}
+
+div.text-with-divider + p {
+  margin-top: 30px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[class^="heading-"] {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "PT Serif", "Times New Roman", Times, serif;
+  font-weight: 700;
+  color: #151515;
+  letter-spacing: 0;
+}
+
+h2 {
+  font-size: 45px;
+  line-height: 1.2;
+}
+
+.text-with-divider {
+  position: relative;
+  padding-left: 60px;
+  max-width: 470px;
+}
+
+.text-with-divider .divider {
+  position: absolute;
+  left: 0;
+  top: 17px;
+}
+
+.text-with-divider .divider:after {
+  width: 40px;
+}
+
+.divider::after {
+  content: "";
+  display: inline-block;
+  width: 60px;
+  height: 2px;
+  background-color: #41a451;
+}
+
+.divider {
+  font-size: 0;
+  line-height: 0;
+}
+
+.text-with-divider h4 {
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  color: rgba(21, 21, 21, 0.7);
+  font-size: 26px;
+  line-height: 1.38462;
+}
+
+.why-choose-us {
+  padding: 115px 0;
+}
+
+.why-choose-us-body {
+  margin-top: 60px;
+}
+
+.box-icon-caption h4 {
+    font-weight: 500;
+}
