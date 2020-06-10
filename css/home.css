@@ -33,18 +33,14 @@
   width: 100%;
 }
 
-.top-background .title-container {
-  height: fit-content;
-  margin-top: 130px;
-  left: 35%;
-  position: absolute;
-  width: 100%;
+.top-background .title-container {    
+  margin-top: 130px; 
+  position: absolute;  
 }
 
 .top-background .title-container .main-title {
   color: #fff;
-  font-family: cursive;
-  position: absolute;
+  font-family: cursive; 
 }
 
 .card-holiday-container {

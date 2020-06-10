@@ -1,16 +1,24 @@
-@import url("./nav-bar.css");
+@import url("./navbar.css");
 /* @import url("./home.css"); */
 /* @import url("./home-gallery.css"); */
 
 /* Add the decaration on top */
 a { 
-  color: inherit;
-  text-decoration: none;
+  color: inherit; 
   background-color: transparent; 
+  transition: all 0.3s ease-in-out;
 }
 
-a {
-  transition: all 0.3s ease-in-out;
+a:link,
+a:visited,
+a:hover,
+a:active{
+  color: inherit; 
+  text-decoration: none;
+}
+
+a.active {
+  font-weight: bold;
 }
 
 .main-container {

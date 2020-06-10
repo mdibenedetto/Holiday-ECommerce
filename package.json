@@ -1,0 +1,20 @@
+{
+  "name": "cutravel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "http-server -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdibenedetto/nci-ss-project-holiday-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdibenedetto/nci-ss-project-holiday-website/issues"
+  },
+  "homepage": "https://github.com/mdibenedetto/nci-ss-project-holiday-website#readme"
+}
