@@ -22,9 +22,10 @@ if (window.currentUser) {
           Welcome ${window.currentUser.userName}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item disabled" >Account</a>
-          <a class="dropdown-item disabled" >Order history</a>
-          <a class="dropdown-item disabled" >Cart</a>
+          <a class="dropdown-item" href="user-account.html">Account</a>
+          <a class="dropdown-item" href="orders.html" >Order history</a>
+          <a class="dropdown-item"  href="cart.html">Cart</a>
+          <a class="dropdown-item"  href="checkout-cart.html">Checkout</a>
           <a class="dropdown-item" href="login.html" onclick="logout()">
             Log out
           </a>
