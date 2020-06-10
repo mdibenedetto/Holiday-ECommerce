@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "http-server -o",
+    "remote-heroku":"heroku git:remote -a nicissproject",
+    "push-heroku":  "git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
