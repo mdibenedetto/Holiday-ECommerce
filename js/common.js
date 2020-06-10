@@ -8,7 +8,7 @@ window.currentUser = getCurrentUser();
 if (window.currentUser) {
   // usetToolbar = `<li>Welcome ${window.currentUser.userName}</li>
   // <li><a href="login.html" onclick="logout()">Log out</a></li>`;
- 
+
   usetToolbar = `    
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" 
@@ -22,9 +22,9 @@ if (window.currentUser) {
           Welcome ${window.currentUser.userName}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" >Account</a>
-          <a class="dropdown-item" >Order history</a>
-          <a class="dropdown-item" >Cart</a>
+          <a class="dropdown-item disabled" >Account</a>
+          <a class="dropdown-item disabled" >Order history</a>
+          <a class="dropdown-item disabled" >Cart</a>
           <a class="dropdown-item" href="login.html" onclick="logout()">
             Log out
           </a>
@@ -35,7 +35,8 @@ if (window.currentUser) {
   // usetToolbar = `<li><a href="login.html">Login</a></li>
   // <li><a href="register.html">Register</a></li>`;
 
-  usetToolbar = ` <li class="nav-item">
+  usetToolbar = `
+    <li class="nav-item">
         <a class="nav-link" href="login.html">
           Login
         </a>
@@ -72,7 +73,7 @@ const toolBar = `
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
-            <li class="nav-item active"> 
+            <li class="nav-item"> 
               <a class="nav-link" href="index.html">
                 Home <span class="sr-only">(current)</span>
               </a>
@@ -98,8 +99,24 @@ const toolBar = `
     </header>
 `;
 
- 
+function setActivePageLink(page) {
+  const parseLink = (url) => {
+    let index = url.lastIndexOf("/");
+    let page = url.substr(index + 1);
+    return page;
+  };
 
+  let activePage = parseLink(window.location.pathname);
+
+  const links = document.querySelectorAll("nav li");
+  links.forEach((li) => {
+    const anchor = li.querySelector("a");
+    const linkPage = parseLink(anchor.href);
+    if (linkPage === activePage) {
+      li.classList.add("active");
+    }
+  });
+}
 // const footer = ``;
 
 // const scriptLinks = `
@@ -121,6 +138,7 @@ document.addEventListener(
   () => {
     initLayoutPage();
     setLinkListener();
+    setActivePageLink();
   },
   false
 );
@@ -132,7 +150,9 @@ function initLayoutPage() {
 }
 
 function setLinkListener() {
-  const links = document.querySelectorAll("nav a:not(.navbar-brand):not([role=button])");
+  const links = document.querySelectorAll(
+    "nav a:not(.navbar-brand):not([role=button])"
+  );
   links.forEach((a) =>
     a.addEventListener("click", (e) => {
       document.body.setAttribute("data-loading", "true");
