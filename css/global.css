@@ -3,6 +3,13 @@
 /* @import url("./home-gallery.css"); */
 
 /* Add the decaration on top */
+
+
+html,
+body {
+  height: 100%;
+}
+
 a { 
   color: inherit; 
   background-color: transparent; 

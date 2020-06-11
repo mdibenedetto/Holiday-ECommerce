@@ -6,7 +6,7 @@
   position: relative;
   justify-content: center;
   display: flex;
-  height: 635px;
+  /* height: 635px; */
   background: #012542;
   margin-top: -52px;
   /* z-index: -1; */
@@ -48,13 +48,13 @@
   justify-content: center;
   top: -45px;
   position: relative;
-  height: 350px;
+  /* height: 350px; */
 }
 
 .card-holiday {
   background-color: lightgreen;
   width: 300px;
-  height: 364px;
+  /* height: 364px; */
   border: 1px solid;
   margin-left: 10px;
   margin-right: 10px;

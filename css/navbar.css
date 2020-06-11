@@ -25,6 +25,23 @@
   }
 }
 
+@media (max-width: 991px) {
+  .header-navbar.container {
+    width: 100%;
+    margin: 0;
+    display: contents;
+    
+  }
+
+  .header-navbar.container .navbar-background{
+    border-radius: 0;
+  }
+
+  section.top-background {
+    margin-top: 0;
+  }
+}
+
 /* .nav-bar {
   background-color: #d73430;
   display: inline-block;
@@ -90,5 +107,5 @@
   text-align: center;
   padding: 5px 5px;
   text-decoration: none;
-  width: 150px;
+  /* width: 150px; */
 }

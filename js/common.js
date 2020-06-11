@@ -34,7 +34,7 @@ if (window.currentUser) {
     `;
 } else {
   // usetToolbar = `<li><a href="login.html">Login</a></li>
-  // <li><a href="register.html">Register</a></li>`;
+  // <li><a href="register.html">register</a></li>`;
 
   usetToolbar = `
     <li class="nav-item">
@@ -44,7 +44,7 @@ if (window.currentUser) {
       </li>
       <li class="nav-item">
         <a class="nav-link" href="register.html">
-          Register
+          register
         </a>
       </li>`;
 }
