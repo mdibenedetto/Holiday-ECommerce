@@ -120,6 +120,11 @@ function setActivePageLink(page) {
     }
   });
 }
+
+const cssLinks = `
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+`;
 // const footer = ``;
 
 // const scriptLinks = `
@@ -147,6 +152,8 @@ document.addEventListener(
 );
 
 function initLayoutPage() {
+  document.head.insertAdjacentHTML("afterbegin", cssLinks);  
+
   document.body.insertAdjacentHTML("afterbegin", pageLoader);
   document.body.insertAdjacentHTML("afterbegin", toolBar);
   document.body.removeAttribute("data-loading");

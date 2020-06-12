@@ -49,6 +49,11 @@ a.active {
   padding: 40px;
 }
 
+.frame
+{
+  background-color: white;
+}
+
 /* Page loader */
 body[data-loading="true"] .loader-container {
   background-color: #c8dde4;

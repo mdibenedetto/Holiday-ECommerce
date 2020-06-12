@@ -32,26 +32,121 @@
     <!-- END bootstrap -->
     <link rel="stylesheet" href="./css/global.css" />
     <!-- END global css -->
+    <link rel="stylesheet" href="./css/cart.css" />
   </head>
   <body>
-    <section class="container main-container">
-      <h1>
-        PLACE HOLDER "Checkout cart"
-      </h1>
-
-      <a
-        class="btn btn-primary"
-        href="./checkout-cart.html"
-        style="color: white; display: flex; align-self: flex-end;"
-      >
-        Checkout
-      </a>
-      <img
-        style="width: 100%;"
-        src="./img/cart-page-dummy.png"
-        alt=""
-        srcset=""
-      />
+    <section class="main-container">
+      <section class="frame cart-container container mb-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Available</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-right">Price</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img src="https://dummyimage.com/50x50/55595c/fff" />
+                    </td>
+                    <td>Product Name Dada</td>
+                    <td>In stock</td>
+                    <td>
+                      <input class="form-control" type="text" value="1" />
+                    </td>
+                    <td class="text-right">124,90 €</td>
+                    <td class="text-right">
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="https://dummyimage.com/50x50/55595c/fff" />
+                    </td>
+                    <td>Product Name Toto</td>
+                    <td>In stock</td>
+                    <td>
+                      <input class="form-control" type="text" value="1" />
+                    </td>
+                    <td class="text-right">33,90 €</td>
+                    <td class="text-right">
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="https://dummyimage.com/50x50/55595c/fff" />
+                    </td>
+                    <td>Product Name Titi</td>
+                    <td>In stock</td>
+                    <td>
+                      <input class="form-control" type="text" value="1" />
+                    </td>
+                    <td class="text-right">70,00 €</td>
+                    <td class="text-right">
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Sub-Total</td>
+                    <td class="text-right">255,90 €</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Shipping</td>
+                    <td class="text-right">6,90 €</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Total</strong></td>
+                    <td class="text-right"><strong>346,90 €</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col mb-2">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <a href="holiday.html" class="btn btn-block btn-light">
+                  Continue Shopping
+                </a>
+              </div>
+              <div class="col-sm-12 col-md-6 text-right">
+                <a
+                  href="./checkout-cart.html"
+                  class="btn-checkout btn btn-lg btn-block btn-success text-uppercase"
+                >
+                  Checkout
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
     <script src="./js/common.js"></script>
   </body>
