@@ -51,43 +51,22 @@
           <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
           <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
         </ol> -->
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img
-              src="https://via.placeholder.com/1440x635.png/012542?text=Image-1"
-              class="d-block w-100"
-              alt="..."
-            />
-            <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </div>
-          </div>
+        <!-- START: LOAD CAROUSEL ITEMS -->
+        <div class="carousel-inner"></div>
+        <template id="carousel-item">
           <div class="carousel-item">
             <img
-              src="https://via.placeholder.com/1440x635.png/d8b1d3?text=Image-2"
-              class="d-block w-100"
+              src="{IMAGE_PATH}"
+              class="item-image d-block w-100"
               alt="..."
             />
             <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h5 class="item-title">{TITLE}</h5>
+              <p class="item-content">{BODY_CONTENT}</p>
             </div>
           </div>
-          <div class="carousel-item">
-            <img
-              src="https://via.placeholder.com/1440x635.png/144238144?text=Image-3"
-              class="d-block w-100"
-              alt="..."
-            />
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </div>
-          </div>
-        </div>
+        </template> 
+        <!-- END: LOAD CAROUSEL ITEMS -->
         <a
           class="carousel-control-prev"
           href="#carouselExampleCaptions"
@@ -138,9 +117,43 @@
       </section>
     </section>
 
+    <section class="container">
+      <div class="col-10 mx-auto">
+        <h2 class="">
+          It’s time to jet off with our amazing destinations!
+        </h2>
+
+        <p>
+          Grab huge reductions on flights to worldwide destinations with
+          DreamHolidays. With award-winning service and flights to many
+          destinations, DreamHolidays is the European's fastest-growing holiday
+          packages seller. Our destinations allow you to experience a little
+          luxury throughout your journey, with connections through the five-star
+          hotels.
+        </p>
+        <blockquote>
+          <p>
+            Curabitur blandit tempus porttitor.
+            <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu
+            leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
+          </p>
+        </blockquote>
+
+        <h2 class="">
+          Travel somewhere new!
+        </h2>
+        <p>
+          This year uncover new horizons. Whether your interests are sun and
+          palm trees, museum shopping , cooking or shopping, DreamHolidays
+          offers plenty of options to embark on new experiences. Check out all
+          of our deals and book your dream vacation today!
+        </p>
+      </div>
+    </section>
     <!-- <footer></footer> -->
     <!-- WEBSITE JS -->
     <script src="./js/common.js"></script>
+    <script src="./js/home.js"></script>
     <script></script>
   </body>
 </html>

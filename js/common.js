@@ -62,7 +62,9 @@ if (window.currentUser) {
 const toolBar = `
    <header class="header-navbar container">
     <nav class="navbar-background navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">Cutravel</a>
+        <a class="navbar-brand" href="index.html">
+          <span class="brand-text">DH</span>
+        </a>
         <button class="navbar-toggler" 
             type="button" 
             data-toggle="collapse" 

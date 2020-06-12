@@ -1,14 +1,14 @@
 .header-navbar {
-  /* display: flex;
-  justify-content: center; 
+  display: flex;
+  justify-content: center;
   top: 0;
   left: 0;
-  right: 0; */
-  /* z-index: 999; */
+  right: 0;
+  z-index: 999;
 }
 
 .navbar-brand {
-  display: none;
+  /* display: none; */
 }
 
 .navbar-background {
@@ -30,10 +30,9 @@
     width: 100%;
     margin: 0;
     display: contents;
-    
   }
 
-  .header-navbar.container .navbar-background{
+  .header-navbar.container .navbar-background {
     border-radius: 0;
   }
 
@@ -108,4 +107,18 @@
   padding: 5px 5px;
   text-decoration: none;
   /* width: 150px; */
+}
+
+.brand-text {
+  border: 1px solid;
+  font-family: cursive;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  background: radial-gradient(ellipse at center, #d73430 0%, #f1625e 100%);
+  background: radial-gradient(ellipse at center, #0777d3 0%, #1166ab 100%);
+  display: inline-flex;
+  color: white;
+  box-shadow: 1px 1px 1px #001c35;
 }

@@ -1,5 +1,6 @@
-.header-nav-bar {
-  position: fixed;
+.header-navbar {
+  position: sticky;
+  margin-bottom: -71px;
 }
 
 .top-background {
@@ -8,7 +9,7 @@
   display: flex;
   /* height: 635px; */
   background: #012542;
-  margin-top: -52px;
+  /* margin-top: -52px; */
   /* z-index: -1; */
 }
 
@@ -33,14 +34,14 @@
   width: 100%;
 }
 
-.top-background .title-container {    
-  margin-top: 130px; 
-  position: absolute;  
+.top-background .title-container {
+  margin-top: 130px;
+  position: absolute;
 }
 
 .top-background .title-container .main-title {
   color: #fff;
-  font-family: cursive; 
+  font-family: cursive;
 }
 
 .card-holiday-container {
@@ -67,3 +68,14 @@
   font-family: "Open Sans", sans-serif;
   background: #012642;
 } */
+
+@media (max-width: 768px) {
+  .card-holiday-container {
+    top: 0;
+    margin: 15px;
+  }
+
+  .title-container {
+    display: none;
+  }
+}

@@ -4,7 +4,6 @@
 
 /* Add the decaration on top */
 
-
 html,
 body {
   height: 100%;
@@ -12,21 +11,28 @@ body {
 
 body {
   background: #eaeaea;
- 
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  line-height: 1.66667;
+  font-weight: 300;
+  color: rgba(21, 21, 21, 0.8);
+  letter-spacing: -0.03em;
+}
 
-a { 
-  color: inherit; 
-  background-color: transparent; 
+a {
+  color: inherit;
+  background-color: transparent;
   transition: all 0.3s ease-in-out;
 }
 
 a:link,
 a:visited,
 a:hover,
-a:active{
-  color: inherit; 
+a:active {
+  color: inherit;
   text-decoration: none;
 }
 
@@ -37,7 +43,7 @@ a.active {
 .main-container {
   display: flex;
   justify-content: center;
-  justify-items: center; 
+  justify-items: center;
   align-items: center;
   flex-direction: column;
   padding: 40px;
