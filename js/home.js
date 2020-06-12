@@ -20,8 +20,7 @@ const items = [
 document.addEventListener("DOMContentLoaded", () => {
   const carouselInner = document.querySelector(".carousel-inner");
   const temp = document.querySelector("template#carousel-item");
-
-  debugger;
+ 
   items.forEach((item) => {
     const clone = temp.content.cloneNode(true);
     clone.querySelector(".item-image").src = item.imageUrl;
