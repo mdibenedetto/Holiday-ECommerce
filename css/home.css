@@ -1,5 +1,5 @@
 .header-navbar {
-  position: sticky;
+  /* position: sticky; */
   margin-bottom: -71px;
 }
 
@@ -59,6 +59,10 @@
   border: 1px solid;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.carousel-caption {
+  top: 180px;
 }
 
 /* footer {

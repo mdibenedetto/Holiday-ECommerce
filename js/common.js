@@ -128,9 +128,9 @@ const cssLinks = `
 
 const footer = `
 <footer class="footer row ">
-<section class = "footer-body">
-  © Copyright 2020 DreamHolidays - All Rights Reserved
-</section>
+  <section class = "footer-body">
+    © Copyright 2020 DreamHolidays - All Rights Reserved
+  </section>
 </footer>`;
 
 // const scriptLinks = `

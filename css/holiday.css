@@ -18,9 +18,14 @@
   display: inline-block;
 }
 
-.card-text{
-    font-size: 13px;
-    /* white-space: nowrap;
+.card-text {
+  font-size: 13px;
+  /* white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; */
+}
+
+a.card-link {
+  color: #007bff;
+  font-weight: 500;
 }

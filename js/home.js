@@ -1,32 +1,72 @@
-const dummyBaseImage = `https://via.placeholder.com`;
-const items = [
-  {
-    imageUrl: dummyBaseImage + "/1440x635.png/012542?text=Image-1",
-    title: "First slide label",
-    content: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-  },
-  {
-    imageUrl: dummyBaseImage + "/1440x635.png/d8b1d3?text=Image-2",
-    title: "Second slide label",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    imageUrl: dummyBaseImage + "/1440x635.png/144238144?text=Image-3",
-    title: "Third slide label",
-    content: "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-  },
-];
-
 document.addEventListener("DOMContentLoaded", () => {
-  const carouselInner = document.querySelector(".carousel-inner");
+  loadSlider();
+  loadBanner();
+});
+
+function loadSlider() {
+  const sliderBaseImage = `./img/slider`;
+  const sliderItems = [
+    {
+      imageUrl: sliderBaseImage + "/slide1.jpg",
+      title: "Maldives",
+      price: 2000,
+      content: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
+    },
+    {
+      imageUrl: sliderBaseImage + "/slide2.jpg",
+      title: "Venice",
+      price: 1600,
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
+    {
+      imageUrl: sliderBaseImage + "/slide3.jpg",
+      title: "London",
+      price: 1000,
+      content:
+        "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
+    },
+  ];
+
+  const parent = document.querySelector(".carousel-inner");
   const temp = document.querySelector("template#carousel-item");
- 
-  items.forEach((item) => {
+
+  sliderItems.forEach((item) => {
     const clone = temp.content.cloneNode(true);
     clone.querySelector(".item-image").src = item.imageUrl;
     clone.querySelector(".item-title").textContent = item.title;
     clone.querySelector(".item-content").textContent = item.content;
-    carouselInner.appendChild(clone);
+    parent.appendChild(clone);
   });
-  carouselInner.children[0].classList.add("active");
-});
+  parent.children[0].classList.add("active");
+}
+
+function loadBanner() {
+  const bannerBaseImage = `./img/banner`;
+  const bannerItems = [
+    {
+      imageUrl: bannerBaseImage + "/ban1.jpg",
+      title: "Barcelona",
+      price: 1000,
+    },
+    {
+      imageUrl: bannerBaseImage + "/ban2.jpg",
+      title: "Goa",
+      price: 1500,
+    },
+    {
+      imageUrl: bannerBaseImage + "/ban3.jpg",
+      title: "Paris",
+      price: 1600,
+    },
+  ];
+
+  const parent = document.querySelector(".card-holiday-container");
+  const temp = document.querySelector("template#card-holiday-item");
+
+  bannerItems.forEach((item) => {
+    const clone = temp.content.cloneNode(true);
+    clone.querySelector(".item-image").src = item.imageUrl; 
+    parent.appendChild(clone);
+  });
+ 
+}

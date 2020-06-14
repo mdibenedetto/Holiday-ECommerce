@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Holiday</title>
-     <!-- START bootstrap -->
+    <!-- START bootstrap -->
     <!-- CSS only -->
     <link
       rel="stylesheet"
@@ -31,97 +31,51 @@
     ></script>
     <!-- END bootstrap -->
     <link rel="stylesheet" href="./css/global.css" />
-      <!-- END global css -->
+    <!-- END global css -->
     <link rel="stylesheet" href="./css/holiday.css" />
   </head>
   <body>
     <section class="main-container">
       <div class="container">
         <div class="row">
-          <div class="col-8 container" id="templateContainer">
-            <template>
-              <div class="row">
-                <div class="col-sm">
-                  <!-- SUB TEMPLATE -->
+          <div class="col-8 container">
+            <div class="row" id="holiday-container">
+              <!-- SUB TEMPLATE -->
+              <template id="holiday-item">
+                <div class="col-sm-6">
                   <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
                       <div class="col-md-6">
-                        <img
-                          src="https://via.placeholder.com/174x157.png/012542?text=Image-1"
-                          class="img-fluid card-img"
-                          alt="..."
-                        />
+                        <a class="item-link" href="holiday-detail.html?id=1">
+                          <img
+                            src="https://via.placeholder.com/174x157.png/012542?text=Image-1"
+                            class="item-image img-fluid card-img"
+                            alt="..."
+                          />
+                        </a>
                       </div>
                       <div class="col-md-6">
                         <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
+                          <h5 class="card-title item-title">Card title</h5>
+                          <p class="card-text item-content">
                             This is a wider card with supporting text below as a
                             natural lead-in to additional content. This content
                             is a little bit longer.
                           </p>
+
                           <a
                             href="holiday-detail.html?id=1"
-                            class="btn btn-primary"
-                            >Detail</a
-                          > 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- SUB TEMPLATE -->
-                  <!-- SUB TEMPLATE -->
-                </div>
-                <div class="col-sm">
-                  <!-- SUB TEMPLATE -->
-                  <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row no-gutters">
-                      <div class="col-md-6">
-                        <img
-                          src="https://via.placeholder.com/174x157.png/012542?text=Image-2"
-                          class="img-fluid card-img"
-                          alt="..."
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a
-                            natural lead-in to additional content. This content
-                            is a little bit longer.
-                          </p>
-                          <a
-                            href="holiday-detail.html?id=2"
-                            class="btn btn-primary"
+                            class="item-link card-link"
                             >Detail</a
                           >
-                          
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- SUB TEMPLATE -->
                 </div>
-              </div>
-            </template>
-
-            <!-- TODO  REMOVE DUMMY CODE-->
-            <script>
-              var template = document.getElementsByTagName("template")[0];
-              var clon = template.content.cloneNode(true);
-
-              const templateContainer = document.querySelector(
-                "#templateContainer"
-              );
-
-              Array(10)
-                .fill("")
-                .forEach(() => {
-                  var clon = template.content.cloneNode(true);
-                  templateContainer.appendChild(clon);
-                });
-            </script>
+              </template>
+              <!-- SUB TEMPLATE -->
+            </div>
           </div>
 
           <div class="col-4">
@@ -144,10 +98,10 @@
                   class="form-control"
                   id="exampleFormControlSelect2"
                 >
-                  <option>Spain</option>
-                  <option>Ireland</option>
+                  <option>Lituania</option>
                   <option>Croatia</option>
                   <option>Romania</option>
+                  <option>Ireland</option>
                   <option>Italy</option>
                 </select>
               </div>
@@ -167,5 +121,7 @@
       </div>
     </section>
     <script src="./js/common.js"></script>
+    <script src="./js/holiday-data-list.js"></script>
+    <script src="./js/holiday.js"></script>
   </body>
 </html>
