@@ -65,6 +65,14 @@
   top: 180px;
 }
 
+.body-content {
+  background: white;
+  max-width: 944px;
+  top: -25px;
+  position: relative;
+  padding: 15px;
+}
+
 /* footer {
   display: block;
   padding: 0px 0 60px;
@@ -77,6 +85,10 @@
   .card-holiday-container {
     top: 0;
     margin: 15px;
+  }
+
+  .body-conten{
+    top: auto;
   }
 
   .title-container {

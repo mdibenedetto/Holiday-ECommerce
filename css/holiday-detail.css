@@ -9,3 +9,8 @@
 .main-container-right {
   text-align: right;
 }
+
+.body-content {
+  background: white; 
+  padding: 15px;
+}
