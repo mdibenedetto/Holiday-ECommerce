@@ -15,7 +15,7 @@
   border-radius: 0 0 6px 6px;
   box-shadow: 1px 1px 1px #001c35;
   background: radial-gradient(ellipse at center, #d73430 0%, #f1625e 100%);
-  z-index: 1;
+  z-index: 10;
 }
 
 @media (min-width: 1200px) {
