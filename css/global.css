@@ -47,7 +47,7 @@ a.active {
   align-items: center;
   flex-direction: column;
   padding: 40px;
-  min-height: calc(100% - 45px - 70px);
+  height: calc(100% - 45px - 100px);
 }
 
 .frame
