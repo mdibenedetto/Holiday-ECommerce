@@ -14,6 +14,8 @@
 ## 3. Push changes to the server of github
 `git push`
 
+## 4. to pull down changes made by another developer
+`git pull`
 
 
 
