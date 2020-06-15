@@ -137,14 +137,12 @@ button.social{
 }
 
 .customer-box{
-    position:absolute;
     padding: 40px;
     box-sizing: border-box;
     padding: 40px;
     width:700px;
     height:auto;
 }
-
 
 
 input[type="textp"],
