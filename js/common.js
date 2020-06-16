@@ -126,10 +126,17 @@ const cssLinks = `
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 `;
 
+const currentYear = new Date().getFullYear();
 const footer = `
 <footer class="footer row ">
-  <section class = "footer-body">
-    © Copyright 2020 DreamHolidays - All Rights Reserved
+  <section class="container">
+    <section class = "footer-body">
+      © Copyright ${currentYear} DreamHolidays - All Rights Reserved
+    </section>
+    <section></section>
+    <section class = "footer-body">
+      Designed by - <strong>Michele Dibenedetto, Raminta Kairyte, Petra Furkes</strong>
+    </section>
   </section>
 </footer>`;
 
