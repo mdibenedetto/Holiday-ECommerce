@@ -10,10 +10,10 @@ body {
 }
 
 body {
+  display: grid;
+  grid-template-columns: repeat(1, 100%);
+  grid-template-rows: auto 1fr auto;
   background: #eaeaea;
-}
-
-body {
   font-family: "Poppins", sans-serif;
   font-size: 15px;
   line-height: 1.66667;
@@ -42,20 +42,23 @@ a.active {
 
 .main-container {
   display: flex;
-  justify-content: center;
+ justify-content: center;
   justify-items: center;
   align-items: center;
   flex-direction: column;
+    /* */
   padding: 40px;
-  min-height: calc(100% - 45px - 100px);
+  /* min-height: calc(100% - 45px - 100px); */
 }
 
-.frame
-{
+.frame {
   background-color: white;
 }
 
 /* Page loader */
+.loader-container {
+  display: none;
+}
 body[data-loading="true"] .loader-container {
   background-color: #c8dde4;
   width: 100%;
