@@ -44,16 +44,19 @@ function loadBanner() {
   const bannerBaseImage = `./img/banner`;
   const bannerItems = [
     {
+      id: 1,
       imageUrl: bannerBaseImage + "/ban1.jpg",
       title: "Barcelona",
       price: 1000,
     },
     {
+      id: 5,
       imageUrl: bannerBaseImage + "/ban2.jpg",
       title: "Goa",
       price: 1500,
     },
     {
+      id: 6,
       imageUrl: bannerBaseImage + "/ban3.jpg",
       title: "Paris",
       price: 1600,
@@ -65,8 +68,14 @@ function loadBanner() {
 
   bannerItems.forEach((item) => {
     const clone = temp.content.cloneNode(true);
-    clone.querySelector(".item-image").src = item.imageUrl; 
+    clone.querySelector(".item-image").src = item.imageUrl;
+
+    const link = clone.querySelector(".item-link");
+    link.setAttribute("href", "holiday-detail.html?id=" + item.id);
+    link.addEventListener("click", () =>
+      document.body.setAttribute("data-loading", "true")
+    );
+    
     parent.appendChild(clone);
   });
- 
 }
