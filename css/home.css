@@ -43,6 +43,7 @@
 .top-background .title-container .main-title {
   color: #fff;
   font-family: cursive;
+  transition: 4s;
 }
 
 .card-holiday-container {
@@ -61,8 +62,10 @@
   margin-right: 10px;
 }
 
+.navbar-brand:hover ,
 .card-holiday:hover {
   filter: drop-shadow(2px 4px 6px black);
+  transition: 0.3s;
 }
 
 .carousel-caption {
