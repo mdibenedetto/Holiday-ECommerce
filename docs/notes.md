@@ -17,6 +17,11 @@
 ## 4. to pull down changes made by another developer
 `git pull`
 
+## 5. run
+
+'npm run dev'
+
+
 
 
 
