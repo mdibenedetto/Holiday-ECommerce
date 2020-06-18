@@ -43,12 +43,16 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Available</th>
-                    <th scope="col" class="text-center">Quantity</th>
-                    <th scope="col" class="text-right">Price</th>
-                    <th></th>
+                    <th scope="col" class="col-image"></th>
+                    <th scope="col" class="col-product">
+                      Holiday package name
+                    </th>
+                    <th scope="col" class="col-available">Available</th>
+                    <th scope="col" class="text-center col-quantity">
+                      Quantity
+                    </th>
+                    <th scope="col" class="text-right col-price">Price</th>
+                    <th class="col-remove"></th>
                   </tr>
                 </thead>
                 <tbody class="cart-body">
@@ -81,13 +85,14 @@
                     );
 
                     const items = [1, 2, 3, 4, 5];
+                    const lorem = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, aspernatur!`;
 
                     items.forEach((item, i) => {
                       const clone = temp.content.cloneNode(true);
                       clone.querySelector(".item-image").src =
-                        "https://dummyimage.com/50x50/55595c/fff";
-                      clone.querySelector(".item-title").textContent =
-                        "Prorduct name " + item;
+                        "https://dummyimage.com/50x50/0b6ec24f/fff&text=DH";
+                      clone.querySelector(".item-title").innerHTML =
+                        "<strong> Holiday package name </strong>" + item + "<br /> " + lorem;
                       clone.querySelector(".item-in-stock").textContent =
                         "In stock";
                       clone.querySelector(".item-price").textContent =
@@ -127,13 +132,13 @@
             </div>
           </div>
           <div class="col mb-2">
-            <div class="row">
-              <div class="col-sm-12 col-md-6">
+            <div class="row justify-content-end">
+              <div class="col-sm-12 col-lg-2">
                 <a href="holiday.html" class="btn btn-block btn-light">
                   Continue Shopping
                 </a>
               </div>
-              <div class="col-sm-12 col-md-6 text-right">
+              <div class="col-sm-12 col-lg-2 text-right">
                 <a
                   href="./checkout-cart.html"
                   class="btn-checkout btn btn-lg btn-block btn-success text-uppercase"
