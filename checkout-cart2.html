@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Checkout cart</title>
     <!-- START bootstrap -->
     <!-- CSS only -->
@@ -32,19 +32,160 @@
     <!-- END bootstrap -->
     <link rel="stylesheet" href="./css/global.css" />
     <!-- END global css -->
+    <link rel="stylesheet" href="./css/checkout-cart2.css" />
   </head>
+
   <body>
     <section class="main-container">
-      <h1>
-        PLACE HOLDER "Checkout cart"
-      </h1>
+      <h2>Checkout</h2>
 
-      <img
-        style="width: 100%;"
-        src="./img/checkout-cart-dummy.png"
-        alt=""
-        srcset=""
-      />
+      <div class="row">
+        <div class="col-75">
+          <div class="container">
+            <form action="/action_page.php">
+              <div class="row">
+                <div class="col-50">
+                  <h3>Billing Info</h3>
+                  <label for="fname"><i class="fa fa-user"></i> Name</label>
+                  <input
+                    type="text"
+                    id="fname"
+                    name="firstname"
+                    placeholder="John Doe"
+                  />
+                  <label for="email"
+                    ><i class="fa fa-envelope"></i> Email</label
+                  >
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="john@mail.com"
+                  />
+                  <label for="adr"
+                    ><i class="fa fa-address-card-o"></i> Address</label
+                  >
+                  <input
+                    type="text"
+                    id="adr"
+                    name="address"
+                    placeholder=" 1 Main Street"
+                  />
+                  <label for="city"
+                    ><i class="fa fa-institution"></i> City</label
+                  >
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="Dublin"
+                  />
+
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="state">Country</label>
+                      <input
+                        type="text"
+                        id="country"
+                        name="country"
+                        placeholder="Ireland"
+                      />
+                    </div>
+                    <div class="col-50">
+                      <label for="zip">Postcode</label>
+                      <input
+                        type="text"
+                        id="post"
+                        name="post"
+                        placeholder="100000"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-50">
+                  <h3>Payment Info</h3>
+                  <label for="fname">Accepted Methods</label>
+                  <div class="icon-container">
+                    <i class="fa fa-cc-visa" style="color: navy;"></i>
+                    <i class="fa fa-cc-mastercard" style="color: red;"></i>
+                    <i class="fa fa-cc-paypal" style="color: blue;"></i>
+                  </div>
+                  <label for="cname">Cardholder's name</label>
+                  <input
+                    type="text"
+                    id="cname"
+                    name="cardname"
+                    placeholder="John Doe"
+                  />
+                  <label for="ccnum">Credit card number</label>
+                  <input
+                    type="text"
+                    id="ccnum"
+                    name="cardnumber"
+                    placeholder="1111-2222-3333-4444"
+                  />
+                  <label for="expmonth">Expiry Month</label>
+                  <input
+                    type="text"
+                    id="month"
+                    name="month"
+                    placeholder="September"
+                  />
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="expyear">Expiry Year</label>
+                      <input
+                        type="text"
+                        id="year"
+                        name="year"
+                        placeholder="2022"
+                      />
+                    </div>
+                    <div class="col-50">
+                      <label for="cvv">Security Code</label>
+                      <input
+                        type="text"
+                        id="cvv"
+                        name="cvv"
+                        placeholder="123"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <label>
+                <input type="checkbox" checked="checked" name="sameadress" />
+                Shipping address same as billing
+              </label>
+              <input type="submit" value="Continue" class="btn" />
+            </form>
+          </div>
+        </div>
+        <div class="col-25">
+          <div class="container">
+            <div class="image"></div>
+            <h4>
+              Receipt Summary
+              <span class="price" style="color: black;">
+                <i class="fa fa-shopping-cart"></i> <b></b
+              ></span>
+            </h4>
+            <p>
+              <a href="#">Maldives Package</a>
+              <span class="price">$1500.00</span>
+            </p>
+            <p>Discount <span class="discount">$0.00</span></p>
+            <p>Subtotal<span class="subtotal">$1500.00</span></p>
+            <p>Tax <span class="tax">$200.00</span></p>
+            <hr />
+            <p>
+              Total
+              <span class="price" style="color: black;"><b>$1700.00</b></span>
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
     <script src="./js/common.js"></script>
   </body>
