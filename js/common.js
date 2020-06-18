@@ -26,6 +26,7 @@ if (window.currentUser) {
           <a class="dropdown-item" href="orders.html" >Order history</a>
           <a class="dropdown-item"  href="cart.html">Cart</a>
           <a class="dropdown-item"  href="checkout-cart.html">Checkout</a>
+          <a class="dropdown-item"  href="checkout-cart2.html">Checkout V2</a>
           <a class="dropdown-item" href="login.html" onclick="logout()">
             Log out
           </a>
