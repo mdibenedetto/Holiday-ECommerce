@@ -1,0 +1,86 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/Shared/x_devs/NCI/SS-Server Side - Project/nci-ss-project-holiday-website/src/nci-ss-dream-holiday.csproj": {}
+  },
+  "projects": {
+    "/Users/Shared/x_devs/NCI/SS-Server Side - Project/nci-ss-project-holiday-website/src/nci-ss-dream-holiday.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/Shared/x_devs/NCI/SS-Server Side - Project/nci-ss-project-holiday-website/src/nci-ss-dream-holiday.csproj",
+        "projectName": "nci-ss-dream-holiday",
+        "projectPath": "/Users/Shared/x_devs/NCI/SS-Server Side - Project/nci-ss-project-holiday-website/src/nci-ss-dream-holiday.csproj",
+        "packagesPath": "/Users/mike/.nuget/packages/",
+        "outputPath": "/Users/Shared/x_devs/NCI/SS-Server Side - Project/nci-ss-project-holiday-website/src/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/mike/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
