@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using nci_ss_dream_holiday.Models;
+using dream_holiday.Models;
 
-namespace nci_ss_dream_holiday.Controllers
+namespace dream_holiday.Controllers
 {
     public class HomeController : Controller
     {

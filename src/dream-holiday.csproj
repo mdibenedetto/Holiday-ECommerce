@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-nci_ss_dream_holiday-57F462A3-0B63-4323-9031-D44E9F2CF666</UserSecretsId>
-    <RootNamespace>nci_ss_dream_holiday</RootNamespace>
+    <UserSecretsId>aspnet-dream_holiday-E98B9DB6-1869-49AA-9A34-724C724D8083</UserSecretsId>
+    <RootNamespace>dream_holiday</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

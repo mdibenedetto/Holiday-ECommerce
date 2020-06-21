@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace nci_ss_dream_holiday.Data.Migrations
+namespace dream_holiday.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

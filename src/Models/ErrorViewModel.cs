@@ -1,6 +1,6 @@
 using System;
 
-namespace nci_ss_dream_holiday.Models
+namespace dream_holiday.Models
 {
     public class ErrorViewModel
     {

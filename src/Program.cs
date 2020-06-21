@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace nci_ss_dream_holiday
+namespace dream_holiday
 {
     public class Program
     {

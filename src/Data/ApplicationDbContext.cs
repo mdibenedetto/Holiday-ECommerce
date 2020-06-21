@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace nci_ss_dream_holiday.Data
+namespace dream_holiday.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

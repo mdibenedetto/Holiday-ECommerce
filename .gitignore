@@ -2,3 +2,10 @@
 **/fonts/**
 node_modules
 package-lock.json
+src/__bin
+src/__obj
+
+src/bin
+src/obj
+src/.vscode
+src/.vs
