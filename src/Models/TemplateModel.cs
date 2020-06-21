@@ -14,5 +14,10 @@ namespace dream_holiday.Models
         {
             this.prop1 = prop1;
         }
+
+        public TemplateModel(String prop1, int prop2)
+        {
+            this.prop1 = prop1;
+        }
     }
 }
