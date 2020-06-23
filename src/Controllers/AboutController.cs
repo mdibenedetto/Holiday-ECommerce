@@ -13,6 +13,7 @@ namespace dream_holiday.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            // about
             return View();
         }
     }
