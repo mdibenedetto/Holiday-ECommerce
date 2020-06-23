@@ -9,6 +9,7 @@ using dream_holiday.Models;
 
 namespace dream_holiday.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,6 +19,7 @@ namespace dream_holiday.Controllers
             _logger = logger;
         }
 
+       
         public IActionResult Index()
         {
             return View();

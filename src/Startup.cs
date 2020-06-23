@@ -64,8 +64,7 @@ namespace dream_holiday
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
+ 
                 //endpoints.MapControllerRoute(name: "template",
                 //   pattern: "template/one",
                 //   defaults: new { controller = "Template", action = "Index" });
