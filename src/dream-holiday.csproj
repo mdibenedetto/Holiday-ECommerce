@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Orders\" />
     <Folder Include="Views\Template\" />
     <Folder Include="Views\FakeLogin\" />
     <Folder Include="Views\About\" />
