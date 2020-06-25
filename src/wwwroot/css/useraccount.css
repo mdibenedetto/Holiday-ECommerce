@@ -1,0 +1,125 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background: #efefef;
+    font-size: 16px;
+    color: #777;
+    font-family: sans-serif;
+    font-weight: 300;
+}
+
+h1 {
+    margin: 0 0 20px 0;
+    font-weight: 300;
+    font-size: 28px;
+}
+
+input[type="text"] {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 220px;
+    height: 32px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+input[type="submit"] {
+    margin-bottom: 28px;
+    width: 120px;
+    height: 32px;
+    background: #236ee0;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+    input[type="submit"]:hover,
+    input[type="submit"]:focus {
+        background: #71aceb;
+        transition: 0.2s ease;
+    }
+
+
+
+.account-box {
+    position: relative;
+    height: auto;
+    width: 700px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+
+.customer-box {
+    padding: 40px;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 700px;
+    height: auto;
+}
+
+
+input[type="text"],
+select[id="title"],
+option[value="title"] {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 600px;
+    height: 32px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+select[class="dayofbirth"],
+select[class="monthofbirth"],
+select[class="yearofbirth"],
+option[class="select-option"] {
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 197px;
+    height: 32px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+select[class="cardmonth"],
+select[class="cardyear"] {
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 300px;
+    height: 32px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}

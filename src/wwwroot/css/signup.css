@@ -1,4 +1,4 @@
-body {
+﻿body {
     margin: 0;
     padding: 0;
     background: #efefef;
@@ -33,8 +33,7 @@ h1 {
     font-size: 28px;
 }
 
-input[type="text"],
-input[type="pasword"] {
+input[type="text"] {
     display: block;
     box-sizing: border-box;
     margin-bottom: 20px;
@@ -91,63 +90,4 @@ input[type="submit"] {
     color: #fff;
     text-align: center;
     text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-}
-
-
-.account-box {
-    position: relative;
-    height: auto;
-    width: 700px;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
-}
-
-.customer-box {
-    padding: 40px;
-    box-sizing: border-box;
-    padding: 40px;
-    width: 700px;
-    height: auto;
-}
-
-
-input[type="textp"],
-input[type="paswordp"],
-select[id="title"],
-option[value="title"] {
-    display: block;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    padding: 4px;
-    width: 600px;
-    height: 32px;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #aaa;
-    font-family: sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    transition: 0.2s ease;
-}
-
-select[class="dayofbirth"],
-select[class="monthofbirth"],
-select[class="yearofbirth"],
-option[class="select-option"],
-input[type="card_cvc"],
-select[class="cardmonth"],
-select[class="cardyear"] {
-    display: inline-block;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    padding: 4px;
-    width: 197px;
-    height: 32px;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #aaa;
-    font-family: sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    transition: 0.2s ease;
 }
