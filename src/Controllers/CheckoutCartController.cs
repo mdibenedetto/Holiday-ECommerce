@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dream_holiday.Controllers
 {
-    public class HolidayController : Controller
+    [Route("checkout-cart")]
+    public class CheckoutCartController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()
