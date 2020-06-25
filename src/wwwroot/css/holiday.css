@@ -1,0 +1,31 @@
+﻿.holiday-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.card {
+    /* min-width: 360px;
+  min-height: 196px; */
+}
+
+    .card img {
+        /* width: 167px;
+  height: 143px; */
+        width: 100%;
+        /* height: 60%; */
+        border: 1px solid;
+        display: inline-block;
+    }
+
+.card-text {
+    font-size: 13px;
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
+}
+
+a.card-link {
+    color: #007bff;
+    font-weight: 500;
+}

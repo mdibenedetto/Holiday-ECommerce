@@ -22,5 +22,12 @@
     <Folder Include="Views\Template\" />
     <Folder Include="Views\FakeLogin\" />
     <Folder Include="Views\About\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Views\Holiday\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Orders\Index.cshtml" />
+    <Content Remove="Views\UserAccount\Index.cshtml" />
+    <Content Remove="wwwroot\css\signup.css" />
   </ItemGroup>
 </Project>

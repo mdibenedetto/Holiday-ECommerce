@@ -1,0 +1,88 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Holidays";
+}
+
+<link rel="stylesheet" href="./css/holiday.css" />
+
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 container">
+                <div class="row" id="holiday-container">
+                    <!-- SUB TEMPLATE -->
+                    <template id="holiday-item">
+                        <div class="col-sm-6">
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row no-gutters">
+                                    <div class="col-md-6">
+                                        <a class="item-link" href="holiday-detail.html?id=1">
+                                            <img src="https://via.placeholder.com/174x157.png/012542?text=Image-1"
+                                                 class="item-image img-fluid card-img"
+                                                 alt="..." />
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card-body">
+                                            <h5 class="card-title item-title">Card title</h5>
+                                            <p class="card-text item-content">
+                                                This is a wider card with supporting text below as a
+                                                natural lead-in to additional content. This content
+                                                is a little bit longer.
+                                            </p>
+
+                                            <a href="holiday-detail.html?id=1"
+                                               class="item-link card-link">Detail</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- SUB TEMPLATE -->
+                </div>
+            </div>
+
+            <div class="col-4">
+                <h1>FILTERS</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Stars Hotol</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect2">Destination</label>
+                        <select multiple
+                                class="form-control"
+                                id="exampleFormControlSelect2">
+                            <option>Lituania</option>
+                            <option>Croatia</option>
+                            <option>Romania</option>
+                            <option>Ireland</option>
+                            <option>Italy</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="formControlRange">Price Range</label>
+                        <input type="range"
+                               class="form-control-range"
+                               id="formControlRange" />
+                    </div>
+                </form>
+                <!-- end filter -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="./js/holiday-data-list.js"></script>
+<script src="./js/holiday.js"></script>
