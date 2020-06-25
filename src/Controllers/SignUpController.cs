@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dream_holiday.Controllers
 {
+   [Route("sign-up")]
     public class SignUpController : Controller
     {
         public IActionResult Index()

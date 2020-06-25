@@ -24,9 +24,9 @@
     <Folder Include="Views\About\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Holiday\" />
+    <Folder Include="Views\CheckoutCart\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="Views\UserAccount\Index.cshtml" />
     <Content Remove="wwwroot\css\signup.css" />
   </ItemGroup>
 </Project>
