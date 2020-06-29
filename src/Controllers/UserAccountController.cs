@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dream_holiday.Controllers
 {
-    [Route("user-account")]
     public class UserAccountController : Controller
     {
         public IActionResult Index()

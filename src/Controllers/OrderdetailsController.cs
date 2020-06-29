@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dream_holiday.Controllers
 {
-    [Route("order-details")]
-    public class OrderDetailsController : Controller
+    public class OrderdetailsController : Controller
     {
         public IActionResult Index()
         {
