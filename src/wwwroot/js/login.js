@@ -11,6 +11,7 @@ form.addEventListener("submit", (e) => {
   setCurrentUser({
     userName,
   });
-  window.location = "/holiday";
+  //window.location = "/holiday";
 });
 
+ß

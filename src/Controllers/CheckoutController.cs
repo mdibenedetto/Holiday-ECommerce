@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dream_holiday.Controllers
 {
-    public class OrdersController : Controller
+    public class CheckoutController : Controller
     {
         public IActionResult Index()
         {

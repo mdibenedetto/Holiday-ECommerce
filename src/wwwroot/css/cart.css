@@ -1,0 +1,35 @@
+﻿.cart-container {
+    background-color: #ffffff;
+}
+
+a.btn-checkout {
+    color: #ffffff;
+}
+
+table {
+    /* text-align: center; */
+}
+
+.col-image {
+    width: 70px;
+}
+
+.col-product {
+    width: auto;
+}
+
+.col-available {
+    width: 85px;
+}
+
+.col-quantity {
+    width: 70px;
+}
+
+.col-price {
+    width: 70px;
+}
+
+.col-remove {
+    width: 70px;
+}
