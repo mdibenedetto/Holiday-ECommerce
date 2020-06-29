@@ -25,6 +25,7 @@
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Holiday\" />
     <Folder Include="Views\CheckoutCart\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\signup.css" />
