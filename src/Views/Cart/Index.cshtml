@@ -3,7 +3,10 @@
     ViewData["Title"] = "Cart";
 }
 
+@model List<CartModel>
+
 <link rel="stylesheet" href="./css/cart.css" />
+
 <section class="main-container">
     <section class="frame cart-container container mb-4">
         <div class="row">
@@ -25,50 +28,31 @@
                             </tr>
                         </thead>
                         <tbody class="cart-body">
-                            <template id="product-item">
+                            @foreach (var item in Model)
+                            {
                                 <tr>
                                     <td>
-                                        <img class="item-image" src="{IMAGE_URL}" />
+                                        <img class="item-image" src="https://dummyimage.com/50x50/0b6ec24f/fff&text=DH" />
                                     </td>
                                     <td>
                                         <a class="item-title" href="./holiday-detail.html">
-                                            {ITEM_TITLE}
+                                           @item.Title
                                         </a>
                                     </td>
-                                    <td class="item-in-stock">{QTY_STOCK}</td>
-                                    <td>
-                                        <input class="form-control" type="text" value="1" />
+                                    <td class="item-in-stock">
+                                        @(item.IsInstock ? "In Stock" : "Out of Stock")
                                     </td>
-                                    <td class="item-price text-right">{PRICE €}</td>
+                                    <td>
+                                        <input class="form-control" type="text" value="@item.Qty" />
+                                    </td>
+                                    <td class="item-price text-right">€ @item.price</td>
                                     <td class="text-right">
                                         <button class="btn btn-sm btn-danger">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
-                            </template>
-                            <script>
-                    const cartBody = document.querySelector(".cart-body");
-                    const temp = document.querySelector(
-                      "template#product-item"
-                    );
-
-                    const items = [1, 2, 3, 4, 5];
-                    const lorem = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, aspernatur!`;
-
-                    items.forEach((item, i) => {
-                      const clone = temp.content.cloneNode(true);
-                      clone.querySelector(".item-image").src =
-                        "https://dummyimage.com/50x50/0b6ec24f/fff&text=DH";
-                      clone.querySelector(".item-title").innerHTML =
-                        "<strong> Holiday package name </strong>" + item + "<br /> " + lorem;
-                      clone.querySelector(".item-in-stock").textContent =
-                        "In stock";
-                      clone.querySelector(".item-price").textContent =
-                        1000 + (i + 1) * 3 + " €";
-                      cartBody.appendChild(clone);
-                    });
-                            </script>
+                            }
                         </tbody>
 
                         <tfoot>
