@@ -2,6 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Orders History";
 }
 
 <style>
@@ -35,8 +36,8 @@
             <div class="img">
                 <img src="img/images/cart.svg"
                      alt="cart"
-                     width="15%"
-                     height="15%" />
+                     width="120"
+                     height="120" />
             </div>
             <br>
             <p>Here are your previous orders displayed. You can find a specific order by the ID number. To view a specifit order, click on the ID number.  </p>
@@ -44,8 +45,8 @@
             <h4> Search by ID   <input type="search">   <button type="button" class="btn btn-danger">Search </button></h4>
             <br>
 
-            <table>
-                <thead>
+            <table class="table">
+                <thead class="thead-light">
                     <tr>
                         <th scope="col">Order ID</th>
                         <th scope="col">Date</th>
