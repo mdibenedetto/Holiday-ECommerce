@@ -8,37 +8,40 @@ using Microsoft.AspNetCore.Mvc;
 namespace dream_holiday.Controllers
 {
     public class OrderDetailsController : Controller
-    {
-    
+    {    
 
-        public IActionResult Index()
+        public IActionResult Index(int orderId)
         {
-            List<OrderDetailsModel> banana = GetData();
+            var banana = GetData(orderId);
             return View(banana);
         }
 
-        private List<OrderDetailsModel> GetData()
+        private OrderDetailsModel GetData(int orderId)
         {
+            var orderItem = new OrderDetailsModel(); 
 
+            orderItem.OrderId = orderId;
+            orderItem.OrderDate = DateTime.Now.AddMonths(-1);
 
-            var list = new List<OrderDetailsModel>();
+            var list = new List<OrderDetailItem>();
 
             for (var i = 0; i < 6; i++)
             {
-                list.Add(new OrderDetailsModel
+                list.Add(new OrderDetailItem
                 {
-
                     nr = i + 1,
-                    title = "Croatia Blue Lagoon",
+                    title = orderId +  " - Croatia Blue Lagoon",
                     description = "(Our half day tour from Split we take you to the most famous and the most popular Blue Lagoon in Croatia.)", 
                     Qty = 1,
                     Price = (decimal)298 + (i * 2),
-                }); ; ; ; ;
+                }); 
 
             }
-            return list;
 
+            orderItem.Items = list;
 
+            return orderItem;
+             
             /// end deta data        
         }
 

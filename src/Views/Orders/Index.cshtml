@@ -6,6 +6,10 @@
 }
 
 <style>
+
+
+
+
     .wbox {
         background-color: white;
         padding: 20px;
@@ -25,6 +29,7 @@
     }
 </style>
 
+
 <section class="main-container">
 
 
@@ -42,7 +47,19 @@
             <br>
             <p>Here are your previous orders displayed. You can find a specific order by the ID number. To view a specifit order, click on the ID number.  </p>
             <br>
-            <h4> Search by ID   <input type="search">   <button type="button" class="btn btn-danger">Search </button></h4>
+
+            <form action="/orders" method="get">
+                <h4>
+                    Search by ID
+                </h4>
+                <input name="id" type="search"> 
+                <button type="submit"
+                        class="btn btn-danger">
+                    Search
+                </button>
+
+            </form>
+
             <br>
 
             <table class="table">
@@ -60,24 +77,23 @@
                 <tbody>
 
                     @foreach (var order in Model)
-
-
                     {
-                    <tr>
-                        
-                        <td>@order.nr</td>
-                        <th scope="row">
-                        <h5><a href="orderdetails?orderId=@order.Id" class="badge badge-danger">   @order.Id  </a></h5></th>
+                        <tr>
 
-                        <td>@order.Date.ToString("yyyy-MM-dd")</td>
-                        <td> &euro; @order.Price </td>
-                        <td>@order.Qty </td>
-                        <td>@(order.Status ? "Payment Approved" : "Redeemed") </td>
-                    </tr>
+                            <td>@order.nr</td>
+                            <th scope="row">
+                                <h5><a href="orderdetails?orderId=@order.Id" class="badge badge-danger">   @order.Id  </a></h5>
+                            </th>
+
+                            <td>@order.Date.ToString("yyyy-MM-dd")</td>
+                            <td> &euro; @order.Price </td>
+                            <td>@order.Qty </td>
+                            <td>@(order.Status ? "Payment Approved" : "Redeemed") </td>
+                        </tr>
 
                     }
 
-                 
+
 
                 </tbody>
             </table>

@@ -1,4 +1,4 @@
-﻿@model List<OrderDetailsModel>
+﻿@model OrderDetailsModel
 
 @{
     ViewData["Title"] = "Order Details";
@@ -49,7 +49,14 @@
 
         <p>Here are  all items displayed from your last order. For a better holiday experience, please add more items to the cart.</p>
         <div class="orderid">
-            <h4><span class="badge badge-pill badge-danger"> Order ID:  #165478 </span>  <span class="badge badge-pill badge-danger"> Date: 13th October 2019 </span></h4>
+            <h4>
+                <span class="badge badge-pill badge-danger">
+                    Order ID:  @Model.OrderId 
+                </span>
+                <span class="badge badge-pill badge-danger">
+                    Date:  @Model.OrderDate
+                </span>
+            </h4>
         </div>
 
         <br>
@@ -66,19 +73,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var banana in Model)
+                    @foreach (var banana in Model.Items)
 
                     {
 
                         <tr>
                             <th scope="row"> @banana.nr </th>
 
-                            <td> 
-                            <div class="bold"> @banana.title </div> 
-                            <p> @banana.description </p> 
-                            
+                            <td>
+                                <div class="bold"> @banana.title </div>
+                                <p> @banana.description </p>
+
                             </td>
-                            
+
                             <td> @banana.Qty</td>
                             <td> &euro; @banana.Price </td>
                         </tr>
@@ -102,10 +109,10 @@
         </div>
 
         <br>
-        
-            <a class="btn btn-danger" href="/orders">Back to Orders</a>
-        
+
+        <a class="btn btn-danger" href="/orders">Back to Orders</a>
+
 
     </div>
-    
+
 </section>
