@@ -31,7 +31,29 @@
                 <h1> Date of Birth</h1>
                 <select class="dayofbirth" id="dayofbirth" name="dayofbirth" data-formid="dayofbirth" data-field-label="Day">
                     <option class="select-option" label="Day" value="">Day</option>
-                    <option class="select-option" label="01" value="1">01</option>
+                    @{
+                        for (int day = 1; day < 32; day++)
+                        {
+                            if (Model.BirthDay.Day == day)
+                            {
+                                <option selected
+                                        class="select-option"
+                                        label="@day"
+                                        value="@day">
+                                    @day
+                                </option>
+                            }
+                            else
+                            {
+                                <option 
+                                        class="select-option" label="@day" value="@day">
+                                    @day
+                                </option>
+
+                            }
+                        }
+                    }
+
                     <option class="select-option" label="02" value="2">02</option>
                     <option class="select-option" label="03" value="3">03</option>
                     <option class="select-option" label="04" value="4">04</option>
@@ -65,18 +87,29 @@
                 </select>
                 <select class="monthofbirth" id="monthofbirth" name="monthofbirth" data-formid="monthofbirth" data-field-label="Month">
                     <option class="select-option" label="Month" value="">Month</option>
-                    <option class="select-option" label="January" value="1">January</option>
-                    <option class="select-option" label="February" value="2">February</option>
-                    <option class="select-option" label="March" value="3">March</option>
-                    <option class="select-option" label="April" value="4">April</option>
-                    <option class="select-option" label="May" value="5">May</option>
-                    <option class="select-option" label="June" value="6">June</option>
-                    <option class="select-option" label="July" value="7">July</option>
-                    <option class="select-option" label="August" value="8">August</option>
-                    <option class="select-option" label="September" value="9">September</option>
-                    <option class="select-option" label="October" value="10">October</option>
-                    <option class="select-option" label="November" value="11">November</option>
-                    <option class="select-option" label="December" value="12">December</option>
+
+                    @{
+                        string [] monthValue = { "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December" };
+                        for (int month = 0; month < monthValue.Length; month++)
+                        {
+                            if (Model.BirthMonth.Month == month)
+                            {
+                                <option selected
+                                    class="select-option"
+                                    label="@monthValue[month]"
+                                    value="@month">
+                                    @monthValue[month]
+                                </option>
+                            }
+                            else
+                            {
+                            <option class="select-option" label="@monthValue[month]" value="@month">
+                                @monthValue[month]
+                            </option>
+
+                            }
+                        }
+                    }
                 </select>
                 <select class="yearofbirth" id="yearofbirth" name="yearofbirth" data-formid="yearofbirth" data-field-label="Year">
                     <option class="select-option" label="Year" value="">Year</option>
@@ -112,6 +145,13 @@
                 <input type="text" name="card_cvc" placeholder="Card CVC" value="@(Model.CardCVC)"/>
                 <select class="cardmonth" id="cardmonth" name="cardmonth" data-formid="cardmonth" data-field-label="Day">
                     <option class="select-option" label="Month" value="">Month</option>
+
+
+
+
+
+
+
                     <option class="select-option" label="01" value="1">01</option>
                     <option class="select-option" label="02" value="2">02</option>
                     <option class="select-option" label="03" value="3">03</option>

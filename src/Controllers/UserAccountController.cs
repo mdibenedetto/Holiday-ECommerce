@@ -24,6 +24,9 @@ namespace dream_holiday.Controllers
             user.Email = "firstname.lastname@gmail.com";
             user.Paswoord = "pasword123";
             user.RetypePasword = "pasword123";
+            user.BirthDay = DateTime.Now.AddYears(-20);
+            user.BirthMonth = DateTime.Now.AddYears(-20);
+            user.BirthYear = DateTime.Now.AddYears(-20);
             user.Country = "Ireland";
             user.Address = "Apt.25, Street 28";
             user.Address2 = "Dublin 1";

@@ -14,6 +14,9 @@ namespace dream_holiday.Models
         public String FirstName = "";
         public String LastName = "";
         public String Email = "";
+        public DateTime BirthDay;
+        public DateTime BirthMonth;
+        public DateTime BirthYear;
         public String Paswoord = "";
         public String RetypePasword = "";
         public String Country = "";
@@ -45,6 +48,5 @@ namespace dream_holiday.Models
             return FirstNameCard + " " + LastNameCard;
 
         }
-
     }
 }
