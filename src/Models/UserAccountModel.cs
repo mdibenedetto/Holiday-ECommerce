@@ -11,7 +11,7 @@ namespace dream_holiday.Models
         { 
         }
 
-        public String FirstName = "";
+        public String FirstName { get; set; }
         public String LastName = "";
         public String Email = "";
         public DateTime BirthDay;

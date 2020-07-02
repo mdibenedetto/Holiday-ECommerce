@@ -16,6 +16,15 @@ namespace dream_holiday.Controllers
             return View(user);
         }
 
+        [HttpPost]
+        public IActionResult Update(
+            
+            UserAccountModel formUser)
+        {
+            var user = GetData();
+            return View("index", formUser);
+        }
+
         private UserAccountModel GetData()
         {
             var user = new UserAccountModel();

@@ -1,6 +1,4 @@
-﻿@*
-    
-*@
+﻿
 @{
     ViewData["Title"] = "User account";
 }
@@ -12,7 +10,19 @@
 
 
 <section class="main-container">
-    <div class="account-box">
+
+
+    <form class="account-box"
+          id="formUser"
+          name="formUser"
+          action="/user-account"
+          method="post"
+          enctype="application/x-www-form-urlencoded"
+          >
+
+        <input type="submit" name="edit-button" placeholder="Edit Details" />
+
+
         <div class="customer-box">
             <section class="section-data">
                 <h1> Account</h1>
@@ -23,8 +33,9 @@
                     <option value="title">Mrs</option>
                     <option value="title">Mr</option>
                 </select>
-                <input type="text" name="fullname" placeholder="Full Name" value="@(Model.GetFullName())" />
-                <input type="text" name="email" placeholder="Email Address" value="@(Model.Email)"/>
+                <input type="text" name="FirstName" placeholder="Full Name" value="@(Model.FirstName)" />
+                <input type="text" name="LastName" placeholder="Full Name" value="@(Model.LastName)" />
+                <input type="text" name="Email" placeholder="Email Address" value="@(Model.Email)" />
                 <input type="text" name="pasword" placeholder="Pasword" value="@(Model.Paswoord)" />
                 <input type="text" name="pasword" placeholder="Retype pasword" value="@(Model.RetypePasword)" />
 
@@ -45,8 +56,7 @@
                             }
                             else
                             {
-                                <option 
-                                        class="select-option" label="@day" value="@day">
+                                <option class="select-option" label="@day" value="@day">
                                     @day
                                 </option>
 
@@ -89,23 +99,23 @@
                     <option class="select-option" label="Month" value="">Month</option>
 
                     @{
-                        string [] monthValue = { "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December" };
+                        string[] monthValue = { "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December" };
                         for (int month = 0; month < monthValue.Length; month++)
                         {
                             if (Model.BirthMonth.Month == month)
                             {
                                 <option selected
-                                    class="select-option"
-                                    label="@monthValue[month]"
-                                    value="@month">
+                                        class="select-option"
+                                        label="@monthValue[month]"
+                                        value="@month">
                                     @monthValue[month]
                                 </option>
                             }
                             else
                             {
-                            <option class="select-option" label="@monthValue[month]" value="@month">
-                                @monthValue[month]
-                            </option>
+                                <option class="select-option" label="@monthValue[month]" value="@month">
+                                    @monthValue[month]
+                                </option>
 
                             }
                         }
@@ -122,7 +132,7 @@
 
                         }
                     }
-                    
+
                 </select>
             </section>
 
@@ -130,19 +140,19 @@
 
                 <h1>Address</h1>
                 <input type="text" name="country" placeholder="Country" value="@(Model.Country)" />
-                <input type="text" name="address" placeholder="Address"  value="@(Model.Address)"/>
+                <input type="text" name="address" placeholder="Address" value="@(Model.Address)" />
                 <input type="text" name="address 2" placeholder="Address 2" value="@(Model.Address2)" />
-                <input type="text" name="town/city" placeholder="Town/City" value="@(Model.Town)"/>
+                <input type="text" name="town/city" placeholder="Town/City" value="@(Model.Town)" />
                 <input type="text" name="county" placeholder="County" value="@(Model.County)" />
-                <input type="text" name="telephone" placeholder="Telephone" value="@(Model.Telephone)"/>
+                <input type="text" name="telephone" placeholder="Telephone" value="@(Model.Telephone)" />
             </section>
 
             <section class="section-data">
                 <h1>Payment Details</h1>
                 <h2>Credit Card</h2>
                 <input type="text" name="fullname" placeholder="Full Name" value="@(Model.GetFullNameCard())" />
-                <input type="text" name="card_number" placeholder="Card Number" value="@(Model.CardNumber)"/>
-                <input type="text" name="card_cvc" placeholder="Card CVC" value="@(Model.CardCVC)"/>
+                <input type="text" name="card_number" placeholder="Card Number" value="@(Model.CardNumber)" />
+                <input type="text" name="card_cvc" placeholder="Card CVC" value="@(Model.CardCVC)" />
                 <select class="cardmonth" id="cardmonth" name="cardmonth" data-formid="cardmonth" data-field-label="Day">
                     <option class="select-option" label="Month" value="">Month</option>
 
@@ -176,22 +186,21 @@
 
                         }
                     }
-                  
+
                 </select>
             </section>
 
             <section class="section-data">
                 <h1>Billing Address</h1>
-                <input type="text" name="country" placeholder="Country" value="@(Model.CountryBilling)"/>
+                <input type="text" name="country" placeholder="Country" value="@(Model.CountryBilling)" />
                 <input type="text" name="address" placeholder="Address" value="@(Model.AddressBilling)" />
-                <input type="text" name="address 2" placeholder="Address 2" value="@(Model.Address2Billing)"/>
+                <input type="text" name="address 2" placeholder="Address 2" value="@(Model.Address2Billing)" />
                 <input type="text" name="town/city" placeholder="Town/City" value="@(Model.TownBilling)" />
-                <input type="text" name="county" placeholder="County" value="@(Model.County2Billing)"/>
-
-
-                <input type="submit" name="edit-button" placeholder="Edit Details" />
+                <input type="text" name="county" placeholder="County" value="@(Model.County2Billing)" />
             </section>
 
+            <input type="submit" name="edit-button" placeholder="Edit Details" />
+
         </div>
-    </div>
+    </form>
 </section>
