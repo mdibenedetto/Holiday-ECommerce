@@ -67,7 +67,7 @@
                         
                         <td>@order.nr</td>
                         <th scope="row">
-                        <h5><a href="orderdetails" class="badge badge-danger">   @order.Id  </a></h5></th>
+                        <h5><a href="orderdetails?orderId=@order.Id" class="badge badge-danger">   @order.Id  </a></h5></th>
 
                         <td>@order.Date.ToString("yyyy-MM-dd")</td>
                         <td> &euro; @order.Price </td>

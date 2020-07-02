@@ -26,13 +26,13 @@ namespace dream_holiday.Controllers
                 {
 
                     nr = i + 1,
-                    Id = 125478 + i,
+                    Id = 12547 + i,
                     Date = DateTime.Now.AddDays(i),
                    // .Now.AddDays(i),
                     Price = (decimal)1299.99 + (i * 2),
-                    Qty = 1,
+                    Qty = i + 2,
                     Status = i % 2 == 0
-                }); ; ; ; ;
+                });; ; ; ; ;
  
             }
                      return list;
