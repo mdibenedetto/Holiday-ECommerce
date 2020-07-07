@@ -21,7 +21,8 @@ namespace dream_holiday.Controllers
             var orderItem = new OrderDetailsModel(); 
 
             orderItem.OrderId = orderId;
-            orderItem.OrderDate = DateTime.Now.AddMonths(-1);
+            orderItem.OrderDate = DateTime.Now.AddMonths(1);
+            //    DateTime.Now.ToString("dddd, dd MMMM yyyy");
 
             var list = new List<OrderDetailItem>();
 
