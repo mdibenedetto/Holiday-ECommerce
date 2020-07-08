@@ -152,3 +152,12 @@
         border-bottom: 0.5px solid;
         opacity: 0.5;
     }
+
+.navbar ul li form {
+    padding: 0;
+}
+
+#navbarDropdownMenuLink {
+    width: auto;
+    padding-left: 0;
+}

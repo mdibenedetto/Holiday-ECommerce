@@ -25,53 +25,105 @@
             crossorigin="anonymous"></script>
 
     <!-- END bootstrap -->
-    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="/css/global.css" />
     <!-- END global css -->
-
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     @*<link rel="stylesheet" href="~/css/site.css" />*@
 
 </head>
 <body>
     @*<header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">dream_holiday</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">dream_holiday</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+            </nav>
+        </header>*@
+
+    <header class="header-navbar container">
+        <nav class="navbar-background navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="home">
+                <span class="brand-text">DH</span>
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home">
+                            Home <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="holiday">
+                            Holidays
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about">
+                            About
+                        </a>
+                    </li>
+                </ul>
+
+                <partial name="_LoginPartial" />
+
             </div>
         </nav>
-    </header>*@
+    </header>
+
     <div class="no_container">
         <main role="main" class="no_pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - dream_holiday - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="footer row">
+        <section class="container">
+            <section class="footer-body">
+                &copy; Copyright @{ DateTime.Today.Year.ToString(); } DreamHolidays - All Rights Reserved -
+                <a asp-area=""
+                   asp-controller="Home"
+                   asp-action="Privacy">Privacy</a>
+            </section>
+            <section></section>
+            <section class="footer-body">
+                Designed by - <strong>Michele Dibenedetto, Raminta Kairyte, Petra Furkes</strong>
+            </section>
+        </section>
     </footer>
 
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>*@
-    @*@RenderSection("Scripts", required: false)*@
 
-    <script src="./js/common.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    *@
+
+    @*This is needed for the login and register "built-in" view in ASP.NET MVC*@
+    @RenderSection("Scripts", required: false)
+
+    <script src="/js/common.js"></script>
 </body>
 </html>
