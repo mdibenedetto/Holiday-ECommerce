@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using dream_holiday.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dream_holiday.Controllers
 {
+    //[Authorize]
     [Route("template")]
     public class TemplateController : Controller
     {
