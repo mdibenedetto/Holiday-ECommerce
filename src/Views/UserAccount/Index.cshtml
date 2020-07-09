@@ -20,9 +20,6 @@
           enctype="application/x-www-form-urlencoded"
           >
 
-        <input type="submit" name="edit-button" placeholder="Edit Details" />
-
-
         <div class="customer-box">
             <section class="section-data">
                 <h1> Account</h1>
@@ -33,14 +30,14 @@
                     <option value="title">Mrs</option>
                     <option value="title">Mr</option>
                 </select>
-                <input type="text" name="FirstName" placeholder="Full Name" value="@(Model.FirstName)" />
-                <input type="text" name="LastName" placeholder="Full Name" value="@(Model.LastName)" />
+                <input type="text" name="FirstName" placeholder="First Name" value="@(Model.FirstName)" />
+                <input type="text" name="LastName" placeholder="Last Name" value="@(Model.LastName)" />
                 <input type="text" name="Email" placeholder="Email Address" value="@(Model.Email)" />
-                <input type="text" name="pasword" placeholder="Pasword" value="@(Model.Paswoord)" />
-                <input type="text" name="pasword" placeholder="Retype pasword" value="@(Model.RetypePasword)" />
+                <input type="text" name="Pasword" placeholder="Pasword" value="@(Model.Pasword)" />
+                <input type="text" name="RetypePasword" placeholder="Retype pasword" value="@(Model.RetypePasword)" />
 
-                <h1> Date of Birth</h1>
-                <select class="dayofbirth" id="dayofbirth" name="dayofbirth" data-formid="dayofbirth" data-field-label="Day">
+                <p> Date of Birth</p>
+                <select class="dayofbirth" id="dayofbirth" name="BirthDay" data-formid="dayofbirth" data-field-label="Day">
                     <option class="select-option" label="Day" value="">Day</option>
                     @{
                         for (int day = 1; day < 32; day++)
@@ -63,43 +60,12 @@
                             }
                         }
                     }
-
-                    <option class="select-option" label="02" value="2">02</option>
-                    <option class="select-option" label="03" value="3">03</option>
-                    <option class="select-option" label="04" value="4">04</option>
-                    <option class="select-option" label="05" value="5">05</option>
-                    <option class="select-option" label="06" value="6">06</option>
-                    <option class="select-option" label="07" value="7">07</option>
-                    <option class="select-option" label="08" value="8">08</option>
-                    <option class="select-option" label="09" value="9">09</option>
-                    <option class="select-option" label="10" value="10">10</option>
-                    <option class="select-option" label="11" value="11">11</option>
-                    <option class="select-option" label="12" value="12">12</option>
-                    <option class="select-option" label="13" value="13">13</option>
-                    <option class="select-option" label="14" value="14">14</option>
-                    <option class="select-option" label="15" value="15">15</option>
-                    <option class="select-option" label="16" value="16">16</option>
-                    <option class="select-option" label="17" value="17">17</option>
-                    <option class="select-option" label="18" value="18">18</option>
-                    <option class="select-option" label="19" value="19">19</option>
-                    <option class="select-option" label="20" value="20">20</option>
-                    <option class="select-option" label="21" value="21">21</option>
-                    <option class="select-option" label="22" value="22">22</option>
-                    <option class="select-option" label="23" value="23">23</option>
-                    <option class="select-option" label="24" value="24">24</option>
-                    <option class="select-option" label="25" value="25">25</option>
-                    <option class="select-option" label="26" value="26">26</option>
-                    <option class="select-option" label="27" value="27">27</option>
-                    <option class="select-option" label="28" value="28">28</option>
-                    <option class="select-option" label="29" value="29">29</option>
-                    <option class="select-option" label="30" value="30">30</option>
-                    <option class="select-option" label="31" value="31">31</option>
                 </select>
-                <select class="monthofbirth" id="monthofbirth" name="monthofbirth" data-formid="monthofbirth" data-field-label="Month">
+                <select class="monthofbirth" id="monthofbirth" name="BirthMonth" data-formid="monthofbirth" data-field-label="Month">
                     <option class="select-option" label="Month" value="">Month</option>
 
                     @{
-                        string[] monthValue = { "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December" };
+                        string[] monthValue = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
                         for (int month = 0; month < monthValue.Length; month++)
                         {
                             if (Model.BirthMonth.Month == month)
@@ -121,69 +87,97 @@
                         }
                     }
                 </select>
-                <select class="yearofbirth" id="yearofbirth" name="yearofbirth" data-formid="yearofbirth" data-field-label="Year">
+                <select class="yearofbirth" id="yearofbirth" name="BirthYear" data-formid="yearofbirth" data-field-label="Year">
                     <option class="select-option" label="Year" value="">Year</option>
 
                     @{
                         int curYearDOB = DateTime.Now.Year;
                         for (int year = curYearDOB; year > (curYearDOB - 120); year--)
-                        {
-                            <option class="select-option" label="@(year)" value="@(year)">@year</option>
 
+                        {
+                            if (Model.BirthYear.Year == year)
+                            {
+                                <option selected
+                                        class="select-option"
+                                        label="@(year)"
+                                        value="@(year)">
+                                    @year
+                                </option>
+
+                            }
+                            else
+                            {
+                                <option class="select-option" label="@(year)" value="@(year)">@year</option>
+
+                            }
+                        }
+                     }
+
+                </select>
+            </section>
+
+            <section class="section-data">
+                <h1>Address</h1>
+                <input type="text" name="Country" placeholder="Country" value="@(Model.Country)" />
+                <input type="text" name="Address" placeholder="Address" value="@(Model.Address)" />
+                <input type="text" name="Address2" placeholder="Address 2" value="@(Model.Address2)" />
+                <input type="text" name="Town" placeholder="Town/City" value="@(Model.Town)" />
+                <input type="text" name="County" placeholder="County" value="@(Model.County)" />
+                <input type="text" name="Telephone" placeholder="Telephone" value="@(Model.Telephone)" />
+            </section>
+            <section class="section-data">
+                <h1>Payment Details</h1>
+                <p>Credit Card</p>
+                <input type="text" name="CardHolderFullName" placeholder="Card Holder Full Name" value="@(Model.CardHolderFullName)" />
+                <input type="text" name="CardNumber" placeholder="Card Number" value="@(Model.CardNumber)" />
+                <input type="text" name="CardCVC" placeholder="Card CVC" value="@(Model.CardCVC)" />
+                <select class="cardmonth" id="cardmonth" name="CardMonth" data-formid="cardmonth" data-field-label="Day">
+                    <option class="select-option" label="Month" value="">Month</option>
+
+
+                    @{
+                        for (int cardMonth = 1; cardMonth < 13; cardMonth++)
+                        {
+                            if (Model.CardMonth.Day == cardMonth)
+                            {
+                                <option selected
+                                        class="select-option"
+                                        label="@cardMonth"
+                                        value="@cardMonth">
+                                    @cardMonth
+                                </option>
+                            }
+                            else
+                            {
+                                <option class="select-option" label="@cardMonth" value="@cardMonth">
+                                    @cardMonth
+                                </option>
+
+                            }
                         }
                     }
 
                 </select>
-            </section>
-
-            <section class="section-data">
-
-                <h1>Address</h1>
-                <input type="text" name="country" placeholder="Country" value="@(Model.Country)" />
-                <input type="text" name="address" placeholder="Address" value="@(Model.Address)" />
-                <input type="text" name="address 2" placeholder="Address 2" value="@(Model.Address2)" />
-                <input type="text" name="town/city" placeholder="Town/City" value="@(Model.Town)" />
-                <input type="text" name="county" placeholder="County" value="@(Model.County)" />
-                <input type="text" name="telephone" placeholder="Telephone" value="@(Model.Telephone)" />
-            </section>
-
-            <section class="section-data">
-                <h1>Payment Details</h1>
-                <h2>Credit Card</h2>
-                <input type="text" name="fullname" placeholder="Full Name" value="@(Model.GetFullNameCard())" />
-                <input type="text" name="card_number" placeholder="Card Number" value="@(Model.CardNumber)" />
-                <input type="text" name="card_cvc" placeholder="Card CVC" value="@(Model.CardCVC)" />
-                <select class="cardmonth" id="cardmonth" name="cardmonth" data-formid="cardmonth" data-field-label="Day">
-                    <option class="select-option" label="Month" value="">Month</option>
-
-
-
-
-
-
-
-                    <option class="select-option" label="01" value="1">01</option>
-                    <option class="select-option" label="02" value="2">02</option>
-                    <option class="select-option" label="03" value="3">03</option>
-                    <option class="select-option" label="04" value="4">04</option>
-                    <option class="select-option" label="05" value="5">05</option>
-                    <option class="select-option" label="06" value="6">06</option>
-                    <option class="select-option" label="07" value="7">07</option>
-                    <option class="select-option" label="08" value="8">08</option>
-                    <option class="select-option" label="09" value="9">09</option>
-                    <option class="select-option" label="10" value="10">10</option>
-                    <option class="select-option" label="11" value="11">11</option>
-                    <option class="select-option" label="12" value="12">12</option>
-                </select>
-                <select class="cardyear" id="cardyear" name="cardyear" data-formid="Year" data-field-label="Year">
+                <select class="cardyear" id="cardyear" name="CardYear" data-formid="Year" data-field-label="Year">
                     <option class="select-option" label="Year" value="">Year</option>
 
                     @{
                         int curYear = DateTime.Now.Year;
                         for (int year = (curYear + 5); year >= curYear; year--)
                         {
-                            <option class="select-option" label="@(year)" value="@(year)">@year</option>
-
+                            if (Model.CardYear.Year == year)
+                            {
+                                <option selected
+                                        class="select-option" 
+                                        label="@(year)" 
+                                        value="@(year)">
+                                    @year
+                                </option>
+                            }
+                            else
+                            {
+                                <option class="select-option" label="@(year)" value="@(year)">@year</option>
+                            }
                         }
                     }
 
@@ -192,11 +186,11 @@
 
             <section class="section-data">
                 <h1>Billing Address</h1>
-                <input type="text" name="country" placeholder="Country" value="@(Model.CountryBilling)" />
-                <input type="text" name="address" placeholder="Address" value="@(Model.AddressBilling)" />
-                <input type="text" name="address 2" placeholder="Address 2" value="@(Model.Address2Billing)" />
-                <input type="text" name="town/city" placeholder="Town/City" value="@(Model.TownBilling)" />
-                <input type="text" name="county" placeholder="County" value="@(Model.County2Billing)" />
+                <input type="text" name="CountryBilling" placeholder="Country" value="@(Model.CountryBilling)" />
+                <input type="text" name="AddressBilling" placeholder="Address" value="@(Model.AddressBilling)" />
+                <input type="text" name="Address2Billing" placeholder="Address 2" value="@(Model.Address2Billing)" />
+                <input type="text" name="TownBilling" placeholder="Town/City" value="@(Model.TownBilling)" />
+                <input type="text" name="County2Billing" placeholder="County" value="@(Model.County2Billing)" />
             </section>
 
             <input type="submit" name="edit-button" placeholder="Edit Details" />

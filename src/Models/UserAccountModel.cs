@@ -11,29 +11,31 @@ namespace dream_holiday.Models
         { 
         }
 
+        
         public String FirstName { get; set; }
-        public String LastName = "";
-        public String Email = "";
+        public String LastName { get; set; }
+        public String Email { get; set; }
         public DateTime BirthDay;
         public DateTime BirthMonth;
         public DateTime BirthYear;
-        public String Paswoord = "";
-        public String RetypePasword = "";
-        public String Country = "";
-        public String Address = "";
-        public String Address2 = "";
-        public String Town = "";
-        public String County = "";
-        public String Telephone = "";
-        public String FirstNameCard = "";
-        public String LastNameCard = "";
-        public String CardNumber = "";
-        public String CardCVC = "";
-        public String CountryBilling = "";
-        public String AddressBilling = "";
-        public String Address2Billing = "";
-        public String TownBilling = "";
-        public String County2Billing = "";
+        public String Pasword { get; set; }
+        public String RetypePasword { get; set; }
+        public String Country { get; set; }
+        public String Address { get; set; }
+        public String Address2 { get; set; }
+        public String Town { get; set; }
+        public String County { get; set; }
+        public String Telephone { get; set; }
+        public String CardHolderFullName { get; set; }
+        public String CardNumber { get; set; }
+        public String CardCVC { get; set; }
+        public DateTime CardMonth;
+        public DateTime CardYear;
+        public String CountryBilling { get; set; }
+        public String AddressBilling { get; set; }
+        public String Address2Billing { get; set; }
+        public String TownBilling { get; set; }
+        public String County2Billing { get; set; }
 
 
 
@@ -43,10 +45,5 @@ namespace dream_holiday.Models
        
         }
 
-        public String GetFullNameCard()
-        {
-            return FirstNameCard + " " + LastNameCard;
-
-        }
     }
 }

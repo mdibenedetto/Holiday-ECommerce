@@ -31,7 +31,7 @@ namespace dream_holiday.Controllers
             user.FirstName = "Petra";
             user.LastName = "Furkes";
             user.Email = "firstname.lastname@gmail.com";
-            user.Paswoord = "pasword123";
+            user.Pasword = "pasword123";
             user.RetypePasword = "pasword123";
             user.BirthDay = DateTime.Now.AddYears(-20);
             user.BirthMonth = DateTime.Now.AddYears(-20);
@@ -42,10 +42,11 @@ namespace dream_holiday.Controllers
             user.Town = "Dublin";
             user.County = "Co. Dublin";
             user.Telephone = "123456789";
-            user.FirstNameCard = "Petra";
-            user.LastNameCard = "Furkes";
+            user.CardHolderFullName = "Petra Furkes";
             user.CardNumber = "9842 4520 1111 2222";
             user.CardCVC = "228";
+            user.CardMonth = DateTime.Now.AddYears(-20);
+            user.CardYear = DateTime.Now.AddYears(+2);
             user.CountryBilling = "Ireland";
             user.AddressBilling = "Apt. 25, street 28";
             user.Address2Billing = "Dublin 1";
