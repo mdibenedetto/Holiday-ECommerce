@@ -11,19 +11,21 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using dream_holiday.Models;
 
 namespace dream_holiday.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUserModel> _userManager;
+        private readonly SignInManager<ApplicationUserModel> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, 
+        public LoginModel(
+            SignInManager<ApplicationUserModel> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<ApplicationUserModel> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -79,9 +81,25 @@ namespace dream_holiday.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                // try first to find user  by email and password
+                var result = await _signInManager
+                    .PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                // if fails try to recover the associated email to that username
+                if (!result.Succeeded)
+                {
+                  var foundUser = _userManager.FindByEmailAsync(Input.Email);
+                    if (foundUser != null){
+                        result = await _signInManager.PasswordSignInAsync(
+                            foundUser.Result.UserName,
+                            Input.Password,
+                            Input.RememberMe,
+                            lockoutOnFailure: false);
+                    }
+                }
+
                 if (result.Succeeded)
                 {
+
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

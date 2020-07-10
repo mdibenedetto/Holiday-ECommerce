@@ -4,56 +4,75 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using dream_holiday.Models;
+using dream_holiday.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace dream_holiday.Controllers
 {
     [Route("user-account")]
     public class UserAccountController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public UserAccountController(ApplicationDbContext context)
         {
-            var user = GetData();
-            return View(user);
+            _context = context;
         }
 
+        // GET: UserAccount/Edit/5
+        public async Task<IActionResult> Index(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var userAccountModel = await _context.Users.FindAsync(id.ToString());
+            if (userAccountModel == null)
+            {
+                return NotFound();
+            }
+            return View(userAccountModel);
+             
+        }
+             
+ 
         [HttpPost]
-        public IActionResult Update(
-            
-            UserAccountModel formUser)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, ApplicationUserModel userAccountModel)
         {
-            var user = GetData();
-            return View("index", formUser);
+            if (id.ToString() != userAccountModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(userAccountModel);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserAccountModelExists(Guid.Parse( userAccountModel.Id)))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(nameof(Index), userAccountModel);
         }
 
-        private UserAccountModel GetData()
+        private bool UserAccountModelExists(Guid id)
         {
-            var user = new UserAccountModel();
-            user.FirstName = "Petra";
-            user.LastName = "Furkes";
-            user.Email = "firstname.lastname@gmail.com";
-            user.Pasword = "pasword123";
-            user.RetypePasword = "pasword123";
-            user.BirthDay = DateTime.Now.AddYears(-20);
-            user.BirthMonth = DateTime.Now.AddYears(-20);
-            user.BirthYear = DateTime.Now.AddYears(-20);
-            user.Country = "Ireland";
-            user.Address = "Apt.25, Street 28";
-            user.Address2 = "Dublin 1";
-            user.Town = "Dublin";
-            user.County = "Co. Dublin";
-            user.Telephone = "123456789";
-            user.CardHolderFullName = "Petra Furkes";
-            user.CardNumber = "9842 4520 1111 2222";
-            user.CardCVC = "228";
-            user.CardMonth = DateTime.Now.AddYears(-20);
-            user.CardYear = DateTime.Now.AddYears(+2);
-            user.CountryBilling = "Ireland";
-            user.AddressBilling = "Apt. 25, street 28";
-            user.Address2Billing = "Dublin 1";
-            user.TownBilling = "Dublin";
-            user.County2Billing = "Co. Dublin";
-
-            return user;
+            return _context.Users.Any(e => e.Id == id.ToString());
         }
+       
     }
 }

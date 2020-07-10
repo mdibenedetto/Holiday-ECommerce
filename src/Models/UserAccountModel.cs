@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace dream_holiday.Models
 {
-    public class UserAccountModel
+    public class ApplicationUserModel : IdentityUser
     {
-        public UserAccountModel() 
-        { 
-        }
-
-        
         public String FirstName { get; set; }
         public String LastName { get; set; }
-        public String Email { get; set; }
-        public DateTime BirthDay;
-        public DateTime BirthMonth;
-        public DateTime BirthYear;
+
+
+        public DateTime BirthDay { get; set; }
+        public DateTime BirthMonth { get; set; }
+        public DateTime BirthYear { get; set; }
+
         public String Pasword { get; set; }
         public String RetypePasword { get; set; }
         public String Country { get; set; }
@@ -29,20 +28,18 @@ namespace dream_holiday.Models
         public String CardHolderFullName { get; set; }
         public String CardNumber { get; set; }
         public String CardCVC { get; set; }
-        public DateTime CardMonth;
-        public DateTime CardYear;
+        public DateTime CardMonth { get; set; }
+        public DateTime CardYear { get; set; }
         public String CountryBilling { get; set; }
         public String AddressBilling { get; set; }
         public String Address2Billing { get; set; }
         public String TownBilling { get; set; }
         public String County2Billing { get; set; }
 
-
-
         public String GetFullName()
         {
             return FirstName + " " + LastName;
-       
+
         }
 
     }

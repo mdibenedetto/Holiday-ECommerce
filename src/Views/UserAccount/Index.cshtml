@@ -3,10 +3,10 @@
     ViewData["Title"] = "User account";
 }
 
-@model UserAccountModel
+@model ApplicationUserModel
 
 
-<link rel="stylesheet" href="./css/useraccount.css" />
+<link rel="stylesheet" href="/css/useraccount.css" />
 
 
 <section class="main-container">
@@ -15,11 +15,10 @@
     <form class="account-box"
           id="formUser"
           name="formUser"
-          action="/user-account"
+          asp-action="Edit"
           method="post"
-          enctype="application/x-www-form-urlencoded"
-          >
-
+          enctype="application/x-www-form-urlencoded">
+        <input type="hidden" asp-for="Id" />
         <div class="customer-box">
             <section class="section-data">
                 <h1> Account</h1>
@@ -111,7 +110,7 @@
 
                             }
                         }
-                     }
+                    }
 
                 </select>
             </section>
@@ -168,8 +167,8 @@
                             if (Model.CardYear.Year == year)
                             {
                                 <option selected
-                                        class="select-option" 
-                                        label="@(year)" 
+                                        class="select-option"
+                                        label="@(year)"
                                         value="@(year)">
                                     @year
                                 </option>
@@ -193,8 +192,17 @@
                 <input type="text" name="County2Billing" placeholder="County" value="@(Model.County2Billing)" />
             </section>
 
-            <input type="submit" name="edit-button" placeholder="Edit Details" />
-
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
         </div>
     </form>
 </section>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

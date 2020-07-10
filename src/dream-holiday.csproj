@@ -29,7 +29,5 @@
     <Folder Include="Views\CheckoutCart\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Areas\Identity\Pages\Account\" />
-    <Folder Include="Areas\Identity\Data\" />
-    <Folder Include="Areas\Identity\Models\" />
   </ItemGroup>
 </Project>
