@@ -16,9 +16,9 @@ namespace dream_holiday.Controllers
             return View(banana);
         }
 
-        private OrderDetailsModel GetData(int orderId)
+        private OrderDetail GetData(int orderId)
         {
-            var orderItem = new OrderDetailsModel(); 
+            var orderItem = new OrderDetail(); 
 
             orderItem.OrderId = orderId;
             orderItem.OrderDate = DateTime.Now.AddMonths(-1);

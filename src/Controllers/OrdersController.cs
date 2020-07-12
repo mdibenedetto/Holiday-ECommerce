@@ -12,7 +12,7 @@ namespace dream_holiday.Controllers
     {
         public IActionResult Index(int id, String Status)
         {
-            List<OrdersModel> banana = GetData(id); GetData(Status);
+            List<Order> banana = GetData(id); GetData(Status);
         
 
             return View(banana);
@@ -20,13 +20,13 @@ namespace dream_holiday.Controllers
         }
 
  
-        private List<OrdersModel> GetData(int id)
+        private List<Order> GetData(int id)
         {
-            var list = new List<OrdersModel>();
+            var list = new List<Order>();
 
             for (var i = 0; i < 10; i++)
             {
-                list.Add(new OrdersModel
+                list.Add(new Order
                 {
                     nr = i + 1,
                     Id = 12547 + i,
@@ -55,13 +55,13 @@ namespace dream_holiday.Controllers
         }
 
 
-        private List<OrdersModel> GetData(String Status)
+        private List<Order> GetData(String Status)
         {
-            var list = new List<OrdersModel>();
+            var list = new List<Order>();
 
             for (var i = 0; i < 10; i++)
             {
-                list.Add(new OrdersModel
+                list.Add(new Order
                 {
                     nr = i + 1,
                     Id = 12547 + i,
