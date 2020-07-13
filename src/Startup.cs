@@ -1,8 +1,12 @@
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using dream_holiday.Data;
 using Microsoft.Extensions.Configuration;
@@ -25,40 +29,15 @@ namespace dream_holiday
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
-            options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-              services
-                .AddDefaultIdentity<ApplicationUser>(
-                    options =>
-                    {
-                        // Password settings.
-
-                        options.SignIn.RequireConfirmedAccount = false; 
-                        options.SignIn.RequireConfirmedEmail = false;
-                        options.Password.RequireDigit = false;
-                        options.Password.RequireLowercase = false;
-                        options.Password.RequireNonAlphanumeric = false;
-                        options.Password.RequireUppercase = false;
-                        //options.Password.RequireDigit = true;
-                        //options.Password.RequireLowercase = true;
-                        //options.Password.RequireNonAlphanumeric = true;
-                        //options.Password.RequireUppercase = true;
-                        options.Password.RequiredLength = 6;
-                        //options.Password.RequiredUniqueChars = 1;
-
-                        // Lockout settings.
-                        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                        options.Lockout.MaxFailedAccessAttempts = 25;
-                        options.Lockout.AllowedForNewUsers = true;
-
-                        // User settings.
-                        options.User.AllowedUserNameCharacters =
-                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                        options.User.RequireUniqueEmail = false;
-                    })
-                .AddRoles<ApplicationRole>()
+      
+            services
+                .AddDefaultIdentity<ApplicationUserModel>(
+                    options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
- 
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -80,8 +59,8 @@ namespace dream_holiday
         public void Configure(
                 IApplicationBuilder app,
                 IWebHostEnvironment env,
-                UserManager<ApplicationUser> userManager,
-                RoleManager<ApplicationRole> roleManager  )  {
+                UserManager<ApplicationUserModel> userManager,
+                RoleManager<IdentityRole> roleManager  )  {
 
             if (env.IsDevelopment())
             {
@@ -102,12 +81,6 @@ namespace dream_holiday
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                context.Database.EnsureCreated();
-            }
 
             // create default UserRoles and Users
             //StartupUsers.Startup(userManager, roleManager);

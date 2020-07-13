@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
 namespace dream_holiday.Models
 {
-    public class UserAccount
+    public class ApplicationUserModel : IdentityUser
     {
-        public ApplicationUser User { get; set; }
-
-        public Guid Id { get; set; }
-
         public String FirstName { get; set; }
         public String LastName { get; set; }
 
@@ -39,5 +41,6 @@ namespace dream_holiday.Models
             return FirstName + " " + LastName;
 
         }
+
     }
 }

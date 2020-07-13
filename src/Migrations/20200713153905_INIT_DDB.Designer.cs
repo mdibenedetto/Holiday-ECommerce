@@ -9,8 +9,8 @@ using dream_holiday.Data;
 namespace dream_holiday.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200712165805_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200713153905_INIT_DDB")]
+    partial class INIT_DDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -219,6 +219,21 @@ namespace dream_holiday.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsInstock")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Cart");
@@ -233,6 +248,90 @@ namespace dream_holiday.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Checkout");
+                });
+
+            modelBuilder.Entity("dream_holiday.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid?>("CustomerId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("dream_holiday.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("PackageId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("PackageId");
+
+                    b.ToTable("OrderDetail");
+                });
+
+            modelBuilder.Entity("dream_holiday.Models.TravelPackage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TravelPackage");
                 });
 
             modelBuilder.Entity("dream_holiday.Models.UserAccount", b =>
@@ -295,10 +394,10 @@ namespace dream_holiday.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Pasword")
+                    b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("RetypePasword")
+                    b.Property<string>("RetypePassword")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Telephone")
@@ -369,6 +468,24 @@ namespace dream_holiday.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dream_holiday.Models.Order", b =>
+                {
+                    b.HasOne("dream_holiday.Models.UserAccount", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("dream_holiday.Models.OrderDetail", b =>
+                {
+                    b.HasOne("dream_holiday.Models.Order", "Order")
+                        .WithMany("Details")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("dream_holiday.Models.TravelPackage", "Package")
+                        .WithMany()
+                        .HasForeignKey("PackageId");
                 });
 
             modelBuilder.Entity("dream_holiday.Models.UserAccount", b =>

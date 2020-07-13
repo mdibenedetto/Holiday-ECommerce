@@ -18,14 +18,14 @@ namespace dream_holiday.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUserModel> _userManager;
+        private readonly SignInManager<ApplicationUserModel> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(
-            SignInManager<ApplicationUser> signInManager, 
+            SignInManager<ApplicationUserModel> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUserModel> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -88,8 +88,7 @@ namespace dream_holiday.Areas.Identity.Pages.Account
                 if (!result.Succeeded)
                 {
                   var foundUser = _userManager.FindByEmailAsync(Input.Email);
-                    if (foundUser != null && foundUser.Result!= null)
-                    {
+                    if (foundUser != null){
                         result = await _signInManager.PasswordSignInAsync(
                             foundUser.Result.UserName,
                             Input.Password,
@@ -100,15 +99,14 @@ namespace dream_holiday.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
-
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
-
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");

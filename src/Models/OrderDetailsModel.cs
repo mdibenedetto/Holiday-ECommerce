@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace dream_holiday.Models
 {
@@ -13,7 +15,7 @@ namespace dream_holiday.Models
         public decimal Price = 0;
     }
 
-    public class OrderDetail
+    public class OrderDetailsModel
     {
 
         public long OrderId;

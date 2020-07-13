@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace dream_holiday.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class INIT_DDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,7 +50,12 @@ namespace dream_holiday.Migrations
                 name: "Cart",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    IsInstock = table.Column<bool>(nullable: false),
+                    Qty = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,6 +71,23 @@ namespace dream_holiday.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Checkout", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TravelPackage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Qty = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    Image = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TravelPackage", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,8 +207,8 @@ namespace dream_holiday.Migrations
                     BirthDay = table.Column<DateTime>(nullable: false),
                     BirthMonth = table.Column<DateTime>(nullable: false),
                     BirthYear = table.Column<DateTime>(nullable: false),
-                    Pasword = table.Column<string>(nullable: true),
-                    RetypePasword = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    RetypePassword = table.Column<string>(nullable: true),
                     Country = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     Address2 = table.Column<string>(nullable: true),
@@ -211,6 +233,58 @@ namespace dream_holiday.Migrations
                         name: "FK_UserAccount_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CustomerId = table.Column<Guid>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    Qty = table.Column<int>(nullable: false),
+                    Status = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order_UserAccount_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "UserAccount",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDetail",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OrderId = table.Column<int>(nullable: true),
+                    PackageId = table.Column<int>(nullable: true),
+                    OrderDate = table.Column<DateTime>(nullable: false),
+                    Qty = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderDetail_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OrderDetail_TravelPackage_PackageId",
+                        column: x => x.PackageId,
+                        principalTable: "TravelPackage",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -253,6 +327,21 @@ namespace dream_holiday.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Order_CustomerId",
+                table: "Order",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetail_OrderId",
+                table: "OrderDetail",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetail_PackageId",
+                table: "OrderDetail",
+                column: "PackageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserAccount_UserId",
                 table: "UserAccount",
                 column: "UserId");
@@ -282,10 +371,19 @@ namespace dream_holiday.Migrations
                 name: "Checkout");
 
             migrationBuilder.DropTable(
-                name: "UserAccount");
+                name: "OrderDetail");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Order");
+
+            migrationBuilder.DropTable(
+                name: "TravelPackage");
+
+            migrationBuilder.DropTable(
+                name: "UserAccount");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

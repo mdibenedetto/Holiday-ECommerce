@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
@@ -25,6 +29,5 @@
     <Folder Include="Views\CheckoutCart\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Areas\Identity\Pages\Account\" />
-    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 </Project>

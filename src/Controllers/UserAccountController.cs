@@ -27,56 +27,35 @@ namespace dream_holiday.Controllers
                 return NotFound();
             }
 
-
-            //todo: remove var userAccountModel2 = await _context.UserAccount.FindAsync(id);
-
-            var query = from ua in _context.UserAccount 
-                        join u in _context.Users on ua.User.Id equals u.Id 
-                        where u.Id == id  
-                        select ua ; 
-                      
-            
-             var userAccount = query.FirstOrDefault();
- 
-
-            if (userAccount == null)
-            {
-                var user = await _context.Users.FindAsync(id);
-                var newUserAccount = new UserAccount { User = user };
-                return View(newUserAccount); 
-            }
-            return View(userAccount);
-
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, UserAccount userAccount)
-        {
-            if (id != userAccount.Id)
+            var userAccountModel = await _context.Users.FindAsync(id.ToString());
+            if (userAccountModel == null)
             {
                 return NotFound();
             }
-            // todo : fix view and switch back to ModelState.IsValid
-            var IsValid = true; //ModelState.IsValid;
-            if (IsValid)
+            return View(userAccountModel);
+             
+        }
+             
+ 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, ApplicationUserModel userAccountModel)
+        {
+            if (id.ToString() != userAccountModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    if (UserAccountModelExists(userAccount.Id))
-                    {
-                        _context.Update(userAccount);
-                    }
-                    else                 
-                    {
-                        _context.Add(userAccount);
-                    }
+                    _context.Update(userAccountModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserAccountModelExists(userAccount.Id))
+                    if (!UserAccountModelExists(Guid.Parse( userAccountModel.Id)))
                     {
                         return NotFound();
                     }
@@ -87,14 +66,13 @@ namespace dream_holiday.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-
-            return View(nameof(Index), userAccount);
+            return View(nameof(Index), userAccountModel);
         }
 
         private bool UserAccountModelExists(Guid id)
         {
-            return _context.UserAccount.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Id == id.ToString());
         }
-
+       
     }
 }

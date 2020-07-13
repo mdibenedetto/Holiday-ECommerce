@@ -3,7 +3,7 @@
     ViewData["Title"] = "User account";
 }
 
-@model UserAccount
+@model ApplicationUserModel
 
 
 <link rel="stylesheet" href="/css/useraccount.css" />
@@ -31,7 +31,7 @@
                 </select>
                 <input type="text" name="FirstName" placeholder="First Name" value="@(Model.FirstName)" />
                 <input type="text" name="LastName" placeholder="Last Name" value="@(Model.LastName)" />
-                <input type="text" name="User.Email" placeholder="Email Address" value="@(Model.User.Email)" />
+                <input type="text" name="Email" placeholder="Email Address" value="@(Model.Email)" />
                 <input type="text" name="Pasword" placeholder="Pasword" value="@(Model.Pasword)" />
                 <input type="text" name="RetypePasword" placeholder="Retype pasword" value="@(Model.RetypePasword)" />
 

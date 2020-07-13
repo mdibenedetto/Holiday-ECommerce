@@ -1,12 +1,35 @@
-﻿@model OrderDetail
+﻿@model OrderDetailsModel
 
 @{
     ViewData["Title"] = "Order Details";
 }
 
+<style>
+    .wbox {
+        background-color: white;
+        padding: 20px;
+        
 
-<link rel="stylesheet" href="/css/order-detail.css" />
- 
+    }
+
+    h3 {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .img {
+        text-align: center;
+        opacity: 0.6;
+    }
+
+        .img:hover {
+            opacity: 0.8;
+        }
+</style>
 
 <section class="main-container">
 
@@ -30,7 +53,7 @@
         <div class="orderid">
             <h4>
                 <span class="badge badge-pill badge-danger">
-                    Order ID:  @Model.OrderId
+                    Order ID:  @Model.OrderId 
                 </span>
                 <span class="badge badge-pill badge-danger">
                     Date:  @Model.OrderDate.ToString("yyyy-MM-dd")

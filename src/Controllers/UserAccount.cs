@@ -54,7 +54,7 @@
 //        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 //        [HttpPost]
 //        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Email,Pasword,RetypePasword,Country,Address,Address2,Town,County,Telephone,CardHolderFullName,CardNumber,CardCVC,CountryBilling,AddressBilling,Address2Billing,TownBilling,County2Billing")] ApplicationUser userAccountModel)
+//        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Email,Pasword,RetypePasword,Country,Address,Address2,Town,County,Telephone,CardHolderFullName,CardNumber,CardCVC,CountryBilling,AddressBilling,Address2Billing,TownBilling,County2Billing")] ApplicationUserModel userAccountModel)
 //        {
 //            if (ModelState.IsValid)
 //            {

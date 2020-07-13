@@ -1,17 +1,16 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace dream_holiday.Models
 {
-    [Table("Cart")]
-    public class Cart
+    public class CartModel
     {
-       
-        public Guid Id { get; set; }
+        public CartModel()
+        {
+        }
+
         public String Title = "";
         public String Description = "";
         public bool IsInstock = false;
         public int Qty = 0;
-        public Decimal Price = 0;
+        public Decimal price = 0;
       }
 }
