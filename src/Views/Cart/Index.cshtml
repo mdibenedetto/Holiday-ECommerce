@@ -3,7 +3,7 @@
     ViewData["Title"] = "Cart";
 }
 
-@model List<CartModel>
+@model List<Cart>
 
 <link rel="stylesheet" href="./css/cart.css" />
 
@@ -45,7 +45,7 @@
                                     <td>
                                         <input class="form-control" type="text" value="@item.Qty" />
                                     </td>
-                                    <td class="item-price text-right">€ @item.price</td>
+                                    <td class="item-price text-right">€ @item.Price</td>
                                     <td class="text-right">
                                         <button class="btn btn-sm btn-danger">
                                             <i class="fa fa-trash"></i>

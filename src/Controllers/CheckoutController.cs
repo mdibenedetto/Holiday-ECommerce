@@ -11,8 +11,6 @@ namespace dream_holiday.Controllers
     [Route("checkout-cart")]
     public class CheckoutController : Controller
     {
-       
-
         public IActionResult Index()
         {
             var mycart = GetData();
@@ -20,9 +18,9 @@ namespace dream_holiday.Controllers
         }
 
 
-        private CheckoutModel GetData()
+        private Checkout GetData()
         {
-            var mycart = new CheckoutModel();
+            var mycart = new Checkout();
            
             mycart.FirstName = "John";
             mycart.LastName = "Banana";

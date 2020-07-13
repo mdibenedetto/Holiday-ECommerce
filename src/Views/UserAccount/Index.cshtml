@@ -3,7 +3,7 @@
     ViewData["Title"] = "User account";
 }
 
-@model ApplicationUserModel
+@model UserAccount
 
 
 <link rel="stylesheet" href="/css/useraccount.css" />
@@ -19,6 +19,8 @@
           method="post"
           enctype="application/x-www-form-urlencoded">
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="User.Id" name="User.Id" />
+
         <div class="customer-box">
             <section class="section-data">
                 <h1> Account</h1>
@@ -31,9 +33,9 @@
                 </select>
                 <input type="text" name="FirstName" placeholder="First Name" value="@(Model.FirstName)" />
                 <input type="text" name="LastName" placeholder="Last Name" value="@(Model.LastName)" />
-                <input type="text" name="Email" placeholder="Email Address" value="@(Model.Email)" />
-                <input type="text" name="Pasword" placeholder="Pasword" value="@(Model.Pasword)" />
-                <input type="text" name="RetypePasword" placeholder="Retype pasword" value="@(Model.RetypePasword)" />
+                <input type="text" name="User.Email" placeholder="Email Address" value="@(Model.User.Email)" />
+                <input type="text" name="Password" placeholder="Password" value="@(Model.User.PasswordHash)" />
+                <input type="text" name="RetypePassword" placeholder="Retype Password" value="@(Model.User.PasswordHash)" />
 
                 <p> Date of Birth</p>
                 <select class="dayofbirth" id="dayofbirth" name="BirthDay" data-formid="dayofbirth" data-field-label="Day">

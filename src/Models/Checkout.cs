@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace dream_holiday.Models
 {
-    public class CheckoutModel
+    [Table("Checkout")]
+    public class Checkout
     {
-
-
-        public CheckoutModel() { }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public Guid Id { get; set; }
 
         public String FirstName = "";
         public String LastName = "";
         public String UserName = "";
         public String Email = "";
 
-
-
         public String Address = "";
         public String Address2 = "";
-
 
         public String Country = "";
         public String City = "";
@@ -40,7 +40,6 @@ namespace dream_holiday.Models
         public String GetUserName()
         {
             return FirstName + LastName;
-
         }
 
     }

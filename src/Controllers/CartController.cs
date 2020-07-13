@@ -15,25 +15,25 @@ namespace dream_holiday.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            List<CartModel> cartList = getMockData();
+            List<Cart> cartList = getMockData();
             return View(cartList);
         }
 
 
         // fake DB layer
-        List<CartModel> getMockData()
+        List<Cart> getMockData()
         {
-            var mockList = new List<CartModel>();
+            var mockList = new List<Cart>();
             for (int i = 0; i < 8; i++)
             {
-                mockList.Add(new CartModel
+                mockList.Add(new Cart
                 {
                     Title = "Holiday package name - " + (i + 1),
                     Description = "Lorem ipsum dolor sit amet " +
                     "consectetur adipisicing elit.Exercitationem," +
                     " aspernatur!",
                     IsInstock = true,
-                    price = 1003 + i,
+                    Price = 1003 + i,
                     Qty = 1 + i
                 });
             }

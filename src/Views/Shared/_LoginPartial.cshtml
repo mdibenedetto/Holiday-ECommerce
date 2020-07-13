@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUserModel> SignInManager
-@inject UserManager<ApplicationUserModel> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav ml-auto">
     @if (SignInManager.IsSignedIn(User))
@@ -17,10 +17,10 @@
                 Hello @User.Identity.Name!
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="user-account/?id=@(   UserManager.GetUserId(User) )">Account</a>
-                <a class="dropdown-item" href="orders">Order history</a>
-                <a class="dropdown-item" href="cart">Cart</a>
-                <a class="dropdown-item" href="checkout-cart">Checkout</a>
+                <a class="dropdown-item" href="/user-account/?userId=@(   UserManager.GetUserId(User) )">Account</a>
+                <a class="dropdown-item" href="/orders">Order history</a>
+                <a class="dropdown-item" href="/cart">Cart</a>
+                <a class="dropdown-item" href="/checkout-cart">Checkout</a>
                 @*<a class="dropdown-item" href="login" onclick="logout()">
                         Log out
                     </a>*@

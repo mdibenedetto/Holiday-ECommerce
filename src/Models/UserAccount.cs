@@ -1,14 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dream_holiday.Models
 {
-    public class ApplicationUserModel : IdentityUser
-    {
+    public class UserAccount
+    { 
+        public virtual ApplicationUser User { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public Guid Id { get; set; }
+
         public String FirstName { get; set; }
         public String LastName { get; set; }
 
@@ -17,8 +20,8 @@ namespace dream_holiday.Models
         public DateTime BirthMonth { get; set; }
         public DateTime BirthYear { get; set; }
 
-        public String Pasword { get; set; }
-        public String RetypePasword { get; set; }
+        public String Password { get; set; }
+        public String RetypePassword { get; set; }
         public String Country { get; set; }
         public String Address { get; set; }
         public String Address2 { get; set; }
@@ -41,6 +44,5 @@ namespace dream_holiday.Models
             return FirstName + " " + LastName;
 
         }
-
     }
 }
