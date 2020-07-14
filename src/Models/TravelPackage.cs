@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace dream_holiday.Models
 {
@@ -19,6 +20,9 @@ namespace dream_holiday.Models
         public int Qty { get; set; }
         public decimal Price { get; set; }
         public String Image { get; set; }
+
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
 
     }
 }
