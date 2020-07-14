@@ -33,44 +33,28 @@ namespace dream_holiday.Controllers
         }
 
         // GET: UserAccount/Edit/5
-        public async Task<IActionResult> Index(Guid? userId)
+        public IActionResult Index(Guid? userId)
         {
             if (userId == null)
             {
                 return NotFound();
             }
 
-
-            //todo: remove var userAccountModel2 = await _context.UserAccount.FindAsync(id);
-
-            var query = from ua in _context.UserAccount 
-                        join u in _context.Users on ua.User.Id equals u.Id
-                        where u.Id == userId  
-                        select ua ;
-
-            //var query2 = from u in _context.Users
-            //             join ua in _context.UserAccount on u.Id equals ua.User.Id
-            //             where u.Id == userId
-            //            select ua;
+            var query = (from user in _context.Users
+                         where user.Id == userId
+                         join ua in _context.UserAccount
+                                on user.Id equals ua.User.Id
+                                into userAccount_join                      
+                         from _userAccount in userAccount_join.DefaultIfEmpty()
+                         select new UserAccountModel{
+                            Id = _userAccount.Id,
+                            UserAccount = _userAccount,
+                            User = user
+                         }) ;
 
             var userAccount = query.FirstOrDefault();
  
-
-            if (userAccount == null)
-            { 
-                var user = await _context.Users.FindAsync(userId);
-                var newUserAccount = new UserAccount {
-                    Id = Guid.NewGuid(),
-                    User = new ApplicationUser() };
-                return View(newUserAccount); 
-            }
-
-            if (userAccount.User == null)
-            {
-                userAccount.User = await _context.Users.FindAsync(userId);
-            }
-             return View(userAccount);
-
+            return View(userAccount);
         }
 
 
@@ -91,24 +75,28 @@ namespace dream_holiday.Controllers
             {
                 try
                 {
-                  
-                    newUserAccount.User = await _context.Users.FindAsync(userAccount.User.Id);
+                    // update application user
+                    var user = await _userManager.FindByIdAsync(userAccount.User.Id.ToString());
+                    user.UserName = userAccount.User.UserName;
+                    user.Email = userAccount.User.Email;
+                    // update only those fields which changed
+
+                    await _userManager.UpdateAsync(user);
+                    //_context.Attach(user);
+
+                    // update user account
+                    newUserAccount.User = user;
                     newUserAccount.Id = userAccount.Id;
                     newUserAccount.FirstName = userAccount.FirstName;
                     newUserAccount.LastName = userAccount.LastName;
 
-                    //_context.Update(userAccount.User);
-
                     if (UserAccountModelExists(userAccount.Id))
-                    { 
-                        //_context.Update(user);
-                        //_context.UserAccount.Attach(userAccount);
+                    {  
                         _context.Update(newUserAccount);
                     }
                     else                 
                     {
-                        _context.UserAccount.Add(newUserAccount);
-                        //_context.Attach(userAccount);
+                        _context.Add(newUserAccount); 
                     }
                     await _context.SaveChangesAsync();
                 }
@@ -123,10 +111,13 @@ namespace dream_holiday.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), new { userId = newUserAccount.User.Id });
+                return RedirectToAction(nameof(Index),
+                    new { userId = newUserAccount.User.Id }
+                );
             }
-            return RedirectToAction(nameof(Index), new { userId = newUserAccount.User.Id });
-            //return View("index/?id=" + userId, userAccount);
+            return RedirectToAction(nameof(Index),
+                new { userId = newUserAccount.User.Id }
+             );
         }
 
         private bool UserAccountModelExists(Guid id)

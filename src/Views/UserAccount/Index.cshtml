@@ -3,7 +3,12 @@
     ViewData["Title"] = "User account";
 }
 
-@model UserAccount
+@model UserAccountModel
+
+@{
+    var user = Model.User;
+    var userAccount = Model.UserAccount ?? new UserAccount();
+}
 
 
 <link rel="stylesheet" href="/css/useraccount.css" />
@@ -31,11 +36,12 @@
                     <option value="title">Mrs</option>
                     <option value="title">Mr</option>
                 </select>
-                <input type="text" name="FirstName" placeholder="First Name" value="@(Model.FirstName)" />
-                <input type="text" name="LastName" placeholder="Last Name" value="@(Model.LastName)" />
-                <input type="text" name="User.Email" placeholder="Email Address" value="@(Model.User.Email)" />
-                <input type="text" name="Password" placeholder="Password" value="@(Model.User.PasswordHash)" />
-                <input type="text" name="RetypePassword" placeholder="Retype Password" value="@(Model.User.PasswordHash)" />
+                <input type="text" name="FirstName" placeholder="First Name" value="@(userAccount.FirstName)" />
+                <input type="text" name="LastName" placeholder="Last Name" value="@(userAccount.LastName)" />
+                <input type="text" name="User.UserName" placeholder="UserName" value="@(user.UserName)" />
+                <input type="text" name="User.Email" placeholder="Email Address" value="@(user.Email)" />
+                <input type="password" name="Password" placeholder="Password" value="@(user.PasswordHash)" />
+                <input type="password" name="RetypePassword" placeholder="Retype Password" value="@(user.PasswordHash)" />
 
                 <p> Date of Birth</p>
                 <select class="dayofbirth" id="dayofbirth" name="BirthDay" data-formid="dayofbirth" data-field-label="Day">
@@ -43,7 +49,7 @@
                     @{
                         for (int day = 1; day < 32; day++)
                         {
-                            if (Model.BirthDay.Day == day)
+                            if (userAccount.BirthDay.Day == day)
                             {
                                 <option selected
                                         class="select-option"
@@ -69,7 +75,7 @@
                         string[] monthValue = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
                         for (int month = 0; month < monthValue.Length; month++)
                         {
-                            if (Model.BirthMonth.Month == month)
+                            if (userAccount.BirthMonth.Month == month)
                             {
                                 <option selected
                                         class="select-option"
@@ -96,7 +102,7 @@
                         for (int year = curYearDOB; year > (curYearDOB - 120); year--)
 
                         {
-                            if (Model.BirthYear.Year == year)
+                            if (userAccount.BirthYear.Year == year)
                             {
                                 <option selected
                                         class="select-option"
@@ -119,19 +125,19 @@
 
             <section class="section-data">
                 <h1>Address</h1>
-                <input type="text" name="Country" placeholder="Country" value="@(Model.Country)" />
-                <input type="text" name="Address" placeholder="Address" value="@(Model.Address)" />
-                <input type="text" name="Address2" placeholder="Address 2" value="@(Model.Address2)" />
-                <input type="text" name="Town" placeholder="Town/City" value="@(Model.Town)" />
-                <input type="text" name="County" placeholder="County" value="@(Model.County)" />
-                <input type="text" name="Telephone" placeholder="Telephone" value="@(Model.Telephone)" />
+                <input type="text" name="Country" placeholder="Country" value="@(userAccount.Country)" />
+                <input type="text" name="Address" placeholder="Address" value="@(userAccount.Address)" />
+                <input type="text" name="Address2" placeholder="Address 2" value="@(userAccount.Address2)" />
+                <input type="text" name="Town" placeholder="Town/City" value="@(userAccount.Town)" />
+                <input type="text" name="County" placeholder="County" value="@(userAccount.County)" />
+                <input type="text" name="Telephone" placeholder="Telephone" value="@(userAccount.Telephone)" />
             </section>
             <section class="section-data">
                 <h1>Payment Details</h1>
                 <p>Credit Card</p>
-                <input type="text" name="CardHolderFullName" placeholder="Card Holder Full Name" value="@(Model.CardHolderFullName)" />
-                <input type="text" name="CardNumber" placeholder="Card Number" value="@(Model.CardNumber)" />
-                <input type="text" name="CardCVC" placeholder="Card CVC" value="@(Model.CardCVC)" />
+                <input type="text" name="CardHolderFullName" placeholder="Card Holder Full Name" value="@(userAccount.CardHolderFullName)" />
+                <input type="text" name="CardNumber" placeholder="Card Number" value="@(userAccount.CardNumber)" />
+                <input type="text" name="CardCVC" placeholder="Card CVC" value="@(userAccount.CardCVC)" />
                 <select class="cardmonth" id="cardmonth" name="CardMonth" data-formid="cardmonth" data-field-label="Day">
                     <option class="select-option" label="Month" value="">Month</option>
 
@@ -139,7 +145,7 @@
                     @{
                         for (int cardMonth = 1; cardMonth < 13; cardMonth++)
                         {
-                            if (Model.CardMonth.Day == cardMonth)
+                            if (userAccount.CardMonth.Day == cardMonth)
                             {
                                 <option selected
                                         class="select-option"
@@ -166,7 +172,7 @@
                         int curYear = DateTime.Now.Year;
                         for (int year = (curYear + 5); year >= curYear; year--)
                         {
-                            if (Model.CardYear.Year == year)
+                            if (userAccount.CardYear.Year == year)
                             {
                                 <option selected
                                         class="select-option"
@@ -187,11 +193,11 @@
 
             <section class="section-data">
                 <h1>Billing Address</h1>
-                <input type="text" name="CountryBilling" placeholder="Country" value="@(Model.CountryBilling)" />
-                <input type="text" name="AddressBilling" placeholder="Address" value="@(Model.AddressBilling)" />
-                <input type="text" name="Address2Billing" placeholder="Address 2" value="@(Model.Address2Billing)" />
-                <input type="text" name="TownBilling" placeholder="Town/City" value="@(Model.TownBilling)" />
-                <input type="text" name="County2Billing" placeholder="County" value="@(Model.County2Billing)" />
+                <input type="text" name="CountryBilling" placeholder="Country" value="@(userAccount.CountryBilling)" />
+                <input type="text" name="AddressBilling" placeholder="Address" value="@(userAccount.AddressBilling)" />
+                <input type="text" name="Address2Billing" placeholder="Address 2" value="@(userAccount.Address2Billing)" />
+                <input type="text" name="TownBilling" placeholder="Town/City" value="@(userAccount.TownBilling)" />
+                <input type="text" name="County2Billing" placeholder="County" value="@(userAccount.County2Billing)" />
             </section>
 
             <div class="form-group">
