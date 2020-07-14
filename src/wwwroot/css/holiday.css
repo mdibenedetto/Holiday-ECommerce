@@ -29,3 +29,7 @@ a.card-link {
     color: #007bff;
     font-weight: 500;
 }
+
+#destinations {
+    height: 300px;
+}
