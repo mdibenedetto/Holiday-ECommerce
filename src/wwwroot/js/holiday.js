@@ -11,7 +11,9 @@ chkAllDestination.addEventListener("click", toggleDestinationList);
 const destinations = document.querySelector("#destinations");
 
 const priceRange = document.querySelector("#price-range");
-priceRange.setAttribute("min", 0.1);
+priceRange.setAttribute("min", 0);
+priceRange.setAttribute("max", 5000);
+priceRange.setAttribute("step", 10);
 priceRange.addEventListener("input", updateSearchPrice);
 
 const btnSearch = document.querySelector("button#btnSearch");
@@ -30,7 +32,8 @@ function updateSearchPrice() {
 }
 
 function computedPrice() {
-    return Math.round(priceRange.value * 100);
+    return priceRange.value;
+    //return Math.round(priceRange.value * 100);
 }
 
 function filterHolidays() {   
@@ -89,7 +92,7 @@ function loadHolidays(holidayItems) {
 
         const links = clone.querySelectorAll(".item-link");
         links.forEach((link) =>
-            link.setAttribute("href", "holiday-detail.html?id=" + (index + 1))
+            link.setAttribute("href", "/holiday/detail?id=" + item.id)
         );
 
         parent.appendChild(clone);

@@ -1,0 +1,16 @@
+﻿.main-container {
+    flex-direction: row;
+}
+
+.main-container-left {
+    max-width: 600px;
+}
+
+.main-container-right {
+    text-align: right;
+}
+
+.body-content {
+    background: white;
+    padding: 15px;
+}

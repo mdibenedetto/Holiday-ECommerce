@@ -1,15 +1,16 @@
-﻿const pageLoader = `<div class="loader-container">
-  <div class="loader"></div>
-</div>`;
+﻿
 
-let usetToolbar = ``;
 
 window.currentUser = getCurrentUser();
-if (window.currentUser) {
-    // usetToolbar = `<li>Welcome ${window.currentUser.userName}</li>
-    // <li><a href="login.html" onclick="logout()">Log out</a></li>`;
+ 
+function getMenuBar() {
+    let usetToolbar = ``;
 
-    usetToolbar = `    
+    if (window.currentUser) {
+        // usetToolbar = `<li>Welcome ${window.currentUser.userName}</li>
+        // <li><a href="login.html" onclick="logout()">Log out</a></li>`;
+
+        usetToolbar = `    
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" 
             style = "width: auto;"
@@ -32,11 +33,11 @@ if (window.currentUser) {
         </div>
       </li>
     `;
-} else {
-    // usetToolbar = `<li><a href="login.html">Login</a></li>
-    // <li><a href="sign-up.html">Sign up</a></li>`;
+    } else {
+        // usetToolbar = `<li><a href="login.html">Login</a></li>
+        // <li><a href="sign-up.html">Sign up</a></li>`;
 
-    usetToolbar = `
+        usetToolbar = `
     <li class="nav-item">
         <a class="nav-link" href="login">
           Login
@@ -47,19 +48,13 @@ if (window.currentUser) {
           Sign up
         </a>
       </li>`;
+    }
+
+    return usetToolbar;
 }
 
-{
-    /* <nav class="navbar nav-bar">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="holiday.html">Holidays</a></li>
-    <li><a href="about.html">About</a></li>
-    ${usetToolbar}
-  </ul>
-  </nav> */
-}
-const toolBar = `
+function getToolBar() {
+    const toolBar = `
    <header class="header-navbar container">
     <nav class="navbar-background navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="home">
@@ -94,13 +89,16 @@ const toolBar = `
             </ul>
             
             <ul class="navbar-nav ml-auto">
-            ${usetToolbar}  
+            ${getMenuBar()}  
             </ul>
           
         </div>
       </nav>    
     </header>
 `;
+    return toolBar;
+} 
+
 
 function setActivePageLink(page) {
     const parseLink = (url) => {
@@ -121,10 +119,7 @@ function setActivePageLink(page) {
     });
 }
 
-const cssLinks = `
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-`;
+
 
 //const currentYear = new Date().getFullYear();
 //const footer = `
@@ -165,12 +160,21 @@ document.addEventListener(
 );
 
 function initLayoutPage() {
-    document.head.insertAdjacentHTML("afterbegin", cssLinks);
+    //let pageLoader = `<div class="loader-container">
+    //                      <div class="loader"></div>
+    //                    </div>`;
 
-    document.body.insertAdjacentHTML("afterbegin", pageLoader);
-    //document.body.insertAdjacentHTML("afterbegin", toolBar);
-    //document.body.insertAdjacentHTML("beforeend", footer);
-    document.body.removeAttribute("data-loading");
+    //const cssLinks = `
+    //<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+    //<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    //`;
+
+    //document.head.insertAdjacentHTML("afterbegin", cssLinks);
+
+    //document.body.insertAdjacentHTML("afterbegin", pageLoader);
+    ////document.body.insertAdjacentHTML("afterbegin", toolBar);
+    ////document.body.insertAdjacentHTML("beforeend", footer);
+    //document.body.removeAttribute("data-loading");
 }
 
 function setLinkListener() {

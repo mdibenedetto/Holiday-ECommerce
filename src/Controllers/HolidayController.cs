@@ -30,6 +30,15 @@ namespace dream_holIday.Controllers
             return View();
         }
 
+        public IActionResult Detail(int Id)
+        {
+            var item = _context
+                .TravelPackage
+                .Find(Id);               
+
+            return View(item);
+        }
+
         [HttpGet("api/travelpackages")]
         public JsonResult LoadTravelPackages(
             [FromQuery] String[] destinations,
@@ -81,7 +90,6 @@ namespace dream_holIday.Controllers
                         Description= "Nulla vitae elit libero, a pharetra augue mollis interdum.",
                     },
                     new TravelPackage  {
-
                         Image= base_Image_Url + "/moscow.jpg",
                         Country= "Russia",
                         City= "Moscow",
