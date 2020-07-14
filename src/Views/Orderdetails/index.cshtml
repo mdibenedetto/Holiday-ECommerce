@@ -1,4 +1,4 @@
-﻿@model List<OrderDetail>
+﻿@model List<OrderDetailModel>
 
 @{
     ViewData["Title"] = "Order Details";
@@ -30,10 +30,10 @@
         <div class="orderid">
             <h4>
                 <span class="badge badge-pill badge-danger">
-                    Order ID:  Model.FirstOrDefault().Order.Id
+                    Order ID:  @ViewBag.orderId
                 </span>
                 <span class="badge badge-pill badge-danger">
-                    Date:  Model.OrderDate.ToString("yyyy-MM-dd")
+                    Date: @ViewBag.orderDate.ToString("yyyy-MM-dd")
                 </span>
             </h4>
         </div>
@@ -53,20 +53,18 @@
                 </thead>
                 <tbody>
                     @foreach (var detail in Model)
-
                     {
-
                         <tr>
-                            <th scope="row"> @detail.Id </th>
+                            <th scope="row"> @detail.OrderDetail.Id </th>
 
-                            <td>
-                                <div class="bold"> @detail.Package?.Name </div>
-                                <p> @detail.Package?.Description </p>
+                            <td>                                
+                                <div class="bold"> @detail.TravelPackage?.Name </div>
+                                <p> @detail.TravelPackage?.Description </p>
 
                             </td>
 
-                            <td> @detail.Qty</td>
-                            <td> &euro; @detail.Price </td>
+                            <td> @detail.OrderDetail.Qty</td>
+                            <td> &euro; @detail.OrderDetail.Price </td>
                         </tr>
                     }
 

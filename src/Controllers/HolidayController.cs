@@ -29,6 +29,7 @@ namespace dream_holIday.Controllers
 
         private void MockData()
         {
+ 
             if (_context.TravelPackage.Any())
             {
                 return;

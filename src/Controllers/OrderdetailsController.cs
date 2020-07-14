@@ -10,7 +10,6 @@ namespace dream_holiday.Controllers
 {
     public class OrderDetailsController : Controller
     {
-
         private readonly ApplicationDbContext _context;
 
         public OrderDetailsController(ApplicationDbContext context)
@@ -24,12 +23,25 @@ namespace dream_holiday.Controllers
             // todo: remove it when cart is ready
             this.MockData(orderId);
 
-            var orderDetails = _context
-                .OrderDetail
-                .ToList();
+     
+            var order = (from od in _context.Order
+                         where od.Id == orderId
+                         select od)
+                         .FirstOrDefault();
 
-            //var list = GetData(orderId);
+            ViewBag.orderId = orderId;
+            ViewBag.orderDate = order.Date;
 
+            var orderDetails =
+                (from od in _context.OrderDetail
+                    join tp in _context.TravelPackage
+                    on od.TravelPackage.Id equals tp.Id
+                 where od.Order.Id == orderId
+                 select new OrderDetailModel
+                {
+                    OrderDetail = od,
+                    TravelPackage = tp
+                }).ToList(); 
 
             return View(orderDetails);
         }
@@ -38,35 +50,25 @@ namespace dream_holiday.Controllers
 
         private void MockData(int orderId)
         {
+            //_context.OrderDetail.Clear();
+            //_context.SaveChanges();
+
             if (_context.OrderDetail.Any(order => order.Order.Id == orderId) )
             {
                 return;
             }
 
-     
-
-               // new Order { Id = orderId };
-          
-            //orderItem.OrderDate = DateTime.Now.AddMonths(-1);
-            //    DateTime.Now.ToString("dddd, dd MMMM yyyy");
-            var order = _context.Order.Find(orderId);
+            //var order = _context.Order.Find(orderId);
             var list = new List<OrderDetail>();
 
             for (var i = 0; i < 6; i++)
             {
                 var orderItem = new OrderDetail();
 
-                orderItem.Order = order;
-                orderItem.Id = orderId + i;
-
-                orderItem.Package = new TravelPackage
-                {                   
-                    Name = orderId + " - Croatia Blue Lagoon",
-                    Description = "(Our half day tour from Split we take you to the most famous and the most popular Blue Lagoon in Croatia.)",
-                    Qty = 1,
-                    Price = (decimal)298 + (i * 2),
-                };
-
+                orderItem.OrderId = orderId;
+                orderItem.Id = i + 1;
+                orderItem.TravelPackage = _context.TravelPackage.ToList()[i];
+            
                 list.Add(orderItem);
             }
 

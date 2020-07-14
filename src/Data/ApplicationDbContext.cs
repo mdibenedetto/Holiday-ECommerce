@@ -27,6 +27,18 @@ namespace dream_holiday.Data
         public DbSet<OrderDetail> OrderDetail { get; set; }
 
         public DbSet<TravelPackage> TravelPackage { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<OrderDetail>()
+                .HasKey(c => new { c.Id, c.OrderId });
+
+
+        }
     }
-     
+
+
 }

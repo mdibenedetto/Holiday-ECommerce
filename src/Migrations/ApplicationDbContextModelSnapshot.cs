@@ -282,14 +282,11 @@ namespace dream_holiday.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("TEXT");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("PackageId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
@@ -297,11 +294,14 @@ namespace dream_holiday.Migrations
                     b.Property<int>("Qty")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("TravelPackageId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id", "OrderId");
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("PackageId");
+                    b.HasIndex("TravelPackageId");
 
                     b.ToTable("OrderDetail");
                 });
@@ -479,11 +479,13 @@ namespace dream_holiday.Migrations
                 {
                     b.HasOne("dream_holiday.Models.Order", "Order")
                         .WithMany("Details")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("dream_holiday.Models.TravelPackage", "Package")
+                    b.HasOne("dream_holiday.Models.TravelPackage", "TravelPackage")
                         .WithMany()
-                        .HasForeignKey("PackageId");
+                        .HasForeignKey("TravelPackageId");
                 });
 
             modelBuilder.Entity("dream_holiday.Models.UserAccount", b =>
