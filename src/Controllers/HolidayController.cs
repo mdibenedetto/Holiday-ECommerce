@@ -8,15 +8,16 @@ using dream_holiday.Models;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace dream_holIday.Controllers
+namespace dream_holiday.Controllers
 {
     public class HolIdayController : Controller
     {
         private readonly ApplicationDbContext _context;
+       
 
         public HolIdayController(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context;            
         }
 
         public IActionResult Index()
@@ -62,6 +63,19 @@ namespace dream_holIday.Controllers
             return Json(list);
         }
 
+        public IActionResult AddToCart(int tpId)
+        {
+
+            var travelPackage = _context.TravelPackage.Find(tpId);
+
+            _context.Cart.Add(new Cart {
+                UserAccount = null,
+                TravelPackage = travelPackage
+            });
+
+            return RedirectToAction("index");
+        }
+
         private void MockDataCart()
         {
             //if (_context.Cart.Any())
@@ -87,6 +101,11 @@ namespace dream_holIday.Controllers
 
         private void MockData()
         {
+            //_context.OrderDetail.Clear();
+            //_context.Cart.Clear();
+            //_context.TravelPackage.Clear();
+
+            //_context.SaveChanges();
             if (_context.TravelPackage.Any())
             {
                 return;
@@ -100,6 +119,18 @@ namespace dream_holIday.Controllers
 
         List<TravelPackage> buildList()
         {
+            var LOREM_IPSUM = @"                 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore veritatis et quasi architecto beatae vitae
+                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+                aspernatur aut odit aut fugit, sed quia consequuntur";
+
             var base_Image_Url = "/img/holIday";
 
             List<TravelPackage> holidayItems =
@@ -110,7 +141,7 @@ namespace dream_holIday.Controllers
                         City = "Barcelona",
                         Name = "Barcelona",
                         Price= 2000,
-                        Description= "Nulla vitae elit libero, a pharetra augue mollis interdum.",
+                        Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
                         Image= base_Image_Url + "/moscow.jpg",
@@ -118,7 +149,7 @@ namespace dream_holIday.Controllers
                         City= "Moscow",
                         Name= "Moscow",
                         Price= 1600,
-                        Description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                        Description= LOREM_IPSUM,
                     },
                     new TravelPackage {
 
@@ -127,8 +158,7 @@ namespace dream_holIday.Controllers
                         City = "Bangkok",
                         Name= "Thailand",
                         Price= 1000,
-                        Description=
-                                "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
+                        Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
 
@@ -136,7 +166,7 @@ namespace dream_holIday.Controllers
                         City= "New Zealand",
                         Name= "New Zealand",
                         Price= 2000,
-                        Description= "Nulla vitae elit libero, a pharetra augue mollis interdum.",
+                        Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
 
@@ -145,7 +175,7 @@ namespace dream_holIday.Controllers
                         City= "Goa",
                         Name= "Goa",
                         Price= 1600,
-                        Description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                        Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
                         Image= base_Image_Url + "/france.jpg",
@@ -153,8 +183,7 @@ namespace dream_holIday.Controllers
                         City= "Paris",
                         Name= "France",
                         Price= 1000,
-                        Description=
-                                "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
+                        Description=LOREM_IPSUM,
                     },
                     new TravelPackage{
                             Image= base_Image_Url + "/canada.jpg",
@@ -162,7 +191,7 @@ namespace dream_holIday.Controllers
                             City = "Niagra",
                             Name= "Canada",
                             Price= 2000,
-                            Description= "Nulla vitae elit libero, a pharetra augue mollis interdum.",
+                            Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
                             Image= base_Image_Url + "/turkey.jpg",
@@ -170,7 +199,7 @@ namespace dream_holIday.Controllers
                             City= "Istanbul",
                             Name= "Turkey",
                             Price= 1600,
-                            Description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                            Description= LOREM_IPSUM,
                     },
                     new TravelPackage {
                         Image= base_Image_Url + "/egypt.jpg",
@@ -178,7 +207,7 @@ namespace dream_holIday.Controllers
                         City= "Cairo",
                         Name= "Egypt",
                         Price= 1000,
-                        Description= "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
+                        Description= LOREM_IPSUM,
                     },
                     new TravelPackage {
 
@@ -187,7 +216,7 @@ namespace dream_holIday.Controllers
                         City= "Kioto",
                         Name= "Japan",
                         Price= 2000,
-                        Description= "Nulla vitae elit libero, a pharetra augue mollis interdum.",
+                        Description= LOREM_IPSUM,
                     },
                     new TravelPackage {
 
@@ -196,7 +225,7 @@ namespace dream_holIday.Controllers
                         City= "San Paolo",
                         Name= "Brazil",
                         Price= 1600,
-                        Description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                        Description= LOREM_IPSUM,
                     }
                 };
             return holidayItems;

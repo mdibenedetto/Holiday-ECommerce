@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using dream_holiday.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using dream_holiday.Models.Services;
 
 namespace dream_holiday
 {
@@ -33,6 +34,8 @@ namespace dream_holiday
             });
 
             services.AddHttpContextAccessor();
+ 
+
             services.AddDbContext<ApplicationDbContext>(options =>
 
             options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));

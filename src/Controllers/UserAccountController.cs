@@ -31,9 +31,24 @@ namespace dream_holiday.Controllers
         }
 
 
-        private async Task<ApplicationUser> GetCurrentUser()
+        async public Task<ApplicationUser> GetCurrentUser()
         {
             return await _userManager.GetUserAsync(HttpContext.User);
+        }
+
+
+        async public Task<UserAccount> GetCurrentUserAccount()
+        {
+            var user = await GetCurrentUser();
+
+            var _userAccount = (from u in _context.Users
+                                where u.Id == user.Id
+                                join ua in _context.UserAccount
+                                on user.Id equals ua.User.Id
+                                select ua)
+                                .FirstOrDefault();
+
+            return _userAccount;
         }
 
         // GET: UserAccount/Edit/5

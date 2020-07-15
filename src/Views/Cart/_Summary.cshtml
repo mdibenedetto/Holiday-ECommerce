@@ -1,5 +1,10 @@
 ﻿
 @using dream_holiday.Controllers;
+@using dream_holiday.Data;
+@inject UserManager<ApplicationUser> userManager
+@using Microsoft.AspNetCore.Identity
+
+@inject ApplicationDbContext context
 
 @{
     //List<Cart> list;
