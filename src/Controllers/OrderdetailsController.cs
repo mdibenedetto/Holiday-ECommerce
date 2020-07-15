@@ -67,7 +67,9 @@ namespace dream_holiday.Controllers
 
                 orderItem.OrderId = orderId;
                 orderItem.Id = i + 1;
-                orderItem.TravelPackage = _context.TravelPackage.ToList()[i];
+                orderItem.TravelPackage = _context
+                    .TravelPackage
+                    .ToList()[i];
             
                 list.Add(orderItem);
             }

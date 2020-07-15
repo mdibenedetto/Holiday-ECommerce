@@ -10,6 +10,7 @@ namespace dream_holiday.Models
     public class Order
     {
         public virtual UserAccount Customer { get; set; }
+        public virtual Checkout Checkout { get; set; }
         public virtual List<OrderDetail> Details { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,7 +20,7 @@ namespace dream_holiday.Models
         public DateTime Date { get; set; }
         public decimal Price { get; set; }
         public int Qty { get; set; }
-        public bool Status { get; set; }
+        public String Status { get; set; }
 
     }
 }

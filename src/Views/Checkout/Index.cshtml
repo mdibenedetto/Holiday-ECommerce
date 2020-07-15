@@ -14,13 +14,16 @@
     @*RIGHT PART - CART/BACKET PLACER*@
 
     <div class="row">
+
+        @*<partial name="~/Views/Cart/_Summary.cshtml" />*@
+
         <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Your cart</span>
                 <span class="badge badge-secondary badge-pill">3</span>
             </h4>
             <ul class="list-group mb-3">
-               
+
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
                         <h6 class="my-0"> @(Model.FirstItem) </h6>
@@ -111,7 +114,7 @@
                         <input type="text"
                                class="form-control"
                                id="username"
-                                value="@(Model.GetUserName())"
+                               value="@(Model.GetUserName())"
                                required="" />
                         <div class="invalid-feedback" style="width: 100%;">
                             Your username is required.
@@ -124,7 +127,7 @@
                     <input type="email"
                            class="form-control"
                            id="email"
-                            value="@(Model.Email)"
+                           value="@(Model.Email)"
                            placeholder="you@example.com" />
                     <div class="invalid-feedback">
                         Please enter a valid email address for shipping updates.
@@ -136,7 +139,7 @@
                     <input type="text"
                            class="form-control"
                            id="address"
-                            value="@(Model.Address)"
+                           value="@(Model.Address)"
                            placeholder="1234 Main St"
                            required="" />
                     <div class="invalid-feedback">
@@ -149,24 +152,24 @@
                     <input type="text"
                            class="form-control"
                            id="address2"
-                            value="@(Model.Address2)"
+                           value="@(Model.Address2)"
                            placeholder="Apartment or suite" />
                 </div>
 
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="country">Country</label>
-                        <input type="text" 
+                        <input type="text"
                                class="form-control"
-                                value="@(Model.Country)"
+                               value="@(Model.Country)"
                                id="country">
                     </div>
 
                     <div class="col-md-4 mb-3">
                         <label for="city">City</label>
-                        <input type="text" 
+                        <input type="text"
                                class="form-control"
-                                value="@(Model.City)"
+                               value="@(Model.City)"
                                id="city" />
                     </div>
 
@@ -178,7 +181,7 @@
                                class="form-control"
                                id="eircode"
                                placeholder=""
-                                value="@(Model.EirCode)"
+                               value="@(Model.EirCode)"
                                required="" />
                         <div class="invalid-feedback">
                             Eir Code code required.
@@ -236,7 +239,7 @@
                                class="form-control"
                                id="cc-name"
                                placeholder=""
-                                value="@(Model.NameOnCard)"
+                               value="@(Model.NameOnCard)"
                                required="" />
                         <small class="text-muted">Full name as displayed on card</small>
                         <div class="invalid-feedback">
@@ -249,7 +252,7 @@
                                class="form-control"
                                id="cc-number"
                                placeholder=""
-                                value="@(Model.CardNumber)"
+                               value="@(Model.CardNumber)"
                                required="" />
                         <div class="invalid-feedback">
                             Credit card number is required
@@ -263,7 +266,7 @@
                                class="form-control"
                                id="cc-expiration"
                                placeholder=""
-                                value="@(Model.Expiration.ToString("MM/yyyy"))"
+                               value="@(Model.Expiration.ToString("MM/yyyy"))"
                                required="" />
                         <div class="invalid-feedback">
                             Expiration date required
@@ -274,7 +277,7 @@
                         <input type="text"
                                class="form-control"
                                id="cc-cvv"
-                                value="@(Model.CVC)"
+                               value="@(Model.CVC)"
                                placeholder=""
                                required="" />
                         <div class="invalid-feedback">

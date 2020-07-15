@@ -24,13 +24,29 @@ namespace dream_holiday.Controllers
             // todo: remove it when cart is ready
             this.MockData();
 
+            // todo: Rami
+            // 1. add delete functionality =
+            // to delete you to remove a record in 3 different tables
+            // 1 record in Order table,  many record in OrderDetail
+          // 2. in OrderDetailController add link to delete one order-detail
+
+            //here is list
             List<Order> oders;
- 
+
+            //if id is not 
             if (id > 0)
             {
                 oders = _context.Order
                     .Where(item => item.Id == id)
                     .ToList();
+            }
+            //if the status is not empty
+            else if (!String.IsNullOrEmpty(Status))
+                {
+                oders = _context.Order
+                    //here filter by Status 
+                     .Where(item => item.Status.Equals(Status))       
+                       .ToList();
             }
             else
             {
@@ -62,82 +78,13 @@ namespace dream_holiday.Controllers
                     // .Now.AddDays(i),
                     Price = (decimal)1299.99 + (i * 2),
                     Qty = i + 2,
-                    Status = i % 2 == 0
-                });
+                    Status = i % 2 == 0 ? "Approved" : "Not Approved"
+                }); ; ;
             }
 
             _context.Order.AddRange(list);
             _context.SaveChanges();
         }
- 
-        private List<Order> GetData(int id)
-        {
-            var list = new List<Order>();
 
-            for (var i = 0; i < 10; i++)
-            {
-                list.Add(new Order
-                {                    
-                    Id = 12547 + i,
-                    Date = DateTime.Now.AddDays(i),
-                   // .Now.AddDays(i),
-                    Price = (decimal)1299.99 + (i * 2),
-                    Qty = i + 2,
-                    Status = i % 2 == 0
-                });
- 
-            }
-
-         
-          if (id == 0)
-            {
-                //returning all stuff
-                return list;
-            }
-            else
-            {
-                // applied filter for status
-                return list.FindAll(item => item.Id == id);
-            }
-
-
-        }
-
-
-        private List<Order> GetData(String Status)
-        {
-            var list = new List<Order>();
-
-            for (var i = 0; i < 10; i++)
-            {
-                list.Add(new Order
-                {
-                  
-                    Id = 12547 + i,
-                    Date = DateTime.Now.AddDays(i),
-                    // .Now.AddDays(i),
-                    Price = (decimal)1299.99 + (i * 2),
-                    Qty = i + 2,
-                    Status = i % 2 == 0
-                });
-
-            }
-
-            // FILTER DATA - if/else
-
-            if (Status == " ")
-            {
-                //returning all stuff
-                return list;
-            }
-            else
-            {
-                // applied filter for status
-                return list.FindAll(item => item.Status.Equals(Status));
-            }
-
-            
-
-        }
     }
 }

@@ -78,7 +78,7 @@
                             <td>@order.Date.ToString("yyyy-MM-dd")</td>
                             <td> &euro; @order.Price </td>
                             <td>@order.Qty </td>
-                            <td>@(order.Status ? "Payment Approved" : "Redeemed") </td>
+                            <td>@(order.Status) </td>
                         </tr>
 
                     }

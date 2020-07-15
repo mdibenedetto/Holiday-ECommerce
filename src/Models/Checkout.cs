@@ -10,6 +10,8 @@ namespace dream_holiday.Models
     [Table("Checkout")]
     public class Checkout
     {
+        public virtual UserAccount UserAccount { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid Id { get; set; }

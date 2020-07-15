@@ -8,5 +8,6 @@ using Microsoft.AspNetCore.Identity;
 namespace dream_holiday.Models
 {
     public class ApplicationRole: IdentityRole<Guid> { }
-    public class ApplicationUser: IdentityUser<Guid> {}
+
+    public class ApplicationUser : IdentityUser<Guid> {}
 }

@@ -23,6 +23,7 @@ namespace dream_holIday.Controllers
         {
             // todo= remove it when cart is ready
             this.MockData();
+            // this.MockDataCart();
 
             var list = _context.TravelPackage.ToList();
             ViewBag.holidayItems = list;
@@ -34,7 +35,7 @@ namespace dream_holIday.Controllers
         {
             var item = _context
                 .TravelPackage
-                .Find(Id);               
+                .Find(Id);
 
             return View(item);
         }
@@ -61,6 +62,29 @@ namespace dream_holIday.Controllers
             return Json(list);
         }
 
+        private void MockDataCart()
+        {
+            //if (_context.Cart.Any())
+            //{
+            //    return;
+            //}
+
+            var list = new List<Cart>();
+
+            for (int i = 0; i < 4; i++)
+            {
+                var cart = new Cart();
+                cart.TravelPackage = _context
+                    .TravelPackage.Find(i + 1);
+                list.Add(cart);
+            }
+
+            _context.Cart.AddRange(list);
+            _context.SaveChanges();
+
+            var carts = _context.Cart.ToList();
+        }
+
         private void MockData()
         {
             if (_context.TravelPackage.Any())
@@ -71,7 +95,6 @@ namespace dream_holIday.Controllers
             var list = buildList();
             _context.TravelPackage.AddRange(list);
             _context.SaveChanges();
-
         }
 
 

@@ -11,6 +11,7 @@ namespace dream_holiday.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid Id { get; set; }
+        public String Title { get; set; }
 
         public String FirstName { get; set; }
         public String LastName { get; set; }

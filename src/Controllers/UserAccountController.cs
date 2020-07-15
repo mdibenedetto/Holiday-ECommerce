@@ -39,7 +39,8 @@ namespace dream_holiday.Controllers
             {
                 return NotFound();
             }
-
+            // select data from table  Users (ApplicationUser)
+            // and left join with table UserAccount
             var query = (from user in _context.Users
                          where user.Id == userId
                          join ua in _context.UserAccount
@@ -51,7 +52,7 @@ namespace dream_holiday.Controllers
                             UserAccount = _userAccount,
                             User = user
                          }) ;
-
+            // take the first row
             var userAccount = query.FirstOrDefault();
  
             return View(userAccount);
@@ -68,27 +69,56 @@ namespace dream_holiday.Controllers
             //    return NotFound();
             //}
             var newUserAccount = new UserAccount();
+            // todo: fix the data model validation (  var IsValid = ModelState.IsValid;)
+            var IsValid = true;
 
-            // todo : fix view and switch back to ModelState.IsValid
-            var IsValid = true; //ModelState.IsValid;
             if (IsValid)
-            {
+            { 
                 try
                 {
-                    // update application user
+                    // =======================================================
+                    // 1. update table ApplicationUser
+                    // =======================================================
+
                     var user = await _userManager.FindByIdAsync(userAccount.User.Id.ToString());
                     user.UserName = userAccount.User.UserName;
                     user.Email = userAccount.User.Email;
+                    // todo: check how to encrypt the Password
                     // update only those fields which changed
-
                     await _userManager.UpdateAsync(user);
                     //_context.Attach(user);
-
-                    // update user account
+                    // =======================================================
+                    // 2. update table UserAccount
+                    // =======================================================
+                    // we set the fiels User with the current user.
+                    // the object "user" is found by using the line:
+                    // " var user = await _userManager.FindByIdAsync(userAccount.User.Id.ToString());"
                     newUserAccount.User = user;
                     newUserAccount.Id = userAccount.Id;
+                    newUserAccount.Title = userAccount.Title;
                     newUserAccount.FirstName = userAccount.FirstName;
                     newUserAccount.LastName = userAccount.LastName;
+                    newUserAccount.BirthDay = userAccount.BirthDay;
+                    newUserAccount.BirthMonth = userAccount.BirthMonth;
+                    newUserAccount.BirthYear = userAccount.BirthYear;
+                    newUserAccount.Password = userAccount.Password;
+                    newUserAccount.RetypePassword = userAccount.RetypePassword;
+                    newUserAccount.Country = userAccount.Country;
+                    newUserAccount.Address = userAccount.Address;
+                    newUserAccount.Address2 = userAccount.Address2;
+                    newUserAccount.Town = userAccount.Town;
+                    newUserAccount.County = userAccount.County;
+                    newUserAccount.Telephone = userAccount.Telephone;
+                    newUserAccount.CardHolderFullName = userAccount.CardHolderFullName;
+                    newUserAccount.CardNumber = userAccount.CardNumber;
+                    newUserAccount.CardCVC = userAccount.CardCVC;
+                    newUserAccount.CardMonth = userAccount.CardMonth;
+                    newUserAccount.CardYear = userAccount.CardYear;
+                    newUserAccount.CountryBilling = userAccount.CountryBilling;
+                    newUserAccount.AddressBilling = userAccount.AddressBilling;
+                    newUserAccount.Address2Billing = userAccount.Address2Billing;
+                    newUserAccount.TownBilling = userAccount.TownBilling;
+                    newUserAccount.County2Billing = userAccount.County2Billing;
 
                     if (UserAccountModelExists(userAccount.Id))
                     {  
@@ -111,6 +141,7 @@ namespace dream_holiday.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index),
                     new { userId = newUserAccount.User.Id }
                 );
