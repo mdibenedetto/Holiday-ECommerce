@@ -24,23 +24,13 @@ namespace dream_holiday.Controllers
             // todo: remove it when cart is ready
             this.MockData();
 
-            //here is list
             List<Order> oders;
-
-            //if id is not 
+ 
             if (id > 0)
             {
                 oders = _context.Order
                     .Where(item => item.Id == id)
                     .ToList();
-            }
-            //if the status is not empty
-            else if (!String.IsNullOrEmpty(Status))
-                {
-                oders = _context.Order
-                    //here filter by Status 
-                     .Where(item => item.Status.Equals(Status))       
-                       .ToList();
             }
             else
             {
@@ -79,10 +69,7 @@ namespace dream_holiday.Controllers
             _context.Order.AddRange(list);
             _context.SaveChanges();
         }
-
-
-
-        //filterring by ID
+ 
         private List<Order> GetData(int id)
         {
             var list = new List<Order>();
@@ -109,14 +96,14 @@ namespace dream_holiday.Controllers
             }
             else
             {
-                // applied filter for id
+                // applied filter for status
                 return list.FindAll(item => item.Id == id);
             }
 
 
         }
 
-        // filtering by Status
+
         private List<Order> GetData(String Status)
         {
             var list = new List<Order>();
@@ -146,7 +133,7 @@ namespace dream_holiday.Controllers
             else
             {
                 // applied filter for status
-                return list.FindAll(item => item.Equals(Status.ToString()));
+                return list.FindAll(item => item.Status.Equals(Status));
             }
 
             
