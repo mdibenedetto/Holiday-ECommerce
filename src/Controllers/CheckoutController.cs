@@ -35,13 +35,15 @@ namespace dream_holiday.Controllers
             // 2. when I click to checkout button (link) create the order.
             // 2.1: to create the order add Insert on table Order, OrderDetail
             // get the checkout data of the user; 
-            this.MockData();
 
-            var userAccount = await GetCurrentUser();           
-            var checkout = _context
-                .Checkout
-               .Where(c => c.UserAccount.Id == userAccount.Id)
-               .FirstOrDefault();
+            // in this case you do not need to use this.MockData();
+
+            var userAccount = await GetCurrentUser();
+
+            var checkout = new Checkout {
+                UserAccount = userAccount
+            };
+   
             
             return View(checkout);
         }
