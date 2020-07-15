@@ -217,22 +217,18 @@ namespace dream_holiday.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsInstock")
-                        .HasColumnType("INTEGER");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Qty")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("TravelPackageId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TravelPackageId");
 
                     b.ToTable("Cart");
                 });
@@ -323,6 +319,9 @@ namespace dream_holiday.Migrations
 
                     b.Property<string>("Image")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsInstock")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -472,6 +471,13 @@ namespace dream_holiday.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dream_holiday.Models.Cart", b =>
+                {
+                    b.HasOne("dream_holiday.Models.TravelPackage", "TravelPackage")
+                        .WithMany()
+                        .HasForeignKey("TravelPackageId");
                 });
 
             modelBuilder.Entity("dream_holiday.Models.Order", b =>

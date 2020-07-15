@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\FakeLogin\" />
     <Folder Include="Views\About\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Holiday\" />
