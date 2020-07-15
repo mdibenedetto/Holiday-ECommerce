@@ -89,6 +89,27 @@ namespace dream_holiday.Controllers
                     newUserAccount.Id = userAccount.Id;
                     newUserAccount.FirstName = userAccount.FirstName;
                     newUserAccount.LastName = userAccount.LastName;
+                    newUserAccount.BirthDay = userAccount.BirthDay;
+                    newUserAccount.BirthMonth = userAccount.BirthMonth;
+                    newUserAccount.BirthYear = userAccount.BirthYear;
+                    newUserAccount.Password = userAccount.Password;
+                    newUserAccount.RetypePassword = userAccount.RetypePassword;
+                    newUserAccount.Country = userAccount.Country;
+                    newUserAccount.Address = userAccount.Address;
+                    newUserAccount.Address2 = userAccount.Address2;
+                    newUserAccount.Town = userAccount.Town;
+                    newUserAccount.County = userAccount.County;
+                    newUserAccount.Telephone = userAccount.Telephone;
+                    newUserAccount.CardHolderFullName = userAccount.CardHolderFullName;
+                    newUserAccount.CardNumber = userAccount.CardNumber;
+                    newUserAccount.CardCVC = userAccount.CardCVC;
+                    newUserAccount.CardMonth = userAccount.CardMonth;
+                    newUserAccount.CardYear = userAccount.CardYear;
+                    newUserAccount.CountryBilling = userAccount.CountryBilling;
+                    newUserAccount.AddressBilling = userAccount.AddressBilling;
+                    newUserAccount.Address2Billing = userAccount.Address2Billing;
+                    newUserAccount.TownBilling = userAccount.TownBilling;
+                    newUserAccount.County2Billing = userAccount.County2Billing;
 
                     if (UserAccountModelExists(userAccount.Id))
                     {  
