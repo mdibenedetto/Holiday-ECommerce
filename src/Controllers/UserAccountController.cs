@@ -8,6 +8,7 @@ using dream_holiday.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace dream_holiday.Controllers
 {
@@ -15,15 +16,18 @@ namespace dream_holiday.Controllers
     public class UserAccountController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager; 
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<UserAccountController> _logger;
 
         public UserAccountController(
             ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager 
+            UserManager<ApplicationUser> userManager,
+            ILogger<UserAccountController> logger
             )
         {            
             _context = context;
-            _userManager = userManager; 
+            _userManager = userManager;
+            _logger = logger; 
         }
 
 
@@ -98,9 +102,20 @@ namespace dream_holiday.Controllers
                     newUserAccount.Title = userAccount.Title;
                     newUserAccount.FirstName = userAccount.FirstName;
                     newUserAccount.LastName = userAccount.LastName;
-                    newUserAccount.BirthDay = userAccount.BirthDay;
-                    newUserAccount.BirthMonth = userAccount.BirthMonth;
-                    newUserAccount.BirthYear = userAccount.BirthYear;
+                    try
+                    {
+                        newUserAccount.BirthDate = new DateTime(
+                            userAccount.BirthYear,
+                            userAccount.BirthMonth,
+                            userAccount.BirthDay
+                            );
+                    }
+                    catch
+                    {
+                        _logger.LogWarning("Date format is wrong");
+                    }
+                
+                     
                     newUserAccount.Password = userAccount.Password;
                     newUserAccount.RetypePassword = userAccount.RetypePassword;
                     newUserAccount.Country = userAccount.Country;

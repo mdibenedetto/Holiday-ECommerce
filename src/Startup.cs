@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using dream_holiday.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace dream_holiday
 {
@@ -24,6 +25,13 @@ namespace dream_holiday
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.Cookie.Expiration = TimeSpan.FromHours(5);
+            });
+
             services.AddHttpContextAccessor();
             services.AddDbContext<ApplicationDbContext>(options =>
 

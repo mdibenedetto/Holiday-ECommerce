@@ -30,11 +30,25 @@
             <section class="section-data">
                 <h1> Account</h1>
                 <select id="title" name="title">
-                    <option value="title">Please select a Title</option>
-                    <option value="title">Ms</option>
-                    <option value="title">Miss</option>
-                    <option value="title">Mrs</option>
-                    <option value="title">Mr</option>
+                    <option value="-">Please select a Title</option>
+
+                    @{
+                        String[] titles =
+                        {
+                            "Ms", "Miss", "Mrs", "Mr"
+                        };
+                    }
+                    @foreach (var title in titles)
+                    {
+                        if (Model.UserAccount.Title == title)
+                        {
+                            <option value="@title" selected>@title</option>
+                        }
+                        else
+                        {
+                            <option value="@title">@title</option>
+                        }
+                    }
                 </select>
                 <input type="text" name="FirstName" placeholder="First Name" value="@(userAccount.FirstName)" />
                 <input type="text" name="LastName" placeholder="Last Name" value="@(userAccount.LastName)" />
@@ -47,9 +61,10 @@
                 <select class="dayofbirth" id="dayofbirth" name="BirthDay" data-formid="dayofbirth" data-field-label="Day">
                     <option class="select-option" label="Day" value="">Day</option>
                     @{
+                        
                         for (int day = 1; day < 32; day++)
                         {
-                            if (userAccount.BirthDay.Day == day)
+                            if (userAccount.BirthDate.Day == day)
                             {
                                 <option selected
                                         class="select-option"
@@ -75,7 +90,7 @@
                         string[] monthValue = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
                         for (int month = 0; month < monthValue.Length; month++)
                         {
-                            if (userAccount.BirthMonth.Month == month)
+                            if (userAccount.BirthDate.Month == month)
                             {
                                 <option selected
                                         class="select-option"
@@ -102,7 +117,7 @@
                         for (int year = curYearDOB; year > (curYearDOB - 120); year--)
 
                         {
-                            if (userAccount.BirthYear.Year == year)
+                            if (userAccount.BirthDate.Year == year)
                             {
                                 <option selected
                                         class="select-option"
@@ -132,6 +147,7 @@
                 <input type="text" name="County" placeholder="County" value="@(userAccount.County)" />
                 <input type="text" name="Telephone" placeholder="Telephone" value="@(userAccount.Telephone)" />
             </section>
+
             <section class="section-data">
                 <h1>Payment Details</h1>
                 <p>Credit Card</p>
@@ -140,12 +156,10 @@
                 <input type="text" name="CardCVC" placeholder="Card CVC" value="@(userAccount.CardCVC)" />
                 <select class="cardmonth" id="cardmonth" name="CardMonth" data-formid="cardmonth" data-field-label="Day">
                     <option class="select-option" label="Month" value="">Month</option>
-
-
                     @{
                         for (int cardMonth = 1; cardMonth < 13; cardMonth++)
                         {
-                            if (userAccount.CardMonth.Day == cardMonth)
+                            if (userAccount.CardMonth == cardMonth)
                             {
                                 <option selected
                                         class="select-option"
@@ -172,7 +186,7 @@
                         int curYear = DateTime.Now.Year;
                         for (int year = (curYear + 5); year >= curYear; year--)
                         {
-                            if (userAccount.CardYear.Year == year)
+                            if (userAccount.CardYear == year)
                             {
                                 <option selected
                                         class="select-option"
