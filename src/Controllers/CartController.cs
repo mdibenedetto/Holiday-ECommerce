@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dream_holiday.Data;
 using dream_holiday.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +13,38 @@ namespace dream_holiday.Controllers
 {
     public class CartController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public CartController(ApplicationDbContext context)
         {
-            List<Cart> cartList = getMockData();
-            return View(cartList);
+            _context = context;
         }
 
 
-        // fake DB layer
-        List<Cart> getMockData()
+        // GET: /<controller>/
+        public IActionResult Index()
         {
+            
+            //here is list
+            List<Cart> cartList;
+
+            cartList = _context.Cart.ToList();
+
+            return View(cartList);
+
+           
+        }
+
+
+
+        //method MockData
+        private void MockData()
+        {
+            if (_context.Cart.Any())
+            {
+                return;
+            }
+
             var mockList = new List<Cart>();
             for (int i = 0; i < 8; i++)
             {
@@ -38,8 +60,11 @@ namespace dream_holiday.Controllers
                 });
             }
 
-            return mockList;
+            _context.Cart.AddRange(mockList);
+            _context.SaveChanges();
+
         }
+
 
 
     }
