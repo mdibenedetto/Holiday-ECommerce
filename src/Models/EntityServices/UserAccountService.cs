@@ -12,6 +12,11 @@ namespace dream_holiday.Models.EntityServices
 {
     public class UserAccountService : BaseEntityService
     {
+        
+        public UserAccountService(ApplicationDbContext context,
+                                    UserResolverService userService)
+            : base(context, userService.getUserManager(), userService.getHTTPContext())
+        { }
 
         public UserAccountService(  ApplicationDbContext context,
                                     UserManager<ApplicationUser> userManager,
@@ -20,7 +25,7 @@ namespace dream_holiday.Models.EntityServices
             : base(context, userManager, contextAccessor)
         { }
 
-        async public Task<UserAccount> GetCurrentUserAccount()
+        async public Task<UserAccount> GetCurrentUserAccountAsync()
         {
             var user =  await base.GetCurrentUser();
 

@@ -16,7 +16,7 @@ namespace dream_holiday
         public static void Main(string[] args)
         {
             const string LOG_FILE = "Logs/log_.txt";
-            const string LOG_FILE_JSON = "Logs/log_json.txt";
+            //const string LOG_FILE_JSON = "Logs/log_json.txt";
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
@@ -24,9 +24,9 @@ namespace dream_holiday
                          path: LOG_FILE
                         ,rollingInterval: RollingInterval.Day
                         ,rollOnFileSizeLimit: true
-                        ,fileSizeLimitBytes: 10000
+                        ,fileSizeLimitBytes: 1 ^ 10
                 )
-                .WriteTo.File(new CompactJsonFormatter(), LOG_FILE_JSON)
+                //.WriteTo.File(new CompactJsonFormatter(), LOG_FILE_JSON)
                 .WriteTo.Seq(
                         Environment.GetEnvironmentVariable("SEQ_URL")
                         ?? "http://localhost:5001")

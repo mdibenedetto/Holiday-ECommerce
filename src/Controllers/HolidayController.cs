@@ -14,7 +14,7 @@ namespace dream_holiday.Controllers
 {
     public class HolIdayController : Controller
     {
-        private readonly ApplicationDbContext _context;         
+        private readonly ApplicationDbContext _context;
         protected readonly UserManager<ApplicationUser> _userManager;
         private IHttpContextAccessor _contextAccessor;
 
@@ -25,9 +25,9 @@ namespace dream_holiday.Controllers
             _context = context;
             _userManager = userManager;
             _contextAccessor = contextAccessor;
-        }        
+        }
 
-    public IActionResult Index()
+        public IActionResult Index()
         {
             // todo= remove it when cart is ready
             this.MockData();
@@ -76,10 +76,6 @@ namespace dream_holiday.Controllers
             {
                 var cartService = new CartService(_context, _userManager, _contextAccessor);
                 cartService.AddTravelPackageToCart(tpId);
-
-
-
-
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -88,29 +84,6 @@ namespace dream_holiday.Controllers
 
             return RedirectToAction("Detail", new { Id = tpId });
         }
-
-        //private void MockDataCart()
-        //{
-        //    //if (_context.Cart.Any())
-        //    //{
-        //    //    return;
-        //    //}
-
-        //    var list = new List<Cart>();
-
-        //    for (int i = 0; i < 4; i++)
-        //    {
-        //        var cart = new Cart();
-        //        cart.TravelPackage = _context
-        //            .TravelPackage.Find(i + 1);
-        //        list.Add(cart);
-        //    }
-
-        //    _context.Cart.AddRange(list);
-        //    _context.SaveChanges();
-
-        //    var carts = _context.Cart.ToList();
-        //}
 
         private void MockData()
         {
