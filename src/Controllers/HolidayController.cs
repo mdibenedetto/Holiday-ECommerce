@@ -4,23 +4,30 @@ using System.Linq;
 
 using dream_holiday.Data;
 using dream_holiday.Models;
-
+using dream_holiday.Models.EntityServices;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace dream_holiday.Controllers
 {
     public class HolIdayController : Controller
     {
-        private readonly ApplicationDbContext _context;
-       
+        private readonly ApplicationDbContext _context;         
+        protected readonly UserManager<ApplicationUser> _userManager;
+        private IHttpContextAccessor _contextAccessor;
 
-        public HolIdayController(ApplicationDbContext context)
+        public HolIdayController(ApplicationDbContext context,
+                                 UserManager<ApplicationUser> userManager,
+                                 IHttpContextAccessor contextAccessor)
         {
-            _context = context;            
-        }
+            _context = context;
+            _userManager = userManager;
+            _contextAccessor = contextAccessor;
+        }        
 
-        public IActionResult Index()
+    public IActionResult Index()
         {
             // todo= remove it when cart is ready
             this.MockData();
@@ -65,39 +72,45 @@ namespace dream_holiday.Controllers
 
         public IActionResult AddToCart(int tpId)
         {
-
-            var travelPackage = _context.TravelPackage.Find(tpId);
-
-            _context.Cart.Add(new Cart {
-                UserAccount = null,
-                TravelPackage = travelPackage
-            });
-
-            return RedirectToAction("index");
-        }
-
-        private void MockDataCart()
-        {
-            //if (_context.Cart.Any())
-            //{
-            //    return;
-            //}
-
-            var list = new List<Cart>();
-
-            for (int i = 0; i < 4; i++)
+            try
             {
-                var cart = new Cart();
-                cart.TravelPackage = _context
-                    .TravelPackage.Find(i + 1);
-                list.Add(cart);
+                var cartService = new CartService(_context, _userManager, _contextAccessor);
+                cartService.AddTravelPackageToCart(tpId);
+
+
+
+
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw ex;
             }
 
-            _context.Cart.AddRange(list);
-            _context.SaveChanges();
-
-            var carts = _context.Cart.ToList();
+            return RedirectToAction("Detail", new { Id = tpId });
         }
+
+        //private void MockDataCart()
+        //{
+        //    //if (_context.Cart.Any())
+        //    //{
+        //    //    return;
+        //    //}
+
+        //    var list = new List<Cart>();
+
+        //    for (int i = 0; i < 4; i++)
+        //    {
+        //        var cart = new Cart();
+        //        cart.TravelPackage = _context
+        //            .TravelPackage.Find(i + 1);
+        //        list.Add(cart);
+        //    }
+
+        //    _context.Cart.AddRange(list);
+        //    _context.SaveChanges();
+
+        //    var carts = _context.Cart.ToList();
+        //}
 
         private void MockData()
         {

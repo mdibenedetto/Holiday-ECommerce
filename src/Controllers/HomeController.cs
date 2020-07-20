@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using dream_holiday.Models;
 using dream_holiday.Data;
+using dream_holiday.Models.EntityServices;
 
 namespace dream_holiday.Controllers
 {
@@ -15,8 +16,7 @@ namespace dream_holiday.Controllers
     {
 
         private readonly ApplicationDbContext _context;
-
-     
+            
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(

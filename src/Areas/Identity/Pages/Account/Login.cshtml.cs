@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using dream_holiday.Models;
+using dream_holiday.Models.EntityServices;
 
 namespace dream_holiday.Areas.Identity.Pages.Account
 {

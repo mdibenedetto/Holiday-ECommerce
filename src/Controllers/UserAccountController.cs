@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using dream_holiday.Models.EntityServices;
 
 namespace dream_holiday.Controllers
 {
@@ -22,37 +23,17 @@ namespace dream_holiday.Controllers
         public UserAccountController(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
-            ILogger<UserAccountController> logger
+            ILogger<UserAccountController> logger,
+            IHttpContextAccessor contextAccessor
             )
-        {            
+        {
             _context = context;
             _userManager = userManager;
-            _logger = logger; 
-        }
-
-
-        async public Task<ApplicationUser> GetCurrentUser()
-        {
-            return await _userManager.GetUserAsync(HttpContext.User);
-        }
-
-
-        async public Task<UserAccount> GetCurrentUserAccount()
-        {
-            var user = await GetCurrentUser();
-
-            var _userAccount = (from u in _context.Users
-                                where u.Id == user.Id
-                                join ua in _context.UserAccount
-                                on user.Id equals ua.User.Id
-                                select ua)
-                                .FirstOrDefault();
-
-            return _userAccount;
+            _logger = logger;
         }
 
         // GET: UserAccount/Edit/5
-        public IActionResult Index(Guid? userId)
+        public IActionResult Index(Guid userId)
         {
             if (userId == null)
             {
@@ -64,16 +45,17 @@ namespace dream_holiday.Controllers
                          where user.Id == userId
                          join ua in _context.UserAccount
                                 on user.Id equals ua.User.Id
-                                into userAccount_join                      
+                                into userAccount_join
                          from _userAccount in userAccount_join.DefaultIfEmpty()
-                         select new UserAccountModel{
-                            Id = _userAccount.Id,
-                            UserAccount = _userAccount,
-                            User = user
-                         }) ;
+                         select new UserAccountModel
+                         {
+                             Id = _userAccount.Id,
+                             UserAccount = _userAccount,
+                             User = user
+                         });
             // take the first row
             var userAccount = query.FirstOrDefault();
- 
+
             return View(userAccount);
         }
 
@@ -88,11 +70,12 @@ namespace dream_holiday.Controllers
             //    return NotFound();
             //}
             var newUserAccount = new UserAccount();
-            // todo: fix the data model validation (  var IsValid = ModelState.IsValid;)
-            var IsValid = true;
+            // todo: fix the data model validation (
+            var IsValid = ModelState.IsValid;
+            //var IsValid = true;
 
             if (IsValid)
-            { 
+            {
                 try
                 {
                     // =======================================================
@@ -102,37 +85,39 @@ namespace dream_holiday.Controllers
                     var user = await _userManager.FindByIdAsync(userAccount.User.Id.ToString());
                     user.UserName = userAccount.User.UserName;
                     user.Email = userAccount.User.Email;
-                    // todo: check how to encrypt the Password
-                    // update only those fields which changed
+                    user.PasswordHash = _userManager
+                            .PasswordHasher
+                            .HashPassword(user, userAccount.Password);
+                  
+                    // update only those fields which has changed
                     await _userManager.UpdateAsync(user);
-                    //_context.Attach(user);
+  
                     // =======================================================
                     // 2. update table UserAccount
                     // =======================================================
-                    // we set the fiels User with the current user.
+                    // we set the field User with the current user.
                     // the object "user" is found by using the line:
-                    // " var user = await _userManager.FindByIdAsync(userAccount.User.Id.ToString());"
+                  
                     newUserAccount.User = user;
                     newUserAccount.Id = userAccount.Id;
                     newUserAccount.Title = userAccount.Title;
                     newUserAccount.FirstName = userAccount.FirstName;
                     newUserAccount.LastName = userAccount.LastName;
+
                     try
                     {
                         newUserAccount.BirthDate = new DateTime(
                             userAccount.BirthYear,
                             userAccount.BirthMonth,
-                            userAccount.BirthDay
-                            );
+                            userAccount.BirthDay);
                     }
                     catch
                     {
                         _logger.LogWarning("Date format is wrong");
                     }
-                
-                     
-                    newUserAccount.Password = userAccount.Password;
-                    newUserAccount.RetypePassword = userAccount.RetypePassword;
+
+                    //newUserAccount.Password = userAccount.Password;
+                    //newUserAccount.RetypePassword = userAccount.RetypePassword;
                     newUserAccount.Country = userAccount.Country;
                     newUserAccount.Address = userAccount.Address;
                     newUserAccount.Address2 = userAccount.Address2;
@@ -151,12 +136,12 @@ namespace dream_holiday.Controllers
                     newUserAccount.County2Billing = userAccount.County2Billing;
 
                     if (UserAccountModelExists(userAccount.Id))
-                    {  
+                    {
                         _context.Update(newUserAccount);
                     }
-                    else                 
+                    else
                     {
-                        _context.Add(newUserAccount); 
+                        _context.Add(newUserAccount);
                     }
                     await _context.SaveChangesAsync();
                 }
