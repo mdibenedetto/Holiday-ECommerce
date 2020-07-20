@@ -1,3 +1,0 @@
-2020-07-20 21:19:53.185 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
-SELECT "t"."Id", "t"."City", "t"."Country", "t"."Description", "t"."Image", "t"."IsInstock", "t"."Name", "t"."Price", "t"."Qty"
-FROM "TravelPackage" AS "t"

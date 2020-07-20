@@ -1,1 +1,0 @@
-2020-07-20 21:24:30.503 +01:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller dream_holiday.Controllers.HomeController (dream-holiday).

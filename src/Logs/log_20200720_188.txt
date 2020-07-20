@@ -1,1 +1,0 @@
-2020-07-20 21:24:29.069 +01:00 [INF] Now listening on: https://localhost:5001

@@ -1,1 +1,0 @@
-2020-07-20 21:24:36.433 +01:00 [INF] Executed ViewResult - view Index executed in 28.8042ms.

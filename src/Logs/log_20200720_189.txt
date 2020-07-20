@@ -1,1 +1,0 @@
-2020-07-20 21:24:29.070 +01:00 [INF] Application started. Press Ctrl+C to shut down.

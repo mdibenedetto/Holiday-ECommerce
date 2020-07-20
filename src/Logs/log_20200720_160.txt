@@ -1,1 +1,0 @@
-2020-07-20 21:19:52.728 +01:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/holiday  

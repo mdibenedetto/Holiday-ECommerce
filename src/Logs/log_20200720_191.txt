@@ -1,1 +1,0 @@
-2020-07-20 21:24:29.072 +01:00 [INF] Content root path: /Users/Shared/x_devs/NCI/SS-Server-Side-Project/nci-ss-project-holiday-website/src

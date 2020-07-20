@@ -1,7 +1,0 @@
-2020-07-20 21:12:32.019 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
-SELECT "c"."Id", "c"."Price", "c"."Qty", "c"."TravelPackageId", "c"."UserAccountId"
-FROM "Cart" AS "c"
-LEFT JOIN "TravelPackage" AS "t" ON "c"."TravelPackageId" = "t"."Id"
-INNER JOIN "TravelPackage" AS "t0" ON "t"."Id" = "t0"."Id"
-LEFT JOIN "UserAccount" AS "u" ON "c"."UserAccountId" = "u"."Id"
-WHERE "u"."Id" = @__user_Id_0
