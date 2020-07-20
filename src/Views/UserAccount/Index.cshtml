@@ -59,12 +59,13 @@
 
                 <p> Date of Birth</p>
                 <select class="dayofbirth" id="dayofbirth" name="BirthDay" data-formid="dayofbirth" data-field-label="Day">
-                    <option class="select-option" label="Day" value="">Day</option>
+                    <option class="select-option" label="Day" value="0" selected>Day</option>
                     @{
-                        
+
                         for (int day = 1; day < 32; day++)
                         {
-                            if (userAccount.BirthDate.Day == day)
+                            // Year == 1 means default value
+                            if (userAccount.BirthDate.Year > 1 && userAccount.BirthDate.Day == day)
                             {
                                 <option selected
                                         class="select-option"
@@ -84,24 +85,27 @@
                     }
                 </select>
                 <select class="monthofbirth" id="monthofbirth" name="BirthMonth" data-formid="monthofbirth" data-field-label="Month">
-                    <option class="select-option" label="Month" value="">Month</option>
+                    <option class="select-option" label="Month" value="0">Month</option>
 
                     @{
                         string[] monthValue = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
                         for (int month = 0; month < monthValue.Length; month++)
                         {
-                            if (userAccount.BirthDate.Month == month)
+                            // Year == 1 means default value
+                            if (userAccount.BirthDate.Year > 1 && userAccount.BirthDate.Month == month + 1)
                             {
                                 <option selected
                                         class="select-option"
                                         label="@monthValue[month]"
-                                        value="@month">
+                                        value="@(month + 1)">
                                     @monthValue[month]
                                 </option>
                             }
                             else
                             {
-                                <option class="select-option" label="@monthValue[month]" value="@month">
+                                <option class="select-option"
+                                        label="@monthValue[month]"
+                                        value="@(month + 1)">
                                     @monthValue[month]
                                 </option>
 
@@ -110,7 +114,7 @@
                     }
                 </select>
                 <select class="yearofbirth" id="yearofbirth" name="BirthYear" data-formid="yearofbirth" data-field-label="Year">
-                    <option class="select-option" label="Year" value="">Year</option>
+                    <option class="select-option" label="Year" value="0">Year</option>
 
                     @{
                         int curYearDOB = DateTime.Now.Year;
@@ -155,7 +159,7 @@
                 <input type="text" name="CardNumber" placeholder="Card Number" value="@(userAccount.CardNumber)" />
                 <input type="text" name="CardCVC" placeholder="Card CVC" value="@(userAccount.CardCVC)" />
                 <select class="cardmonth" id="cardmonth" name="CardMonth" data-formid="cardmonth" data-field-label="Day">
-                    <option class="select-option" label="Month" value="">Month</option>
+                    <option class="select-option" label="Month" value="0">Month</option>
                     @{
                         for (int cardMonth = 1; cardMonth < 13; cardMonth++)
                         {
@@ -180,7 +184,7 @@
 
                 </select>
                 <select class="cardyear" id="cardyear" name="CardYear" data-formid="Year" data-field-label="Year">
-                    <option class="select-option" label="Year" value="">Year</option>
+                    <option class="select-option" label="Year" value="0">Year</option>
 
                     @{
                         int curYear = DateTime.Now.Year;

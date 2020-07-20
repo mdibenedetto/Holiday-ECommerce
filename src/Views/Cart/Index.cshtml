@@ -3,7 +3,7 @@
     ViewData["Title"] = "Cart";
 }
 
-@model List<Cart>
+@model List<CartViewModel>
 
 <link rel="stylesheet" href="./css/cart.css" />
 
@@ -32,24 +32,26 @@
                             {
                                 <tr>
                                     <td>
-                                        <img class="item-image" src="https://dummyimage.com/50x50/0b6ec24f/fff&text=DH" />
+                                        <img class="item-image"
+                                             src="@item.TravelPackage?.Image"
+                                             style="max-height: 50px" />
                                     </td>
                                     <td>
-                                        <a class="item-title" href="./holiday-detail.html">
-                                           PETRA USER TRAVELPACKAGE (item.TravelPackage.Name) - item.Title
+                                        <a class="item-title" href="/holiday">
+                                            @item.TravelPackage?.Name 
                                         </a>
                                     </td>
                                     <td class="item-in-stock">
-                                        PETRA USER TRAVELPACKAGE -  (item.IsInstock ? "In Stock" : "Out of Stock")
+                                        @( item.TravelPackage?.IsInstock  == true ? "In Stock" : "Out of Stock"  ) 
                                     </td>
                                     <td>
-                                        <input class="form-control" type="text" value="@item.Qty" />
+                                        <input class="form-control" type="text" value="@item.Cart.Qty" />
                                     </td>
-                                    <td class="item-price text-right">€ @item.Price</td>
+                                    <td class="item-price text-right">€ @item.Cart.Price</td>
                                     <td class="text-right">
-                                        <button class="btn btn-sm btn-danger">
+                                        <a href ="/cart/delete/?cartId=@item.Cart.Id" class="btn btn-sm btn-danger">
                                             <i class="fa fa-trash"></i>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             }
@@ -87,12 +89,12 @@
             <div class="col mb-2">
                 <div class="row justify-content-end">
                     <div class="col-sm-12 col-lg-2">
-                        <a href="holiday.html" class="btn btn-block btn-light">
+                        <a href="/holiday" class="btn btn-block btn-light">
                             Continue Shopping
                         </a>
                     </div>
                     <div class="col-sm-12 col-lg-2 text-right">
-                        <a href="./checkout-cart.html"
+                        <a href="/checkout-cart"
                            class="btn-checkout btn btn-lg btn-block btn-success text-uppercase">
                             Checkout
                         </a>

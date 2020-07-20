@@ -29,11 +29,15 @@ namespace dream_holiday.Models
         public int BirthMonth { get; set; }
 
         //todo remove this field
-        [NotMapped]
+        [NotMapped]       
         public int BirthYear { get; set; }
 
+        //todo remove this field
+        [NotMapped]
         public String Password { get; set; }
 
+        //todo remove this field
+        [NotMapped]  
         public String RetypePassword { get; set; }
 
         public String Country { get; set; }
