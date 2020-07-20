@@ -1,0 +1,1 @@
+2020-07-20 21:12:31.966 +01:00 [INF] Route matched with {action = "Detail", controller = "HolIday", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Detail(Int32) on controller dream_holiday.Controllers.HolIdayController (dream-holiday).

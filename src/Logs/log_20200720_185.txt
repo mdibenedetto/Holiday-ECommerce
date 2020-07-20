@@ -1,0 +1,1 @@
+2020-07-20 21:24:27.777 +01:00 [INF] User profile is available. Using '/Users/mike/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.

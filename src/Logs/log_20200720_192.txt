@@ -1,0 +1,1 @@
+2020-07-20 21:24:30.416 +01:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/  

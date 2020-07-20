@@ -1,0 +1,1 @@
+2020-07-20 21:12:31.959 +01:00 [INF] Executing endpoint 'dream_holiday.Controllers.HolIdayController.Detail (dream-holiday)'

@@ -1,0 +1,4 @@
+2020-07-20 21:19:53.180 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "TravelPackage" AS "t")

@@ -1,0 +1,1 @@
+2020-07-20 21:24:29.071 +01:00 [INF] Hosting environment: Development
