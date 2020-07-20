@@ -109,12 +109,12 @@ function setActivePageLink(page) {
 
     let activePage = parseLink(window.location.pathname);
 
-    const links = document.querySelectorAll("nav li");
+    const links = document.querySelectorAll("nav li a");
     links.forEach((li) => {
-        const anchor = li.querySelector("a");
+        const anchor = li;
         const linkPage = parseLink(anchor.href);
         if (linkPage === activePage) {
-            li.classList.add("active");
+            li.parentNode.classList.add("active");
         }
     });
 }

@@ -19,11 +19,11 @@ priceRange.addEventListener("input", updateSearchPrice);
 const btnSearch = document.querySelector("button#btnSearch");
 btnSearch.addEventListener("click", filterHolidays);
 
-
 function toggleDestinationList(e) {
     if (this.checked) {
         destinations.selectedIndex = -1;
-    } 
+    }
+    destinations.toggleAttribute("data-disabled");
 }
 
 function updateSearchPrice() {
@@ -36,7 +36,7 @@ function computedPrice() {
     //return Math.round(priceRange.value * 100);
 }
 
-function filterHolidays() {   
+function filterHolidays() {
     document.body.setAttribute("data-loading", true);
 
     const price = priceRange.value;
@@ -53,7 +53,7 @@ function filterHolidays() {
     if (!chkAllDestination.checked && destList && destList.length > 0) {
         url += "&" + destList.join("&");
     }
-       
+
     debugger;
     fetch(url)
         .then(res => res.json())
@@ -64,8 +64,8 @@ function filterHolidays() {
         .catch(err => {
             document.body.removeAttribute("data-loading");
             console.error(err);
-        }) ; 
-    
+        });
+
 }
 
 function loadHolidays(holidayItems) {
@@ -80,8 +80,8 @@ function loadHolidays(holidayItems) {
             <div class="alert-no-result alert alert-primary" role="alert">
                 <h1> No packages found.Please use different searching params </h1>
             </div>
-            `;     
-     }   
+            `;
+    }
 
     holidayItems.forEach((item, index) => {
         var clone = template.content.cloneNode(true);

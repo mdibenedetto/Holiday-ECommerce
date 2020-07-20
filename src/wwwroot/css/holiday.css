@@ -9,20 +9,31 @@
   min-height: 196px; */
 }
 
-    .card img {
-        /* width: 167px;
-  height: 143px; */
-        width: 100%;
-        /* height: 60%; */
-        border: 1px solid;
-        display: inline-block;
-    }
+.card img {
+    width: 100%;
+    max-height: 174px;
+    border: 1px solid;
+    display: inline-block;
+}
 
 .card-text {
     font-size: 13px;
+    max-height: 66px;
+    overflow-y: hidden;
+    position: relative;
     /* white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; */
+}
+
+.card-text::before {
+    content: '...';
+    position: absolute;    
+    bottom: 0;
+    background: white;
+    right: 0;
+    font: inherit;
+    font-size: 150%;
 }
 
 a.card-link {
@@ -32,4 +43,17 @@ a.card-link {
 
 #destinations {
     height: 300px;
+    position: relative;
+}
+
+#destinations[data-disabled]::before {
+    content: '';
+    display: flex;
+    background: #2d2b2ba3; 
+    opacity: 0.3;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
 }
