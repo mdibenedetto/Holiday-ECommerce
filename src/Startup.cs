@@ -10,8 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using dream_holiday.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using dream_holiday.Models.Services;
-
+ 
 namespace dream_holiday
 {
     public class Startup

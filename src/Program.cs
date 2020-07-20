@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Formatting.Compact;
 
 namespace dream_holiday
 {
@@ -13,7 +15,36 @@ namespace dream_holiday
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            const string LOG_FILE = "Logs/log_.txt";
+            const string LOG_FILE_JSON = "Logs/log_json.txt";
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .WriteTo.File(
+                         path: LOG_FILE
+                        ,rollingInterval: RollingInterval.Day
+                        ,rollOnFileSizeLimit: true
+                        ,fileSizeLimitBytes: 10000
+                )
+                .WriteTo.File(new CompactJsonFormatter(), LOG_FILE_JSON)
+                .WriteTo.Seq(
+                        Environment.GetEnvironmentVariable("SEQ_URL")
+                        ?? "http://localhost:5001")
+                .CreateLogger();
+
+            try
+            {
+                Log.Information("Starting up");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application start-up failed");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -21,6 +52,6 @@ namespace dream_holiday
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).UseSerilog();
     }
 }
