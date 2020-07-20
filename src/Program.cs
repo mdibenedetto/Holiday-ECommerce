@@ -22,9 +22,9 @@ namespace dream_holiday
                 .WriteTo.Console()
                 .WriteTo.File(
                          path: LOG_FILE
-                        ,rollingInterval: RollingInterval.Day
-                        ,rollOnFileSizeLimit: true
-                        ,fileSizeLimitBytes: 1 ^ 10
+                        , rollingInterval: RollingInterval.Day
+                        , rollOnFileSizeLimit: true
+                        , fileSizeLimitBytes: 10 ^ 6
                 )
                 //.WriteTo.File(new CompactJsonFormatter(), LOG_FILE_JSON)
                 .WriteTo.Seq(
