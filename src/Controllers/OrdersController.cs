@@ -30,6 +30,8 @@ namespace dream_holiday.Controllers
             // 1 record in Order table,  many record in OrderDetail
           // 2. in OrderDetailController add link to delete one order-detail
 
+
+
             //here is list
             List<Order> oders;
 
@@ -79,6 +81,7 @@ namespace dream_holiday.Controllers
                     Price = (decimal)1299.99 + (i * 2),
                     Qty = i + 2,
                     Status = i % 2 == 0 ? "Approved" : "Not Approved"
+                   
                 }); ; ;
             }
 
