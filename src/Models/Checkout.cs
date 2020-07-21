@@ -28,6 +28,7 @@ namespace dream_holiday.Models
         public String City = "";
         public String EirCode = "";
 
+        public String PaymentMethod = "";
 
         public String NameOnCard = "";
 
@@ -35,6 +36,7 @@ namespace dream_holiday.Models
         public DateTime Expiration;
         public String CVC = "";
 
+        // todo: remove this attributes
         public String FirstItem = "";
         public String SecondItem = "";
         public String ThirdItem = "";

@@ -1,4 +1,5 @@
-﻿
+﻿@using dream_holiday.Models.ViewModel;
+@model HolidayViewModel;
 
 @{ ViewData["Title"] = "Holidays"; }
 
@@ -69,22 +70,26 @@
                     <div class="form-group">
                         <label for="destinations">Destination</label>
                         <select multiple class="form-control" id="destinations" data-disabled>
-                            <option value="Lituania">Lituania</option>
-                            <option value="Croatia">Croatia</option>
-                            <option value="Romania">Romania</option>
-                            <option value="Ireland">Ireland</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Barcelona">Barcelona</option>
-                            <option value="Moscow">Moscow</option>
-                            <option value="Thailand">Thailand</option>
-                            <option value="New Zealand">Zealand</option>
-                            <option value="Goa">Goa</option>
-                            <option value="France">France</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Turkey">Turkey</option>
-                            <option value="Egypt">Egypt</option>
-                            <option value="Japan">Japan</option>
-                            <option value="Brazil">Brazil</option>
+                            @foreach (var country in Model.CountryNames)
+                            {
+                                <option value="@country">@country</option>
+                            }
+                            @*<option value="Lituania">Lituania</option>
+                                <option value="Croatia">Croatia</option>
+                                <option value="Romania">Romania</option>
+                                <option value="Ireland">Ireland</option>
+                                <option value="Italy">Italy</option>
+                                <option value="Barcelona">Barcelona</option>
+                                <option value="Moscow">Moscow</option>
+                                <option value="Thailand">Thailand</option>
+                                <option value="New Zealand">Zealand</option>
+                                <option value="Goa">Goa</option>
+                                <option value="France">France</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Turkey">Turkey</option>
+                                <option value="Egypt">Egypt</option>
+                                <option value="Japan">Japan</option>
+                                <option value="Brazil">Brazil</option>*@
                         </select>
                     </div>
 

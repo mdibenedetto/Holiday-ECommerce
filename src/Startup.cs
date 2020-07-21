@@ -43,7 +43,7 @@ namespace dream_holiday
             {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
 
                 options.LoginPath = $"/Identity/Account/Login";
                 options.SlidingExpiration = true;
@@ -126,7 +126,7 @@ namespace dream_holiday
             }
 
             // create default UserRoles and Users
-            //StartupUsers.Startup(userManager, roleManager);
+            StartupUsers.Startup(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>
             {

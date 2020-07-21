@@ -5,38 +5,45 @@ using System.Linq;
 using dream_holiday.Data;
 using dream_holiday.Models;
 using dream_holiday.Models.EntityServices;
+using dream_holiday.Models.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace dream_holiday.Controllers
 {
-    public class HolIdayController : Controller
+    public class HolidayController : Controller
     {
         private readonly ApplicationDbContext _context;
         protected readonly UserManager<ApplicationUser> _userManager;
-        private IHttpContextAccessor _contextAccessor;
-
-        public HolIdayController(ApplicationDbContext context,
+        private IHttpContextAccessor _contextAccessor; 
+        private readonly ILogger<HolidayController> _logger;
+ 
+        public HolidayController(ApplicationDbContext context,
                                  UserManager<ApplicationUser> userManager,
-                                 IHttpContextAccessor contextAccessor)
+                                 IHttpContextAccessor contextAccessor,
+                                     ILogger<HolidayController> logger
+                                 )
         {
             _context = context;
             _userManager = userManager;
             _contextAccessor = contextAccessor;
+            _logger = logger;
         }
 
         public IActionResult Index()
-        {
-            // todo= remove it when cart is ready
-            this.MockData();
-            // this.MockDataCart();
+        {           
+            this.MockData(); 
 
             var list = _context.TravelPackage.ToList();
             ViewBag.holidayItems = list;
 
-            return View();
+            var model = new HolidayViewModel();
+            model.TravelPackages = _context.TravelPackage.ToList();
+            model.CountryNames = model.TravelPackages.Where(tp=> tp.Country != "").Select(tp => tp.Country).ToList();
+            return View(model);
         }
 
         public IActionResult Detail(int Id)
@@ -77,8 +84,9 @@ namespace dream_holiday.Controllers
                 var cartService = new CartService(_context, _userManager, _contextAccessor);
                 cartService.AddTravelPackageToCart(tpId);
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateException ex)
             {
+                _logger.LogError("AddToCart", ex);
                 throw ex;
             }
 

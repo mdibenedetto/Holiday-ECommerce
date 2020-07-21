@@ -14,7 +14,6 @@ namespace dream_holiday.Controllers
     public class CheckoutController : Controller
     {
 
-
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -26,36 +25,85 @@ namespace dream_holiday.Controllers
             _context = context;
             _userManager = userManager;
         }
-        
+
         async public Task<IActionResult> Index()
         {
-            // todo Rami:
-            // 1. all user should comes from
-            // checkout.UserAccount (model.UserAccount.Firstname and blab bla)
-            // 2. when I click to checkout button (link) create the order.
-            // 2.1: to create the order add Insert on table Order, OrderDetail
-            // get the checkout data of the user; 
-
-            // in this case you do not need to use this.MockData();
-
             var userAccount = await GetCurrentUser();
 
-            var checkout = new Checkout {
+            var checkout = new Checkout
+            {
                 UserAccount = userAccount
             };
-   
-            
+
             return View(checkout);
         }
 
-        // /checkout-cart/process
-        private async Task<IActionResult> Process(Checkout checkout)
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProcessCheckout(Checkout formCheckout)
         {
-            // Insert into table Order
-            // insert into table orderDetail
-            // saveChange()
+            //====================================================
+            // Find the current user
+            //====================================================
+            var userAccount = await this.GetCurrentUser();
 
-            return RedirectToRoute("/");          
+            //====================================================
+            // get data from the cart of the current user;
+            //====================================================
+            var cartList = _context.Cart
+                            .Where(c => c.UserAccount.Id == userAccount.Id)
+                            .Join(_context.TravelPackage,
+                                c => c.TravelPackage.Id,
+                                tp => tp.Id,
+                                (cart, travelPackage) => new CartViewModel { Cart = cart, TravelPackage = travelPackage }
+                            );
+
+
+            // find the total price
+            var totalPrice = 0; // cartList.Sum(c => c.Price);
+            var totalItems = 0; // cartList.Sum(c => c.Qty);
+
+            // Insert into table Order
+            var newOrder = new Order
+            {
+                Checkout = formCheckout,
+                Customer = userAccount,
+                Date = DateTime.Today,
+                Status = "Approved",
+                Price = totalPrice,
+                Qty = totalItems
+            };
+
+            var result = _context.Order.Add(newOrder);
+            _context.SaveChanges();
+            //====================================================
+            // Insert into table OrderDetails
+            //====================================================
+            var orderDetailId = 0;
+            foreach (var item in cartList)
+            {
+                var cart = item.Cart;
+                var travelPackage = item.TravelPackage;
+
+                _context.OrderDetail.Add(new OrderDetail
+                {
+                    Id = ++orderDetailId,
+                    OrderId = newOrder.Id,
+                    OrderDate = DateTime.Today,
+                    Price = cart.Price,
+                    Qty = cart.Qty,
+                    TravelPackage = travelPackage
+                });
+            }
+            //====================================================
+            var cartToRemoveList = cartList.Select(item => item.Cart);
+            _context.Cart.RemoveRange(cartToRemoveList);
+            //====================================================
+
+            //====================================================
+            _context.SaveChanges();
+            //====================================================
+            return RedirectToRoute("/holiday");
         }
 
         async private Task<UserAccount> GetCurrentUser()
@@ -73,39 +121,6 @@ namespace dream_holiday.Controllers
             return _userAccount;
         }
 
-        async private void MockData()
-        {
-            if (_context.Checkout.Any())
-            {
-                return;
-            }
-
-            var userAccount = await GetCurrentUser();
-
-            var checkout = new Checkout();
-
-            checkout.UserAccount = userAccount;
-            checkout.FirstName = "John";
-            checkout.LastName = "Banana";
-            checkout.Email = "banana@gmail.com";
-            checkout.Address = "56A Travel Street";
-            checkout.Address2 = "Green Avenue";
-            checkout.Country = "Ireland";
-            checkout.City = "Dublin";
-            checkout.EirCode = "D02 4A8B";
-            checkout.NameOnCard = "John Banana";
-            checkout.CardNumber = "1254 7854 9658";
-            checkout.Expiration = DateTime.Now.AddYears(3);
-            checkout.CVC = "236";
-            checkout.FirstItem = "Croatia: Blue Lagoon";
-            checkout.SecondItem = "Italy: BolognaStreets";
-            checkout.ThirdItem = "France: Eating Croissants Tour";
-
-            _context.Checkout.AddRange(checkout);
-            _context.SaveChanges();
-        }
-
-        
     }
 }
 

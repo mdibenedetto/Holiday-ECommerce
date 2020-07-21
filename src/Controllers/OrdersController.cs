@@ -23,14 +23,7 @@ namespace dream_holiday.Controllers
         {
             // todo: remove it when cart is ready
             this.MockData();
-
-            // todo: Rami
-            // 1. add delete functionality =
-            // to delete you to remove a record in 3 different tables
-            // 1 record in Order table,  many record in OrderDetail
-          // 2. in OrderDetailController add link to delete one order-detail
-
-
+             
 
             //here is list
             List<Order> oders;
@@ -44,22 +37,34 @@ namespace dream_holiday.Controllers
             }
             //if the status is not empty
             else if (!String.IsNullOrEmpty(Status))
-                {
-                oders = _context.Order
-                    //here filter by Status 
-                     .Where(item => item.Status.Equals(Status))       
+            {
+                oders = _context.Order                    
+                     .Where(item => item.Status.Equals(Status))
                        .ToList();
             }
             else
             {
                 oders = _context.Order.ToList();
-            }
+            }     
 
-            //List<Order> oders =  GetData(id);
+            return View(oders);
+        }
 
-            //GetData(Status);        
 
-            return View(oders);           
+        public IActionResult Delete(int orderId)
+        {
+            var order = _context.Order.Find(orderId);
+            _context.Order.Remove(order);
+
+            var orderDetailList = _context.OrderDetail.Where(od => od.Order.Id == orderId);
+            _context.OrderDetail.RemoveRange(orderDetailList);
+
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index), new {
+                id =0,
+                Status = ""
+            });
         }
 
         private void MockData()
@@ -71,7 +76,7 @@ namespace dream_holiday.Controllers
 
             var list = new List<Order>();
 
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < 2; i++)
             {
                 list.Add(new Order
                 {
@@ -81,7 +86,7 @@ namespace dream_holiday.Controllers
                     Price = (decimal)1299.99 + (i * 2),
                     Qty = i + 2,
                     Status = i % 2 == 0 ? "Approved" : "Not Approved"
-                   
+
                 }); ; ;
             }
 

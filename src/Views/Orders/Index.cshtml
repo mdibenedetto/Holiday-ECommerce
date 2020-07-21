@@ -35,7 +35,7 @@
                     Search
                 </button>
             </form>
-            
+
 
             <form action="/orders" method="get">
                 <h4>
@@ -61,6 +61,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Order Status </th>
+                        <th scope="col">&nbsp;</th>
                     </tr>
                 </thead>
 
@@ -68,25 +69,22 @@
 
                     @foreach (var order in Model)
                     {
-                        <tr>
+                    <tr>
 
-                            <td>@order.Id</td>
-                            <th scope="row">
-                                <h5><a href="orderdetails?orderId=@order.Id" class="badge badge-danger">   @order.Id  </a></h5>
-                            </th>
+                        <td>@order.Id</td>
+                        <th scope="row">
+                            <h5><a href="orderdetails?orderId=@order.Id" class="badge badge-danger">   @order.Id  </a></h5>
+                        </th>
 
-                            <td>@order.Date.ToString("yyyy-MM-dd")</td>
-                            <td> &euro; @order.Price </td>
-                            <td>@order.Qty </td>
-                            <td>@(order.Status) </td>
-                         
-                        </tr>
-
-
-
+                        <td>@order.Date.ToString("yyyy-MM-dd")</td>
+                        <td> &euro; @order.Price </td>
+                        <td>@order.Qty </td>
+                        <td>@(order.Status) </td>
+                        <td>
+                            <a href="/orders/delete?orderId=@order.Id">Delete</a>
+                        </td>
+                    </tr>
                     }
-
-
 
                 </tbody>
             </table>

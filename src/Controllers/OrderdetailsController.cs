@@ -77,39 +77,7 @@ namespace dream_holiday.Controllers
             _context.OrderDetail.AddRange(list);
             _context.SaveChanges();
 
-        }
-
-
-
-
-        private OrderDetail GetData(int orderId)
-        {
-           
-            var orderItem = new OrderDetail(); 
-
-            orderItem.Id = orderId;
-            orderItem.OrderDate = DateTime.Now.AddMonths(-1);
-            //    DateTime.Now.ToString("dddd, dd MMMM yyyy");
-
-            var list = new List<TravelPackage>();
-
-            for (var i = 0; i < 6; i++)
-            {
-                list.Add(new TravelPackage
-                {
-                    Id = i + 1,
-                    Name = orderId +  " - Croatia Blue Lagoon",
-                    Description = "(Our half day tour from Split we take you to the most famous and the most popular Blue Lagoon in Croatia.)", 
-                    Qty = 1,
-                    Price = (decimal)298 + (i * 2),
-                }); 
-
-            }
-
-           
-            return orderItem;   
-        }
- 
+        } 
        
     }
 }
