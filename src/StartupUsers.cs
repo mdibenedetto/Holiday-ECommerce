@@ -6,14 +6,13 @@ namespace dream_holiday
 {
     public static class StartupUsers
     {
-
         public static void Startup(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager)
         {
 
-            //CreateRoles(roleManager);
-            //CreateDefaultUsers(userManager);
+            CreateRoles(roleManager);
+            CreateDefaultUsers(userManager);
         }
 
         // CREATE A ADMIN ROLE
@@ -45,7 +44,7 @@ namespace dream_holiday
                 var user = new ApplicationUser();
                 user.UserName = USER_NAME;
                 user.Email = USER_EMAIL;
-                // create new Admin user and assign ADMIN role to it
+                // create new Admin user and assign ADMIN role to.
                 var result = userManager.CreateAsync(user, DEFAULT_PASSWORD).Result;
                 if (result.Succeeded)
                 {
@@ -53,7 +52,6 @@ namespace dream_holiday
                 }
             }
         }
-
 
     }
 }

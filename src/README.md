@@ -29,3 +29,40 @@ https://www.c-sharpcorner.com/article/add-custom-user-data-to-identify-in-regist
 Support for ASP.NET Core Identity was added to your project.
 
 For setup and configuration information, see https://go.microsoft.com/fwlink/?linkid=2116645.
+
+
+# Authorization
+
+https://docs.microsoft.com/en-us/aspnet/core/security/authorization/simple?view=aspnetcore-3.1
+[Authorize]
+public class AccountController : Controller
+{
+    [AllowAnonymous]
+    public ActionResult Login()
+    {
+    }
+
+    public ActionResult Logout()
+    {
+    }
+}
+
+https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(
+            Configuration.GetConnectionString("DefaultConnection")));
+    services.AddDefaultIdentity<IdentityUser>()
+        .AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>();
+
+    services.AddControllersWithViews();
+    services.AddRazorPages();
+
+
+
+[Authorize(Roles = "Administrator")]
+public class AdministrationController : Controller
+{
+}

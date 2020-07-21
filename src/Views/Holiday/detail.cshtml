@@ -1,6 +1,6 @@
 ﻿
 @model TravelPackage;
- 
+
 <link rel="stylesheet" href="/css/holiday-detail.css" />
 
 <section class="container main-container">
@@ -27,30 +27,33 @@
                 <h4>
                     Creativiity is intelligence, have fun!
                 </h4>
-                
+
                 <p>
                     @{
                         var textblocks = Model.Description.Split(Environment.NewLine);
-                        foreach(var text in textblocks)
+                        foreach (var text in textblocks)
                         {
-                            <p>
-                                @text
-                             </p>
-                        }
-                    } 
-                </p>
+                        <p>
+                            @text
+                        </p>
+                    }
+                    }
+                    </p>
+                </section>
+            </section>
+
+            <section class="col-md-4 order-md-2 mb-4">
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a role="button" href="/holiday/addtocart/?tpId=@Model.Id" class="btn btn-primary">
+                        Add to cart
+                    </a>
+                }
+
+                <partial name="~/Views/Cart/_Summary.cshtml" />
+
             </section>
         </section>
-
-        <section class="col-md-4 order-md-2 mb-4">
-            <a role="button" href="/holiday/addtocart/?tpId=@Model.Id" class="btn btn-primary">
-                Add to cart
-            </a>
-
-            <partial name="~/Views/Cart/_Summary.cshtml" />
-
-        </section> 
     </section>
-</section>
- 
- 
+

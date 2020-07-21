@@ -24,7 +24,7 @@ namespace dream_holiday
                          path: LOG_FILE
                         , rollingInterval: RollingInterval.Day
                         , rollOnFileSizeLimit: true
-                        , fileSizeLimitBytes: 10 ^ 6
+                        , fileSizeLimitBytes: 1000000
                 )
                 //.WriteTo.File(new CompactJsonFormatter(), LOG_FILE_JSON)
                 .WriteTo.Seq(
