@@ -49,7 +49,7 @@ namespace dream_holiday.Controllers
 
             //====================================================
             // get data from the cart of the current user;
-            //====================================================
+            //====================================================            
             var cartList = _context.Cart
                             .Where(c => c.UserAccount.Id == userAccount.Id)
                             .Join(_context.TravelPackage,
@@ -60,8 +60,8 @@ namespace dream_holiday.Controllers
 
 
             // find the total price
-            var totalPrice = 0; // cartList.Sum(c => c.Price);
-            var totalItems = 0; // cartList.Sum(c => c.Qty);
+            var totalPrice =  cartList.ToList().Sum(c=> c.Cart.Price);
+            var totalItems = cartList.ToList().Sum(c => c.Cart.Qty);
 
             // Insert into table Order
             var newOrder = new Order
@@ -74,8 +74,9 @@ namespace dream_holiday.Controllers
                 Qty = totalItems
             };
 
-            var result = _context.Order.Add(newOrder);
-            _context.SaveChanges();
+             //_context.Order.Add(newOrder);
+  
+             
             //====================================================
             // Insert into table OrderDetails
             //====================================================
@@ -87,8 +88,9 @@ namespace dream_holiday.Controllers
 
                 _context.OrderDetail.Add(new OrderDetail
                 {
+                    Order = newOrder,
                     Id = ++orderDetailId,
-                    OrderId = newOrder.Id,
+                    //OrderId = newOrder.Id,
                     OrderDate = DateTime.Today,
                     Price = cart.Price,
                     Qty = cart.Qty,
@@ -103,7 +105,7 @@ namespace dream_holiday.Controllers
             //====================================================
             _context.SaveChanges();
             //====================================================
-            return RedirectToRoute("/holiday");
+            return RedirectToAction("index", "holiday");
         }
 
         async private Task<UserAccount> GetCurrentUser()
