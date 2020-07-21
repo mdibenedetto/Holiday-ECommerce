@@ -10,7 +10,7 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    var cartList = new List<Cart>();
+    var cartList = new List<CartViewModel>();
 
     if (User.Identity.IsAuthenticated)
     {
@@ -47,13 +47,16 @@
             @{
                 decimal totalPrice = 0;
 
-                foreach (var cart in cartList)
+                foreach (var item in cartList)
                 {
+                    var cart = item.Cart;
+                    var travePackage = item.TravelPackage;
+
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
-                            <h6 class="my-0"> @(cart.TravelPackage?.Name) </h6>
+                            <h6 class="my-0"> @(travePackage.Name) </h6>
                             <small class="text-muted">
-                                @cart.TravelPackage?.Country - @cart.TravelPackage?.City
+                                @travePackage.Country - @travePackage.City
                             </small>
                         </div>
                         <span class="text-muted"> @cart.Price &euro;</span>

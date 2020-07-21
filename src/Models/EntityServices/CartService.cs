@@ -31,16 +31,17 @@ namespace dream_holiday.Models.EntityServices
         }
 
 
-        public async Task<List<Cart>> GetCartUser()
+        public async Task<List<CartViewModel>> GetCartUser()
         {
             var user = await _userAccountManager.GetCurrentUserAccountAsync();
             var cartList = _context.Cart
+                                    .Where(c => c.UserAccount.Id == user.Id)
                                     .Join(_context.TravelPackage,
                                       c => c.TravelPackage.Id,
                                       tp => tp.Id,
-                                      (cart, tavelpackage)=> cart
+                                      (cart, tavelpackage)=>
+                                        new CartViewModel { Cart = cart, TravelPackage = tavelpackage }
                                     )
-                                    .Where(c => c.UserAccount.Id == user.Id)
                                     .ToList();
             return cartList;
         }
