@@ -99,8 +99,11 @@ option[value="title"] {
 }
 
 select[class="dayofbirth"],
+select[class="dayofbirth valid"],
 select[class="monthofbirth"],
+select[class="monthofbirth valid"],
 select[class="yearofbirth"],
+select[class="yearofbirth valid"],
 option[class="select-option"] {
     display: inline-block;
     box-sizing: border-box;
@@ -118,7 +121,9 @@ option[class="select-option"] {
 }
 
 select[class="cardmonth"],
-select[class="cardyear"] {
+select[class="cardmonth valid"],
+select[class="cardyear"],
+select[class="cardyear valid"] {
     display: inline-block;
     box-sizing: border-box;
     margin-bottom: 20px;

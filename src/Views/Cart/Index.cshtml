@@ -47,7 +47,7 @@
                                     <td>
                                         <input class="form-control" type="text" value="@item.Cart.Qty" />
                                     </td>
-                                    <td class="item-price text-right">€ @item.Cart.Price</td>
+                                    <td class="item-price text-right">€ @(Math.Round(item.Cart.Price) )</td>
                                     <td class="text-right">
                                         <a href ="/cart/delete/?cartId=@item.Cart.Id" class="btn btn-sm btn-danger">
                                             <i class="fa fa-trash">x</i>
@@ -62,9 +62,9 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                                 <td>Packages</td>
                                 <td class="text-right">@ViewBag.Quantity</td>
+                                <td></td>
                             </tr>
                             <!--
                                 <tr>
@@ -80,9 +80,9 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                                 <td><strong>Total</strong></td>
                                 <td class="text-right"><strong>€ @(Math.Round(ViewBag.TotalPrice) )</strong></td>
+                                <td></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -96,10 +96,22 @@
                         </a>
                     </div>
                     <div class="col-sm-12 col-lg-2 text-right">
-                        <a href="/checkout-cart"
-                           class="btn-checkout btn btn-lg btn-block btn-success text-uppercase">
-                            Checkout
-                        </a>
+
+                        @if (ViewBag.TotalPrice == 0)
+                        {
+                             <a href="javascript:void(0)"
+                                class="btn-checkout btn btn-lg btn-block btn-success text-uppercase"
+                                disabled style="background:lightgray; visibility:hidden;">
+                                 Checkout
+                             </a>
+                        }
+                        else
+                        {
+                            <a href="/checkout-cart"
+                               class="btn-checkout btn btn-lg btn-block btn-success text-uppercase">
+                                Checkout
+                            </a>
+                        }
                     </div>
                 </div>
             </div>
