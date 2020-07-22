@@ -9,6 +9,7 @@ using dream_holiday.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -44,12 +45,26 @@ namespace dream_holiday.Controllers
                             select new CartViewModel { Cart= c, TravelPackage =  t })
                               .ToList();
 
-          
-            //foreach(var cart in cartList)
-            //{
 
-            //}
-            //ViewBag.TotalPrice = xxxx
+
+
+            decimal price;
+            decimal itemTotal;
+            decimal subTotal = 0;
+            int totalQty = 0;
+
+            foreach (var cart in cartList)
+            {
+                price = cart.TravelPackage.Price;
+                itemTotal = cart.Qty * price;
+                subTotal += itemTotal;
+                totalQty += cart.Qty;
+                
+            }
+           
+            ViewBag.TotalPrice = subTotal;
+            ViewBag.Quantity = totalQty;
+
             return View(cartList);
 
         }

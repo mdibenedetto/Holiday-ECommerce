@@ -3,3 +3,12 @@
 .edit-form {
     width: 600px;
 }
+
+.table td, .table th{
+    padding: .55rem;
+    vertical-align:top;
+    border-top:1px solid #dee2e6;
+    background:#fff;
+    height:auto;
+    box-shadow:0 2px 4px rgba(00,0,0,0.6);
+}

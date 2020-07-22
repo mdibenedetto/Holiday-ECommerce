@@ -37,7 +37,7 @@
                                              style="max-height: 50px" />
                                     </td>
                                     <td>
-                                        <a class="item-title" href="/holiday">
+                                        <a class="item-title" href="/holiday/detail?id=@item.TravelPackage.Id">
                                             @item.TravelPackage?.Name 
                                         </a>
                                     </td>
@@ -50,7 +50,7 @@
                                     <td class="item-price text-right">€ @item.Cart.Price</td>
                                     <td class="text-right">
                                         <a href ="/cart/delete/?cartId=@item.Cart.Id" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fa fa-trash">x</i>
                                         </a>
                                     </td>
                                 </tr>
@@ -63,24 +63,26 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>Sub-Total</td>
-                                <td class="text-right">255,90 €</td>
+                                <td>Packages</td>
+                                <td class="text-right">@ViewBag.Quantity</td>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>Shipping</td>
-                                <td class="text-right">6,90 €</td>
-                            </tr>
+                            <!--
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right"></td>
+                                </tr>
+                            -->
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td><strong>Total</strong></td>
-                                <td class="text-right"><strong>346,90 €</strong></td>
+                                <td class="text-right"><strong>€ @ViewBag.TotalPrice</strong></td>
                             </tr>
                         </tfoot>
                     </table>
