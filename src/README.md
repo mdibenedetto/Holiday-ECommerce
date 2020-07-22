@@ -1,9 +1,17 @@
+SQLLITE ONLINE VIEWER
+https://inloop.github.io/sqlite-viewer/
+
 - dotnet ef database drop
 
 
 - dotnet ef migrations remove --context ApplicationDbContext
 - dotnet ef migrations add INIT_DB --context ApplicationDbContext
 - dotnet ef database update --context ApplicationDbContext  
+
+
+TODO
+SCAFFODL PAGE
+https://localhost:5001/Identity/Account/AccessDenied?ReturnUrl=%2FTravelPackage
 
 
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-3.1#initialize-db-with-test-data

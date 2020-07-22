@@ -1,4 +1,5 @@
 ﻿
+using System.Linq;
 using dream_holiday.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -8,11 +9,12 @@ namespace dream_holiday
     {
         public static void Startup(
             UserManager<ApplicationUser> userManager,
-            RoleManager<ApplicationRole> roleManager)
+            RoleManager<ApplicationRole> roleManager,
+            Data.ApplicationDbContext context)
         {
 
             CreateRoles(roleManager);
-            CreateDefaultUsers(userManager);
+            CreateDefaultUsers(userManager, context);
         }
 
         // CREATE A ADMIN ROLE
@@ -23,12 +25,12 @@ namespace dream_holiday
                 ApplicationRole role = new ApplicationRole { };
                 role.Name = Roles.ADMIN;
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
-            }
+            }           
         }
 
         // CREATE DEFAULT USER Admin
         public static void CreateDefaultUsers(
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager, Data.ApplicationDbContext context)
         {
             const string DEFAULT_PASSWORD = "nci_admin_2020";
             const string USER_NAME = "admin";
@@ -49,8 +51,9 @@ namespace dream_holiday
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, Roles.ADMIN).Wait();
-                }
-            }
+                } 
+            }          
+          
         }
 
     }

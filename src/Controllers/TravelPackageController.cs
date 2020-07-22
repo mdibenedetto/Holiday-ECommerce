@@ -10,9 +10,11 @@ using dream_holiday.Models;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dream_holiday.Controllers
 {
+    [Authorize(Roles = Roles.ADMIN)]
     public class TravelPackageController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -123,10 +123,12 @@ namespace dream_holiday
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 context.Database.EnsureCreated();
+
+                // create default UserRoles and Users
+                StartupUsers.Startup(userManager, roleManager, context);
             }
 
-            // create default UserRoles and Users
-            StartupUsers.Startup(userManager, roleManager);
+         
 
             app.UseEndpoints(endpoints =>
             {

@@ -39,26 +39,41 @@ namespace dream_holiday.Models.EntityServices
                                     .Join(_context.TravelPackage,
                                       c => c.TravelPackage.Id,
                                       tp => tp.Id,
-                                      (cart, tavelpackage)=>
+                                      (cart, tavelpackage) =>
                                         new CartViewModel { Cart = cart, TravelPackage = tavelpackage }
                                     )
                                     .ToList();
             return cartList;
         }
 
-        async public void AddTravelPackageToCart(int productId)
+        async public void AddTravelPackageToCart(int travelPackageId)
         {
 
             var _userAccount = await _userAccountManager.GetCurrentUserAccountAsync();
-            var _travelPackage = _context.TravelPackage.Find(productId);
+            var _travelPackage = _context.TravelPackage.Find(travelPackageId);
 
-            _context.Cart.Add(new Cart
+            var found = _context.Cart
+                .Where(cart =>
+                cart.TravelPackage.Id == travelPackageId
+                && cart.UserAccount.Id == _userAccount.Id)
+                .FirstOrDefault();
+            // if not exist
+            if (found == null)
             {
-                TravelPackage = _travelPackage,
-                UserAccount = _userAccount,
-                Qty = 1,
-                Price = _travelPackage.Price
-            });
+                _context.Cart.Add(new Cart
+                {
+                    TravelPackage = _travelPackage,
+                    UserAccount = _userAccount,
+                    Qty = 1,
+                    Price = _travelPackage.Price
+                });
+
+            }
+            else
+            {
+                found.Qty++;
+                _context.Cart.Update(found);
+            }
 
             _context.SaveChanges();
         }

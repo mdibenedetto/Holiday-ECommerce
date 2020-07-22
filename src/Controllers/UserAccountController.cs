@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using dream_holiday.Models.EntityServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dream_holiday.Controllers
 {
+    [Authorize]
     [Route("user-account")]
     public class UserAccountController : Controller
     {

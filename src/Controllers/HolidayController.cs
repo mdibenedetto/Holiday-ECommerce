@@ -130,6 +130,7 @@ namespace dream_holiday.Controllers
             List<TravelPackage> holidayItems =
                 new List<TravelPackage> {
                     new TravelPackage{
+                        IsInstock = true,
                         Image = base_Image_Url + "/barcelona.jpg",
                         Country = "Spain",
                         City = "Barcelona",
@@ -138,6 +139,7 @@ namespace dream_holiday.Controllers
                         Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
+                           IsInstock = true,
                         Image= base_Image_Url + "/moscow.jpg",
                         Country= "Russia",
                         City= "Moscow",
@@ -146,7 +148,7 @@ namespace dream_holiday.Controllers
                         Description= LOREM_IPSUM,
                     },
                     new TravelPackage {
-
+                           IsInstock = true,
                         Image= base_Image_Url + "/thailand.jpg",
                         Country = "Thailand",
                         City = "Bangkok",
@@ -155,7 +157,7 @@ namespace dream_holiday.Controllers
                         Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
-
+                           IsInstock = true,
                         Image= base_Image_Url + "/new_zealand.jpg",
                         City= "New Zealand",
                         Name= "New Zealand",
@@ -163,7 +165,7 @@ namespace dream_holiday.Controllers
                         Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
-
+                           IsInstock = true,
                         Image= base_Image_Url + "/goa.jpg",
                         Country= "India",
                         City= "Goa",
@@ -172,6 +174,7 @@ namespace dream_holiday.Controllers
                         Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
+                           IsInstock = true,
                         Image= base_Image_Url + "/france.jpg",
                         Country= "France",
                         City= "Paris",
@@ -180,6 +183,7 @@ namespace dream_holiday.Controllers
                         Description=LOREM_IPSUM,
                     },
                     new TravelPackage{
+                           IsInstock = true,
                             Image= base_Image_Url + "/canada.jpg",
                             Country= "Canada",
                             City = "Niagra",
@@ -188,6 +192,7 @@ namespace dream_holiday.Controllers
                             Description= LOREM_IPSUM,
                     },
                     new TravelPackage  {
+                           IsInstock = true,
                             Image= base_Image_Url + "/turkey.jpg",
                             Country= "Turkey",
                             City= "Istanbul",
@@ -196,6 +201,7 @@ namespace dream_holiday.Controllers
                             Description= LOREM_IPSUM,
                     },
                     new TravelPackage {
+                           IsInstock = true,
                         Image= base_Image_Url + "/egypt.jpg",
                         Country= "Egypt",
                         City= "Cairo",
@@ -204,7 +210,7 @@ namespace dream_holiday.Controllers
                         Description= LOREM_IPSUM,
                     },
                     new TravelPackage {
-
+                           IsInstock = true,
                         Image= base_Image_Url + "/japan.jpg",
                         Country= "Japan",
                         City= "Kioto",
@@ -213,7 +219,7 @@ namespace dream_holiday.Controllers
                         Description= LOREM_IPSUM,
                     },
                     new TravelPackage {
-
+                           IsInstock = true,
                         Image= base_Image_Url + "/brazil.jpg",
                         Country= "Brazil",
                         City= "San Paolo",

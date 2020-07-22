@@ -5,16 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
- 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace dream_holiday.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -33,8 +32,6 @@ namespace dream_holiday.Controllers
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {
-            //todo: remove it  where c.UserAccountId = 38042e71-c925-4d1b-a5fc-3cb50bd16fa6
-            //MockData();
 
             var userAccount = await GetCurrentUser();
 
@@ -91,41 +88,7 @@ namespace dream_holiday.Controllers
                                 .FirstOrDefault();
 
             return _userAccount;
-        }
-
-        //todo: remove it
-        //method MockData
-        //async private void MockData()
-        //{
-        //    if (_context.Cart.Any())
-        //    {
-        //        return;
-        //    }
-
-        //    var mockList = new List<Cart>();
-        //    // find the current user
-        //    var _userAccount = await GetCurrentUser();
-
-        //    for (int i = 0; i < 8; i++)
-        //    {
-        //        var newTravelPackage = _context
-        //            .TravelPackage.Find(i + 1);
-
-        //        mockList.Add(new Cart
-        //        {
-        //            UserAccount = _userAccount,
-        //            TravelPackage = newTravelPackage,
-        //            Price = 1003 + i,
-        //            Qty = 1 + i
-        //        });
-        //    }
-
-        //    _context.Cart.AddRange(mockList);
-        //    _context.SaveChanges();
-
-        //}
-
-
+        } 
 
     }
 }

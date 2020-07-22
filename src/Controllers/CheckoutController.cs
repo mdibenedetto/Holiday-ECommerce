@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dream_holiday.Controllers
 {
-
+    [Authorize]
     [Route("checkout-cart")]
     public class CheckoutController : Controller
     {
@@ -58,7 +59,6 @@ namespace dream_holiday.Controllers
                                 (cart, travelPackage) => new CartViewModel { Cart = cart, TravelPackage = travelPackage }
                             );
 
-
             // find the total price
             var totalPrice =  cartList.ToList().Sum(c=> c.Cart.Price);
             var totalItems = cartList.ToList().Sum(c => c.Cart.Qty);
@@ -73,9 +73,6 @@ namespace dream_holiday.Controllers
                 Price = totalPrice,
                 Qty = totalItems
             };
-
-             //_context.Order.Add(newOrder);
-  
              
             //====================================================
             // Insert into table OrderDetails

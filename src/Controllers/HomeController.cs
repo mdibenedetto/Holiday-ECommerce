@@ -24,7 +24,7 @@ namespace dream_holiday.Controllers
             ILogger<HomeController> logger)
         {
             _context = context;
-            _logger = logger; 
+            _logger = logger;           
         }
 
 

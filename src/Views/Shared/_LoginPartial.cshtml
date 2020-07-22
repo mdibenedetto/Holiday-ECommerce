@@ -4,12 +4,12 @@
 
 <ul class="navbar-nav ml-auto">
     @if (SignInManager.IsSignedIn(User))
-    { 
+    {
         <li class="nav-item dropdown">
 
-            <a class="nav-link dropdown-toggle"             
+            <a class="nav-link dropdown-toggle"
                href="#"
-               id="navbarDropdownMenuLink" 
+               id="navbarDropdownMenuLink"
                role="button"
                data-toggle="dropdown"
                aria-haspopup="true"
@@ -17,12 +17,23 @@
                 Hello @User.Identity.Name!
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/user-account/?userId=@(   UserManager.GetUserId(User) )">Account</a>
-                <a class="dropdown-item" href="/orders">Order history</a>
-                <a class="dropdown-item" href="/cart">Cart</a>
-                <a class="dropdown-item" href="/checkout-cart">Checkout</a>
-                <a class="dropdown-item" href="/travelpackage">Travel Packages</a>
-               
+                @{
+                    if (User.IsInRole(Roles.ADMIN))
+                    {
+                        <a class="dropdown-item" href="/travelpackage">Travel Packages</a>
+                    }
+                    else
+                    {
+                        <a class="dropdown-item"
+                           href="/user-account/?userId=@(
+                                UserManager.GetUserId(User) )">Account</a>
+                        <a class="dropdown-item" href="/orders">Order history</a>
+                        <a class="dropdown-item" href="/cart">Cart</a>
+                    }
+                }
+
+                @*<a class="dropdown-item" href="/checkout-cart">Checkout</a>*@
+
             </div>
         </li>
 
