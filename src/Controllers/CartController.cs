@@ -46,20 +46,19 @@ namespace dream_holiday.Controllers
                               .ToList();
 
 
-
-
             decimal price;
             decimal itemTotal;
             decimal subTotal = 0;
             int totalQty = 0;
 
-            foreach (var cart in cartList)
+            foreach (var item in cartList)
             {
-                price = cart.TravelPackage.Price;
+                var cart = item.Cart;
+
+                price = cart.Price;
                 itemTotal = cart.Qty * price;
                 subTotal += itemTotal;
-                totalQty += cart.Qty;
-                
+                totalQty += cart.Qty;                
             }
            
             ViewBag.TotalPrice = subTotal;
