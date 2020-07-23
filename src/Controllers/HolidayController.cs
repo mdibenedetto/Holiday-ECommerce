@@ -16,41 +16,71 @@ namespace dream_holiday.Controllers
 {
     public class HolidayController : Controller
     {
+        //todo: remove
         private readonly ApplicationDbContext _context;
-        protected readonly UserManager<ApplicationUser> _userManager;
-        private IHttpContextAccessor _contextAccessor; 
+        //protected readonly UserManager<ApplicationUser> _userManager;
+        //private IHttpContextAccessor _contextAccessor;
+
         private readonly ILogger<HolidayController> _logger;
- 
-        public HolidayController(ApplicationDbContext context,
-                                 UserManager<ApplicationUser> userManager,
-                                 IHttpContextAccessor contextAccessor,
-                                     ILogger<HolidayController> logger
+        private readonly TravelPackageService _travelPackageService;
+        private readonly CartService _cartService;
+
+        public HolidayController(
+                                //todo: remove
+                                ApplicationDbContext context,
+                                 //UserManager<ApplicationUser> userManager,
+                                 //IHttpContextAccessor contextAccessor,
+
+                                 ILogger<HolidayController> logger,
+                                 TravelPackageService travelPackageService,
+                                 CartService cartService
                                  )
         {
+            //todo: remove
             _context = context;
-            _userManager = userManager;
-            _contextAccessor = contextAccessor;
+            //_userManager = userManager;
+            //_contextAccessor = contextAccessor;
             _logger = logger;
+            _travelPackageService = travelPackageService;
+            _cartService = cartService;
         }
 
         public IActionResult Index()
-        {           
-            this.MockData(); 
-
-            var list = _context.TravelPackage.ToList();
-            ViewBag.holidayItems = list;
+        {
+            this.MockData();
 
             var model = new HolidayViewModel();
-            model.TravelPackages = _context.TravelPackage.ToList();
-            model.CountryNames = model.TravelPackages.Where(tp=> tp.Country != "").Select(tp => tp.Country).ToList();
+
+            try
+            {
+                var list = _travelPackageService.findAllTravelPackages();
+                ViewBag.holidayItems = list;
+
+
+                model.TravelPackages = list;
+                model.CountryNames = _travelPackageService.getTravelCountries();
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Index", ex);
+                throw ex;
+            }
+
             return View(model);
         }
 
         public IActionResult Detail(int Id)
         {
-            var item = _context
-                .TravelPackage
-                .Find(Id);
+            TravelPackage item;
+            try
+            {
+                item = _travelPackageService.Find(Id);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Detail", ex);
+                throw ex;
+            }
 
             return View(item);
         }
@@ -60,18 +90,15 @@ namespace dream_holiday.Controllers
             [FromQuery] String[] destinations,
             [FromQuery] Decimal price = 0)
         {
-            var list = _context.TravelPackage.ToList();
-
-            if (destinations != null && destinations.Length > 0)
+            List<TravelPackage> list = null;
+            try
             {
-                list = list
-                    .Where(tp => destinations.Contains(tp.Country))
-                    .ToList();
+                list = _travelPackageService.findAllTravelPackages(destinations, price);
             }
-
-            if (price > 0)
+            catch (DbUpdateException ex)
             {
-                list = list.Where(tp => tp.Price <= price).ToList();
+                _logger.LogError("LoadTravelPackages", ex);
+                throw ex;
             }
 
             return Json(list);
@@ -81,8 +108,8 @@ namespace dream_holiday.Controllers
         {
             try
             {
-                var cartService = new CartService(_context, _userManager, _contextAccessor);
-                cartService.AddTravelPackageToCart(tpId);
+                //var cartService = new CartService(_context, _userManager, _contextAccessor);
+                _cartService.AddTravelPackageToCart(tpId);
             }
             catch (DbUpdateException ex)
             {

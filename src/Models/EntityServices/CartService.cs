@@ -10,7 +10,6 @@ namespace dream_holiday.Models.EntityServices
 {
     public class CartService : BaseEntityService
     {
-
         UserAccountService _userAccountManager;
 
         public CartService(ApplicationDbContext context,
@@ -21,14 +20,14 @@ namespace dream_holiday.Models.EntityServices
 
         }
 
-        public CartService(ApplicationDbContext context,
-                     UserManager<ApplicationUser> userManager,
-                      IHttpContextAccessor contextAccessor
-                     )
-      : base(context, userManager, contextAccessor)
-        {
-            _userAccountManager = new UserAccountService(_context, _userManager, contextAccessor);
-        }
+      //  public CartService(ApplicationDbContext context,
+      //               UserManager<ApplicationUser> userManager,
+      //                IHttpContextAccessor contextAccessor
+      //               )
+      //: base(context, userManager, contextAccessor)
+      //  {
+      //      _userAccountManager = new UserAccountService(_context, _userManager, contextAccessor);
+      //  }
 
 
         public async Task<List<CartViewModel>> GetCartUser()
@@ -77,5 +76,6 @@ namespace dream_holiday.Models.EntityServices
 
             _context.SaveChanges();
         }
+
     }
 }

@@ -26,7 +26,7 @@ namespace dream_holiday
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<UserResolverService>();
+         
 
             //services
             //.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -85,8 +85,24 @@ namespace dream_holiday
               .AddRoles<ApplicationRole>()
               .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddTransient<UserResolverService>();
+            services.AddTransient<TravelPackageService>();
+            services.AddTransient<CartService>();
+           //services.AddSingleton<TravelPackageService>(
+           //     s=>
+           //     {
+           //         var _applicationDbContext = s.GetRequiredService<ApplicationDbContext>();
+           //         var _userService = s.GetRequiredService<UserResolverService>();
+
+           //         return new TravelPackageService(
+           //             _applicationDbContext,
+           //             _userService
+           //             );
+           //     }
+           //     );
+
             services.AddControllersWithViews();
-            services.AddRazorPages(); 
+            services.AddRazorPages();
 
         }
 
@@ -117,7 +133,7 @@ namespace dream_holiday
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
@@ -128,7 +144,7 @@ namespace dream_holiday
                 StartupUsers.Startup(userManager, roleManager, context);
             }
 
-         
+
 
             app.UseEndpoints(endpoints =>
             {
