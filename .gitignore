@@ -414,3 +414,4 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+src/Logs/**
