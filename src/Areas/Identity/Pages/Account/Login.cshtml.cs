@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using dream_holiday.Models;
 using dream_holiday.Models.EntityServices;
+using dream_holiday.Data;
 
 namespace dream_holiday.Areas.Identity.Pages.Account
 {
@@ -22,15 +23,18 @@ namespace dream_holiday.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public LoginModel(
-            SignInManager<ApplicationUser> signInManager, 
+              ApplicationDbContext context,
+            SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -80,23 +84,33 @@ namespace dream_holiday.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                debugUserLogin();
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                // try first to find user  by email and password
+                // try first to find user  by email and password              
+
                 var result = await _signInManager
-                    .PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    .PasswordSignInAsync(Input.Email,
+                                        Input.Password,
+                                        Input.RememberMe,
+                                        lockoutOnFailure: false);
+
+
                 // if fails try to recover the associated email to that username
                 if (!result.Succeeded)
                 {
-                  var foundUser = _userManager.FindByEmailAsync(Input.Email);
-                    if (foundUser != null && foundUser.Result!= null)
+                    var foundUser = _userManager.FindByEmailAsync(Input.Email);
+                    if (foundUser != null && foundUser.Result != null)
                     {
                         result = await _signInManager.PasswordSignInAsync(
-                            foundUser.Result.UserName,
-                            Input.Password,
+                            foundUser.Result.UserName.Trim(),
+                            Input.Password.Trim(),
                             Input.RememberMe,
                             lockoutOnFailure: false);
                     }
+
+                    logUserStatus(foundUser, result);
                 }
 
                 if (result.Succeeded)
@@ -124,6 +138,79 @@ namespace dream_holiday.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        async private void logUserStatus(
+            Task<ApplicationUser> foundUser,
+            Microsoft.AspNetCore.Identity.SignInResult result)
+        {
+            var user = foundUser.Result;
+            var signinResult = result;
+            if (signinResult.IsNotAllowed)
+            {
+                if (!await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    _logger.LogWarning("Email isn't confirmed.");
+                }
+
+                if (!await _userManager.IsPhoneNumberConfirmedAsync(user))
+                {
+                    _logger.LogWarning("Phone Number isn't confirmed.");
+                }
+            }
+            else if (signinResult.IsLockedOut)
+            {
+                _logger.LogWarning("Account is locked out.");
+            }
+            else if (signinResult.RequiresTwoFactor)
+            {
+                _logger.LogWarning("2FA required.");
+            }
+            else
+            {
+                _logger.LogWarning("Username or password is incorrect.");
+                if (user == null)
+                {
+                    _logger.LogWarning("Username is incorrect.");
+                }
+                else
+                {
+                    _logger.LogWarning("Password is incorrect.");
+                }
+            }
+        }
+
+        private void debugUserLogin()
+        {
+            var appUser = new ApplicationUser();
+            var hashPassword = _userManager
+                        .PasswordHasher
+                        .HashPassword(appUser, Input.Password);
+
+
+            ApplicationUser resultFound = null;
+
+            // username and passowrd 1
+            resultFound = _context.Users.Where(u =>
+            (u.UserName == Input.Email || u.Email == Input.Email)
+            && u.PasswordHash == hashPassword
+            ).FirstOrDefault();
+
+            // username and passowrd 2
+            resultFound = _context.Users.Where(u =>
+            (u.UserName == Input.Email)
+            ).FirstOrDefault();
+
+            // username and passowrd 3
+            resultFound = _context.Users.Where(u =>
+            (u.Email == Input.Email)
+            ).FirstOrDefault();
+
+            // username and passowrd 4
+            resultFound = _context.Users.Where(u =>
+              u.PasswordHash == hashPassword
+            ).FirstOrDefault();
+
         }
     }
 }
