@@ -60,7 +60,7 @@ namespace dream_holiday.Controllers
                             );
 
             // find the total price
-            var totalPrice =  cartList.ToList().Sum(c=> c.Cart.Price);
+            var totalPrice = cartList.ToList().Sum(c => c.Cart.Price);
             var totalItems = cartList.ToList().Sum(c => c.Cart.Qty);
 
             // Insert into table Order
@@ -73,7 +73,7 @@ namespace dream_holiday.Controllers
                 Price = totalPrice,
                 Qty = totalItems
             };
-             
+
             //====================================================
             // Insert into table OrderDetails
             //====================================================
@@ -102,7 +102,7 @@ namespace dream_holiday.Controllers
             //====================================================
             _context.SaveChanges();
             //====================================================
-            return RedirectToAction("index", "holiday");
+            return RedirectToAction("index", "thankyou");
         }
 
         async private Task<UserAccount> GetCurrentUser()
