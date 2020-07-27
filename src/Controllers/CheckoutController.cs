@@ -43,6 +43,13 @@ namespace dream_holiday.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> ProcessCheckout(Checkout formCheckout)
         {
+
+            var IsValid = ModelState.IsValid;
+            if(IsValid == false)
+            {
+                return RedirectToAction("index", "checkout");
+            }
+
             //====================================================
             // Find the current user
             //====================================================

@@ -16,7 +16,8 @@ namespace dream_holiday.Models
         [Key]
         public Guid Id { get; set; }
 
-        public String FirstName = "";
+        [Required]
+        public String FirstName { get; set; }
         public String LastName = "";
         public String UserName = "";
         public String Email = "";
