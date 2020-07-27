@@ -88,6 +88,7 @@ namespace dream_holiday
             services.AddTransient<UserResolverService>();
             services.AddTransient<TravelPackageService>();
             services.AddTransient<CartService>();
+
            //services.AddSingleton<TravelPackageService>(
            //     s=>
            //     {

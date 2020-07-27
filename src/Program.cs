@@ -42,6 +42,7 @@ namespace dream_holiday
         {
             const string LOG_FILE = "Logs";
 
+            // todo: add config to delete file after 1 months
             Func<LogEventLevel, string, Action<LoggerConfiguration>>
            SetLogger = (level, filePath) =>
            {

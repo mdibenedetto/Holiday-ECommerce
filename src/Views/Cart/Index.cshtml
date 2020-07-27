@@ -28,33 +28,49 @@
                             </tr>
                         </thead>
                         <tbody class="cart-body">
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        <img class="item-image"
-                                             src="@item.TravelPackage?.Image"
-                                             style="max-height: 50px" />
-                                    </td>
-                                    <td>
-                                        <a class="item-title" href="/holiday/detail?id=@item.TravelPackage.Id">
-                                            @item.TravelPackage?.Name 
-                                        </a>
-                                    </td>
-                                    <td class="item-in-stock">
-                                        @( item.TravelPackage?.IsInstock  == true ? "In Stock" : "Out of Stock"  ) 
-                                    </td>
-                                    <td>
-                                        <input class="form-control" type="text" value="@item.Cart.Qty" />
-                                    </td>
-                                    <td class="item-price text-right">€ @(Math.Round(item.Cart.Price) )</td>
-                                    <td class="text-right">
-                                        <a href ="/cart/delete/?cartId=@item.Cart.Id" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash">x</i>
-                                        </a>
-                                    </td>
-                                </tr>
+                            @{
+
+                                decimal price;
+                                decimal itemTotal;
+                                decimal totalPrice = 0;
+                                int totalQty = 0;
+
+                                foreach (var item in Model)
+                                {
+                                    var cart = item.Cart;
+
+                                    price = cart.Price;
+                                    itemTotal = cart.Qty * price;
+                                    totalPrice += itemTotal;
+                                    totalQty += cart.Qty;
+
+                                    <tr>
+                                        <td>
+                                            <img class="item-image"
+                                                 src="@item.TravelPackage?.Image"
+                                                 style="max-height: 50px" />
+                                        </td>
+                                        <td>
+                                            <a class="item-title" href="/holiday/detail?id=@item.TravelPackage.Id">
+                                                @item.TravelPackage?.Name
+                                            </a>
+                                        </td>
+                                        <td class="item-in-stock">
+                                            @( item.TravelPackage?.IsInstock  == true ? "In Stock" : "Out of Stock"  )
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" value="@item.Cart.Qty" />
+                                        </td>
+                                        <td class="item-price text-right">€ @(Math.Round(item.Cart.Price) )</td>
+                                        <td class="text-right">
+                                            <a href="/cart/delete/?cartId=@item.Cart.Id" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash">x</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
                             }
+
                         </tbody>
 
                         <tfoot>
@@ -62,26 +78,16 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>Packages</td>
-                                <td class="text-right">@ViewBag.Quantity</td>
+                                <td>Packages</td>                               
+                                <td class="text-right">@totalQty</td>
                                 <td></td>
                             </tr>
-                            <!--
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-right"></td>
-                                </tr>
-                            -->
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td><strong>Total</strong></td>
-                                <td class="text-right"><strong>€ @(Math.Round(ViewBag.TotalPrice) )</strong></td>
+                                <td class="text-right"><strong>€ @(Math.Round(totalPrice))</strong></td>
                                 <td></td>
                             </tr>
                         </tfoot>
@@ -97,7 +103,7 @@
                     </div>
                     <div class="col-sm-12 col-lg-2 text-right">
 
-                        @if (ViewBag.TotalPrice == 0)
+                        @if (totalPrice == 0)
                         {
                              <a href="javascript:void(0)"
                                 class="btn-checkout btn btn-lg btn-block btn-success text-uppercase"

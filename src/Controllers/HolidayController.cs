@@ -31,9 +31,9 @@ namespace dream_holiday.Controllers
                                  //UserManager<ApplicationUser> userManager,
                                  //IHttpContextAccessor contextAccessor,
 
-                                 ILogger<HolidayController> logger,
-                                 TravelPackageService travelPackageService,
-                                 CartService cartService
+                                     ILogger<HolidayController> logger,
+                                     TravelPackageService travelPackageService,
+                                     CartService cartService
                                  )
         {
             //todo: remove

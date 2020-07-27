@@ -31,7 +31,7 @@ namespace dream_holiday.Models.EntityServices
 
 
         public async Task<List<CartViewModel>> GetCartUser()
-        {
+        { 
             var user = await _userAccountManager.GetCurrentUserAccountAsync();
             var cartList = _context.Cart
                                     .Where(c => c.UserAccount.Id == user.Id)
@@ -77,5 +77,12 @@ namespace dream_holiday.Models.EntityServices
             _context.SaveChanges();
         }
 
+        async public void removeCart(Guid? cartId)
+        {
+            var cart = _context.Cart.Find(cartId);
+            _context.Cart.Remove(cart);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

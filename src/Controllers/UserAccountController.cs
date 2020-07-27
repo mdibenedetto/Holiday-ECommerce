@@ -87,19 +87,23 @@ namespace dream_holiday.Controllers
                     var user = await _userManager.FindByIdAsync(userAccount.User.Id.ToString());
                     user.UserName = userAccount.User.UserName;
                     user.Email = userAccount.User.Email;
-                    user.PasswordHash = _userManager
-                            .PasswordHasher
-                            .HashPassword(user, userAccount.Password);
-                  
-                    // update only those fields which has changed
-                    await _userManager.UpdateAsync(user);
-  
+
+                    if( user.PasswordHash != userAccount.Password)
+                    {
+                        user.PasswordHash = _userManager
+                          .PasswordHasher
+                          .HashPassword(user, userAccount.Password);
+
+                        // update only those fields which has changed
+                        await _userManager.UpdateAsync(user);
+                    }
+
                     // =======================================================
                     // 2. update table UserAccount
                     // =======================================================
                     // we set the field User with the current user.
                     // the object "user" is found by using the line:
-                  
+
                     newUserAccount.User = user;
                     newUserAccount.Id = userAccount.Id;
                     newUserAccount.Title = userAccount.Title;
