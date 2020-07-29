@@ -12,239 +12,218 @@
 <link rel="stylesheet" href="./css/checkout-cart.css" />
 
 <section class="main-container">
-
-    @*RIGHT PART - CART/BACKET PLACER*@
-
     <div class="row">
 
         <partial name="~/Views/Cart/_CartSummary.cshtml" />
 
-        @*LEFT PART - BILLING ADDRESS PLACER*@
-
-    <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Checkout Order</h4>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-        <form class="needs-validation"
-              name="checkout"
-              method="post"
-              enctype="multipart/form-data"
-              action="checkout-cart"
-              novalidate>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="firstName">First name</label>
-                    <input type="text"
-                           class="form-control"
-                           id="FirstName"
-                           name="FirstName"
-                           placeholder=""
-                           asp-for="FirstName"
-                           value="@(userAccount.FirstName)"
-                           required="" />
-                    <div class="invalid-feedback">
-                        Valid first name is required.
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Checkout Order</h4>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form class="needs-validation"
+                  name="checkout"
+                  method="post"
+                  enctype="multipart/form-data"
+                  action="checkout-cart"
+                  novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text"
+                               class="form-control"
+                               id="FirstName"
+                               name="FirstName"
+                               placeholder=""
+                               asp-for="FirstName"
+                               value="@(checkout.FirstName ?? userAccount.FirstName)"
+                               required="" />
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                        <span asp-validation-for="FirstName"
+                              class="text-danger"></span>
                     </div>
-                    <span asp-validation-for="FirstName"
-                          class="text-danger"></span>
-                </div>
 
-                <div class="col-md-6 mb-3">
-                    <label for="lastName">Last name</label>
-                    <input type="text"
-                           class="form-control"
-                           id="lastName"
-                           name="LastName"
-                           placeholder=""
-                           value="@(userAccount.LastName)"
-                           required="" />
-                    <div class="invalid-feedback">
-                        Valid last name is required.
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text"
+                               class="form-control"
+                               id="lastName"
+                               name="LastName"
+                               placeholder=""
+                               value="@(checkout.LastName ?? userAccount.LastName)"
+                               required="" />
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
-
-            <div class="mb-3">
-                <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                <input type="email"
-                       class="form-control"
-                       id="email"
-                       name="Email"
-                       value="@(userAccount.User?.Email)"
-                       placeholder="you@example.com" />
-                <div class="invalid-feedback">
-                    Please enter a valid email address for shipping updates.
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="address">Address</label>
-                <input type="text"
-                       class="form-control"
-                       id="address"
-                       name="Address"
-                       value="@(userAccount.Address)"
-                       placeholder="1234 Main St"
-                       required="" />
-                <div class="invalid-feedback">
-                    Please enter your shipping address.
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                <input type="text"
-                       class="form-control"
-                       id="address2"
-                       name="Address2"
-                       value="@(userAccount.Address2)"
-                       placeholder="Apartment or suite" />
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-5 mb-3">
-                    <label for="country">Country</label>
-                    <input type="text"
+                <div class="mb-3">
+                    <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                    <input type="email"
                            class="form-control"
-                           id="country"
-                           name="Country"
-                           value="@(userAccount.Country)">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <label for="city">City</label>
-                    <input type="text"
-                           class="form-control"
-                           id="city"
-                           name="City"
-                           value="@(userAccount.Town)" />
-                </div>
-
-                <div class="col-md-3 mb-3">
-                    <label for="eircode">Eir Code</label>
-                    <input type="text"
-                           class="form-control"
-                           id="eircode"
-                           name="EirCode"
-                           placeholder=""
-                           value="@(checkout.EirCode)"
-                           required="" />
+                           id="email"
+                           name="Email"
+                           value="@(checkout.Email ?? userAccount.User?.Email)"
+                           placeholder="you@example.com" />
                     <div class="invalid-feedback">
-                        Eir Code code required.
-                    </div>
-                </div>
-            </div>
-
-            <hr class="mb-4" />
-
-            <h4 class="mb-3">Payment Method</h4>
-
-            <div class="d-block my-3">
-                <div class="custom-control custom-radio">
-                    <input id="credit"
-                           name="paymentMethod"
-                           type="radio"
-                           class="custom-control-input"
-                           value="cc"
-                           checked=""
-                           required="" />
-                    <label class="custom-control-label"
-                           for="credit">Credit card</label>
-                </div>
-                @*<div class="custom-control custom-radio">
-                    <input id="debit"
-                           name="paymentMethod"
-                           type="radio"
-                           class="custom-control-input"
-                           value="dc"
-                           required="" />
-                    <label class="custom-control-label" for="debit">Debit card</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input id="paypal"
-                           name="paymentMethod"
-                           type="radio"
-                           class="custom-control-input"
-                           value="pp"
-                           required="" />
-                    <label class="custom-control-label" for="paypal">PayPal</label>
-                </div>
-                *@
-            </div>
-            <div class="row">
-
-                <div class="col-md-6 mb-3">
-                    <label for="cc-name">Name on card</label>
-                    <input type="text"
-                           class="form-control"
-                           id="cc-name"
-                           name="NameOnCard"
-                           placeholder=""
-                           value="@(checkout.NameOnCard)"
-                           required="" />
-                    <small class="text-muted">Full name as displayed on card</small>
-                    <div class="invalid-feedback">
-                        Name on card is required
+                        Please enter a valid email address for shipping updates.
                     </div>
                 </div>
 
-                <div class="col-md-6 mb-3">
-                    <label for="cc-number">Credit card number</label>
+                <div class="mb-3">
+                    <label for="address">Address</label>
                     <input type="text"
                            class="form-control"
-                           id="cc-number"
-                           name="CardNumber"
-                           placeholder=""
-                           value="@(Model.CardNumber)"
+                           id="address"
+                           name="Address"
+                           value="@(checkout.Address ?? userAccount.Address)"
+                           placeholder="1234 Main St"
                            required="" />
                     <div class="invalid-feedback">
-                        Credit card number is required
+                        Please enter your shipping address.
                     </div>
                 </div>
 
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-3 mb-3">
-                    <label for="cc-expiration">Expiration</label>
-                    <input type="date"
+                <div class="mb-3">
+                    <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                    <input type="text"
                            class="form-control"
-                           id="cc-expiration"
-                           name="Expiration"
-                           value=""
-                           placeholder=""
-                           required="" />
-                    <div class="invalid-feedback">
-                        Expiration date required
+                           id="address2"
+                           name="Address2"
+                           value="@(checkout.Address2 ?? userAccount.Address2)"
+                           placeholder="Apartment or suite" />
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-5 mb-3">
+                        <label for="country">Country</label>
+                        <input type="text"
+                               class="form-control"
+                               id="country"
+                               name="Country"
+                               value="@(checkout.Country ?? userAccount.Country)">
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="city">City</label>
+                        <input type="text"
+                               class="form-control"
+                               id="city"
+                               name="City"
+                               value="@(checkout.City ?? userAccount.Town)" />
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="eircode">Eir Code</label>
+                        <input type="text"
+                               class="form-control"
+                               id="eircode"
+                               name="EirCode"
+                               placeholder=""
+                               value="@(checkout.EirCode)"
+                               required="" />
+                        <div class="invalid-feedback">
+                            Eir Code code required.
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-2 mb-2">
-                    <label for="cc-cvv">CVV</label>
-                    <input type="number"
-                           class="form-control"
-                           id="cc-cvv"
-                           name="CVC"
-                           value="@(checkout.CVC)"
-                           placeholder=""
-                           required="" />
-                    <div class="invalid-feedback">
-                        Security code required
+                <hr class="mb-4" />
+
+                <h4 class="mb-3">Payment Method</h4>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit"
+                               name="paymentMethod"
+                               type="radio"
+                               class="custom-control-input"
+                               value="cc"
+                               checked=""
+                               required="" />
+                        <label class="custom-control-label"
+                               for="credit">Credit card</label>
                     </div>
                 </div>
+                <div class="row">
 
-            </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-name">Name on card</label>
+                        <input type="text"
+                               class="form-control"
+                               id="cc-name"
+                               name="NameOnCard"
+                               placeholder=""
+                               value="@(checkout.NameOnCard)"
+                               required="" />
+                        <small class="text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                            Name on card is required
+                        </div>
+                    </div>
 
-            <hr class="mb-4" />
-            <button class="btn btn-secondary btn-lg btn-block" type="submit">
-                Checkout
-            </button>
-        </form>
-    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-number">Credit card number</label>
+                        <input type="text"
+                               class="form-control"
+                               id="cc-number"
+                               name="CardNumber"
+                               placeholder=""
+                               value="@(checkout.CardNumber)"
+                               required="" />
+                        <div class="invalid-feedback">
+                            Credit card number is required
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">Expiration</label>
+                        <input type="date"
+                               class="form-control"
+                               id="cc-expiration"
+                               name="Expiration"
+                               value="@(checkout.Expiration)"
+                               placeholder=""
+                               required="" />
+                        <div class="invalid-feedback">
+                            Expiration date required
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mb-2">
+                        <label for="cc-cvv">CVV</label>
+                        <input type="text"
+                               class="form-control"
+                               id="cc-cvv"
+                               name="CVC"
+                               asp-for="CVC"
+                               value="@(checkout.CVC)"
+                               placeholder=""
+                               required="" />
+                        <span asp-validation-for="CVC"
+                              class="text-danger">
+                           
+                        </span>
+                        <div class="invalid-feedback">
+                            Security code required and has to be a number with minimum 3 digits and maximum 4 digits
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="mb-4" />
+                <button class="btn btn-secondary btn-lg btn-block" type="submit">
+                    Checkout
+                </button>
+            </form>
+        </div>
     </div>
 </section>
 
