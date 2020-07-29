@@ -47,7 +47,8 @@ namespace dream_holiday.Controllers
             var IsValid = ModelState.IsValid;
             if(IsValid == false)
             {
-                return RedirectToAction("index", "checkout");
+                formCheckout.UserAccount = await this.GetCurrentUser();
+                return View("index", formCheckout);
             }
 
             //====================================================
