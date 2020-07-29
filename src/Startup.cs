@@ -85,26 +85,20 @@ namespace dream_holiday
                   })
               .AddRoles<ApplicationRole>()
               .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.AddTransient<UserResolverService>();
-            services.AddTransient<TravelPackageService>();
-            services.AddTransient<CartService>();
-
-            //services.AddSingleton<TravelPackageService>(
-            //     s=>
-            //     {
-            //         var _applicationDbContext = s.GetRequiredService<ApplicationDbContext>();
-            //         var _userService = s.GetRequiredService<UserResolverService>();
-
-            //         return new TravelPackageService(
-            //             _applicationDbContext,
-            //             _userService
-            //             );
-            //     }
-            //     );
+            
+            addAplicationEntityServices(services);            
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+        }
+
+        private void addAplicationEntityServices(IServiceCollection services)
+        {
+            services.AddTransient<UserResolverService>();
+            services.AddTransient<TravelPackageService>();
+            services.AddTransient<CartService>();
+            services.AddTransient<CheckoutService>();
 
         }
 
