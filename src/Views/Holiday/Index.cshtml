@@ -38,6 +38,14 @@
 
                                         <a href="holiday-detail.html?id=1"
                                            class="item-link card-link">Detail</a>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <a role="button" href="/holiday/addtocart/?tpId=1" class="btn btn-primary">
+                                                Add to cart
+                                            </a>
+                                        }
+
+                                        
                                     </div>
                                 </div>
                             </div>
