@@ -23,9 +23,6 @@ namespace dream_holiday
                 Log.Information("Starting up");
                 var host = CreateHostBuilder(args).Build();
 
-                Log.Information("Add test data");
-                //StartupTestData.Startup(host);
-
                 host.Run();
             }
             catch (Exception ex)

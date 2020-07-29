@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using dream_holiday.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using dream_holiday.Models.EntityServices;
+using Serilog;
 
 namespace dream_holiday
 {
@@ -26,7 +27,7 @@ namespace dream_holiday
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-         
+
 
             //services
             //.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -89,18 +90,18 @@ namespace dream_holiday
             services.AddTransient<TravelPackageService>();
             services.AddTransient<CartService>();
 
-           //services.AddSingleton<TravelPackageService>(
-           //     s=>
-           //     {
-           //         var _applicationDbContext = s.GetRequiredService<ApplicationDbContext>();
-           //         var _userService = s.GetRequiredService<UserResolverService>();
+            //services.AddSingleton<TravelPackageService>(
+            //     s=>
+            //     {
+            //         var _applicationDbContext = s.GetRequiredService<ApplicationDbContext>();
+            //         var _userService = s.GetRequiredService<UserResolverService>();
 
-           //         return new TravelPackageService(
-           //             _applicationDbContext,
-           //             _userService
-           //             );
-           //     }
-           //     );
+            //         return new TravelPackageService(
+            //             _applicationDbContext,
+            //             _userService
+            //             );
+            //     }
+            //     );
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -142,7 +143,11 @@ namespace dream_holiday
                 context.Database.EnsureCreated();
 
                 // create default UserRoles and Users
-                StartupUsers.Startup(userManager, roleManager, context);
+                Log.Information("Seed Admin user into DB");
+                StartupDbUsers.SeedUsers(userManager, roleManager, context);
+
+                Log.Information("Seed TravelPackage into DB");
+                StartupDbData.SeedData(context);
             }
 
 
