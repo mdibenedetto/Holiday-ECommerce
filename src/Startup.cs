@@ -96,6 +96,7 @@ namespace dream_holiday
         private void addAplicationEntityServices(IServiceCollection services)
         {
             services.AddTransient<UserResolverService>();
+            services.AddTransient<UserAccountService>();
             services.AddTransient<TravelPackageService>();
             services.AddTransient<CartService>();
             services.AddTransient<CheckoutService>();

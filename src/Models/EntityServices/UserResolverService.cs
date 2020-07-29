@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -25,10 +26,6 @@ namespace dream_holiday.Models.EntityServices
         {
             return _httpContext;
         }
-
-        //public async string GetUser()
-        //{
-        //    return await _context.HttpContext?.User?.Identity?.Name;
-        //}
+         
     }
 }
