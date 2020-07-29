@@ -9,9 +9,10 @@
 }
 
 .thankyou {
+    position: relative;
     margin: 5% auto;
-    height: auto;
-    max-width: 880px;
+    height: 770px;
+    width: 880px;
     background: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.6);
 }
@@ -19,7 +20,6 @@
 
 .HomeButton {
     padding: 40px 40px 0px 350px;
-
 }
 
 .frame {
@@ -31,9 +31,4 @@ h4 {
 }
 .thank-you{
     margin-top:30px;
-}
-.traveling {
-    height: auto;
-    max-width: 880px;
-    width:100%;
 }

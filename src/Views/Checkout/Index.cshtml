@@ -98,17 +98,13 @@
 
                 <div class="row">
 
-                <div class="col-md-3 mb-3">
-                    <label for="eircode">Eir Code</label>
-                    <input type="text"
-                           class="form-control"
-                           id="eircode"
-                           name="EirCode"
-                           placeholder=""
-                           value="@(userAccount.EirCode)"
-                           required="" />
-                    <div class="invalid-feedback">
-                        Eir Code code required.
+                    <div class="col-md-5 mb-3">
+                        <label for="country">Country</label>
+                        <input type="text"
+                               class="form-control"
+                               id="country"
+                               name="Country"
+                               value="@(checkout.Country ?? userAccount.Country)">
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -201,19 +197,6 @@
                         </div>
                     </div>
 
-<<<<<<< HEAD
-                <div class="col-md-2 mb-2">
-                    <label for="cc-cvv">CVC</label>
-                    <input type="number"
-                           class="form-control"
-                           id="cc-cvv"
-                           name="CVC"
-                           value="@(checkout.CVC)"
-                           placeholder=""
-                           required="" />
-                    <div class="invalid-feedback">
-                        Security code required
-=======
                     <div class="col-md-2 mb-2">
                         <label for="cc-cvv">CVV</label>
                         <input type="text"
@@ -231,7 +214,6 @@
                         <div class="invalid-feedback">
                             Security code required and has to be a number with minimum 3 digits and maximum 4 digits
                         </div>
->>>>>>> 15d877877f8384230a8f1061365ea97405bac15c
                     </div>
 
                 </div>

@@ -8,15 +8,27 @@ using System.Threading.Tasks;
 
 namespace dream_holiday.Models.EntityServices
 {
-    public class CartService : BaseService
+    public class CartService : BaseEntityService
     {
         UserAccountService _userAccountManager;
 
-        public CartService(ApplicationDbContext context, UserResolverService userService)
-         : base(context, userService)
+        public CartService(ApplicationDbContext context,
+                                 UserResolverService userService)
+         : base(context, userService.getUserManager(), userService.getHTTPContext())
         {
             _userAccountManager = new UserAccountService(_context, userService);
-        }         
+
+        }
+
+      //  public CartService(ApplicationDbContext context,
+      //               UserManager<ApplicationUser> userManager,
+      //                IHttpContextAccessor contextAccessor
+      //               )
+      //: base(context, userManager, contextAccessor)
+      //  {
+      //      _userAccountManager = new UserAccountService(_context, _userManager, contextAccessor);
+      //  }
+
 
         public async Task<List<CartViewModel>> GetCartUser()
         { 

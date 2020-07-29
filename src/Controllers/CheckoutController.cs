@@ -4,12 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
-using dream_holiday.Models.EntityServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace dream_holiday.Controllers
 {
@@ -20,48 +17,25 @@ namespace dream_holiday.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<CheckoutController> _logger;
-        private readonly CheckoutService _checkoutService;
 
-        //public CheckoutController( ApplicationDbContext context,
-        //     UserManager<ApplicationUser> userManager
-        //    )
-        //{
-        //    _context = context;
-        //    _userManager = userManager;
-        //}
-
-
-          //  try
-          //  {
-              
-          //  }
-          //  catch (DbUpdateException ex)
-          //  {
-          //      _logger.LogError("Index", ex);
-          //      throw ex;
-          //  }
-
-
-        public CheckoutController(ILogger<CheckoutController> logger, CheckoutService checkoutService)
+        public CheckoutController(
+            ApplicationDbContext context,
+             UserManager<ApplicationUser> userManager
+            )
         {
-            _logger = logger;
-            _checkoutService = checkoutService;
+            _context = context;
+            _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        async public Task<IActionResult> Index()
         {
-            Checkout checkout = null;
-            try
+            var userAccount = await GetCurrentUser();
+
+            var checkout = new Checkout
             {
-                checkout = await _checkoutService.NewCheckoutAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError("Index", ex);
-                throw ex;
-            }
-           
+                UserAccount = userAccount
+            };
+
             return View(checkout);
         }
 
