@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace dream_holiday
 {
-    public static class StartupUsers
+    public static class StartupDbUsers
     {
-        public static void Startup(
+        public static void SeedUsers(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             Data.ApplicationDbContext context)
