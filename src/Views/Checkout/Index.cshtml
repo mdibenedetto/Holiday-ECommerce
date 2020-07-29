@@ -96,15 +96,15 @@
                            placeholder="Apartment or suite" />
                 </div>
 
-                <div class="row">
-
+                <div class="row">                
                     <div class="col-md-5 mb-3">
                         <label for="country">Country</label>
-                        <input type="text"
-                               class="form-control"
-                               id="country"
-                               name="Country"
-                               value="@(checkout.Country ?? userAccount.Country)">
+                        <input type="text" 
+                            class="form-control" 
+                            id="country" 
+                            name="Country"
+                             value="@(checkout.Country ?? userAccount.Country)"
+                               />
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -113,7 +113,7 @@
                                class="form-control"
                                id="city"
                                name="City"
-                               value="@(checkout.City ?? userAccount.Town)" />
+                               value="@(checkout.City ?? userAccount.City)" />
                     </div>
 
                     <div class="col-md-3 mb-3">
@@ -123,13 +123,13 @@
                                id="eircode"
                                name="EirCode"
                                placeholder=""
-                               value="@(checkout.EirCode)"
+                               value="@(checkout.EirCode ?? userAccount.EirCode)"
                                required="" />
                         <div class="invalid-feedback">
                             Eir Code code required.
                         </div>
                     </div>
-                </div>
+                </div>       
 
                 <hr class="mb-4" />
 
@@ -157,7 +157,7 @@
                                id="cc-name"
                                name="NameOnCard"
                                placeholder=""
-                               value="@(checkout.NameOnCard)"
+                               value="@(checkout.NameOnCard ?? userAccount.CardHolderFullName)"
                                required="" />
                         <small class="text-muted">Full name as displayed on card</small>
                         <div class="invalid-feedback">
@@ -172,7 +172,7 @@
                                id="cc-number"
                                name="CardNumber"
                                placeholder=""
-                               value="@(checkout.CardNumber)"
+                               value="@(checkout.CardNumber ?? userAccount.CardNumber)"
                                required="" />
                         <div class="invalid-feedback">
                             Credit card number is required
@@ -198,22 +198,23 @@
                     </div>
 
                     <div class="col-md-2 mb-2">
-                        <label for="cc-cvv">CVV</label>
+                        <label for="cc-cvv">CVC</label>
                         <input type="text"
                                class="form-control"
                                id="cc-cvv"
                                name="CVC"
                                asp-for="CVC"
-                               value="@(checkout.CVC)"
+                               value="@(checkout.CVC ?? userAccount.CardCVC)"
                                placeholder=""
                                required="" />
                         <span asp-validation-for="CVC"
                               class="text-danger">
-                           
+
                         </span>
                         <div class="invalid-feedback">
                             Security code required and has to be a number with minimum 3 digits and maximum 4 digits
                         </div>
+
                     </div>
 
                 </div>

@@ -88,7 +88,7 @@ namespace dream_holiday.Controllers
                     user.UserName = userAccount.User.UserName;
                     user.Email = userAccount.User.Email;
 
-                    if( user.PasswordHash != userAccount.Password)
+                    if (user.PasswordHash != userAccount.Password)
                     {
                         user.PasswordHash = _userManager
                           .PasswordHasher
@@ -127,7 +127,7 @@ namespace dream_holiday.Controllers
                     newUserAccount.Country = userAccount.Country;
                     newUserAccount.Address = userAccount.Address;
                     newUserAccount.Address2 = userAccount.Address2;
-                    newUserAccount.Town = userAccount.Town;
+                    newUserAccount.City = userAccount.City;
                     newUserAccount.County = userAccount.County;
                     newUserAccount.Telephone = userAccount.Telephone;
                     newUserAccount.CardHolderFullName = userAccount.CardHolderFullName;
@@ -138,7 +138,7 @@ namespace dream_holiday.Controllers
                     newUserAccount.CountryBilling = userAccount.CountryBilling;
                     newUserAccount.AddressBilling = userAccount.AddressBilling;
                     newUserAccount.Address2Billing = userAccount.Address2Billing;
-                    newUserAccount.TownBilling = userAccount.TownBilling;
+                    newUserAccount.CityBilling = userAccount.CityBilling;
                     newUserAccount.County2Billing = userAccount.County2Billing;
 
                     if (UserAccountModelExists(userAccount.Id))

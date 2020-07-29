@@ -13,8 +13,7 @@ namespace dream_holiday.Models.EntityServices
         private ApplicationDbContext _context;
         private UserResolverService _userService;
 
-        public TravelPackageService(ApplicationDbContext context,
-                                 UserResolverService userService)
+        public TravelPackageService(ApplicationDbContext context, UserResolverService userService)
         {
             _context = context;
             _userService = userService;

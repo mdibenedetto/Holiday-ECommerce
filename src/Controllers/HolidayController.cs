@@ -102,5 +102,22 @@ namespace dream_holiday.Controllers
             return RedirectToAction("Detail", new { Id = tpId });
         }
 
+
+        [HttpPost("api/addtocart")]
+        public JsonResult ApiAddToCart(int tpId)
+        {
+            try
+            {
+                _cartService.AddTravelPackageToCart(tpId);
+                return new JsonResult(new { successed = true });
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("AddToCart", ex);
+                return new JsonResult(new { successed = false });
+                throw ex;
+            }          
+        }              
+
     }
 }

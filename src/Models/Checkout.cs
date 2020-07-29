@@ -45,7 +45,7 @@ namespace dream_holiday.Models
         public String NameOnCard { get; set; }
 
         [Required]
-        [CreditCard]
+        [CreditCard( ErrorMessage = "Credit card is not valid" )]
         public String CardNumber { get; set; }
 
         [Required]

@@ -21,7 +21,7 @@
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row no-gutters">
                                 <div class="col-md-6">
-                                    <a class="item-link" href="holiday-detail.html?id=1">
+                                    <a class="item-link detail-link" href="holiday-detail.html?id=1">
                                         <img src="https://via.placeholder.com/174x157.png/012542?text=Image-1"
                                              class="item-image img-fluid card-img"
                                              alt="..." />
@@ -37,7 +37,16 @@
                                         </p>
 
                                         <a href="holiday-detail.html?id=1"
-                                           class="item-link card-link">Detail</a>
+                                           class="item-link card-link detail-link">Detail</a>
+
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <a  href="/holiday/addtocart?tpId=1"
+                                                class="item-link card-link add-travel-link">
+                                                Add to cart
+                                            </a>
+                                        }
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -52,17 +61,7 @@
 
             <div class="col-4">
                 <h1>FILTERS</h1>
-                <form id="formFilter" method="get">
-                    @*<div class="form-group">
-                            <label for="exampleFormControlSelect1">Stars Hotol</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>*@
+                <form id="formFilter" method="get"> 
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="chkAllDestination" checked />
                         <label class="form-check-label" for="chkAllDestination">All Destinations</label>
@@ -74,22 +73,6 @@
                             {
                                 <option value="@country">@country</option>
                             }
-                            @*<option value="Lituania">Lituania</option>
-                                <option value="Croatia">Croatia</option>
-                                <option value="Romania">Romania</option>
-                                <option value="Ireland">Ireland</option>
-                                <option value="Italy">Italy</option>
-                                <option value="Barcelona">Barcelona</option>
-                                <option value="Moscow">Moscow</option>
-                                <option value="Thailand">Thailand</option>
-                                <option value="New Zealand">Zealand</option>
-                                <option value="Goa">Goa</option>
-                                <option value="France">France</option>
-                                <option value="Canada">Canada</option>
-                                <option value="Turkey">Turkey</option>
-                                <option value="Egypt">Egypt</option>
-                                <option value="Japan">Japan</option>
-                                <option value="Brazil">Brazil</option>*@
                         </select>
                     </div>
 

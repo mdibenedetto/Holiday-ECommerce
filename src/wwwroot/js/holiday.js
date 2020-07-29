@@ -90,10 +90,40 @@ function loadHolidays(holidayItems) {
         clone.querySelector(".item-title").textContent = item.name;
         clone.querySelector(".item-content").textContent = item.description;
 
-        const links = clone.querySelectorAll(".item-link");
-        links.forEach((link) =>
+        const detailLinks = clone.querySelectorAll(".detail-link");
+        detailLinks.forEach((link) =>
             link.setAttribute("href", "/holiday/detail?id=" + item.id)
         );
+
+        const addTravelLink = clone.querySelector(".add-travel-link");
+        if (addTravelLink) {
+            addTravelLink.setAttribute("data-id", item.id);
+
+            addTravelLink.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                const errorMessage = () => alert("The service is not available right now.\nPlease try later.");
+
+                fetch(
+                    "/api/addtocart?tpId=" + this.dataset.id,
+                    {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    }).then(res => {
+                        if (res.status == 200) {
+                            alert("Your new travel package was added!")
+                        }
+                        else {
+                            errorMessage();
+                        }
+                    }).catch(er => {
+                        errorMessage();
+                    })
+            })
+        }
+     
 
         parent.appendChild(clone);
     });
