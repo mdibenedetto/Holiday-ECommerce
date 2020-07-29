@@ -13,9 +13,7 @@ namespace dream_holiday.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid Id { get; set; }
- 
         public int Qty { get; set; }
-
         public Decimal Price { get; set; }
     }
 }
