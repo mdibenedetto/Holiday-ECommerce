@@ -46,6 +46,8 @@ namespace dream_holiday.Models
 
         public String Address2 { get; set; }
 
+        public String EirCode { get; set; }
+
         public String Town { get; set; }
 
         public String County { get; set; }
@@ -67,6 +69,8 @@ namespace dream_holiday.Models
         public String AddressBilling { get; set; }
 
         public String Address2Billing { get; set; }
+
+        public String EirCodeBilling { get; set; }
 
         public String TownBilling { get; set; }
 
