@@ -66,3 +66,12 @@ a.card-link {
     padding: 20px;
     margin-bottom: 20px;
 }
+
+form#formFilter div:not(:last-child) {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 13px;
+}
+
+.item-link.image-link.detail-link {
+    color: transparent;
+}

@@ -25,7 +25,7 @@
             <p>Here are your previous orders displayed. You can find a specific order by the ID number. To view a specifit order, click on the ID number.  </p>
             <br>
 
-            <form action="/orders" method="get">
+            <form action="/order" method="get">
                 <h4>
                     Search by ID
                 </h4>
@@ -37,7 +37,7 @@
             </form>
 
 
-            <form action="/orders" method="get">
+            <form action="/order" method="get">
                 <h4>
                     Search by Status
                 </h4>
@@ -69,21 +69,21 @@
 
                     @foreach (var order in Model)
                     {
-                    <tr>
+                        <tr>
 
-                        <td>@order.Id</td>
-                        <th scope="row">
-                            <h5><a href="/orderdetails?orderId=@order.Id" class="badge badge-danger">   @order.Id  </a></h5>
-                        </th>
+                            <td>@order.Id</td>
+                            <th scope="row">                               
+                                <h5><a href="/order/detail?orderId=@order.Id" class="badge badge-danger">   @order.Id  </a></h5>
+                            </th>
 
-                        <td>@order.Date.ToString("yyyy-MM-dd")</td>
-                        <td> &euro; @order.Price </td>
-                        <td>@order.Qty </td>
-                        <td>@(order.Status) </td>
-                        <td>
-                            <a href="/orders/delete?orderId=@order.Id">Delete</a>
-                        </td>
-                    </tr>
+                            <td>@order.Date.ToString("yyyy-MM-dd")</td>
+                            <td> &euro; @order.Price </td>
+                            <td>@order.Qty </td>
+                            <td>@(order.Status) </td>
+                            <td>
+                                <a href="/order/delete?orderId=@order.Id">Delete</a>
+                            </td>
+                        </tr>
                     }
 
                 </tbody>

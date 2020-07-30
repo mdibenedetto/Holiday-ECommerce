@@ -14,3 +14,35 @@
     background: white;
     padding: 15px;
 }
+
+figure {
+    display: inline-flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+}
+
+ 
+    figure .item-image {
+        display: inline-flex;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        max-width: 400px;
+        border-radius: 1%;
+    }
+
+figure figcaption{
+    font-weight: bold;
+}
+
+.add-button {
+    display: flex;
+     
+    justify-content: flex-end;
+    margin: 10px 0;
+}

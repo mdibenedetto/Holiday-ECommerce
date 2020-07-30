@@ -8,15 +8,16 @@ using Microsoft.Extensions.Logging;
 using dream_holiday.Models;
 using dream_holiday.Data;
 using dream_holiday.Models.EntityServices;
+using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Controllers
 {
-    
+
     public class HomeController : Controller
     {
 
         private readonly ApplicationDbContext _context;
-            
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(
@@ -24,7 +25,7 @@ namespace dream_holiday.Controllers
             ILogger<HomeController> logger)
         {
             _context = context;
-            _logger = logger;           
+            _logger = logger;
         }
 
 

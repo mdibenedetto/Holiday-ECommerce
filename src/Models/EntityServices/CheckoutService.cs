@@ -2,10 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using dream_holiday.Data;
+using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Models.EntityServices
 {
-    public class CheckoutService:BaseService
+    public class CheckoutService : BaseService
     {
         private readonly UserAccountService _userAccountManager;
 
@@ -19,7 +20,7 @@ namespace dream_holiday.Models.EntityServices
         {
             var userAccount = await _userAccountManager.GetCurrentUserAccountAsync();
 
-            if(formCheckout!= null)
+            if (formCheckout != null)
             {
                 formCheckout.UserAccount = userAccount;
                 return formCheckout;
@@ -31,10 +32,10 @@ namespace dream_holiday.Models.EntityServices
                     UserAccount = userAccount
                 };
                 return checkout;
-            }        
+            }
         }
 
-       public async Task ProcessCheckoutAsync(Checkout formCheckout)
+        public async Task ProcessCheckoutAsync(Checkout formCheckout)
         {
 
             //====================================================

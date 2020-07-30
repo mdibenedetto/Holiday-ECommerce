@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
 using dream_holiday.Models.EntityServices;
-using dream_holiday.Models.ViewModel;
+using dream_holiday.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +15,16 @@ using Microsoft.Extensions.Logging;
 namespace dream_holiday.Controllers
 {
     public class HolidayController : Controller
-    { 
+    {
         private readonly ILogger<HolidayController> _logger;
         private readonly TravelPackageService _travelPackageService;
         private readonly CartService _cartService;
 
-        public HolidayController(   ILogger<HolidayController> logger,
+        public HolidayController(ILogger<HolidayController> logger,
                                      TravelPackageService travelPackageService,
                                      CartService cartService
                                  )
-        {           
+        {
             _logger = logger;
             _travelPackageService = travelPackageService;
             _cartService = cartService;
@@ -40,7 +40,7 @@ namespace dream_holiday.Controllers
                 model.HolidayItems = list;
 
 
-                model.TravelPackages = list.Select(t=> t.TravelPackage).ToList();
+                model.TravelPackages = list.Select(t => t.TravelPackage).ToList();
                 model.CountryNames = _travelPackageService.getTravelCountries();
             }
             catch (DbUpdateException ex)
@@ -110,9 +110,10 @@ namespace dream_holiday.Controllers
             {
                 var cart = await _cartService.AddTravelPackageToCart(tpId);
                 var list = _travelPackageService.findAllTravelPackagesInCart();
-                
+
                 //travelPackage
-                return new JsonResult(new {
+                return new JsonResult(new
+                {
                     successed = true,
                     cart
                 });
@@ -122,12 +123,12 @@ namespace dream_holiday.Controllers
                 _logger.LogError("ApiAddToCart", ex);
                 return new JsonResult(new { successed = false });
                 throw ex;
-            }          
+            }
         }
 
         [HttpGet("api/getcartsummary")]
         public PartialViewResult GetCartSummary()
-        {            
+        {
             return PartialView("~/Views/Cart/_CartSummary.cshtml");
         }
 

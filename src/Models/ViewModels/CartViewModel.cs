@@ -1,0 +1,9 @@
+﻿using System;
+namespace dream_holiday.Models.ViewModels
+{
+    public class CartViewModel
+    {
+        public Cart Cart { get; set; }
+        public TravelPackage TravelPackage { get; set; }
+    }
+}

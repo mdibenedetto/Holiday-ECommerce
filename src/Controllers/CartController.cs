@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
 using dream_holiday.Models.EntityServices;
-using Microsoft.AspNetCore.Authorization; 
-using Microsoft.AspNetCore.Mvc; 
+using dream_holiday.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

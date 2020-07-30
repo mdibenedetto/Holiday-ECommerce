@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dream_holiday.Models.ViewModel
+namespace dream_holiday.Models.ViewModels
 {
     public class HolidayViewModel
     {

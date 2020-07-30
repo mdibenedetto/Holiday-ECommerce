@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
+using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Models.EntityServices
 {

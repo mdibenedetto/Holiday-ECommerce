@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Models.EntityServices
 {
@@ -37,7 +38,7 @@ namespace dream_holiday.Models.EntityServices
             return _userAccount;
         }
 
-        public UserAccountModel findUserAccount(Guid userId)
+        public UserAccountViewModel findUserAccount(Guid userId)
         {
             // select data from table  Users (ApplicationUser)
             // and left join with table UserAccount
@@ -47,14 +48,14 @@ namespace dream_holiday.Models.EntityServices
                                 on user.Id equals ua.User.Id
                                 into userAccount_join
                          from _userAccount in userAccount_join.DefaultIfEmpty()
-                         select new UserAccountModel
+                         select new UserAccountViewModel
                          {
                              Id = _userAccount.Id,
                              UserAccount = _userAccount,
                              User = user
                          });
             // take the first row
-            UserAccountModel userAccount = query.FirstOrDefault();
+            UserAccountViewModel userAccount = query.FirstOrDefault();
 
             return userAccount;
         }

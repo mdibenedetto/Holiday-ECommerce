@@ -1,4 +1,4 @@
-﻿@using dream_holiday.Models.ViewModel;
+﻿@using dream_holiday.Models.ViewModels;
 @model HolidayViewModel;
 
 @{ ViewData["Title"] = "Holidays"; }
@@ -21,7 +21,7 @@
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row no-gutters">
                                 <div class="col-md-6">
-                                    <a class="item-link detail-link" href="holiday-detail.html?id=1">
+                                    <a class="item-link detail-link image-link" href="holiday-detail.html?id=1">
                                         <img src="https://via.placeholder.com/174x157.png/012542?text=Image-1"
                                              class="item-image img-fluid card-img"
                                              alt="..." />
@@ -62,14 +62,16 @@
             <div class="col-4">
                 <section id="filters">
 
-                    <h3>Filters</h3>
+                    <h4>Filters</h4>
+                    <hr />
+
                     <form id="formFilter" method="get">
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" id="chkAllDestination" checked />
                             <label class="form-check-label" for="chkAllDestination">All Destinations</label>
                         </div>
                         <div class="form-group">
-                            <label for="destinations">Destination</label>
+                            <label for="destinations">Choose Destination</label>
                             <select multiple class="form-control" id="destinations" data-disabled>
                                 @foreach (var country in Model.CountryNames)
                                 {
@@ -101,7 +103,11 @@
                 </section>
 
                 <section id="cart">
-                    <partial name="~/Views/Cart/_CartSummary.cshtml" />
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <partial name="~/Views/Cart/_CartSummary.cshtml" />
+                    }
+                    
                 </section>
             </div>
         </div>

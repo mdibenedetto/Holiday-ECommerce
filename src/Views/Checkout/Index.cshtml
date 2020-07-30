@@ -17,7 +17,6 @@
         <partial name="~/Views/Cart/_CartSummary.cshtml" />
 
         <div class="col-md-8 order-md-1">
-            <h4 class="mb-3">Checkout Order</h4>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <form class="needs-validation"
                   name="checkout"
@@ -25,6 +24,9 @@
                   enctype="multipart/form-data"
                   action="checkout-cart"
                   novalidate>
+
+                <h4 class="mb-3">Checkout Order</h4>
+
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
@@ -39,8 +41,7 @@
                         <div class="invalid-feedback">
                             Valid first name is required.
                         </div>
-                        <span asp-validation-for="FirstName"
-                              class="text-danger"></span>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -55,6 +56,7 @@
                         <div class="invalid-feedback">
                             Valid last name is required.
                         </div>
+                        <span asp-validation-for="LastName" class="text-danger"> </span>
                     </div>
 
                 </div>
@@ -66,10 +68,7 @@
                            id="email"
                            name="Email"
                            value="@(checkout.Email ?? userAccount.User?.Email)"
-                           placeholder="you@example.com" />
-                    <div class="invalid-feedback">
-                        Please enter a valid email address for shipping updates.
-                    </div>
+                           placeholder="you@example.com" /> 
                 </div>
 
                 <div class="mb-3">
@@ -84,6 +83,7 @@
                     <div class="invalid-feedback">
                         Please enter your shipping address.
                     </div>
+                    <span asp-validation-for="Address" class="text-danger"> </span>
                 </div>
 
                 <div class="mb-3">
@@ -96,15 +96,14 @@
                            placeholder="Apartment or suite" />
                 </div>
 
-                <div class="row">                
+                <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="country">Country</label>
-                        <input type="text" 
-                            class="form-control" 
-                            id="country" 
-                            name="Country"
-                             value="@(checkout.Country ?? userAccount.Country)"
-                               />
+                        <input type="text"
+                               class="form-control"
+                               id="country"
+                               name="Country"
+                               value="@(checkout.Country ?? userAccount.Country)" />
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -125,11 +124,12 @@
                                placeholder=""
                                value="@(checkout.EirCode ?? userAccount.EirCode)"
                                required="" />
+                        <span asp-validation-for="EirCode" class="text-danger"> </span>
                         <div class="invalid-feedback">
                             Eir Code code required.
                         </div>
                     </div>
-                </div>       
+                </div>
 
                 <hr class="mb-4" />
 
@@ -150,7 +150,7 @@
                 </div>
                 <div class="row">
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-12 mb-3">
                         <label for="cc-name">Name on card</label>
                         <input type="text"
                                class="form-control"
@@ -163,7 +163,12 @@
                         <div class="invalid-feedback">
                             Name on card is required
                         </div>
+                        <span asp-validation-for="NameOnCard" class="text-danger"> </span>
                     </div>
+
+                </div>
+
+                <div class="row">
 
                     <div class="col-md-6 mb-3">
                         <label for="cc-number">Credit card number</label>
@@ -177,24 +182,31 @@
                         <div class="invalid-feedback">
                             Credit card number is required
                         </div>
+                        @*<span asp-validation-for="CardNumber"
+                                  class="text-danger">
+                            </span>*@
                     </div>
 
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label for="cc-expiration">Expiration</label>
                         <input type="date"
                                class="form-control"
                                id="cc-expiration"
                                name="Expiration"
-                               value="@(checkout.Expiration)"
+                               asp-for="Expiration"
+                               data-value="@(checkout.Expiration)"
+                               value="@(checkout.Expiration.Year > 1 ?
+                                        checkout.Expiration.ToString("yyyy-MM-dd")
+                                        : ""
+                                        )"
                                placeholder=""
                                required="" />
                         <div class="invalid-feedback">
                             Expiration date required
                         </div>
+                        @*<span asp-validation-for="Expiration"
+                                  class="text-danger">
+                            </span>*@
                     </div>
 
                     <div class="col-md-2 mb-2">
@@ -205,12 +217,12 @@
                                name="CVC"
                                asp-for="CVC"
                                value="@(checkout.CVC ?? userAccount.CardCVC)"
+                               maxlength="4"
                                placeholder=""
                                required="" />
-                        <span asp-validation-for="CVC"
-                              class="text-danger">
-
-                        </span>
+                        @*<span asp-validation-for="CVC"
+                                  class="text-danger">
+                            </span>*@
                         <div class="invalid-feedback">
                             Security code required and has to be a number with minimum 3 digits and maximum 4 digits
                         </div>
@@ -218,6 +230,19 @@
                     </div>
 
                 </div>
+
+                <div class="row cc-error-feedback col-12">
+                    <span asp-validation-for="CardNumber"
+                          class="text-danger">
+                    </span>
+                    <span asp-validation-for="Expiration"
+                          class="text-danger">
+                    </span>
+                    <span asp-validation-for="CVC"
+                          class="text-danger">
+                    </span>
+                </div>
+
 
                 <hr class="mb-4" />
                 <button class="btn btn-secondary btn-lg btn-block" type="submit">

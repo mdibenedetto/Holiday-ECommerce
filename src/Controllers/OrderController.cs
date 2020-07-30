@@ -4,18 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
+using dream_holiday.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 
 namespace dream_holiday.Controllers
 {
+ 
     [Authorize]
-    public class OrdersController : Controller
+    public class OrderController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public OrdersController(ApplicationDbContext context)
+        public OrderController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -64,6 +66,30 @@ namespace dream_holiday.Controllers
                 Status = ""
             });
         }
-           
+
+        public IActionResult Detail(int orderId)
+        {
+            var order = (from od in _context.Order
+                         where od.Id == orderId
+                         select od)
+                         .FirstOrDefault();
+
+            ViewBag.orderId = orderId;
+            ViewBag.orderDate = order?.Date;
+
+            var orderDetails =
+                (from od in _context.OrderDetail
+                 join tp in _context.TravelPackage
+                 on od.TravelPackage.Id equals tp.Id
+                 where od.Order.Id == orderId
+                 select new OrderDetailModel
+                 {
+                     OrderDetail = od,
+                     TravelPackage = tp
+                 }).ToList();
+
+            return View(orderDetails);
+        }
+
     }
 }

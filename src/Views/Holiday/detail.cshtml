@@ -7,15 +7,26 @@
     <section class="row container">
         <!-- <section class="col-sm main-container-left"> -->
         <section class="col-md-8 order-md-1">
-            <figure>
-                <img class="item-image"
-                     style="width: 100%;"
-                     src="@Model.Image"
-                     alt="" />
-                <figcaption>
-                    5 days, 4 nights
-                </figcaption>
-            </figure>
+
+            <section>
+                <figure>
+                    <img class="item-image"
+                         src="@Model.Image"
+                         alt="" />
+                    <figcaption>
+                        5 days, 4 nights
+                    </figcaption>
+                </figure>
+            </section>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <section class="container add-button">
+                    <a role="button" href="/holiday/addtocart/?tpId=@Model.Id" class="btn btn-primary">
+                        Add to cart
+                    </a>
+                </section>
+            }
 
             <section class="container body-content">
                 <h2>
@@ -42,14 +53,7 @@
                 </section>
             </section>
 
-            <section class="col-md-4 order-md-2 mb-4">
-
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a role="button" href="/holiday/addtocart/?tpId=@Model.Id" class="btn btn-primary">
-                        Add to cart
-                    </a>
-                }
+            <section class="col-md-4 order-md-2">
 
                 <partial name="~/Views/Cart/_CartSummary.cshtml" />
 

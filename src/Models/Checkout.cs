@@ -41,17 +41,18 @@ namespace dream_holiday.Models
         [Required]
         public String PaymentMethod { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The name of the card holder is required")]
         public String NameOnCard { get; set; }
 
-        [Required]
-        [CreditCard( ErrorMessage = "Credit card is not valid" )]
+        [Required (ErrorMessage = "A valid credit card is required")]
+        [CreditCard( ErrorMessage = "Credit card is not valid (ex. 4111 1111 1111 1111)")]
         public String CardNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage= "The credit card expiration date is required")]
         public DateTime Expiration { get; set; }
 
-        [Required]
+        [Required (ErrorMessage="The CVC is required")]
+        [MaxLength(4, ErrorMessage = "The CVC as to be a number with 3 or 4 digits")]
         [RegularExpression(@"^[0-9]{3,4}$",
             ErrorMessage = "Security code required and has to be a number with 3 digits or 4 digits (ex 123 or 1234)")]
         public String CVC { get; set; }

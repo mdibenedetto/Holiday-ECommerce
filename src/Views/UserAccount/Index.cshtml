@@ -3,7 +3,9 @@
     ViewData["Title"] = "User account";
 }
 
-@model UserAccountModel
+@using dream_holiday.Models.ViewModels;
+
+@model UserAccountViewModel
 
 @{
     var user = Model.User;
@@ -22,8 +24,7 @@
           name="formUser"
           asp-action="Edit"
           method="post"
-          enctype="application/x-www-form-urlencoded"
-          >
+          enctype="application/x-www-form-urlencoded">
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="User.Id" name="User.Id" />
 
@@ -226,7 +227,7 @@
             </div>
         </div>
     </form>
-</section> 
+</section>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

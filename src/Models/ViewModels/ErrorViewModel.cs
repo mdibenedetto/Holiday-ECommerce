@@ -1,6 +1,6 @@
 using System;
 
-namespace dream_holiday.Models
+namespace dream_holiday.Models.ViewModels
 {
     public class ErrorViewModel
     {

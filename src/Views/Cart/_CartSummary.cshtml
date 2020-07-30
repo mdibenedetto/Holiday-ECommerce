@@ -1,12 +1,13 @@
 ﻿
- 
-@using dream_holiday.Data;
-@using dream_holiday.Models.EntityServices;
+
 @using Microsoft.AspNetCore.Http.Extensions
 @using Microsoft.AspNetCore.Identity
+@using dream_holiday.Data;
+@using dream_holiday.Models.EntityServices;
+@using dream_holiday.Models.ViewModels;
 
 @inject UserResolverService _userResolverService;
-@inject ApplicationDbContext _context;  
+@inject ApplicationDbContext _context;
 @inject UserManager<ApplicationUser> UserManager
 
 @{
@@ -19,62 +20,70 @@
     }
 }
 
-    <div class="order-md-2 mb-4"> 
-        <h4 class="d-flex justify-content-between align-items-center mb-3">           
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a href="/cart">
-                    <span class="text-muted">Go to your cart</span>
-                    <span class="badge badge-secondary badge-pill">
-                        @cartList.Count()
-                    </span>
-                </a>
-            }
-            else
-            {
-        <span class="text-muted">
-            To add this travel to your cart please &nbsp;            
-            <a class="btn btn-primary"
-               href="/Identity/Account/Login?returnUrl=@Context.Request.GetEncodedPathAndQuery()">
-                log in
+<style>
+    .cart-summary {
+        background: white;
+        padding: 10px;
+        height: 100%;
+        margin: 0;
+    } 
+</style>
+<div class="order-md-2 mb-4 cart-summary">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="/cart">
+                <span class="text-muted">Go to your cart</span>
+                <span class="badge badge-secondary badge-pill">
+                    @cartList.Count()
+                </span>
             </a>
-        </span>
+        }
+        else
+        {
+            <span class="text-muted">
+                To add this travel to your cart please &nbsp;
+                <a class="btn btn-primary"
+                   href="/Identity/Account/Login?returnUrl=@Context.Request.GetEncodedPathAndQuery()">
+                    log in
+                </a>
+            </span>
+        }
+    </h4>
+
+    <ul class="list-group mb-3">
+        @{
+            decimal totalPrice = 0;
+            int cardList = cartList.Count();
+            int cardListQty = 0;
+            int totalQty = 0;
+            decimal totalCartPrice = 0;
+
+            foreach (var item in cartList)
+            {
+                var cart = item.Cart;
+                var travePackage = item.TravelPackage;
+                cardListQty = item.Cart.Qty;
+                totalCartPrice = cart.Price * item.Cart.Qty;
+                totalQty = totalQty + cardListQty;
+                totalPrice += totalCartPrice;
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0"> @(travePackage.Name) (@cardListQty)</h6>
+
+                        <small class="text-muted">
+                            @travePackage.Country - @travePackage.City
+                        </small>
+                    </div>
+                    <span class="text-muted"> @totalCartPrice &euro;</span>
+                </li>
+
             }
-        </h4>
-
-        <ul class="list-group mb-3">
-            @{
-                decimal totalPrice = 0;
-                int cardList = cartList.Count();
-                int cardListQty = 0;
-                int totalQty = 0;
-                decimal totalCartPrice = 0;
-
-                foreach (var item in cartList)
-                {
-                    var cart = item.Cart;
-                    var travePackage = item.TravelPackage;
-                    cardListQty = item.Cart.Qty;
-                    totalCartPrice = cart.Price * item.Cart.Qty;
-                    totalQty = totalQty + cardListQty;
-                    totalPrice += totalCartPrice;
-
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0"> @(travePackage.Name) (@cardListQty)</h6>
-
-                                <small class="text-muted">
-                                    @travePackage.Country - @travePackage.City
-                                </small>
-                            </div>
-                            <span class="text-muted"> @totalCartPrice &euro;</span>
-                        </li>
-
-                }
-            }
-            <li class="list-group-item d-flex justify-content-between">
-                <span>Total (@totalQty) </span>
-                <strong>@totalPrice &euro;</strong>
-            </li>
-        </ul>
-    </div>
+        }
+        <li class="list-group-item d-flex justify-content-between">
+            <span>Total (@totalQty) </span>
+            <strong>@totalPrice &euro;</strong>
+        </li>
+    </ul>
+</div>
