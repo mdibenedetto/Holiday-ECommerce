@@ -5,42 +5,71 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
+using dream_holiday.Models.ViewModel;
 
 namespace dream_holiday.Models.EntityServices
 {
-    public class TravelPackageService
+    public class TravelPackageService : BaseService
     {
-        private ApplicationDbContext _context;
-        private UserResolverService _userService;
 
-        public TravelPackageService(ApplicationDbContext context, UserResolverService userService)
+        public TravelPackageService(
+            ApplicationDbContext context,
+            UserResolverService userService)
+            : base(context, userService)
         {
-            _context = context;
-            _userService = userService;
+
         }
 
-        public List<TravelPackage> findAllTravelPackages(string[] destinations, decimal price)
+        public async Task<List<TravelPackageViewModel>> findAllTravelPackagesAsync(string[] destinations, decimal price)
         {
-            var list = _context.TravelPackage.ToList();
+            var list = await this.findAllTravelPackagesAsync();
 
             if (destinations != null && destinations.Length > 0)
             {
                 list = list
-                    .Where(tp => destinations.Contains(tp.Country))
+                    .Where(tp => destinations.Contains(tp.TravelPackage.Country))
                     .ToList();
             }
 
             if (price > 0)
             {
-                list = list.Where(tp => tp.Price <= price).ToList();
+                list = list.Where(tp => tp.TravelPackage.Price <= price).ToList();
             }
 
             return list;
         }
 
-        public List<TravelPackage> findAllTravelPackages()
+        public async Task<List<TravelPackageViewModel>> findAllTravelPackagesAsync()
         {
-            return _context.TravelPackage.ToList();
+
+            var user = await base.GetCurrentUser();
+            // First case - User NOT Logged In
+            if (user == null)
+            {
+                return _context.TravelPackage
+                    .Select(tp => new TravelPackageViewModel
+                    {
+                        TravelPackage = tp,
+                        TotalInCart = 0
+                    }).ToList();
+            }
+            // Second case - User Logged In
+            var _userAccountService = new UserAccountService(_context, _userService);
+            var userAccount = await _userAccountService.GetCurrentUserAccountAsync();
+
+
+            var query = (from tp in _context.TravelPackage
+                         select new TravelPackageViewModel
+                         {
+                             TravelPackage = tp,
+                             TotalInCart = (from c in _context.Cart
+                                            where c.UserAccount.Id == userAccount.Id
+                                                && c.TravelPackage.Id == tp.Id
+                                            select c.Qty).Sum()
+                         });
+
+            return query.ToList();
+
         }
 
         public List<string> getTravelCountries()
@@ -55,7 +84,12 @@ namespace dream_holiday.Models.EntityServices
         {
             return _context
                  .TravelPackage
-                 .Find(id); 
+                 .Find(id);
+        }
+
+        public object findAllTravelPackagesInCart()
+        {
+            return null;
         }
     }
 }

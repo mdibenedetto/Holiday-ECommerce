@@ -83,48 +83,74 @@ function loadHolidays(holidayItems) {
             `;
     }
 
-    holidayItems.forEach((item, index) => {
-        var clone = template.content.cloneNode(true);
 
-        clone.querySelector(".item-image").src = item.image;
-        clone.querySelector(".item-title").textContent = item.name;
-        clone.querySelector(".item-content").textContent = item.description;
+    holidayItems.forEach(({ travelPackage, totalInCart }, index) => {
+        const totalItems = (totalInCart > 0 ? ` (${totalInCart})` : '');
+
+        var clone = template.content.cloneNode(true);
+        clone.firstElementChild.setAttribute("data-id", travelPackage.id);
+
+        clone.querySelector(".item-image").src = travelPackage.image;
+        clone.querySelector(".item-title").textContent = travelPackage.name + totalItems;
+        clone.querySelector(".item-content").textContent = travelPackage.description;
 
         const detailLinks = clone.querySelectorAll(".detail-link");
         detailLinks.forEach((link) =>
-            link.setAttribute("href", "/holiday/detail?id=" + item.id)
+            link.setAttribute("href", "/holiday/detail?id=" + travelPackage.id)
         );
 
         const addTravelLink = clone.querySelector(".add-travel-link");
+
         if (addTravelLink) {
-            addTravelLink.setAttribute("data-id", item.id);
-
-            addTravelLink.addEventListener("click", function (e) {
-                e.preventDefault();
-
-                const errorMessage = () => alert("The service is not available right now.\nPlease try later.");
-
-                fetch(
-                    "/api/addtocart?tpId=" + this.dataset.id,
-                    {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    }).then(res => {
-                        if (res.status == 200) {
-                            alert("Your new travel package was added!")
-                        }
-                        else {
-                            errorMessage();
-                        }
-                    }).catch(er => {
-                        errorMessage();
-                    })
-            })
+            addTravelLink.setAttribute("href", `/holiday/addtocart?tpId=${travelPackage.id}`);
+            addTravelLink.setAttribute("data-id", travelPackage.id);
+            addTravelLink.addEventListener("click", addTravelToCart)
         }
-     
 
         parent.appendChild(clone);
     });
+}
+
+function addTravelToCart(e) {
+    e.preventDefault();
+
+    const errorMessage = () => alert("The service is not available right now.\nPlease try later.");
+
+    fetch(
+        "/api/addtocart?tpId=" + this.dataset.id,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => {
+            if (res.status != 200) {
+                return errorMessage();
+            }
+            return res.json();
+        })
+        .then(res => {
+            const { cart } = res;
+            const { travelPackage } = cart;
+            const blockTitle = document.querySelector(`[data-id="${travelPackage.id}"] .item-title`);
+
+            blockTitle.innerText = travelPackage.name + ` (${cart.qty})`
+        })
+        .then(() => reloadCart())
+        .catch(() => errorMessage())
+}
+
+function reloadCart() {
+ 
+    fetch("/api/getcartsummary").then(res => {
+        return res.text();
+    })
+        .then(
+            html => {
+                const cartBlock = document.querySelector("#cart");
+                cartBlock.innerHTML = html;
+            }
+        )
+
 }

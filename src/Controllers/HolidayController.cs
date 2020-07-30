@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
 using dream_holiday.Models.EntityServices;
@@ -30,17 +30,17 @@ namespace dream_holiday.Controllers
             _cartService = cartService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
             var model = new HolidayViewModel();
 
             try
             {
-                var list = _travelPackageService.findAllTravelPackages();
-                ViewBag.holidayItems = list;
+                var list = await _travelPackageService.findAllTravelPackagesAsync();
+                model.HolidayItems = list;
 
 
-                model.TravelPackages = list;
+                model.TravelPackages = list.Select(t=> t.TravelPackage).ToList();
                 model.CountryNames = _travelPackageService.getTravelCountries();
             }
             catch (DbUpdateException ex)
@@ -69,14 +69,14 @@ namespace dream_holiday.Controllers
         }
 
         [HttpGet("api/travelpackages")]
-        public JsonResult LoadTravelPackages(
+        public async Task<JsonResult> LoadTravelPackagesAsync(
             [FromQuery] String[] destinations,
             [FromQuery] Decimal price = 0)
         {
-            List<TravelPackage> list = null;
+            List<TravelPackageViewModel> list = null;
             try
             {
-                list = _travelPackageService.findAllTravelPackages(destinations, price);
+                list = await _travelPackageService.findAllTravelPackagesAsync(destinations, price);
             }
             catch (DbUpdateException ex)
             {
@@ -90,8 +90,8 @@ namespace dream_holiday.Controllers
         public IActionResult AddToCart(int tpId)
         {
             try
-            {                
-                _cartService.AddTravelPackageToCart(tpId);
+            {
+                _ = _cartService.AddTravelPackageToCart(tpId);
             }
             catch (DbUpdateException ex)
             {
@@ -104,20 +104,32 @@ namespace dream_holiday.Controllers
 
 
         [HttpPost("api/addtocart")]
-        public JsonResult ApiAddToCart(int tpId)
+        public async Task<JsonResult> ApiAddToCartAsync(int tpId)
         {
             try
             {
-                _cartService.AddTravelPackageToCart(tpId);
-                return new JsonResult(new { successed = true });
+                var cart = await _cartService.AddTravelPackageToCart(tpId);
+                var list = _travelPackageService.findAllTravelPackagesInCart();
+                
+                //travelPackage
+                return new JsonResult(new {
+                    successed = true,
+                    cart
+                });
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("AddToCart", ex);
+                _logger.LogError("ApiAddToCart", ex);
                 return new JsonResult(new { successed = false });
                 throw ex;
             }          
-        }              
+        }
+
+        [HttpGet("api/getcartsummary")]
+        public PartialViewResult GetCartSummary()
+        {            
+            return PartialView("~/Views/Cart/_CartSummary.cshtml");
+        }
 
     }
 }

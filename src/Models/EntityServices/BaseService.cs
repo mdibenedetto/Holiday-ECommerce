@@ -11,20 +11,10 @@ namespace dream_holiday.Models.EntityServices
     {
         protected readonly ApplicationDbContext _context;
         protected readonly UserManager<ApplicationUser> _userManager;
-        protected IHttpContextAccessor _httpContext; 
-        private UserResolverService _userService;
+        protected IHttpContextAccessor _httpContext;
+        protected UserResolverService _userService;
 
-        //public BaseService(ApplicationDbContext context,
-        //                         UserManager<ApplicationUser> userManager,
-        //                         IHttpContextAccessor httpContext
-        //                         )
-        //{
-        //    _context = context;
-        //    _userManager = userManager;
-        //    _httpContext = httpContext;
-        //}
-
-        protected BaseService(ApplicationDbContext context, UserResolverService userService)
+         protected BaseService(ApplicationDbContext context, UserResolverService userService)
         {
             _context = context;
             _userService = userService;

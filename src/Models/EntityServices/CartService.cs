@@ -16,10 +16,10 @@ namespace dream_holiday.Models.EntityServices
          : base(context, userService)
         {
             _userAccountManager = new UserAccountService(_context, userService);
-        }         
+        }
 
         public async Task<List<CartViewModel>> GetCartUser()
-        { 
+        {
             var user = await _userAccountManager.GetCurrentUserAccountAsync();
             var cartList = _context.Cart
                                     .Where(c => c.UserAccount.Id == user.Id)
@@ -33,36 +33,41 @@ namespace dream_holiday.Models.EntityServices
             return cartList;
         }
 
-        async public void AddTravelPackageToCart(int travelPackageId)
+        async public Task<Cart> AddTravelPackageToCart(int travelPackageId)
         {
 
             var _userAccount = await _userAccountManager.GetCurrentUserAccountAsync();
             var _travelPackage = _context.TravelPackage.Find(travelPackageId);
+            Cart cartToUpdate;
 
-            var found = _context.Cart
+            cartToUpdate = _context.Cart
                 .Where(cart =>
                 cart.TravelPackage.Id == travelPackageId
                 && cart.UserAccount.Id == _userAccount.Id)
                 .FirstOrDefault();
             // if not exist
-            if (found == null)
+            if (cartToUpdate == null)
             {
-                _context.Cart.Add(new Cart
+                cartToUpdate = new Cart
                 {
-                    TravelPackage = _travelPackage,
                     UserAccount = _userAccount,
-                    Qty = 1,
-                    Price = _travelPackage.Price
-                });
+                    TravelPackage = _travelPackage,
+                    Price = _travelPackage.Price,
+                    Qty = 1
+                };
+
+                _context.Cart.Add(cartToUpdate);
 
             }
             else
             {
-                found.Qty++;
-                _context.Cart.Update(found);
+                cartToUpdate.Qty++;
+                _context.Cart.Update(cartToUpdate);
             }
 
             _context.SaveChanges();
+
+            return cartToUpdate;
         }
 
         async public void removeCart(Guid? cartId)
