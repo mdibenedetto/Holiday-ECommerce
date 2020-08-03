@@ -257,7 +257,7 @@ namespace dream_holiday.Migrations
                     NameOnCard = table.Column<string>(nullable: false),
                     CardNumber = table.Column<string>(nullable: false),
                     Expiration = table.Column<DateTime>(nullable: false),
-                    CVC = table.Column<string>(nullable: false)
+                    CVC = table.Column<string>(maxLength: 4, nullable: false)
                 },
                 constraints: table =>
                 {

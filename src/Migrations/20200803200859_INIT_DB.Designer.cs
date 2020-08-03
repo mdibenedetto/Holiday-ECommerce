@@ -9,14 +9,14 @@ using dream_holiday.Data;
 namespace dream_holiday.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200729152413_INIT_DB")]
+    [Migration("20200803200859_INIT_DB")]
     partial class INIT_DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5");
+                .HasAnnotation("ProductVersion", "3.1.6");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
@@ -255,7 +255,8 @@ namespace dream_holiday.Migrations
 
                     b.Property<string>("CVC")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(4);
 
                     b.Property<string>("CardNumber")
                         .IsRequired()
