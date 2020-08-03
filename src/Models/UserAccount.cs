@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace dream_holiday.Models
 {
     public class UserAccount
-    { 
+    {
         public virtual ApplicationUser User { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -29,7 +29,7 @@ namespace dream_holiday.Models
         public int BirthMonth { get; set; }
 
         //todo remove this field
-        [NotMapped]       
+        [NotMapped]
         public int BirthYear { get; set; }
 
         //todo remove this field
@@ -37,7 +37,7 @@ namespace dream_holiday.Models
         public String Password { get; set; }
 
         //todo remove this field
-        [NotMapped]  
+        [NotMapped]
         public String RetypePassword { get; set; }
 
         public String Country { get; set; }
@@ -46,7 +46,9 @@ namespace dream_holiday.Models
 
         public String Address2 { get; set; }
 
-        public String Town { get; set; }
+        public String EirCode { get; set; }
+
+        public String City { get; set; }
 
         public String County { get; set; }
 
@@ -68,7 +70,9 @@ namespace dream_holiday.Models
 
         public String Address2Billing { get; set; }
 
-        public String TownBilling { get; set; }
+        public String EirCodeBilling { get; set; }
+
+        public String CityBilling { get; set; }
 
         public String County2Billing { get; set; }
 

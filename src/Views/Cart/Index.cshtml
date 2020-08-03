@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Cart";
 }
-
+@using dream_holiday.Models.ViewModels;
 @model List<CartViewModel>
 
 <link rel="stylesheet" href="./css/cart.css" />
@@ -78,7 +78,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>Packages</td>                               
+                                <td>Packages</td>
                                 <td class="text-right">@totalQty</td>
                                 <td></td>
                             </tr>
@@ -105,11 +105,11 @@
 
                         @if (totalPrice == 0)
                         {
-                             <a href="javascript:void(0)"
-                                class="btn-checkout btn btn-lg btn-block btn-success text-uppercase"
-                                disabled style="background:lightgray; visibility:hidden;">
-                                 Checkout
-                             </a>
+                            <a href="javascript:void(0)"
+                               class="btn-checkout btn btn-lg btn-block btn-success text-uppercase"
+                               disabled style="background:lightgray; visibility:hidden;">
+                                Checkout
+                            </a>
                         }
                         else
                         {

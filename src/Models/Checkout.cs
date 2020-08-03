@@ -18,34 +18,43 @@ namespace dream_holiday.Models
 
         [Required]
         public String FirstName { get; set; }
-        public String LastName = "";
-        public String UserName = "";
-        public String Email = "";
 
-        public String Address = "";
-        public String Address2 = "";
+        [Required]
+        public String LastName { get; set; }
 
-        public String Country = "";
-        public String City = "";
-        public String EirCode = "";
+        [Required]
+        public String Email { get; set; }
 
-        public String PaymentMethod = "";
+        [Required]
+        public String Address { get; set; }
+        public String Address2 { get; set; }
 
-        public String NameOnCard = "";
+        [Required]
+        public String Country { get; set; }
 
-        public String CardNumber = "";
-        public DateTime Expiration;
-        public String CVC = "";
+        [Required]
+        public String City { get; set; }
 
-        // todo: remove this attributes
-        public String FirstItem = "";
-        public String SecondItem = "";
-        public String ThirdItem = "";
+        [Required]
+        public String EirCode { get; set; }
 
-        public String GetUserName()
-        {
-            return FirstName + LastName;
-        }
+        [Required]
+        public String PaymentMethod { get; set; }
 
+        [Required(ErrorMessage = "The name of the card holder is required")]
+        public String NameOnCard { get; set; }
+
+        [Required (ErrorMessage = "A valid credit card is required")]
+        [CreditCard( ErrorMessage = "Credit card is not valid (ex. 4111 1111 1111 1111)")]
+        public String CardNumber { get; set; }
+
+        [Required(ErrorMessage= "The credit card expiration date is required")]
+        public DateTime Expiration { get; set; }
+
+        [Required (ErrorMessage="The CVC is required")]
+        [MaxLength(4, ErrorMessage = "The CVC as to be a number with 3 or 4 digits")]
+        [RegularExpression(@"^[0-9]{3,4}$",
+            ErrorMessage = "Security code required and has to be a number with 3 digits or 4 digits (ex 123 or 1234)")]
+        public String CVC { get; set; }
     }
 }

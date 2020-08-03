@@ -8,7 +8,6 @@ namespace dream_holiday.Models
     public class OrderDetail
     {         
         public virtual TravelPackage TravelPackage { get; set; }
-
         public virtual Order Order { get; set; }
 
         [Key()]

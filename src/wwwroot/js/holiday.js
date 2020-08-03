@@ -83,18 +83,108 @@ function loadHolidays(holidayItems) {
             `;
     }
 
-    holidayItems.forEach((item, index) => {
+
+    holidayItems.forEach(({ travelPackage, totalInCart }, index) => {
+        const totalItems = (totalInCart > 0 ? ` (${totalInCart})` : '');
+
         var clone = template.content.cloneNode(true);
+        clone.firstElementChild.setAttribute("data-id", travelPackage.id);
 
-        clone.querySelector(".item-image").src = item.image;
-        clone.querySelector(".item-title").textContent = item.name;
-        clone.querySelector(".item-content").textContent = item.description;
+        clone.querySelector(".item-image").src = travelPackage.image;
+        clone.querySelector(".item-title").textContent = travelPackage.name + totalItems;
+        clone.querySelector(".item-content").textContent = travelPackage.description;
 
-        const links = clone.querySelectorAll(".item-link");
-        links.forEach((link) =>
-            link.setAttribute("href", "/holiday/detail?id=" + item.id)
+        // display Travel Package Link
+        const detailLinks = clone.querySelectorAll(".detail-link");
+        detailLinks.forEach((link) =>
+            link.setAttribute("href", "/holiday/detail?id=" + travelPackage.id)
         );
+
+        // add cart item link
+        const addTravelLink = clone.querySelector(".add-travel-link");
+        setCartActionLink(addTravelLink, travelPackage.id, true);
+
+        // remove-cart item link
+        const removeTravelLink = clone.querySelector(".remove-travel-link");
+        setCartActionLink(removeTravelLink, travelPackage.id, false);
+        removeTravelLink.style.display = !totalItems ? 'none' : '';
 
         parent.appendChild(clone);
     });
+}
+
+function setCartActionLink(updateTravelLink, travelPackageId, isAdd) {
+    if (updateTravelLink) {
+        updateTravelLink.setAttribute("href", "");
+        updateTravelLink.setAttribute("data-id", travelPackageId);
+        updateTravelLink.addEventListener("click", e => updateTravelCart(e, isAdd));
+    }
+}
+
+
+function updateTravelCart(e, isAdd = true) {
+    e.preventDefault();
+
+    document.body.setAttribute("data-loading", "true");
+
+    const errorMessage = (err) => {
+        alert("The service is not available right now.\nPlease try later.");
+        console.error("Error: " + err);
+    };
+
+    // url Params
+    let ACTION = isAdd ? "addtocart" : "remofromcart";
+
+    const { id } = e.target.dataset;
+
+    fetch(
+        `/api/${ACTION}?tpId=${id}`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => {
+            if (res.status != 200) {
+                return errorMessage("status code: " + status);
+            }
+            return res.json();
+        })
+        .then(res => {
+            const { cart } = res;
+            const { travelPackage } = cart;
+
+            const card = document.querySelector(`[data-id="${travelPackage.id}"]`);
+
+            // update title with quantity
+            const blockTitle = card.querySelector(`.item-title`);
+            blockTitle.innerText = travelPackage.name + ((cart.qty == 0) ? "" : ` (${cart.qty})`);
+
+            // display remove link if quantity > 0;
+            const removeTravelLink = card.querySelector(`.remove-travel-link`);
+            removeTravelLink.style.display = (cart.qty == 0) ? 'none' : '';
+
+        })
+        .then(() => reloadCart())
+        .catch((err) => {
+            errorMessage(err);
+        })
+        .finally(() => {
+            document.body.removeAttribute("data-loading");
+        } );
+}
+
+function reloadCart() {
+
+    fetch("/api/getcartsummary").then(res => {
+        return res.text();
+    })
+        .then(
+            html => {
+                const cartBlock = document.querySelector("#cart");
+                cartBlock.innerHTML = html;
+            }
+        )
+
 }

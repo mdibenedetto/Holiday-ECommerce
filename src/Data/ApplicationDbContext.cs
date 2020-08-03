@@ -16,6 +16,8 @@ namespace dream_holiday.Data
         {
         }
 
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
         public DbSet<UserAccount> UserAccount{ get; set; }
 
         public DbSet<Cart> Cart { get; set; } 

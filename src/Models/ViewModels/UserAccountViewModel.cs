@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace dream_holiday.Models
+namespace dream_holiday.Models.ViewModels
 {
-    public class UserAccountModel
+    public class UserAccountViewModel
     {
         public Guid Id;
 

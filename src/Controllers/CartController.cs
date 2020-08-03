@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
 using dream_holiday.Models.EntityServices;
-using Microsoft.AspNetCore.Authorization; 
-using Microsoft.AspNetCore.Mvc; 
+using dream_holiday.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -36,7 +37,7 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("Index", ex);
+                _logger.LogError("CartController =>  Index", ex);
                 throw ex;
             }
 
@@ -52,7 +53,7 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("delete", ex);
+                _logger.LogError("CartController => delete", ex);
                 throw ex;
             }
 

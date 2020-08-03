@@ -21,13 +21,14 @@
                     if (User.IsInRole(Roles.ADMIN))
                     {
                         <a class="dropdown-item" href="/travelpackage">Travel Packages</a>
+                        <a class="dropdown-item" href="/order">Order history</a>
                     }
                     else
                     {
                         <a class="dropdown-item"
                            href="/user-account/?userId=@(
                                 UserManager.GetUserId(User) )">Account</a>
-                        <a class="dropdown-item" href="/orders">Order history</a>
+                        <a class="dropdown-item" href="/order">Order history</a>
                         <a class="dropdown-item" href="/cart">Cart</a>
                     }
                 }

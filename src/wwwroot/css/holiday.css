@@ -9,6 +9,18 @@
   min-height: 196px; */
 }
 
+.card-body {
+    padding: 1rem;
+}
+
+.card-link + .card-link {
+    margin-left:0;
+}
+
+.card-link:not(:first-of-type)::before{
+    content : '|'
+}
+
 .card img {
     width: 100%;
     max-height: 174px;
@@ -42,7 +54,7 @@ a.card-link {
 }
 
 #destinations {
-    height: 300px;
+    height: 220px;
     position: relative;
 }
 
@@ -56,4 +68,22 @@ a.card-link {
     width: 100%;
     left: 0;
     top: 0;
+}
+
+#filters {
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+form#formFilter div:not(:last-child) {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 13px;
+}
+
+.item-link.image-link.detail-link {
+    color: transparent;
 }

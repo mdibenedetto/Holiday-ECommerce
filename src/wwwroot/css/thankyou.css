@@ -1,34 +1,33 @@
-﻿body {
-    margin: 0;
-    padding: 0;
-    background: #efefef;
-    font-size: 16px;
-    color: #777;
-    font-family: sans-serif;
-    font-weight: 300;
-}
+﻿
 
 .thankyou {
-    position: relative;
-    margin: 5% auto;
-    height: 770px;
-    width: 880px;
+    height: auto;
+    max-width: 880px;
     background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.6)
 }
-
-
-.HomeButton {
-    padding: 40px 40px 0px 350px;
-}
+ 
 
 .frame {
-    padding: 40px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h4 {
     text-align: center;
 }
-.thank-you{
-    margin-top:30px;
+
+.thank-you {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.traveling {
+    height: auto;
+    max-height: 404px;
+    display: inline-block;
 }

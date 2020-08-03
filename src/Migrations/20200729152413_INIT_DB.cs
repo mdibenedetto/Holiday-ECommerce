@@ -185,7 +185,8 @@ namespace dream_holiday.Migrations
                     Country = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     Address2 = table.Column<string>(nullable: true),
-                    Town = table.Column<string>(nullable: true),
+                    EirCode = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
                     County = table.Column<string>(nullable: true),
                     Telephone = table.Column<string>(nullable: true),
                     CardHolderFullName = table.Column<string>(nullable: true),
@@ -196,7 +197,8 @@ namespace dream_holiday.Migrations
                     CountryBilling = table.Column<string>(nullable: true),
                     AddressBilling = table.Column<string>(nullable: true),
                     Address2Billing = table.Column<string>(nullable: true),
-                    TownBilling = table.Column<string>(nullable: true),
+                    EirCodeBilling = table.Column<string>(nullable: true),
+                    CityBilling = table.Column<string>(nullable: true),
                     County2Billing = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -243,7 +245,19 @@ namespace dream_holiday.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     UserAccountId = table.Column<Guid>(nullable: true),
-                    FirstName = table.Column<string>(nullable: false)
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    Address2 = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    EirCode = table.Column<string>(nullable: false),
+                    PaymentMethod = table.Column<string>(nullable: false),
+                    NameOnCard = table.Column<string>(nullable: false),
+                    CardNumber = table.Column<string>(nullable: false),
+                    Expiration = table.Column<DateTime>(nullable: false),
+                    CVC = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

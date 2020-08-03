@@ -1,4 +1,6 @@
-﻿@model List<OrderDetailModel>
+﻿@using dream_holiday.Models.ViewModels;
+
+@model List<OrderDetailViewModel>
 
 @{
     ViewData["Title"] = "Order Details";
@@ -6,7 +8,7 @@
 
 
 <link rel="stylesheet" href="/css/order-detail.css" />
- 
+
 
 <section class="main-container">
 
@@ -15,8 +17,8 @@
         <br>
 
         <div class="img">
-            <a href="orders.html">
-                <img src="img/images/check.svg"
+            <a href="/order">
+                <img src="/img/images/check.svg"
                      alt="check"
                      width="80"
                      height="80" />
@@ -57,7 +59,7 @@
                         <tr>
                             <th scope="row"> @detail.OrderDetail.Id </th>
 
-                            <td>                                
+                            <td>
                                 <div class="bold"> @detail.TravelPackage?.Name </div>
                                 <p> @detail.TravelPackage?.Description </p>
 
@@ -87,7 +89,7 @@
 
         <br>
 
-        <a class="btn btn-danger" href="/orders">Back to Orders</a>
+        <a class="btn btn-danger" href="/order">Back to Orders</a>
 
 
     </div>

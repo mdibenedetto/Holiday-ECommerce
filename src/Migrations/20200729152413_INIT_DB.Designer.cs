@@ -9,7 +9,7 @@ using dream_holiday.Data;
 namespace dream_holiday.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200727172058_INIT_DB")]
+    [Migration("20200729152413_INIT_DB")]
     partial class INIT_DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -246,7 +246,53 @@ namespace dream_holiday.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CVC")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CardNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EirCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Expiration")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameOnCard")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -394,6 +440,12 @@ namespace dream_holiday.Migrations
                     b.Property<int>("CardYear")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CityBilling")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Country")
                         .HasColumnType("TEXT");
 
@@ -406,6 +458,12 @@ namespace dream_holiday.Migrations
                     b.Property<string>("County2Billing")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("EirCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EirCodeBilling")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("TEXT");
 
@@ -416,12 +474,6 @@ namespace dream_holiday.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Town")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TownBilling")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("UserId")
