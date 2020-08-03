@@ -26,7 +26,7 @@ namespace dream_holiday.Models.EntityServices
 
         async public Task<UserAccount> GetCurrentUserAccountAsync()
         {
-            var user = await base.GetCurrentUser();
+            var user = await base.GetCurrentUserAsync();
 
             var _userAccount = (from u in _context.Users
                                 where u.Id == user.Id
@@ -35,7 +35,7 @@ namespace dream_holiday.Models.EntityServices
                                 select ua)
                                 .FirstOrDefault();
 
-            return _userAccount;
+            return _userAccount ?? new UserAccount();
         }
 
         public UserAccountViewModel findUserAccount(Guid userId)

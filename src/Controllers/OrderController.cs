@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using dream_holiday.Data;
-using dream_holiday.Models;
-using dream_holiday.Models.ViewModels;
+using System.Collections.Generic; 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using dream_holiday.Models.EntityServices;
+using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Controllers
 {
@@ -15,50 +13,81 @@ namespace dream_holiday.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        // todo: remove all code after test are done
+        //private readonly ApplicationDbContext _context;
+        private readonly ILogger<OrderController> _logger;
+        private readonly OrderService _orderService;
 
-        public OrderController(ApplicationDbContext context)
+        public OrderController(
+            //ApplicationDbContext context,
+                                ILogger<OrderController> logger,
+                               OrderService orderService)
         {
-            _context = context;
+            //_context = context;
+             _logger = logger;
+            _orderService = orderService;
         }
 
         public IActionResult Index(int id, String Status)
         {
-            //here is list
-            List<Order> oders;
+            try
+            {
+               var orders =  _orderService.FindOrders(id, Status);
+               return View(orders);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Order => Index", ex);
+                throw ex;
+            }
+            // todo: remove all code after test are done
+            ////here is list
+            //List<Order> oders;
 
-            //if id is not 
-            if (id > 0)
-            {
-                oders = _context.Order
-                    .Where(item => item.Id == id)
-                    .ToList();
-            }
-            //if the status is not empty
-            else if (!String.IsNullOrEmpty(Status))
-            {
-                oders = _context.Order
-                     .Where(item => item.Status.Equals(Status))
-                       .ToList();
-            }
-            else
-            {
-                oders = _context.Order.ToList();
-            }
+            ////if id is not 
+            //if (id > 0)
+            //{
+            //    oders = _context.Order
+            //        .Where(item => item.Id == id)
+            //        .ToList();
+            //}
+            ////if the status is not empty
+            //else if (!String.IsNullOrEmpty(Status))
+            //{
+            //    oders = _context.Order
+            //         .Where(item => item.Status.Equals(Status))
+            //           .ToList();
+            //}
+            //else
+            //{
+            //    oders = _context.Order.ToList();
+            //}
 
-            return View(oders);
+            //return View(oders);
         }
 
 
         public IActionResult Delete(int orderId)
         {
-            var order = _context.Order.Find(orderId);
-            _context.Order.Remove(order);
+            // todo: remove all code after test are done
+            //var order = _context.Order.Find(orderId);
+            //_context.Order.Remove(order);
 
-            var orderDetailList = _context.OrderDetail.Where(od => od.Order.Id == orderId);
-            _context.OrderDetail.RemoveRange(orderDetailList);
+            //var orderDetailList = _context.OrderDetail.Where(od => od.Order.Id == orderId);
+            //_context.OrderDetail.RemoveRange(orderDetailList);
 
-            _context.SaveChanges();
+            //_context.SaveChanges();orderId
+            try
+            {
+                _orderService.DeleteOrder(orderId);
+
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Order => Delete", ex);
+                throw ex;
+            }
+                     
 
             return RedirectToAction(nameof(Index), new
             {
@@ -69,26 +98,44 @@ namespace dream_holiday.Controllers
 
         public IActionResult Detail(int orderId)
         {
-            var order = (from od in _context.Order
-                         where od.Id == orderId
-                         select od)
-                         .FirstOrDefault();
 
-            ViewBag.orderId = orderId;
-            ViewBag.orderDate = order?.Date;
+            try
+            { 
+              List<OrderDetailViewModel> orderDetails =
+                    _orderService.FindOrderDetails(orderId);
 
-            var orderDetails =
-                (from od in _context.OrderDetail
-                 join tp in _context.TravelPackage
-                 on od.TravelPackage.Id equals tp.Id
-                 where od.Order.Id == orderId
-                 select new OrderDetailModel
-                 {
-                     OrderDetail = od,
-                     TravelPackage = tp
-                 }).ToList();
+                ViewBag.orderId = orderId;
+                ViewBag.orderDate = OrderDetailViewModel.OrderDate;
 
-            return View(orderDetails);
+                return View(orderDetails);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Order => Detail", ex);
+                throw ex;
+            }
+
+            // todo: remove all code after test are done
+            //var order = (from od in _context.Order
+            //             where od.Id == orderId
+            //             select od)
+            //             .FirstOrDefault();
+
+            //ViewBag.orderId = orderId;
+            //ViewBag.orderDate = order?.Date;
+
+            //var orderDetails =
+            //    (from od in _context.OrderDetail
+            //     join tp in _context.TravelPackage
+            //     on od.TravelPackage.Id equals tp.Id
+            //     where od.Order.Id == orderId
+            //     select new OrderDetailModel
+            //     {
+            //         OrderDetail = od,
+            //         TravelPackage = tp
+            //     }).ToList();
+
+            //return View(orderDetails);
         }
 
     }

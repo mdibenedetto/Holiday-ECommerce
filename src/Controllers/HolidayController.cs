@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using dream_holiday.Data;
+using System.Threading.Tasks; 
 using dream_holiday.Models;
 using dream_holiday.Models.EntityServices;
-using dream_holiday.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+using dream_holiday.Models.ViewModels; 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

@@ -14,19 +14,24 @@ namespace dream_holiday.Models.EntityServices
         protected IHttpContextAccessor _httpContext;
         protected UserResolverService _userService;
 
-         protected BaseService(ApplicationDbContext context, UserResolverService userService)
+        protected BaseService(ApplicationDbContext context, UserResolverService userService)
         {
             _context = context;
             _userService = userService;
             _userManager = userService.getUserManager();
-            _httpContext = userService.getHTTPContext(); 
+            _httpContext = userService.getHTTPContext();
         }
 
-        protected async Task<ApplicationUser> GetCurrentUser()
+        protected async Task<ApplicationUser> GetCurrentUserAsync()
         {
             var currentUser = _httpContext.HttpContext.User;
-
             return await _userManager.GetUserAsync(currentUser);
+        }
+
+        protected ApplicationUser GetCurrentUser()
+        {
+            var currentUser = _httpContext.HttpContext.User;
+            return _userManager.GetUserAsync(currentUser).Result;
         }
     }
 }

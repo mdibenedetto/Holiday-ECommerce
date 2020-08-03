@@ -42,7 +42,7 @@ namespace dream_holiday.Models.EntityServices
         public async Task<List<TravelPackageViewModel>> findAllTravelPackagesAsync()
         {
 
-            var user = await base.GetCurrentUser();
+            var user = await base.GetCurrentUserAsync();
             // First case - User NOT Logged In
             if (user == null)
             {
@@ -56,13 +56,12 @@ namespace dream_holiday.Models.EntityServices
             // Second case - User Logged In
             var _userAccountService = new UserAccountService(_context, _userService);
             var userAccount = await _userAccountService.GetCurrentUserAccountAsync();
-
-
+            // userAccount == null if the current user is an Admin
             var query = (from tp in _context.TravelPackage
                          select new TravelPackageViewModel
                          {
                              TravelPackage = tp,
-                             TotalInCart = (from c in _context.Cart
+                             TotalInCart =  (from c in _context.Cart
                                             where c.UserAccount.Id == userAccount.Id
                                                 && c.TravelPackage.Id == tp.Id
                                             select c.Qty).Sum()

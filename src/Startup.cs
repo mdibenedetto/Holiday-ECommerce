@@ -100,6 +100,7 @@ namespace dream_holiday
             services.AddTransient<TravelPackageService>();
             services.AddTransient<CartService>();
             services.AddTransient<CheckoutService>();
+            services.AddTransient<OrderService>();
 
         }
 
