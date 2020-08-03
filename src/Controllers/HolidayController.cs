@@ -105,8 +105,7 @@ namespace dream_holiday.Controllers
         {
             try
             {
-                var cart = await _cartService.AddTravelPackageToCart(tpId);
-                var list = _travelPackageService.findAllTravelPackagesInCart();
+                var cart = await _cartService.AddTravelPackageToCart(tpId); 
 
                 //travelPackage
                 return new JsonResult(new
@@ -130,8 +129,7 @@ namespace dream_holiday.Controllers
         {
             try
             {
-                var cart = await _cartService.RemoveTravelPackageFromCart(tpId);
-                var list = _travelPackageService.findAllTravelPackagesInCart();
+                var cart = await _cartService.RemoveTravelPackageFromCart(tpId); 
 
                 //travelPackage
                 return new JsonResult(new

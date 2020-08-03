@@ -79,23 +79,26 @@ namespace dream_holiday.Models.EntityServices
         async public Task<Cart> RemoveTravelPackageFromCart(int travelPackageId)
         { 
             Cart cartToUpdate = await FindCartByTravelPackageId(travelPackageId);
+          
 
             // if not exist
             if (cartToUpdate != null)
             {
-                if (cartToUpdate.Qty == 1)
+                cartToUpdate.Qty--;
+
+                if (cartToUpdate.Qty >  0)
                 {
-                    _context.Cart.Remove(cartToUpdate);
+                    _context.Cart.Update(cartToUpdate);                   
+                   
                 }
                 else
-                {
-                    cartToUpdate.Qty--;
-                    _context.Cart.Update(cartToUpdate);
+                {                 
+                    _context.Cart.Remove(cartToUpdate);
                 }
             }
 
             _context.SaveChanges();
-
+           
             return cartToUpdate;
         }
 

@@ -102,38 +102,37 @@ function loadHolidays(holidayItems) {
 
         // add cart item link
         const addTravelLink = clone.querySelector(".add-travel-link");
-
-        if (addTravelLink) {
-            addTravelLink.setAttribute("href", `/holiday/addtocart?tpId=${travelPackage.id}`);
-            addTravelLink.setAttribute("data-id", travelPackage.id);
-            addTravelLink.addEventListener("click", e => updateTravelCart(e, true));
-        }
+        setCartActionLink(addTravelLink, travelPackage.id, true);
 
         // remove-cart item link
         const removeTravelLink = clone.querySelector(".remove-travel-link");
+        setCartActionLink(removeTravelLink, travelPackage.id, false);
         removeTravelLink.style.display = !totalItems ? 'none' : '';
-
-        if (removeTravelLink) {
-            addTravelLink.setAttribute("href", `/holiday/removetocart?tpId=${travelPackage.id}`);
-            addTravelLink.setAttribute("data-id", travelPackage.id);
-            addTravelLink.addEventListener("click", e => updateTravelCart(e, false));
-        }
 
         parent.appendChild(clone);
     });
+}
+
+function setCartActionLink(updateTravelLink, travelPackageId, isAdd) {
+    if (updateTravelLink) {
+        updateTravelLink.setAttribute("href", "");
+        updateTravelLink.setAttribute("data-id", travelPackageId);
+        updateTravelLink.addEventListener("click", e => updateTravelCart(e, isAdd));
+    }
 }
 
 
 function updateTravelCart(e, isAdd = true) {
     e.preventDefault();
 
+    document.body.setAttribute("data-loading", "true");
+
     const errorMessage = (err) => {
         alert("The service is not available right now.\nPlease try later.");
-        console.error("Error: "  + err);
+        console.error("Error: " + err);
     };
 
     // url Params
-
     let ACTION = isAdd ? "addtocart" : "remofromcart";
 
     const { id } = e.target.dataset;
@@ -160,19 +159,20 @@ function updateTravelCart(e, isAdd = true) {
 
             // update title with quantity
             const blockTitle = card.querySelector(`.item-title`);
-            blockTitle.innerText = travelPackage.name + ` (${cart.qty})`;
+            blockTitle.innerText = travelPackage.name + ((cart.qty == 0) ? "" : ` (${cart.qty})`);
 
             // display remove link if quantity > 0;
             const removeTravelLink = card.querySelector(`.remove-travel-link`);
             removeTravelLink.style.display = (cart.qty == 0) ? 'none' : '';
 
-
         })
         .then(() => reloadCart())
         .catch((err) => {
             errorMessage(err);
-          
         })
+        .finally(() => {
+            document.body.removeAttribute("data-loading");
+        } );
 }
 
 function reloadCart() {

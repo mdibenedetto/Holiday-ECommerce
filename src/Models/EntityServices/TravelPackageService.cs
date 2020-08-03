@@ -85,10 +85,6 @@ namespace dream_holiday.Models.EntityServices
                  .TravelPackage
                  .Find(id);
         }
-
-        public object findAllTravelPackagesInCart()
-        {
-            return null;
-        }
+         
     }
 }
