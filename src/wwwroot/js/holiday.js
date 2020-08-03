@@ -94,30 +94,52 @@ function loadHolidays(holidayItems) {
         clone.querySelector(".item-title").textContent = travelPackage.name + totalItems;
         clone.querySelector(".item-content").textContent = travelPackage.description;
 
+        // display Travel Package Link
         const detailLinks = clone.querySelectorAll(".detail-link");
         detailLinks.forEach((link) =>
             link.setAttribute("href", "/holiday/detail?id=" + travelPackage.id)
         );
 
+        // add cart item link
         const addTravelLink = clone.querySelector(".add-travel-link");
 
         if (addTravelLink) {
             addTravelLink.setAttribute("href", `/holiday/addtocart?tpId=${travelPackage.id}`);
             addTravelLink.setAttribute("data-id", travelPackage.id);
-            addTravelLink.addEventListener("click", addTravelToCart)
+            addTravelLink.addEventListener("click", e => updateTravelCart(e, true));
+        }
+
+        // remove-cart item link
+        const removeTravelLink = clone.querySelector(".remove-travel-link");
+        removeTravelLink.style.display = !totalItems ? 'none' : '';
+
+        if (removeTravelLink) {
+            addTravelLink.setAttribute("href", `/holiday/removetocart?tpId=${travelPackage.id}`);
+            addTravelLink.setAttribute("data-id", travelPackage.id);
+            addTravelLink.addEventListener("click", e => updateTravelCart(e, false));
         }
 
         parent.appendChild(clone);
     });
 }
 
-function addTravelToCart(e) {
+
+function updateTravelCart(e, isAdd = true) {
     e.preventDefault();
 
-    const errorMessage = () => alert("The service is not available right now.\nPlease try later.");
+    const errorMessage = (err) => {
+        alert("The service is not available right now.\nPlease try later.");
+        console.error("Error: "  + err);
+    };
+
+    // url Params
+
+    let ACTION = isAdd ? "addtocart" : "remofromcart";
+
+    const { id } = e.target.dataset;
 
     fetch(
-        "/api/addtocart?tpId=" + this.dataset.id,
+        `/api/${ACTION}?tpId=${id}`,
         {
             method: 'POST',
             headers: {
@@ -126,23 +148,35 @@ function addTravelToCart(e) {
         })
         .then(res => {
             if (res.status != 200) {
-                return errorMessage();
+                return errorMessage("status code: " + status);
             }
             return res.json();
         })
         .then(res => {
             const { cart } = res;
             const { travelPackage } = cart;
-            const blockTitle = document.querySelector(`[data-id="${travelPackage.id}"] .item-title`);
 
-            blockTitle.innerText = travelPackage.name + ` (${cart.qty})`
+            const card = document.querySelector(`[data-id="${travelPackage.id}"]`);
+
+            // update title with quantity
+            const blockTitle = card.querySelector(`.item-title`);
+            blockTitle.innerText = travelPackage.name + ` (${cart.qty})`;
+
+            // display remove link if quantity > 0;
+            const removeTravelLink = card.querySelector(`.remove-travel-link`);
+            removeTravelLink.style.display = (cart.qty == 0) ? 'none' : '';
+
+
         })
         .then(() => reloadCart())
-        .catch(() => errorMessage())
+        .catch((err) => {
+            errorMessage(err);
+          
+        })
 }
 
 function reloadCart() {
- 
+
     fetch("/api/getcartsummary").then(res => {
         return res.text();
     })

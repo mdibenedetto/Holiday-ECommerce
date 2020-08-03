@@ -42,7 +42,7 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("Index", ex);
+                _logger.LogError("HolidayController => Index", ex);
                 throw ex;
             }
 
@@ -58,7 +58,7 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("Detail", ex);
+                _logger.LogError("HolidayController => Detail", ex);
                 throw ex;
             }
 
@@ -77,7 +77,7 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("LoadTravelPackages", ex);
+                _logger.LogError("HolidayController => LoadTravelPackages", ex);
                 throw ex;
             }
 
@@ -96,7 +96,7 @@ namespace dream_holiday.Controllers
                 throw ex;
             }
 
-            return RedirectToAction("Detail", new { Id = tpId });
+            return RedirectToAction("HolidayController => Detail", new { Id = tpId });
         }
 
 
@@ -117,10 +117,36 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("ApiAddToCart", ex);
+                _logger.LogError("HolidayController => ApiAddToCart", ex);
                 return new JsonResult(new { successed = false });
                 throw ex;
             }
+        }
+
+
+
+        [HttpPost("api/remofromcart")]
+        public async Task<JsonResult> ApiRemoveFromCartAsync(int tpId) 
+        {
+            try
+            {
+                var cart = await _cartService.RemoveTravelPackageFromCart(tpId);
+                var list = _travelPackageService.findAllTravelPackagesInCart();
+
+                //travelPackage
+                return new JsonResult(new
+                {
+                    successed = true,
+                    cart
+                });
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("HolidayController => ApiRemoveFromCartAsync", ex);
+                return new JsonResult(new { successed = false });
+                throw ex;
+            }
+
         }
 
         [HttpGet("api/getcartsummary")]

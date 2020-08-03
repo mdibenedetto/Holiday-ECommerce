@@ -37,7 +37,7 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("Index", ex);
+                _logger.LogError("CartController =>  Index", ex);
                 throw ex;
             }
 
@@ -53,7 +53,7 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("delete", ex);
+                _logger.LogError("CartController => delete", ex);
                 throw ex;
             }
 

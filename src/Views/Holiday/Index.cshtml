@@ -39,11 +39,16 @@
                                         <a href="holiday-detail.html?id=1"
                                            class="item-link card-link detail-link">Detail</a>
 
-                                        @if (User.Identity.IsAuthenticated)
+                                        @if (User.Identity.IsAuthenticated && !User.IsInRole(Roles.ADMIN))
                                         {
-                                            <a href="/holiday/addtocart?tpId=1"
+                                            <a href="/holiday/addtocart?tpId=-1"
                                                class="item-link card-link add-travel-link">
-                                                Add to cart
+                                                Add
+                                            </a>
+                                            
+                                            <a href="/holiday/remofromcart?tpId=-1"
+                                               class="item-link card-link remove-travel-link">
+                                                Remove
                                             </a>
                                         }
 
@@ -107,7 +112,7 @@
                     {
                         <partial name="~/Views/Cart/_CartSummary.cshtml" />
                     }
-                    
+
                 </section>
             </div>
         </div>
