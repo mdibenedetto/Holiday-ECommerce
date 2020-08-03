@@ -85,8 +85,8 @@ namespace dream_holiday
                   })
               .AddRoles<ApplicationRole>()
               .AddEntityFrameworkStores<ApplicationDbContext>();
-            
-            addAplicationEntityServices(services);            
+
+            addAplicationEntityServices(services);
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -112,17 +112,21 @@ namespace dream_holiday
                 RoleManager<ApplicationRole> roleManager)
         {
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
+
+            // if (env.IsDevelopment())
+            // {
+            //     app.UseDeveloperExceptionPage();
+            //     app.UseDatabaseErrorPage();
+            // }
+            // else
+            // {
+            //     app.UseExceptionHandler("/Home/Error");
+            //     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //     app.UseHsts();
+            // }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
