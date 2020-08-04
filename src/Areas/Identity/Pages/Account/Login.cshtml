@@ -23,14 +23,20 @@
                    placeholder="Email address"
                    required=""
                    autofocus=""
-                   value="nci_test@ncirl.ie" />
+                   u_value="nci_test@ncirl.ie"
+                   value="admin@dreamholiday.com" />
+
 
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Input.Password" class="sr-only"></label>
-            <input asp-for="Input.Password" class="form-control" value="nci_test@ncirl.ie" />
+            <input asp-for="Input.Password"
+                   class="form-control"                   
+                   u_value="nci_test@ncirl.ie"
+                   value="nci_admin_2020"
+            />
             <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>
 
@@ -51,14 +57,14 @@
 
         <div class="form-group">
             @*<p>
-                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-            </p>*@
+                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                </p>*@
             <p>
                 <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
             </p>
             @*<p>
-                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-            </p>*@
+                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                </p>*@
         </div>
     </form>
 </section>

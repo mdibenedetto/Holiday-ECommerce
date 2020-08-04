@@ -21,6 +21,7 @@ namespace dream_holiday.Models
 
         public int Qty { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:#,##0.##}")]
         public decimal Price { get; set; }
 
         public String Image { get; set; }

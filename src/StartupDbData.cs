@@ -21,7 +21,7 @@ namespace dream_holiday
         {
             bool forceClean = false;
             try
-            {               
+            {
 
                 if (forceClean)
                 {
@@ -63,7 +63,7 @@ namespace dream_holiday
                 dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
                 aspernatur aut odit aut fugit, sed quia consequuntur";
 
-            var base_Image_Url = "/img/holIday";
+            var base_Image_Url = "/img/holiday";
 
             List<TravelPackage> holidayItems =
                 new List<TravelPackage> {
@@ -74,7 +74,7 @@ namespace dream_holiday
                         City = "Barcelona",
                         Name = "Barcelona",
                         Price= 2000,
-                        Description= LOREM_IPSUM,
+                        Description= LOREM_IPSUM, Qty=1
                     },
                     new TravelPackage  {
                            IsInstock = true,
@@ -83,7 +83,7 @@ namespace dream_holiday
                         City= "Moscow",
                         Name= "Moscow",
                         Price= 1600,
-                        Description= LOREM_IPSUM,
+                        Description= LOREM_IPSUM, Qty=1
                     },
                     new TravelPackage {
                            IsInstock = true,
@@ -92,7 +92,8 @@ namespace dream_holiday
                         City = "Bangkok",
                         Name= "Thailand",
                         Price= 1000,
-                        Description= LOREM_IPSUM,
+                        Description= LOREM_IPSUM, Qty=1
+
                     },
                     new TravelPackage  {
                            IsInstock = true,
@@ -100,7 +101,7 @@ namespace dream_holiday
                         City= "New Zealand",
                         Name= "New Zealand",
                         Price= 2000,
-                        Description= LOREM_IPSUM,
+                        Description= LOREM_IPSUM, Qty=1
                     },
                     new TravelPackage  {
                            IsInstock = true,
@@ -109,7 +110,7 @@ namespace dream_holiday
                         City= "Goa",
                         Name= "Goa",
                         Price= 1600,
-                        Description= LOREM_IPSUM,
+                        Description= LOREM_IPSUM, Qty=1
                     },
                     new TravelPackage  {
                            IsInstock = true,
@@ -118,7 +119,7 @@ namespace dream_holiday
                         City= "Paris",
                         Name= "France",
                         Price= 1000,
-                        Description=LOREM_IPSUM,
+                        Description=LOREM_IPSUM,  Qty=1
                     },
                     new TravelPackage{
                            IsInstock = true,
@@ -127,7 +128,7 @@ namespace dream_holiday
                             City = "Niagra",
                             Name= "Canada",
                             Price= 2000,
-                            Description= LOREM_IPSUM,
+                            Description= LOREM_IPSUM, Qty=1
                     },
                     new TravelPackage  {
                            IsInstock = true,
@@ -136,7 +137,7 @@ namespace dream_holiday
                             City= "Istanbul",
                             Name= "Turkey",
                             Price= 1600,
-                            Description= LOREM_IPSUM,
+                            Description= LOREM_IPSUM, Qty=1
                     },
                     new TravelPackage {
                            IsInstock = true,
@@ -145,7 +146,7 @@ namespace dream_holiday
                         City= "Cairo",
                         Name= "Egypt",
                         Price= 1000,
-                        Description= LOREM_IPSUM,
+                        Description= LOREM_IPSUM, Qty=1
                     },
                     new TravelPackage {
                            IsInstock = true,
@@ -154,7 +155,7 @@ namespace dream_holiday
                         City= "Kioto",
                         Name= "Japan",
                         Price= 2000,
-                        Description= LOREM_IPSUM,
+                        Description= LOREM_IPSUM, Qty=1
                     },
                     new TravelPackage {
                            IsInstock = true,
@@ -163,7 +164,7 @@ namespace dream_holiday
                         City= "San Paolo",
                         Name= "Brazil",
                         Price= 1600,
-                        Description= LOREM_IPSUM,
+                        Description= LOREM_IPSUM, Qty=1
                     }
                 };
             return holidayItems;

@@ -17,39 +17,40 @@
         </div>
         <div class="form-group">
             <label asp-for="Description" class="control-label"></label>
-            <input asp-for="Description" class="form-control" />
+            <textarea asp-for="Description" class="form-control"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="Qty" class="control-label"></label>
-            <input asp-for="Qty" class="form-control" />
-            <span asp-validation-for="Qty" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Price" class="control-label"></label>
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price" class="text-danger"></span>
-            <label asp-for="Image" class="control-label"></label>
-        </div>
-        <div class="form-group">
-            
 
+        <div class="form-group row">
+            <div class="form-group col-3">
+                <label asp-for="Qty" class="control-label"></label>
+                <input asp-for="Qty" class="form-control" />
+                <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+            <div class="form-group col-3">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+
+        <label asp-for="Image" class="control-label"></label>
+        <div class="form-group image-group">
             @if (!String.IsNullOrEmpty(Model.Image))
-            { 
+            {
                 <img src="@Model.Image" style="max-width: 100%; margin-bottom: 20px;" />
             }
-
             <input asp-for="ImageFile" class="form-control" />
             <span asp-validation-for="ImageFile"></span>
         </div>
+        <hr />
         <div class="form-group">
+            <a asp-action="Index" class="btn btn-primary">Back to List</a>
             <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </form>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

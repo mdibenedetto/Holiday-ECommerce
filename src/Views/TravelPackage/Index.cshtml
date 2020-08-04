@@ -6,61 +6,69 @@
 
 <link rel="stylesheet" href="/css/travel-package.css" />
 
-<section class="main-container">
-        <p>
-            <a role="button" href="/TravelPackage/Create" class="btn btn-primary">Create New</a>
-            <!--
-            <a asp-action="Create">Create New</a>
-        -->
-        </p>
-        <table class="table">
-            <thead>
+<section class="main-container"> 
+    <table class="table">
+        <caption>
+            Travel Package List - Total: @Model.Count()
+        </caption>
+        <thead>
+            <tr>
+                <th class="col-name">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th class="col-desc">
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th class="col-qty">
+                    @Html.DisplayNameFor(model => model.Qty)
+                </th>
+                <th class="col-price">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th class="col-image">
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th class="col-action-buttons">
+                    <a role="button" href="/TravelPackage/Create" class="btn btn-primary">Create New</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Qty)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Price)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Image)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Qty)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Image)
-                        </td>
-                        <td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <img src="@item.Image" />
+                    </td>
+                    <td>
+                        <span class="cell-action-buttons">
                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                             <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                        </span>
+                     
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td  class="table-footer" colspan="100">
+                    Travel Package List - Total: @Model.Count()
+                </td>
+            </tr> 
+        </tfoot>
+    </table>
 </section>
 
