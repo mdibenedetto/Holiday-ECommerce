@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Http;
 namespace dream_holiday.Models
 {
     public class TravelPackage
-    {        
+    {
+        public virtual Category Category { get; set; }
+        public virtual int CategoryId { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }

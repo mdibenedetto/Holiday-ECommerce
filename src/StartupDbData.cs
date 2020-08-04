@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using dream_holiday.Data;
 using dream_holiday.Models;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Compact;
-using ILogger = Serilog.ILogger;
 
 namespace dream_holiday
 {
@@ -33,14 +24,21 @@ namespace dream_holiday
                 }
 
 
-                if (_context.TravelPackage.Any())
+                if (_context.TravelPackage.Any() == false)
                 {
-                    return;
+                    var list = buildTravelPackageList();
+                    _context.TravelPackage.AddRange(list);
+                    _context.SaveChanges();
                 }
 
-                var list = buildList();
-                _context.TravelPackage.AddRange(list);
-                _context.SaveChanges();
+                if (_context.Category.Any() == false)
+                {
+                    var list = buildCategoryList();
+                    _context.Category.AddRange(list);
+                    _context.SaveChanges();
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -48,8 +46,35 @@ namespace dream_holiday
             }
         }
 
+        private static List<Category> buildCategoryList()
+        {
+            //https://www.urby.in/blog/types_of_travel/
 
-        static List<TravelPackage> buildList()
+            List<Category> categories = new List<Category>
+                {
+                        new Category { Code = "Business Travel",
+                            Description=
+                                @"A business trip is a trip undertaken for work or business purposes,
+                                as opposed to other types of travel, such as for leisure purposes 
+                                or regularly commuting between one’s home and workplace.
+                                Going on family vacations or with friends of course has a different planning 
+                                to do than when it’s about a business trip.The needs while being on a business 
+                                trip are always different.You need to carry professional and sophisticated stuff 
+                                to be perfect for your business meetings or programs such
+                                as Cufflink Case, Tie Case, Watch Case and other Travel accessories."},
+
+                      new Category { Code = "Solo Travel"},
+                        new Category { Code = "Travel With Friends"},
+                        new Category { Code = "Family Travel"},
+                        new Category { Code = "Travel With Group"},
+                        new Category { Code = "Luxury Travel"},
+                        new Category { Code = "Adventure Travel"}
+                };
+
+            return categories;
+        }
+
+        static List<TravelPackage> buildTravelPackageList()
         {
             var LOREM_IPSUM = @"                 
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

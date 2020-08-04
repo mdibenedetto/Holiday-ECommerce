@@ -47,23 +47,17 @@ namespace dream_holiday.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TravelPackage",
+                name: "Category",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Country = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Qty = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    Image = table.Column<string>(nullable: true),
-                    IsInstock = table.Column<bool>(nullable: false)
+                    Code = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TravelPackage", x => x.Id);
+                    table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -213,30 +207,30 @@ namespace dream_holiday.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cart",
+                name: "TravelPackage",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    TravelPackageId = table.Column<int>(nullable: true),
-                    UserAccountId = table.Column<Guid>(nullable: true),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CategoryId = table.Column<int>(nullable: false),
+                    Country = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     Qty = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false)
+                    Price = table.Column<decimal>(nullable: false),
+                    Image = table.Column<string>(nullable: true),
+                    IsInstock = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cart", x => x.Id);
+                    table.PrimaryKey("PK_TravelPackage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cart_TravelPackage_TravelPackageId",
-                        column: x => x.TravelPackageId,
-                        principalTable: "TravelPackage",
+                        name: "FK_TravelPackage_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Cart_UserAccount_UserAccountId",
-                        column: x => x.UserAccountId,
-                        principalTable: "UserAccount",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,6 +258,33 @@ namespace dream_holiday.Migrations
                     table.PrimaryKey("PK_Checkout", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Checkout_UserAccount_UserAccountId",
+                        column: x => x.UserAccountId,
+                        principalTable: "UserAccount",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cart",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    TravelPackageId = table.Column<int>(nullable: true),
+                    UserAccountId = table.Column<Guid>(nullable: true),
+                    Qty = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cart", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cart_TravelPackage_TravelPackageId",
+                        column: x => x.TravelPackageId,
+                        principalTable: "TravelPackage",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Cart_UserAccount_UserAccountId",
                         column: x => x.UserAccountId,
                         principalTable: "UserAccount",
                         principalColumn: "Id",
@@ -402,6 +423,12 @@ namespace dream_holiday.Migrations
                 column: "TravelPackageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TravelPackage_CategoryId",
+                table: "TravelPackage",
+                column: "CategoryId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserAccount_UserId",
                 table: "UserAccount",
                 column: "UserId");
@@ -441,6 +468,9 @@ namespace dream_holiday.Migrations
 
             migrationBuilder.DropTable(
                 name: "Checkout");
+
+            migrationBuilder.DropTable(
+                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "UserAccount");

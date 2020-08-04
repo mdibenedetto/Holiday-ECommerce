@@ -9,7 +9,7 @@ using dream_holiday.Data;
 namespace dream_holiday.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200803203300_INIT_DB")]
+    [Migration("20200804212832_INIT_DB")]
     partial class INIT_DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -240,6 +240,24 @@ namespace dream_holiday.Migrations
                     b.ToTable("Cart");
                 });
 
+            modelBuilder.Entity("dream_holiday.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("dream_holiday.Models.Checkout", b =>
                 {
                     b.Property<Guid>("Id")
@@ -376,6 +394,9 @@ namespace dream_holiday.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
 
@@ -401,6 +422,9 @@ namespace dream_holiday.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId")
+                        .IsUnique();
 
                     b.ToTable("TravelPackage");
                 });
@@ -578,6 +602,15 @@ namespace dream_holiday.Migrations
                     b.HasOne("dream_holiday.Models.TravelPackage", "TravelPackage")
                         .WithMany()
                         .HasForeignKey("TravelPackageId");
+                });
+
+            modelBuilder.Entity("dream_holiday.Models.TravelPackage", b =>
+                {
+                    b.HasOne("dream_holiday.Models.Category", "Category")
+                        .WithOne("TravelPackage")
+                        .HasForeignKey("dream_holiday.Models.TravelPackage", "CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("dream_holiday.Models.UserAccount", b =>

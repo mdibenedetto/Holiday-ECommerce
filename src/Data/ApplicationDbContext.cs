@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 namespace dream_holiday.Data
 {
     public class ApplicationDbContext :
-         IdentityDbContext<ApplicationUser, ApplicationRole, Guid> 
+         IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -18,9 +18,9 @@ namespace dream_holiday.Data
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
-        public DbSet<UserAccount> UserAccount{ get; set; }
+        public DbSet<UserAccount> UserAccount { get; set; }
 
-        public DbSet<Cart> Cart { get; set; } 
+        public DbSet<Cart> Cart { get; set; }
 
         public DbSet<Checkout> Checkout { get; set; }
 
@@ -30,6 +30,7 @@ namespace dream_holiday.Data
 
         public DbSet<TravelPackage> TravelPackage { get; set; }
 
+        public DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,9 +39,11 @@ namespace dream_holiday.Data
             modelBuilder.Entity<OrderDetail>()
                 .HasKey(c => new { c.Id, c.OrderId });
 
-
+            modelBuilder.Entity<TravelPackage>()
+               .HasOne(a => a.Category)
+               .WithOne(b => b.TravelPackage)
+                .HasForeignKey<TravelPackage>(c => c.CategoryId);
         }
+
     }
-
-
 }
