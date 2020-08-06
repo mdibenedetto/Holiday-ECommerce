@@ -37,13 +37,39 @@ namespace dream_holiday.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<OrderDetail>()
-                .HasKey(c => new { c.Id, c.OrderId });
+                .HasKey(c => new { c.Id, c.OrderId }); 
 
-            modelBuilder.Entity<TravelPackage>()
-               .HasOne(a => a.Category)
-               .WithOne(b => b.TravelPackage)
-                .HasForeignKey<TravelPackage>(c => c.CategoryId);
+             //modelBuilder
+             //  .Entity<Category>()
+               
+             //  .HasOne(a => a.TravelPackage)
+             //  .WithOne(b => b.Category)
+             //  .IsRequired(false)
+             //  .HasForeignKey<TravelPackage>(t=> t.CategoryId)
+             //  .IsRequired(false) ;
+
+            //modelBuilder.Entity<Blog>()
+            //         .HasOne(b => b.BlogImage)
+            //         .WithOne(i => i.Blog)
+            //         .HasForeignKey<BlogImage>(b => b.BlogForeignKey);
         }
-
     }
+
+    //public class Blog
+    //{
+    //    public int BlogId { get; set; }
+    //    public string Url { get; set; }
+
+    //    public BlogImage BlogImage { get; set; }
+    //}
+
+    //public class BlogImage
+    //{
+    //    public int BlogImageId { get; set; }
+    //    public byte[] Image { get; set; }
+    //    public string Caption { get; set; }
+
+    //    public int BlogForeignKey { get; set; }
+    //    public Blog Blog { get; set; }
+    //}
 }

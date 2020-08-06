@@ -421,9 +421,6 @@ namespace dream_holiday.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId")
-                        .IsUnique();
-
                     b.ToTable("TravelPackage");
                 });
 
@@ -600,15 +597,6 @@ namespace dream_holiday.Migrations
                     b.HasOne("dream_holiday.Models.TravelPackage", "TravelPackage")
                         .WithMany()
                         .HasForeignKey("TravelPackageId");
-                });
-
-            modelBuilder.Entity("dream_holiday.Models.TravelPackage", b =>
-                {
-                    b.HasOne("dream_holiday.Models.Category", "Category")
-                        .WithOne("TravelPackage")
-                        .HasForeignKey("dream_holiday.Models.TravelPackage", "CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("dream_holiday.Models.UserAccount", b =>

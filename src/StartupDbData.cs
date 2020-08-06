@@ -10,7 +10,7 @@ namespace dream_holiday
     {
         internal static void SeedData(ApplicationDbContext _context)
         {
-            bool forceClean = false;
+            bool forceClean = true;
             try
             {
 
@@ -20,6 +20,9 @@ namespace dream_holiday
                     _context.Cart.Clear();
 
                     _context.TravelPackage.Clear();
+                    _context.SaveChanges();
+
+                    _context.Category.Clear();
                     _context.SaveChanges();
                 }
 
@@ -52,7 +55,10 @@ namespace dream_holiday
 
             List<Category> categories = new List<Category>
                 {
-                        new Category { Code = "Business Travel",
+                        new Category {
+
+                           
+                            Code = "Business Travel",
                             Description=
                                 @"A business trip is a trip undertaken for work or business purposes,
                                 as opposed to other types of travel, such as for leisure purposes 

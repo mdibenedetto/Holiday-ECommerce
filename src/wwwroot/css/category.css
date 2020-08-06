@@ -1,0 +1,23 @@
+﻿@import url("./custom-table.css");
+
+.main-container {
+    
+    
+    margin: 20px auto;
+}
+
+.table {
+    max-width: 900px;
+}
+
+    .table td:nth-of-type(n+1) {
+        width: 200px;
+    }
+
+    .table th:nth-of-type(n+2) {
+        width: 200px;
+    }
+
+    .table td:nth-of-type(n+3) {
+        width: 200px;
+    }
