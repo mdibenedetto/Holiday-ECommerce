@@ -10,7 +10,7 @@ namespace dream_holiday
     {
         internal static void SeedData(ApplicationDbContext _context)
         {
-            bool forceClean = true;
+            bool forceClean = false;
             try
             {
 

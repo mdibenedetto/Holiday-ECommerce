@@ -1,9 +1,14 @@
 ﻿@import url("./custom-table.css");
 
 .main-container {
-    
-    
     margin: 20px auto;
+    width: fit-content;
+}
+
+
+ textarea[name="Description"] {
+    height: 400px;
+    resize: none;
 }
 
 .table {
@@ -21,3 +26,18 @@
     .table td:nth-of-type(n+3) {
         width: 200px;
     }
+
+
+section.main-container.category-delete,
+section.main-container.category-create form,
+section.main-container.category-edit form {
+    width: 600px;
+    padding: 40px;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    background: #fff;
+    height: auto;
+    box-shadow: 0 2px 4px rgba(00,0,0,0.6);
+}
+
+
