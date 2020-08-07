@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using dream_holiday.Models;
 using dream_holiday.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using dream_holiday.Models.EntityServices;
 using Microsoft.AspNetCore.Authorization;
+using dream_holiday.Models;
+using dream_holiday.Models.EntityServices;
 
 namespace dream_holiday.Controllers
 {
-    [Authorize]
-    [Route("user-account")]
+    [Authorize] 
     public class UserAccountController : Controller
     {
         private readonly ILogger<UserAccountController> _logger;
@@ -27,7 +26,7 @@ namespace dream_holiday.Controllers
         {
 
             _logger = logger;
-            _userAccountService = userAccountService; 
+            _userAccountService = userAccountService;
         }
 
 
@@ -45,7 +44,7 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("Index", ex);
+                _logger.LogError("UserAccountController => Index", ex);
                 throw ex;
             }
         }
@@ -73,7 +72,7 @@ namespace dream_holiday.Controllers
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
-                    _logger.LogError("Edit", ex);
+                    _logger.LogError("UserAccountController => Edit", ex);
 
                     if (!_userAccountService.UserAccountModelExists(userAccount.Id))
                     {

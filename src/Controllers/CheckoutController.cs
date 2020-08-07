@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿ 
 using System.Threading.Tasks;
-using dream_holiday.Data;
-using dream_holiday.Models;
-using dream_holiday.Models.EntityServices;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization; 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+ 
+using dream_holiday.Models;
+using dream_holiday.Models.EntityServices;
 
 namespace dream_holiday.Controllers
 {
-    [Authorize]
-    [Route("checkout-cart")]
+    [Authorize]   
     public class CheckoutController : Controller
-    { 
-     
+    {
+
         private readonly ILogger<CheckoutController> _logger;
-        private readonly CheckoutService _checkoutService; 
+        private readonly CheckoutService _checkoutService;
 
         public CheckoutController(ILogger<CheckoutController> logger, CheckoutService checkoutService)
         {
@@ -36,16 +32,15 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("Index", ex);
+                _logger.LogError("CheckoutController => Index", ex);
                 throw ex;
             }
-           
+
             return View(checkout);
         }
 
-        [HttpPost]
-        // todo: check why ValidateAntiForgeryToken triggers an error
-        //[ValidateAntiForgeryToken]
+        [HttpPost]        
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProcessCheckout(Checkout formCheckout)
         {
             try
@@ -63,11 +58,11 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("ProcessCheckout", ex);
+                _logger.LogError("CheckoutController => ProcessCheckout", ex);
                 throw ex;
             }
-  
-        } 
+
+        }
 
     }
 }
