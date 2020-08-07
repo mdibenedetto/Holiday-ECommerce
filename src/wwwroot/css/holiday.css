@@ -4,21 +4,28 @@
     padding: 40px;
 }
 
+.right-column{ 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
 .card {
     /* min-width: 360px;
   min-height: 196px; */
 }
 
 .card-body {
-    padding: 1rem;
+    padding: 0.8rem;
 }
 
 .card-link + .card-link {
-    margin-left:0;
+    margin-left: 0;
 }
 
-.card-link:not(:first-of-type)::before{
-    content : '|'
+.card-link:not(:first-of-type)::before {
+    content: '|'
 }
 
 .card img {
@@ -38,37 +45,34 @@
     text-overflow: ellipsis; */
 }
 
-.card-text::before {
-    content: '...';
-    position: absolute;    
-    bottom: 0;
-    background: white;
-    right: 0;
-    font: inherit;
-    font-size: 150%;
-}
+    .card-text::before {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        background: white;
+        right: 0;
+        font: inherit;
+        font-size: 150%;
+    }
 
 a.card-link {
     color: #007bff;
     font-weight: 500;
 }
 
+#categories,
 #destinations {
-    height: 220px;
+    height: 100px;
     position: relative;
 }
 
-#destinations[data-disabled]::before {
-    content: '';
-    display: flex;
-    background: #2d2b2ba3; 
-    opacity: 0.3;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-}
+    #categories[data-disabled],
+    #destinations[data-disabled] {
+        background: #2d2b2b29;
+        outline: none;
+        pointer-events: none
+    }
+ 
 
 #filters {
     background-color: #fff;
@@ -87,3 +91,28 @@ form#formFilter div:not(:last-child) {
 .item-link.image-link.detail-link {
     color: transparent;
 }
+
+div#holiday-container {
+    height: 100%;
+    background: white;
+    box-sizing: border-box;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.alert-no-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 150%;
+    padding: 40px;
+    margin: 0;
+}
+
+    .alert-no-result h1 {
+        font-size: 5em;
+    }

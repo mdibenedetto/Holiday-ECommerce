@@ -12,7 +12,7 @@
 
 @{
     var cartList = new List<CartViewModel>();
-
+   
     if (User.Identity.IsAuthenticated)
     {
         var cartService = new CartService(_context, _userResolverService);

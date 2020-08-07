@@ -1,6 +1,7 @@
 ﻿.wbox {
     background-color: white;
     padding: 20px;
+    width: 60%;
 }
 
 h3 {
@@ -15,3 +16,17 @@ h3 {
 .img {
     text-align: center;
 }
+
+p {
+    font-size: 1.2rem;
+}
+
+section.filters {
+    display: flex;
+    gap: 3em;
+}
+
+    section.filters form section {
+        display: flex;
+        gap: 4px;
+    }

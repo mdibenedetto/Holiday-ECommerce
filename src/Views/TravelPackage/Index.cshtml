@@ -1,32 +1,36 @@
-@model IEnumerable<dream_holiday.Models.TravelPackage>
+@model IEnumerable<dream_holiday.Models.ViewModels.TravelPackageViewModel>
 
 @{
     ViewData["Title"] = "Travel Package";
+
 }
 
 <link rel="stylesheet" href="/css/travel-package.css" />
 
-<section class="main-container"> 
+<section class="main-container">
     <table class="table">
         <caption>
             Travel Package List - Total: @Model.Count()
         </caption>
         <thead>
             <tr>
+                <th class="col-category">
+                    Category
+                </th>
                 <th class="col-name">
-                    @Html.DisplayNameFor(model => model.Name)
+                    Name
                 </th>
                 <th class="col-desc">
-                    @Html.DisplayNameFor(model => model.Description)
+                    Description
                 </th>
                 <th class="col-qty">
-                    @Html.DisplayNameFor(model => model.Qty)
+                    Quantity
                 </th>
                 <th class="col-price">
-                    @Html.DisplayNameFor(model => model.Price)
+                    Price
                 </th>
                 <th class="col-image">
-                    @Html.DisplayNameFor(model => model.Image)
+                    Image
                 </th>
                 <th class="col-action-buttons">
                     <a role="button" href="/TravelPackage/Create"
@@ -35,9 +39,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var itemModel in Model)
             {
+                var item = itemModel.TravelPackage;
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => itemModel.CategoryName)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -58,17 +66,17 @@
                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                             <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </span>
-                     
+
                     </td>
                 </tr>
             }
         </tbody>
         <tfoot>
             <tr>
-                <td  class="table-footer" colspan="100">
+                <td class="table-footer" colspan="100">
                     Travel Package List - Total: @Model.Count()
                 </td>
-            </tr> 
+            </tr>
         </tfoot>
     </table>
 </section>

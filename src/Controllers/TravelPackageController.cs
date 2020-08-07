@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using dream_holiday.Data;
 using dream_holiday.Models;
+using System.Collections.Generic;
+using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Controllers
 {
@@ -16,7 +18,7 @@ namespace dream_holiday.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnv;
-        
+
         public TravelPackageController(
             ApplicationDbContext context,
             IWebHostEnvironment environment)
@@ -28,7 +30,18 @@ namespace dream_holiday.Controllers
         // GET: TravelPackage
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TravelPackage.ToListAsync());
+            var list = await (from tp in _context.TravelPackage
+                              join cat in _context.Category
+                              on tp.CategoryId equals cat.Id
+                              into tp_category
+                              from tp_category_first in tp_category.DefaultIfEmpty()
+                              select new TravelPackageViewModel
+                              {
+                                  TravelPackage = tp,
+                                  CategoryName = tp_category_first != null ? tp_category_first.Name : "All"
+                              }).ToListAsync();
+
+            return View(list);
         }
 
         // GET: TravelPackage/Details/5
@@ -60,7 +73,7 @@ namespace dream_holiday.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Qty,Price,Image")] TravelPackage travelPackage)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Qty,Price,Image,CategoryId")] TravelPackage travelPackage)
         {
             if (ModelState.IsValid)
             {
@@ -70,16 +83,17 @@ namespace dream_holiday.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(travelPackage);
-        }        
-       
-    // GET: TravelPackage/Edit/5
-    public async Task<IActionResult> Edit(int? id)
+        }
+
+        // GET: TravelPackage/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
-            }    
+            }
 
             var travelPackage = await _context.TravelPackage.FindAsync(id);
             if (travelPackage == null)
@@ -94,7 +108,7 @@ namespace dream_holiday.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Qty,Price,Image,ImageFile")] TravelPackage travelPackage)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Qty,Price,Image,ImageFile,CategoryId")] TravelPackage travelPackage)
         {
             if (id != travelPackage.Id)
             {
@@ -162,7 +176,7 @@ namespace dream_holiday.Controllers
 
         String UploadImage(TravelPackage model)
         {
-            String uniqueFileName ="", filePath = "";
+            String uniqueFileName = "", filePath = "";
             const String IMAGE_FOLDER = "img/holiday";
 
             // Todo other validations on your model as needed

@@ -58,7 +58,7 @@ namespace dream_holiday
                         new Category {
 
                            
-                            Code = "Business Travel",
+                            Name = "Business Travel",
                             Description=
                                 @"A business trip is a trip undertaken for work or business purposes,
                                 as opposed to other types of travel, such as for leisure purposes 
@@ -69,12 +69,12 @@ namespace dream_holiday
                                 to be perfect for your business meetings or programs such
                                 as Cufflink Case, Tie Case, Watch Case and other Travel accessories."},
 
-                      new Category { Code = "Solo Travel"},
-                        new Category { Code = "Travel With Friends"},
-                        new Category { Code = "Family Travel"},
-                        new Category { Code = "Travel With Group"},
-                        new Category { Code = "Luxury Travel"},
-                        new Category { Code = "Adventure Travel"}
+                      new Category { Name = "Solo Travel"},
+                        new Category { Name = "Travel With Friends"},
+                        new Category { Name = "Family Travel"},
+                        new Category { Name = "Travel With Group"},
+                        new Category { Name = "Luxury Travel"},
+                        new Category { Name = "Adventure Travel"}
                 };
 
             return categories;

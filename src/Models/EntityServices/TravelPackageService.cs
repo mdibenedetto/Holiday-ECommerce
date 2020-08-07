@@ -12,15 +12,14 @@ namespace dream_holiday.Models.EntityServices
     public class TravelPackageService : BaseService
     {
 
-        public TravelPackageService(
-            ApplicationDbContext context,
-            UserResolverService userService)
+        public TravelPackageService( ApplicationDbContext context,  UserResolverService userService)
             : base(context, userService)
         {
 
         }
 
-        public async Task<List<TravelPackageViewModel>> findAllTravelPackagesAsync(string[] destinations, decimal price)
+        public async Task<List<TravelPackageViewModel>> findAllTravelPackagesAsync(
+                        string[] destinations, int[] categories, decimal price)
         {
             var list = await this.findAllTravelPackagesAsync();
 
@@ -28,6 +27,13 @@ namespace dream_holiday.Models.EntityServices
             {
                 list = list
                     .Where(tp => destinations.Contains(tp.TravelPackage.Country))
+                    .ToList();
+            }
+
+            if (categories != null && categories.Length > 0)
+            {
+                list = list
+                    .Where(tp => categories.Contains(tp.TravelPackage.CategoryId))
                     .ToList();
             }
 
@@ -61,7 +67,7 @@ namespace dream_holiday.Models.EntityServices
                          select new TravelPackageViewModel
                          {
                              TravelPackage = tp,
-                             TotalInCart =  (from c in _context.Cart
+                             TotalInCart = (from c in _context.Cart
                                             where c.UserAccount.Id == userAccount.Id
                                                 && c.TravelPackage.Id == tp.Id
                                             select c.Qty).Sum()
@@ -71,10 +77,24 @@ namespace dream_holiday.Models.EntityServices
 
         }
 
+        internal List<Category> getCategories()
+        {
+            // SELECT * FROM Category
+            // WHERE CategoryID IN
+            // (SELECT CategoryID FROM TravelPackage)
+            return _context.Category
+                .Where(cat => _context
+                                .TravelPackage
+                                .Select(tp => tp.CategoryId)
+                                .Contains(cat.Id)
+                              )
+                .ToList(); 
+        }
+
         public List<string> getTravelCountries()
         {
             return _context.TravelPackage
-                .Where(tp => tp.Country != "")
+                .Where(tp =>  !String.IsNullOrEmpty(tp.Country) )
                   .Select(tp => tp.Country)
                   .ToList();
         }
@@ -85,6 +105,6 @@ namespace dream_holiday.Models.EntityServices
                  .TravelPackage
                  .Find(id);
         }
-         
+
     }
 }

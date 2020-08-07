@@ -8,7 +8,7 @@ namespace dream_holiday.Models
     public class TravelPackage
     {
         public virtual Int32 CategoryId { get; set; }
- 
+       
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }

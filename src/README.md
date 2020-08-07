@@ -1,3 +1,17 @@
+USERS:
+
+1)
+username:  nci_test@ncirl.ie
+pwd:       nci_test@ncirl.ie
+
+2)
+
+username:  admin@dreamholiday.com
+pwd:       nci_admin_2020
+ 
+
+
+
 SQLLITE ONLINE VIEWER
 https://inloop.github.io/sqlite-viewer/
 
@@ -10,7 +24,7 @@ https://inloop.github.io/sqlite-viewer/
 
 
 TODO
-SCAFFODL PAGE
+SCAFFOLD PAGE
 https://localhost:5001/Identity/Account/AccessDenied?ReturnUrl=%2FTravelPackage
 
 

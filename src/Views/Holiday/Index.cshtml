@@ -45,7 +45,7 @@
                                                class="item-link card-link add-travel-link">
                                                 Add
                                             </a>
-                                            
+
                                             <a href="/holiday/remofromcart?tpId=-1"
                                                class="item-link card-link remove-travel-link">
                                                 Remove
@@ -64,23 +64,38 @@
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-4 right-column">
                 <section id="filters">
 
-                    <h4>Filters</h4>
+                    <h5>Filters</h5>
                     <hr />
 
                     <form id="formFilter" method="get">
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="chkAllDestination" checked />
-                            <label class="form-check-label" for="chkAllDestination">All Destinations</label>
-                        </div>
+                       
                         <div class="form-group">
                             <label for="destinations">Choose Destination</label>
+                            <section class="form-group form-check">
+                                <input type="checkbox"  data-for="destinations" class="form-check-input checbox-all" id="chkAllDestination" checked />
+                                <label class="form-check-label" for="chkAllDestination">All Destinations</label>
+                            </section>
                             <select multiple class="form-control" id="destinations" data-disabled>
                                 @foreach (var country in Model.CountryNames)
                                 {
                                     <option value="@country">@country</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categories">Categories</label>
+                            <section class="form-group form-check">
+                                <input type="checkbox" data-for="categories" class="form-check-input checbox-all" id="chkAllCategories" checked />
+                                <label class="form-check-label" for="chkAllCategories">All Categories</label>
+                            </section>
+                            <select multiple class="form-control" id="categories" data-disabled> 
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
                                 }
                             </select>
                         </div>

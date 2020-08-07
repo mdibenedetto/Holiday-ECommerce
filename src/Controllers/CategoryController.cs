@@ -54,7 +54,7 @@ namespace dream_holiday.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,Description")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace dream_holiday.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,Description")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Category category)
         {
             if (id != category.Id)
             {
@@ -141,6 +141,26 @@ namespace dream_holiday.Controllers
         {
             var category = await _context.Category.FindAsync(id);
             _context.Category.Remove(category);
+
+            //===============================================================
+            // If any travel package has assigned the category id 
+            // we want to remove we need to update the TravelPackage table
+            //===============================================================
+            var travelPackages = _context
+                                .TravelPackage
+                                .Where(tp => tp.CategoryId == id)
+                                .ToList();
+
+            if (travelPackages.Count > 0)
+            {
+                foreach (var tp in travelPackages)
+                {
+                    tp.CategoryId = -1;
+                }
+                _context.TravelPackage.UpdateRange(travelPackages);
+            }
+            //===============================================================
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

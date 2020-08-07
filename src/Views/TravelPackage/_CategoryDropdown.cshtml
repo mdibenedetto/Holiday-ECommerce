@@ -1,0 +1,25 @@
+﻿@using dream_holiday.Data;
+
+@inject ApplicationDbContext _context;
+
+@{
+    var categoryList = _context.Category.ToList();
+    var travelPackage = Model ?? new TravelPackage { CategoryId = -1 };
+}
+
+@model dream_holiday.Models.TravelPackage
+<label asp-for="CategoryId" class="control-label"></label>
+<select asp-for="CategoryId" class="form-control">
+    <option value="-1">All</option>
+    @foreach (var item in categoryList)
+    {
+        if (travelPackage.CategoryId == item.Id)
+        {
+            <option value="@item.Id" selected>@item.Name</option>
+        }
+        else
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    }
+</select>

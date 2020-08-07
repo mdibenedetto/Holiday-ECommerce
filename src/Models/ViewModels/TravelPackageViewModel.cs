@@ -6,5 +6,6 @@ namespace dream_holiday.Models.ViewModels
         public TravelPackage TravelPackage { get; set; }
 
         public int TotalInCart { get; set; }
+        public string CategoryName { get; set; }
     }
 }

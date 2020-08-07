@@ -24,33 +24,41 @@
                      height="120" />
             </div>
             <br>
-            <p>Here are your previous orders displayed. You can find a specific order by the ID number. To view a specifit order, click on the ID number.  </p>
+            <header>Here are your previous orders displayed. You can find a specific order by the ID number. To view a specifit order, click on the ID number.  </header>
             <br>
 
-            <form action="/order" method="get">
-                <h4>
-                    Search by ID
-                </h4>
-                <input name="id" type="search">
-                <button type="submit"
-                        class="btn btn-danger">
-                    Search
-                </button>
-            </form>
+
+            <section class="filters">
+                <form action="/order" method="get">
+                    <h4 for="id">
+                        Search by ID
+                    </h4>
+                    <section>
+                        <input name="id" type="search" class="form-control">
+                        <button type="submit"
+                                class="btn btn-danger">
+                            Search
+                        </button>
+                    </section>
+                  
+                </form>
 
 
-            <form action="/order" method="get">
-                <h4>
-                    Search by Status
-                </h4>
-                <input name="Status" type="search">
-                <button type="submit"
-                        class="btn btn-danger">
-                    Search
-                </button>
+                <form action="/order" method="get">
+                    <h4 for="status">
+                        Search by Status
+                    </h4>
+                    <section>
+                        <input name="status" type="search" class="form-control">
+                        <button type="submit"
+                                class="btn btn-danger">
+                            Search
+                        </button>
+                    </section>
 
+                </form>
 
-            </form>
+            </section>
 
             <br>
 
@@ -76,7 +84,7 @@
                     @foreach (var item in Model)
                     {
                         var order = item.Order;
-                        var user = item.User; 
+                        var user = item.User;
                         <tr>
 
                             @if (OrderViewModel.isAdmin)

@@ -37,8 +37,9 @@ namespace dream_holiday.Controllers
                 model.HolidayItems = list;
 
 
-                model.TravelPackages = list.Select(t => t.TravelPackage).ToList();
+                model.TravelPackages = list.Select(t => t.TravelPackage).Distinct().ToList();
                 model.CountryNames = _travelPackageService.getTravelCountries();
+                model.Categories = _travelPackageService.getCategories();
             }
             catch (DbUpdateException ex)
             {
@@ -68,12 +69,14 @@ namespace dream_holiday.Controllers
         [HttpGet("api/travelpackages")]
         public async Task<JsonResult> LoadTravelPackagesAsync(
             [FromQuery] String[] destinations,
+            [FromQuery] int[] categories,
             [FromQuery] Decimal price = 0)
         {
             List<TravelPackageViewModel> list = null;
             try
             {
-                list = await _travelPackageService.findAllTravelPackagesAsync(destinations, price);
+                list = await _travelPackageService
+                              .findAllTravelPackagesAsync(destinations, categories, price);
             }
             catch (DbUpdateException ex)
             {

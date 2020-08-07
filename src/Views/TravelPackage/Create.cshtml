@@ -17,21 +17,24 @@
             <input asp-for="Description" class="form-control" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group col-3">
             <label asp-for="Qty" class="control-label"></label>
             <input asp-for="Qty" class="form-control" />
             <span asp-validation-for="Qty" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group col-3">
             <label asp-for="Price" class="control-label"></label>
             <input asp-for="Price" class="form-control" />
             <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group col-6">
+            <partial name="_CategoryDropdown" model="@Model" />
         </div>
         <div class="form-group">
             <label asp-for="Image" class="control-label"></label>
             <input asp-for="ImageFile" class="form-control" />
             <span asp-validation-for="ImageFile"></span>
-           
+
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
         <div class="form-group">

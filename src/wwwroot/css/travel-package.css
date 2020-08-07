@@ -38,7 +38,9 @@ a.btn {
     }
 
 
-
+ .col-category {
+    width: 150px;
+}
 
 .col-name {
     width: 200px;

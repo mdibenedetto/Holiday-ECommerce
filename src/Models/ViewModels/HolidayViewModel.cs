@@ -9,5 +9,6 @@ namespace dream_holiday.Models.ViewModels
 
         public List<TravelPackage> TravelPackages { get; set; }
         public List<String> CountryNames { get; set; }
+        public List<Category> Categories { get; set; }
     }
 }

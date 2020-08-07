@@ -11,7 +11,7 @@ namespace dream_holiday.Models
         public Int32 Id { get; set; }
 
         [Required]
-        public String Code { get; set; }
+        public String Name { get; set; }
 
         public String Description { get; set; }
 
