@@ -1,5 +1,4 @@
 ﻿.header-navbar {
-    /* position: sticky; */
     margin-bottom: -71px;
 }
 
@@ -7,10 +6,7 @@
     position: relative;
     justify-content: center;
     display: flex;
-    /* height: 635px; */
     background: #012542;
-    /* margin-top: -52px; */
-    /* z-index: -1; */
     opacity: 0.9;
 }
 
@@ -80,13 +76,6 @@
     padding: 15px;
 }
 
-/* footer {
-  display: block;
-  padding: 0px 0 60px;
-  color: #a3afba;
-  font-family: "Open Sans", sans-serif;
-  background: #012642;
-} */
 
 @media (max-width: 768px) {
     .card-holiday-container {
@@ -103,6 +92,10 @@
     }
 }
 
-.alert-no-result{
+.alert-no-result {
     background: white;
+}
+
+.item-image {
+    height: 100%;
 }

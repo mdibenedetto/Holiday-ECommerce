@@ -3,26 +3,40 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using dream_holiday.Data;
 using dream_holiday.Models.ViewModels;
+using dream_holiday.Models.EntityServices;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace dream_holiday.Controllers
 {
     public class HomeController : Controller
-    {
-        private readonly ApplicationDbContext _context;
+    {    
         private readonly ILogger<HomeController> _logger;
+        private readonly TravelPackageService _travelPackageService;
 
-        public HomeController(
-            ApplicationDbContext context,
-            ILogger<HomeController> logger)
+        public HomeController( TravelPackageService travelPackageService, ILogger<HomeController> logger)
         {
-            _context = context;
+            _travelPackageService = travelPackageService;
             _logger = logger;
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+
+            var model = new HomeViewModel();
+
+            try
+            {
+                model.HolidayItems = await _travelPackageService.findAllTravelPackagesAsync();
+              
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("HomeController => Index", ex); 
+            }
+
+            return View(model);
         }
 
         public IActionResult Privacy()

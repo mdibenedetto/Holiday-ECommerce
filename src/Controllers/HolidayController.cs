@@ -34,9 +34,8 @@ namespace dream_holiday.Controllers
             try
             {
                 var list = await _travelPackageService.findAllTravelPackagesAsync();
+
                 model.HolidayItems = list;
-
-
                 model.TravelPackages = list.Select(t => t.TravelPackage).Distinct().ToList();
                 model.CountryNames = _travelPackageService.getTravelCountries();
                 model.Categories = _travelPackageService.getCategories();

@@ -1,6 +1,15 @@
-﻿@{ 
-    ViewData["Title"] = "Home Page";
+﻿@using dream_holiday.Models.ViewModels;
+@model HomeViewModel;
+
+@{
+    ViewData["Title"] = "Home";
 }
+
+<script id="package-travel">
+  let holidayItems=@(
+       Json.Serialize(Model.HolidayItems)
+  )
+</script>
 
 <link rel="stylesheet" href="./css/home.css" />
 
