@@ -9,7 +9,7 @@ using dream_holiday.Data;
 namespace dream_holiday.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200807134346_INIT_DB")]
+    [Migration("20200807140249_INIT_DB")]
     partial class INIT_DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
