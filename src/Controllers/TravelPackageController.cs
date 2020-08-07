@@ -73,11 +73,14 @@ namespace dream_holiday.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Qty,Price,Image,CategoryId")] TravelPackage travelPackage)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Qty,Price,Image,ImageFile,CategoryId")] TravelPackage travelPackage)
         {
             if (ModelState.IsValid)
             {
-                travelPackage.Image = UploadImage(travelPackage);
+                if (travelPackage.ImageFile!= null)
+                {
+                    travelPackage.Image = UploadImage(travelPackage);
+                }
 
                 _context.Add(travelPackage);
                 await _context.SaveChangesAsync();
