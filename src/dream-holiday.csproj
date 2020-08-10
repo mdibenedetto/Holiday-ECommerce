@@ -26,5 +26,6 @@
     <Folder Include="Models\ViewModels\" />
     <Folder Include="Models\EntityServices\" />
     <Folder Include="Logs\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
 </Project>

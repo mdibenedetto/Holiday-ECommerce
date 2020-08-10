@@ -28,18 +28,7 @@ namespace dream_holiday
         public void ConfigureServices(IServiceCollection services)
         {
 
-
-            //services
-            //.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //.AddCookie(options =>
-            //{
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
-            //    options.Cookie.Expiration = TimeSpan.FromHours(5);
-            //    options.LoginPath = $"/Identity/Account/Login";
-            //    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-            //    options.SlidingExpiration = true;
-            //});
-
+ 
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
@@ -65,13 +54,8 @@ namespace dream_holiday
                       options.Password.RequireDigit = false;
                       options.Password.RequireLowercase = false;
                       options.Password.RequireNonAlphanumeric = false;
-                      options.Password.RequireUppercase = false;
-                      //options.Password.RequireDigit = true;
-                      //options.Password.RequireLowercase = true;
-                      //options.Password.RequireNonAlphanumeric = true;
-                      //options.Password.RequireUppercase = true;
-                      options.Password.RequiredLength = 6;
-                      //options.Password.RequiredUniqueChars = 1;
+                      options.Password.RequireUppercase = false; 
+                      options.Password.RequiredLength = 6; 
 
                       // Lockout settings.
                       options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -124,6 +108,20 @@ namespace dream_holiday
                 app.UseHsts();
             }
 
+            app.Use(async (ctx, next) =>
+            {
+                await next();
+
+                if (ctx.Response.StatusCode == 404 && !ctx.Response.HasStarted)
+                {
+                    //Re-execute the request so the user gets the error page
+                    string originalPath = ctx.Request.Path.Value;
+                    ctx.Items["originalPath"] = originalPath;
+                    ctx.Request.Path = "/error/404";
+                    await next();
+                }
+            });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -145,7 +143,6 @@ namespace dream_holiday
                 Log.Information("Seed TravelPackage into DB");
                 StartupDbData.SeedData(context);
             }
-
 
 
             app.UseEndpoints(endpoints =>
