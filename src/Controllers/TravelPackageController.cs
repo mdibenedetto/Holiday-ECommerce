@@ -73,7 +73,9 @@ namespace dream_holiday.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Qty,Price,Image,ImageFile,CategoryId")] TravelPackage travelPackage)
+        public async Task<IActionResult> Create(
+            //[Bind("Id,Name,Description,Qty,Price,Image,ImageFile,CategoryId")]
+        TravelPackage travelPackage)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +113,9 @@ namespace dream_holiday.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Qty,Price,Image,ImageFile,CategoryId")] TravelPackage travelPackage)
+        public async Task<IActionResult> Edit(int id,
+            //[Bind("Id,Name,Description,Qty,Price,Image,ImageFile,CategoryId")]
+        TravelPackage travelPackage)
         {
             if (id != travelPackage.Id)
             {
@@ -122,7 +126,10 @@ namespace dream_holiday.Controllers
             {
                 try
                 {
-                    travelPackage.Image = UploadImage(travelPackage);
+                    if (travelPackage.ImageFile != null)
+                    {
+                        travelPackage.Image = UploadImage(travelPackage);
+                    } 
 
                     _context.Update(travelPackage);
                     await _context.SaveChangesAsync();
@@ -190,8 +197,10 @@ namespace dream_holiday.Controllers
                 filePath = Path.Combine(uploads, uniqueFileName);
 
                 model.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                return "/" + Path.Combine(IMAGE_FOLDER, uniqueFileName); 
             }
-            return "/" + Path.Combine(IMAGE_FOLDER, uniqueFileName); ;
+            return model.Image;// in this case return default value
         }
 
         private string GetUniqueFileName(string fileName)

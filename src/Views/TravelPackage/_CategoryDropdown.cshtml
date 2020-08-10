@@ -8,7 +8,9 @@
 }
 
 @model dream_holiday.Models.TravelPackage
-<label asp-for="CategoryId" class="control-label"></label>
+    <label for="CategoryId" class="control-label">
+        Category
+    </label>
 <select asp-for="CategoryId" class="form-control">
     <option value="-1">All</option>
     @foreach (var item in categoryList)

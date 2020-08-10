@@ -19,7 +19,7 @@
                 </figure>
             </section>
 
-            @if (User.Identity.IsAuthenticated)
+            @if (User.Identity.IsAuthenticated && !User.IsInRole(Roles.ADMIN))
             {
                 <section class="container add-button">
                     <a role="button" href="/holiday/addtocart/?tpId=@Model.Id" class="btn btn-primary">

@@ -23,15 +23,15 @@
                    placeholder="Email address"
                    required=""
                    autofocus=""                  
-                    />
-
-
+                    /> 
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Input.Password" class="sr-only"></label>
-            <input asp-for="Input.Password"
+            <input
+                   asp-for="Input.Password"
+                   placeholder="Password"
                    class="form-control"                     
             />
             <span asp-validation-for="Input.Password" class="text-danger"></span>

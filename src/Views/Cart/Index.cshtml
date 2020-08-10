@@ -59,7 +59,7 @@
                                             @( item.TravelPackage?.IsInstock  == true ? "In Stock" : "Out of Stock"  )
                                         </td>
                                         <td>
-                                            <input class="form-control" type="text" value="@item.Cart.Qty" />
+                                            <input class="form-control" type="text" disabled value="@item.Cart.Qty" />
                                         </td>
                                         <td class="item-price text-right">€ @(Math.Round(item.Cart.Price) )</td>
                                         <td class="text-right">
