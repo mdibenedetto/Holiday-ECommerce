@@ -20,6 +20,10 @@ https://inloop.github.io/sqlite-viewer/
 
 TODO
 SCAFFOLD PAGE
+dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout;Account.RegisterConfirmation"
+
+dotnet aspnet-codegenerator identity --files "Account.AccessDenied"
+
 https://localhost:5001/Identity/Account/AccessDenied?ReturnUrl=%2FTravelPackage
 
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-3.1#initialize-db-with-test-data

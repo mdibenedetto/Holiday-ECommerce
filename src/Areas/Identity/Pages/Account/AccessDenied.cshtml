@@ -1,0 +1,45 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<style>
+
+    .alert-access-denied {
+        width: 600px;
+    }
+
+        .alert-access-denied p {
+            text-align: center;
+            font-weight: bold;
+        }
+
+    .alert-access-denied .error-message {
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+        text-align: center;
+        padding: 20px;
+        background: #fff;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+    }
+</style>
+<section class="main-container">
+    <div class="row">
+        <div class="container alert-access-denied alert alert-secondary" role="alert">
+            <header class="error-message alert alert-danger text-danger">               
+                <h1>
+                    Oops! <br />
+                    Access denied
+                </h1>
+            </header>
+            <p>
+                Sorry! It looks you do not have access to this resource.
+            </p>
+        </div>
+    </div>
+</section> 
