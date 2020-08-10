@@ -20,16 +20,14 @@ namespace dream_holiday.Controllers
             _logger = logger;
         }
 
-
+        //  GET: /Home
         public async Task<IActionResult> IndexAsync()
         {
-
             var model = new HomeViewModel();
 
             try
             {
                 model.HolidayItems = await _travelPackageService.FindAllUserTravelPackagesAsync();
-              
             }
             catch (DbUpdateException ex)
             {
@@ -39,6 +37,7 @@ namespace dream_holiday.Controllers
             return View(model);
         }
 
+        //  GET: /Home/Privacy
         public IActionResult Privacy()
         {
             return View();

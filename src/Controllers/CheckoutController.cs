@@ -13,7 +13,6 @@ namespace dream_holiday.Controllers
     [Authorize]   
     public class CheckoutController : Controller
     {
-
         private readonly ILogger<CheckoutController> _logger;
         private readonly CheckoutService _checkoutService;
 
@@ -23,6 +22,7 @@ namespace dream_holiday.Controllers
             _checkoutService = checkoutService;
         }
 
+        // GET: /Checkout
         public async Task<IActionResult> Index()
         {
             Checkout checkout = null;
@@ -39,6 +39,7 @@ namespace dream_holiday.Controllers
             return View(checkout);
         }
 
+        // POST: /Checkout
         [HttpPost]        
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProcessCheckout(Checkout formCheckout)

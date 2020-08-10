@@ -1,14 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using dream_holiday.Data;
-using dream_holiday.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+
+using dream_holiday.Data;
+using dream_holiday.Models;
 
 namespace dream_holiday.Controllers
 {
@@ -28,7 +28,7 @@ namespace dream_holiday.Controllers
             _roleManager = roleManager;
         }
 
-        // GET: Admin
+        // GET: /Admin
         public async Task<IActionResult> Index()
         {
 
@@ -45,8 +45,6 @@ namespace dream_holiday.Controllers
 
             return View(list);
         }
-
-
 
         // GET: Admin/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
@@ -95,6 +93,12 @@ namespace dream_holiday.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// This method toggles user's role from Admin to Not admin user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="isAdmin"></param>
+        /// <returns></returns>
         async private Task ToggleAdminRole(Guid id, bool isAdmin)
         {
             var applicationUser = await _context.ApplicationUser.FindAsync(id);
@@ -102,7 +106,6 @@ namespace dream_holiday.Controllers
             if (isAdmin)
             {
                 _userManager.AddToRoleAsync(applicationUser, Roles.ADMIN).Wait();
-
             }
             else
             {

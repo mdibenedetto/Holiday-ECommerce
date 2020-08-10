@@ -27,6 +27,7 @@ namespace dream_holiday.Controllers
             _cartService = cartService;
         }
 
+        //  GET: /Holiday
         public async Task<IActionResult> IndexAsync()
         {
             var model = new HolidayViewModel();
@@ -49,6 +50,7 @@ namespace dream_holiday.Controllers
             return View(model);
         }
 
+        //  GET: /Holiday/Detail/{id}
         public IActionResult Detail(int Id)
         {
             TravelPackage item;
@@ -86,6 +88,7 @@ namespace dream_holiday.Controllers
             return Json(list);
         }
 
+        //  GET: /Holiday/AddToCart/{id}
         public IActionResult AddToCart(int tpId)
         {
             try
@@ -123,8 +126,6 @@ namespace dream_holiday.Controllers
                 throw ex;
             }
         }
-
-
 
         [HttpPost("api/remofromcart")]
         public async Task<JsonResult> ApiRemoveFromCartAsync(int tpId) 

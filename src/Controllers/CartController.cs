@@ -23,6 +23,7 @@ namespace dream_holiday.Controllers
             _cartService = cartService;
         }
 
+        // GET: /cart
         public async Task<IActionResult> Index()
         {
             List<CartViewModel> cartList = null;
@@ -41,6 +42,7 @@ namespace dream_holiday.Controllers
 
         }
 
+        // GET: /cart/delete/?cartId={cartId}
         public IActionResult delete(Guid? cartId)
         {
             try

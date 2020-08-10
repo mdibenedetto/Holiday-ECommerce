@@ -19,7 +19,7 @@ namespace dream_holiday.Controllers
             _context = context;
         }
 
-        // GET: Category
+        // GET: /Category
         public async Task<IActionResult> Index()
         {
             return View(await _context.Category.ToListAsync());
