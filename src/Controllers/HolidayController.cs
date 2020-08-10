@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
 using dream_holiday.Models;
 using dream_holiday.Models.EntityServices;
-using dream_holiday.Models.ViewModels; 
+using dream_holiday.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -97,11 +97,11 @@ namespace dream_holiday.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("AddToCart", ex);
+                _logger.LogError("HolidayController => Detail", ex);
                 throw ex;
             }
 
-            return RedirectToAction("HolidayController => Detail", new { Id = tpId });
+            return RedirectToAction("index", new { Id = tpId });
         }
 
 
@@ -110,7 +110,7 @@ namespace dream_holiday.Controllers
         {
             try
             {
-                var cart = await _cartService.AddTravelPackageToCart(tpId); 
+                var cart = await _cartService.AddTravelPackageToCart(tpId);
 
                 //travelPackage
                 return new JsonResult(new
@@ -128,11 +128,11 @@ namespace dream_holiday.Controllers
         }
 
         [HttpPost("api/remofromcart")]
-        public async Task<JsonResult> ApiRemoveFromCartAsync(int tpId) 
+        public async Task<JsonResult> ApiRemoveFromCartAsync(int tpId)
         {
             try
             {
-                var cart = await _cartService.RemoveTravelPackageFromCart(tpId); 
+                var cart = await _cartService.RemoveTravelPackageFromCart(tpId);
 
                 //travelPackage
                 return new JsonResult(new
