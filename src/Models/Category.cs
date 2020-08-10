@@ -12,7 +12,6 @@ namespace dream_holiday.Models
 
         [Required]
         public String Name { get; set; }
-
         public String Description { get; set; }
 
     }

@@ -28,7 +28,7 @@ namespace dream_holiday.Controllers
 
             try
             {
-                model.HolidayItems = await _travelPackageService.findAllTravelPackagesAsync();
+                model.HolidayItems = await _travelPackageService.FindAllUserTravelPackagesAsync();
               
             }
             catch (DbUpdateException ex)

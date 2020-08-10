@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace dream_holiday.Models.EntityServices
 {
+    /// <summary>
+    /// This is the base class used by the Service,
+    /// it provide common functionality shared by all service subclasses
+    /// </summary>
     public abstract class BaseService
     {
         protected readonly ApplicationDbContext _context;
@@ -18,16 +22,25 @@ namespace dream_holiday.Models.EntityServices
         {
             _context = context;
             _userService = userService;
-            _userManager = userService.getUserManager();
-            _httpContext = userService.getHTTPContext();
+            _userManager = userService.GetUserManager();
+            _httpContext = userService.GetHTTPContext();
         }
 
+        /// <summary>
+        /// This method return the current user account logged in
+        /// and who is in session. It return the user asynchronously
+        /// <returns></returns>
         protected async Task<ApplicationUser> GetCurrentUserAsync()
         {
             var currentUser = _httpContext.HttpContext.User;
             return await _userManager.GetUserAsync(currentUser);
         }
 
+        /// <summary>
+        /// This method return the current user account logged in
+        /// and who is in session
+        /// </summary>
+        /// <returns></returns>
         protected ApplicationUser GetCurrentUser()
         {
             var currentUser = _httpContext.HttpContext.User;

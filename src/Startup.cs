@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using dream_holiday.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using dream_holiday.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using dream_holiday.Models.EntityServices;
+ 
 using Serilog;
+using dream_holiday.Models;
+using dream_holiday.Models.EntityServices;
+using dream_holiday.Data;
 
 namespace dream_holiday
 {
@@ -112,20 +112,17 @@ namespace dream_holiday
                 RoleManager<ApplicationRole> roleManager)
         {
 
-
-            app.UseDeveloperExceptionPage();
-            app.UseDatabaseErrorPage();
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            //     app.UseDatabaseErrorPage();
-            // }
-            // else
-            // {
-            //     app.UseExceptionHandler("/Home/Error");
-            //     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //     app.UseHsts();
-            // }
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -158,6 +155,7 @@ namespace dream_holiday
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+                // Example of how to add a new Route
                 //endpoints.MapControllerRoute(name: "template",
                 //   pattern: "template/one",
                 //   defaults: new { controller = "Template", action = "Index" });

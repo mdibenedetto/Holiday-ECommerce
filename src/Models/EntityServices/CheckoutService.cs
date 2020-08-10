@@ -6,6 +6,9 @@ using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Models.EntityServices
 {
+    /// <summary>
+    /// This class handles all task related to the table Checkout.
+    /// </summary>
     public class CheckoutService : BaseService
     {
         private readonly UserAccountService _userAccountManager;
@@ -16,6 +19,12 @@ namespace dream_holiday.Models.EntityServices
             _userAccountManager = new UserAccountService(_context, userService);
         }
 
+        /// <summary>
+        /// This method create a plain Checkout object with a reference to the current user.
+        /// The return value is used to initialize the index page
+        /// </summary>
+        /// <param name="formCheckout"></param>
+        /// <returns></returns>
         public async Task<Checkout> NewCheckoutAsync(Checkout formCheckout = null)
         {
             var userAccount = await _userAccountManager.GetCurrentUserAccountAsync();
@@ -35,9 +44,18 @@ namespace dream_holiday.Models.EntityServices
             }
         }
 
+        /// <summary>
+        /// This method executes all step to process a cart checkout.
+        /// It gets data from the cart, it computes the tolals (Price and Quantity),
+        /// it makes the insert on the table Order and OrderDetail,
+        /// it clear the user account cart.
+        /// All of this query uses entity framework which is charge to look after the
+        /// transaction/commit over the database
+        /// </summary>
+        /// <param name="formCheckout"></param>
+        /// <returns></returns>
         public async Task ProcessCheckoutAsync(Checkout formCheckout)
         {
-
             //====================================================
             // Find the current user
             //====================================================

@@ -9,34 +9,42 @@ using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Models.EntityServices
 {
+    /// <summary>
+    /// This class handles all task related to the table TravelPackage.
+    /// </summary>
     public class TravelPackageService : BaseService
     {
 
-        public TravelPackageService( ApplicationDbContext context,  UserResolverService userService)
-            : base(context, userService)
-        {
+        public TravelPackageService(ApplicationDbContext context, UserResolverService userService)
+            : base(context, userService) { }
 
-        }
-
-        public async Task<List<TravelPackageViewModel>> findAllTravelPackagesAsync(
+        /// <summary>
+        /// This method find all Travel Packages available into the database.
+        /// It also filter them accordingly to filter chosen by the user
+        /// </summary>
+        /// <param name="destinations"></param>
+        /// <param name="categories"></param>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public async Task<List<TravelPackageViewModel>> FindAllTravelPackagesAsync(
                         string[] destinations, int[] categories, decimal price)
         {
-            var list = await this.findAllTravelPackagesAsync();
-
+            var list = await this.FindAllUserTravelPackagesAsync();
+            // filter by destination
             if (destinations != null && destinations.Length > 0)
             {
                 list = list
                     .Where(tp => destinations.Contains(tp.TravelPackage.Country))
                     .ToList();
             }
-
+            // filter by category
             if (categories != null && categories.Length > 0)
             {
                 list = list
                     .Where(tp => categories.Contains(tp.TravelPackage.CategoryId))
                     .ToList();
             }
-
+            // filter by price
             if (price > 0)
             {
                 list = list.Where(tp => tp.TravelPackage.Price <= price).ToList();
@@ -44,8 +52,13 @@ namespace dream_holiday.Models.EntityServices
 
             return list;
         }
-
-        public async Task<List<TravelPackageViewModel>> findAllTravelPackagesAsync()
+        /// <summary>
+        /// This methos returns all travel packages the users have inserted in their cart.
+        /// It also aggregates data to provides feedback of how the items are placed into the cart.
+        /// This information are useful in the page Holiday.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<TravelPackageViewModel>> FindAllUserTravelPackagesAsync()
         {
 
             var user = await base.GetCurrentUserAsync();
@@ -76,8 +89,12 @@ namespace dream_holiday.Models.EntityServices
             return query.ToList();
 
         }
-
-        internal List<Category> getCategories()
+        /// <summary>
+        /// This method return all list of categories which have been assigned to a Travel package.
+        /// If a category has not been assigned yet to any package it will not be returned
+        /// </summary>
+        /// <returns></returns>
+        internal List<Category> GetAssignedCategories()
         {
             // SELECT * FROM Category
             // WHERE CategoryID IN
@@ -88,22 +105,27 @@ namespace dream_holiday.Models.EntityServices
                                 .Select(tp => tp.CategoryId)
                                 .Contains(cat.Id)
                               )
-                .ToList(); 
+                .ToList();
         }
-
-        public List<string> getTravelCountries()
+        /// <summary>
+        /// This method returns the list of the all contry names assigned to a Travel package.
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetTravelCountryNames()
         {
             return _context.TravelPackage
-                .Where(tp =>  !String.IsNullOrEmpty(tp.Country) )
+                .Where(tp => !String.IsNullOrEmpty(tp.Country))
                   .Select(tp => tp.Country)
                   .ToList();
         }
-
+        /// <summary>
+        /// This method finds a travel package by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public TravelPackage Find(int id)
         {
-            return _context
-                 .TravelPackage
-                 .Find(id);
+            return _context.TravelPackage.Find(id);
         }
 
     }

@@ -1,19 +1,21 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+ 
 using Serilog;
 using Serilog.Events;
-using Serilog.Formatting.Compact;
 
 namespace dream_holiday
 {
+    /// <summary>
+    /// This class contains the entry point of the program.
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// the main method is in charge to start the web application
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             SetLogger();
@@ -35,6 +37,10 @@ namespace dream_holiday
             }
         }
 
+        /// <summary>
+        /// This method set up the application logging.
+        /// This web application is using Serilog to handle logs
+        /// </summary>
         private static void SetLogger()
         {
             const string LOG_FILE = "Logs";
@@ -46,7 +52,7 @@ namespace dream_holiday
                Action<LoggerConfiguration> configureLogger =
                         l => l.Filter.ByIncludingOnly(e => e.Level == level)
                            .WriteTo.File(path: LOG_FILE + filePath
-                                       , rollingInterval: RollingInterval.Day
+                                       , rollingInterval: RollingInterval.Month
                                         , rollOnFileSizeLimit: true
                                         , fileSizeLimitBytes: 1000000
                                     );
@@ -54,7 +60,9 @@ namespace dream_holiday
                return configureLogger;
            };
 
-            //const string LOG_FILE_JSON = "Logs/log_json.txt";
+            /* We have different log files for different level of logs
+             * If you want to be more specific with file logging             
+             * uncomment those ones which are desired */
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
@@ -65,15 +73,12 @@ namespace dream_holiday
                         , fileSizeLimitBytes: 1000000
                 )
                 .MinimumLevel.Debug().WriteTo.File(LOG_FILE + "/Verbose-.log")
-                .WriteTo.Logger(SetLogger(LogEventLevel.Information, "/Info-.log"))
-                .WriteTo.Logger(SetLogger(LogEventLevel.Debug, "/Debug-.log"))
-                .WriteTo.Logger(SetLogger(LogEventLevel.Warning, "/Warning-.log"))
                 .WriteTo.Logger(SetLogger(LogEventLevel.Error, "/Error-.log"))
                 .WriteTo.Logger(SetLogger(LogEventLevel.Fatal, "/Fatal-.log"))
-                //.WriteTo.File(new CompactJsonFormatter(), LOG_FILE_JSON)
-                //.WriteTo.Seq(
-                //        Environment.GetEnvironmentVariable("SEQ_URL")
-                //        ?? "http://localhost:5001")
+                //.WriteTo.Logger(SetLogger(LogEventLevel.Information, "/Info-.log"))
+                //.WriteTo.Logger(SetLogger(LogEventLevel.Debug, "/Debug-.log"))
+                //.WriteTo.Logger(SetLogger(LogEventLevel.Warning, "/Warning-.log"))
+                //.WriteTo.File(new CompactJsonFormatter(), "Logs/log_json.txt")              
                 .CreateLogger();
         }
 

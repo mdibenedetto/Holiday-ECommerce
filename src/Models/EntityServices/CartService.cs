@@ -9,6 +9,9 @@ using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Models.EntityServices
 {
+    /// <summary>
+    /// This class handles all task related to the table Cart.
+    /// </summary>
     public class CartService : BaseService
     {
         UserAccountService _userAccountManager;
@@ -19,6 +22,10 @@ namespace dream_holiday.Models.EntityServices
             _userAccountManager = new UserAccountService(_context, userService);
         }
 
+        /// <summary>
+        /// This method retrieve the cart of the current logged in user. 
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<CartViewModel>> GetCartUser()
         {
             var user = await _userAccountManager.GetCurrentUserAccountAsync();
@@ -34,20 +41,15 @@ namespace dream_holiday.Models.EntityServices
             return cartList;
         }
 
+        /// <summary>
+        /// This method add a travel package to the user's cart,
+        /// if the package is already present into the cart it will increase the quantity 
+        /// </summary>
+        /// <param name="travelPackageId"></param>
+        /// <returns></returns>
         async public Task<Cart> AddTravelPackageToCart(int travelPackageId)
         {
-
-            //var _userAccount = await _userAccountManager.GetCurrentUserAccountAsync();
-            //var _travelPackage = _context.TravelPackage.Find(travelPackageId);
-            //Cart cartToUpdate;
-
-            //cartToUpdate = _context.Cart
-            //    .Where(cart =>
-            //    cart.TravelPackage.Id == travelPackageId
-            //    && cart.UserAccount.Id == _userAccount.Id)
-            //    .FirstOrDefault();
-
-            Cart cartToUpdate = await FindCartByTravelPackageId(travelPackageId);
+            Cart cartToUpdate = await FindCartItemByTravelPackageId(travelPackageId);
 
             // if not exist
             if (cartToUpdate == null)
@@ -76,33 +78,42 @@ namespace dream_holiday.Models.EntityServices
             return cartToUpdate;
         }
 
+        /// <summary>
+        /// This method remove a travel package from the user's cart,
+        /// if the package quantity is more 0 it will decrease the quantity
+        /// </summary>
+        /// <param name="travelPackageId"></param>
+        /// <returns></returns>
         async public Task<Cart> RemoveTravelPackageFromCart(int travelPackageId)
-        { 
-            Cart cartToUpdate = await FindCartByTravelPackageId(travelPackageId);
-          
+        {
+            Cart cartToUpdate = await FindCartItemByTravelPackageId(travelPackageId);
 
             // if not exist
             if (cartToUpdate != null)
             {
                 cartToUpdate.Qty--;
 
-                if (cartToUpdate.Qty >  0)
+                if (cartToUpdate.Qty > 0)
                 {
-                    _context.Cart.Update(cartToUpdate);                   
-                   
+                    _context.Cart.Update(cartToUpdate);
                 }
                 else
-                {                 
+                {
                     _context.Cart.Remove(cartToUpdate);
                 }
             }
 
             _context.SaveChanges();
-           
+
             return cartToUpdate;
         }
 
-        async public void removeCart(Guid? cartId)
+        /// <summary>
+        /// This method remove a travel package item from the user's cart.
+        /// This method is more strict than RemoveTravelPackageFromCart()
+        /// </summary>
+        /// <param name="cartId"></param>
+        async public void RemoveCartItem(Guid? cartId)
         {
             var cart = _context.Cart.Find(cartId);
             _context.Cart.Remove(cart);
@@ -110,13 +121,19 @@ namespace dream_holiday.Models.EntityServices
             await _context.SaveChangesAsync();
         }
 
-        async private Task <Cart> FindCartByTravelPackageId(int travelPackageId)
+        /// <summary>
+        /// This method is used to retrive a cart item which needs to be either
+        /// update or removed from the user's cart
+        /// </summary>
+        /// <param name="travelPackageId"></param>
+        /// <returns></returns>
+        async private Task<Cart> FindCartItemByTravelPackageId(int travelPackageId)
         {
-            var _userAccount = await _userAccountManager     
+            var _userAccount = await _userAccountManager
                                     .GetCurrentUserAccountAsync();
 
             var _travelPackage = _context.TravelPackage.Find(travelPackageId);
-                      
+
 
             var cartToUpdate = _context.Cart
                 .Where(cart =>

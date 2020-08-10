@@ -45,7 +45,7 @@ namespace dream_holiday.Controllers
         {
             try
             {
-                _cartService.removeCart(cartId);
+                _cartService.RemoveCartItem(cartId);
             }
             catch (DbUpdateException ex)
             {

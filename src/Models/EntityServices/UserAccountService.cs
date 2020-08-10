@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using dream_holiday.Data;
-using dream_holiday.Models;
 using System.Linq;
-
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using dream_holiday.Models.ViewModels;
 
 namespace dream_holiday.Models.EntityServices
 {
+    /// <summary>
+    /// This class handles all task related the tables ApplicationUser and UserAccount.
+    /// </summary>
     public class UserAccountService : BaseService
     {
 
         public UserAccountService(ApplicationDbContext context,
-            UserResolverService userService)
-            : base(context, userService)
-        {
+            UserResolverService userService) : base(context, userService)
+        { }
 
-        }
-
-
+        /// <summary>
+        /// This method return the current User account
+        /// </summary>
+        /// <returns></returns>
         async public Task<UserAccount> GetCurrentUserAccountAsync()
         {
             var user = await base.GetCurrentUserAsync();
@@ -38,7 +35,12 @@ namespace dream_holiday.Models.EntityServices
             return _userAccount ?? new UserAccount();
         }
 
-        public UserAccountViewModel findUserAccount(Guid userId)
+        /// <summary>
+        /// This method an user account by its user Id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public UserAccountViewModel FindUserAccount(Guid userId)
         {
             // select data from table  Users (ApplicationUser)
             // and left join with table UserAccount
@@ -60,27 +62,36 @@ namespace dream_holiday.Models.EntityServices
             return userAccount;
         }
 
-
-        public async Task<ApplicationUser> updateUserAsync(UserAccount userAccount)
+        /// <summary>
+        /// This method update the Application User's data
+        /// </summary>
+        /// <param name="userAccount"></param>
+        /// <returns></returns>
+        public async Task<ApplicationUser> UpdateUserAsync(UserAccount userAccount)
         {
             var user = await _userManager.FindByIdAsync(userAccount.User.Id.ToString());
             user.UserName = userAccount.User.UserName;
             user.Email = userAccount.User.Email;
 
+            // if password didn't change is not necessary to make any update
+            // This IF allows to over come the issue of a password which is hash coded twuice
             if (user.PasswordHash != userAccount.Password)
             {
-                user.PasswordHash = _userManager
-                  .PasswordHasher
-                  .HashPassword(user, userAccount.Password);
-
+                user.PasswordHash = _userManager.PasswordHasher
+                                                .HashPassword(user, userAccount.Password);
                 // update only those fields which has changed
                 await _userManager.UpdateAsync(user);
             }
 
             return user;
         }
-
-        public async Task<UserAccount> updateUserAccount(UserAccount userAccount, ApplicationUser user)
+        /// <summary>
+        /// This method update the UserAccount's data
+        /// </summary>
+        /// <param name="userAccount"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<UserAccount> UpdateUserAccount(UserAccount userAccount, ApplicationUser user)
         {
             var newUserAccount = new UserAccount();
 
@@ -90,6 +101,7 @@ namespace dream_holiday.Models.EntityServices
             newUserAccount.FirstName = userAccount.FirstName;
             newUserAccount.LastName = userAccount.LastName;
 
+            // this try/catch handles the case where the values to compose a data are not valid
             try
             {
                 newUserAccount.BirthDate = new DateTime(
@@ -102,8 +114,6 @@ namespace dream_holiday.Models.EntityServices
                 Log.Warning("Date format is wrong");
             }
 
-            //newUserAccount.Password = userAccount.Password;
-            //newUserAccount.RetypePassword = userAccount.RetypePassword;
             newUserAccount.Country = userAccount.Country;
             newUserAccount.Address = userAccount.Address;
             newUserAccount.Address2 = userAccount.Address2;
@@ -121,6 +131,7 @@ namespace dream_holiday.Models.EntityServices
             newUserAccount.CityBilling = userAccount.CityBilling;
             newUserAccount.County2Billing = userAccount.County2Billing;
 
+            // this IF handles the case to discriminate if we are doing a insert or an update
             if (UserAccountModelExists(userAccount.Id))
             {
                 _context.Update(newUserAccount);
@@ -133,7 +144,11 @@ namespace dream_holiday.Models.EntityServices
 
             return newUserAccount;
         }
-
+        /// <summary>
+        /// This method check id the user Exist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool UserAccountModelExists(Guid id)
         {
             return _context.UserAccount.Any(e => e.Id == id);

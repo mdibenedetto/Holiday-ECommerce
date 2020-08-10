@@ -33,12 +33,12 @@ namespace dream_holiday.Controllers
 
             try
             {
-                var list = await _travelPackageService.findAllTravelPackagesAsync();
+                var list = await _travelPackageService.FindAllUserTravelPackagesAsync();
 
                 model.HolidayItems = list;
                 model.TravelPackages = list.Select(t => t.TravelPackage).Distinct().ToList();
-                model.CountryNames = _travelPackageService.getTravelCountries();
-                model.Categories = _travelPackageService.getCategories();
+                model.CountryNames = _travelPackageService.GetTravelCountryNames();
+                model.Categories = _travelPackageService.GetAssignedCategories();
             }
             catch (DbUpdateException ex)
             {
@@ -75,7 +75,7 @@ namespace dream_holiday.Controllers
             try
             {
                 list = await _travelPackageService
-                              .findAllTravelPackagesAsync(destinations, categories, price);
+                              .FindAllTravelPackagesAsync(destinations, categories, price);
             }
             catch (DbUpdateException ex)
             {

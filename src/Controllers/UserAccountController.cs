@@ -39,7 +39,7 @@ namespace dream_holiday.Controllers
 
             try
             {
-                var userAccount = _userAccountService.findUserAccount(userId);
+                var userAccount = _userAccountService.FindUserAccount(userId);
                 return View(userAccount);
             }
             catch (DbUpdateException ex)
@@ -63,11 +63,11 @@ namespace dream_holiday.Controllers
                     // =======================================================
                     // 1. update table ApplicationUser
                     // =======================================================
-                    var user = await _userAccountService.updateUserAsync(userAccount);
+                    var user = await _userAccountService.UpdateUserAsync(userAccount);
                     // =======================================================
                     // 2. update table UserAccount
                     // =======================================================
-                    newUserAccount = await _userAccountService.updateUserAccount(userAccount, user);
+                    newUserAccount = await _userAccountService.UpdateUserAccount(userAccount, user);
 
                 }
                 catch (DbUpdateConcurrencyException ex)
