@@ -1,177 +1,107 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
+    var today = DateTime.Today.ToShortDateString();
+    var companyName = "Dream Holidays";
+    var companyNameWebSite = "https://dreamholiday.azurewebsites.net";
+
 }
 
-<style>
-
-
-    .h1 {
-        margin-top: 20.0pt;
-        margin-right: 0cm;
-        margin-bottom: 6.0pt;
-        margin-left: 0cm;
-        line-height: 115%;
-        font-size: 27px;
-        font-family: "Arial",sans-serif;
-        color: black;
-        font-weight: normal;
-    }
-
-    .p0 {
-        margin-top: 0cm;
-        margin-right: 0cm;
-        margin-bottom: 3.0pt;
-        margin-left: 0cm;
-        line-height: 115%;
-        font-size: 35px;
-        font-family: "Arial",sans-serif;
-        color: black;
-        text-align: center;
-    }
-
-    .p1 {
-        margin: 0cm;
-        margin-bottom: .0001pt;
-        line-height: 115%;
-        font-size: 15px;
-        font-family: "Arial",sans-serif;
-        color: black;
-    }
-
-    .p2 {
-        margin: 0cm;
-        margin-bottom: .0001pt;
-        line-height: normal;
-        font-size: 15px;
-        font-family: "Arial",sans-serif;
-        color: black;
-        text-align: center;
-    }
-
-    .p3 {
-        margin: 0cm;
-        margin-bottom: .0001pt;
-        line-height: normal;
-        font-size: 15px;
-        font-family: "Arial",sans-serif;
-        color: black;
-    }
-
-    .span1 {
-        font-size: 12px;
-        color: #999999;
-    }
-
-    .td1 {
-        width: 487.3pt;
-        background: rgb(243, 243, 243);
-        padding: 8.6pt;
-        vertical-align: top;
-        "style="width: 487.3pt;
-        background: rgb(243, 243, 243);
-        padding: 8.6pt;
-        vertical-align: top;
-    }
-
-    .table1 {
-        width: 4.9e+2pt;
-        border: none;
-        margin-left: -8.6pt;
-        border-collapse: collapse;
-    }
-</style>
+<link rel="stylesheet" href="/css/privacy.css" />
 
 <section class="main-container">
-    <p class="p0">Generic Privacy Policy template</p>
-    <h1>@ViewData["Title"]</h1> 
-    <p class="p1">&nbsp;</p>
-    <p class="p1">Last updated: <span style="background:#FFF2CC;">(add date)</span></p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1"><span style="background:#FFF2CC;">My Company (change this)</span> (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;) operates <span style="background:#FFF2CC;">http://www.mysite.com (change this)</span> (the &quot;Site&quot;). This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Site.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">We use your Personal Information only for providing and improving the Site. By using the Site, you agree to the collection and use of information in accordance with this policy.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1"><strong>Information Collection And Use</strong></p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">While using our Site, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to your name (&quot;Personal Information&quot;).</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1"><strong>Log Data</strong></p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">Like many site operators, we collect information that your browser sends whenever you visit our Site (&quot;Log Data&quot;).</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">This Log Data may include information such as your computer&#39;s Internet Protocol (&quot;IP&quot;) address, browser type, browser version, the pages of our Site that you visit, the time and date of your visit, the time spent on those pages and other statistics.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">In addition, we may use third party services such as Google Analytics that collect, monitor and analyze this &hellip;</p>
-    <p class="p1">&nbsp;</p>
-    <table class="table1">
-        <tbody>
-            <tr>
-                <td class="td1">
-                    <p class="p3">The Log Data section is for businesses that use analytics or tracking services in websites or apps, like Google Analytics. For the full disclosure section, <a href="https://termsfeed.com/privacy-policy/generator/?utm_source=Generic&utm_medium=DOCX&utm_campaign=Privacy+Policy+Templates&utm_nooverride=1"><span style="color:#1155CC;">create your own Privacy Policy</span></a>.</p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <p class="p1">&nbsp;</p>
-    <p class="p1"><strong>Communications</strong></p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">We may use your Personal Information to contact you with newsletters, marketing or promotional materials and other information that ...</p>
-    <p class="p1">&nbsp;</p>
-    <table class="table1">
-        <tbody>
-            <tr>
-                <td class="td1">
-                    <p class="p3">The Communications section is for businesses that may contact users via email (email newsletters) or other methods. For the full disclosure section, <a href="https://termsfeed.com/privacy-policy/generator/?utm_source=Generic&utm_medium=DOCX&utm_campaign=Privacy+Policy+Templates&utm_nooverride=1"><span style="color:#1155CC;">create your own Privacy Policy</span></a>.</p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <p class="p1">&nbsp;</p>
-    <p class="p1"><strong>Cookies</strong></p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">Cookies are files with small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and stored on your computer&#39;s hard drive.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">Like many sites, we use &quot;cookies&quot; to collect information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Site.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1"><strong>Security</strong></p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">The security of your Personal Information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we strive to use commercially acceptable means to protect your Personal Information, we cannot guarantee its absolute security.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1"><strong>Changes To This Privacy Policy</strong></p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">This Privacy Policy is effective as of <span style="background:#FFF2CC;">(add date)</span> and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">We reserve the right to update or change our Privacy Policy at any time and you should check this Privacy Policy periodically. Your continued use of the Service after we post any modifications to the Privacy Policy on this page will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">If we make any material changes to this Privacy Policy, we will notify you either through the email address you have provided us, or by placing a prominent notice on our website.</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1"><strong>Contact Us</strong></p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">If you have any questions about this Privacy Policy, please contact us.</p>
-    <p class="p3">&nbsp;</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p1">&nbsp;</p>
-    <p class="p3">&nbsp;</p>
-    <table style="width: 4.9e+2pt;border: none;margin-left:-10.75pt;border-collapse:collapse;">
-        <tbody>
-            <tr>
-                <td style="width: 487.3pt;padding: 5pt;vertical-align: top;">
-                    <p class="p2">
-                        <span class="span1">Disclaimer: Legal information is not legal advice.&nbsp;</span>
-                        <a href="https://termsfeed.com/legal/disclaimer">
-                            <span class="span1">Read the disclaimer</span>
-                        </a><span class="span1">.</span>
-                    </p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <p class="p1">&nbsp;</p>
+    <section class="privacy-container">
+        <h1>@ViewData["Title"]</h1>
+
+        <p class="p1">&nbsp;</p>
+        <p class="p1">Last updated: <span style="background:#FFF2CC;">(@today)</span></p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1"><span style="background:#FFF2CC;">@companyName</span> (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;) operates
+        <span style="background:#FFF2CC;">@companyNameWebSite </span> (the &quot;Site&quot;). This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Site.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">We use your Personal Information only for providing and improving the Site. By using the Site, you agree to the collection and use of information in accordance with this policy.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1"><strong>Information Collection And Use</strong></p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">While using our Site, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to your name (&quot;Personal Information&quot;).</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1"><strong>Log Data</strong></p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">Like many site operators, we collect information that your browser sends whenever you visit our Site (&quot;Log Data&quot;).</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">This Log Data may include information such as your computer&#39;s Internet Protocol (&quot;IP&quot;) address, browser type, browser version, the pages of our Site that you visit, the time and date of your visit, the time spent on those pages and other statistics.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">In addition, we may use third party services such as Google Analytics that collect, monitor and analyze this &hellip;</p>
+        <p class="p1">&nbsp;</p>
+        <table class="table1">
+            <tbody>
+                <tr>
+                    <td class="td1">
+                        <p class="p3">The Log Data section is for businesses that use analytics or tracking services in websites or apps, like Google Analytics. For the full disclosure section, <a href="https://termsfeed.com/privacy-policy/generator/?utm_source=Generic&utm_medium=DOCX&utm_campaign=Privacy+Policy+Templates&utm_nooverride=1"><span style="color:#1155CC;">create your own Privacy Policy</span></a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="p1">&nbsp;</p>
+        <p class="p1"><strong>Communications</strong></p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">We may use your Personal Information to contact you with newsletters, marketing or promotional materials and other information that ...</p>
+        <p class="p1">&nbsp;</p>
+        <table class="table1">
+            <tbody>
+                <tr>
+                    <td class="td1">
+                        <p class="p3">The Communications section is for businesses that may contact users via email (email newsletters) or other methods. For the full disclosure section, <a href="https://termsfeed.com/privacy-policy/generator/?utm_source=Generic&utm_medium=DOCX&utm_campaign=Privacy+Policy+Templates&utm_nooverride=1"><span style="color:#1155CC;">create your own Privacy Policy</span></a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="p1">&nbsp;</p>
+        <p class="p1"><strong>Cookies</strong></p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">Cookies are files with small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and stored on your computer&#39;s hard drive.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">Like many sites, we use &quot;cookies&quot; to collect information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Site.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1"><strong>Security</strong></p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">The security of your Personal Information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we strive to use commercially acceptable means to protect your Personal Information, we cannot guarantee its absolute security.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1"><strong>Changes To This Privacy Policy</strong></p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">This Privacy Policy is effective as of <span style="background:#FFF2CC;">(@today)</span> and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">We reserve the right to update or change our Privacy Policy at any time and you should check this Privacy Policy periodically. Your continued use of the Service after we post any modifications to the Privacy Policy on this page will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">If we make any material changes to this Privacy Policy, we will notify you either through the email address you have provided us, or by placing a prominent notice on our website.</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1"><strong>Contact Us</strong></p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">If you have any questions about this Privacy Policy, please contact us.</p>
+        <p class="p3">&nbsp;</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p1">&nbsp;</p>
+        <p class="p3">&nbsp;</p>
+        <table style="width: 4.9e+2pt;border: none;margin-left:-10.75pt;border-collapse:collapse;">
+            <tbody>
+                <tr>
+                    <td style="width: 487.3pt;padding: 5pt;vertical-align: top;">
+                        <p class="p2">
+                            <span class="span1">Disclaimer: Legal information is not legal advice.&nbsp;</span>
+                            <a href="https://termsfeed.com/legal/disclaimer">
+                                <span class="span1">Read the disclaimer</span>
+                            </a><span class="span1">.</span>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="p1">&nbsp;</p>
+    </section>
 
 </section>
