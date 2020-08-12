@@ -10,6 +10,7 @@ using dream_holiday.Data;
 using dream_holiday.Models;
 using System.Collections.Generic;
 using dream_holiday.Models.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace dream_holiday.Controllers
 {
@@ -18,13 +19,16 @@ namespace dream_holiday.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnv;
+        private readonly ILogger<OrderController> _logger;
 
         public TravelPackageController(
+            ILogger<OrderController> logger,
             ApplicationDbContext context,
             IWebHostEnvironment environment)
         {
             _context = context;
             _hostEnv = environment;
+            _logger = logger;
         }
 
         // GET: TravelPackage
@@ -83,6 +87,8 @@ namespace dream_holiday.Controllers
                 {
                     travelPackage.Image = UploadImage(travelPackage);
                 }
+
+                travelPackage.IsInstock = true;
 
                 _context.Add(travelPackage);
                 await _context.SaveChangesAsync();
@@ -173,9 +179,18 @@ namespace dream_holiday.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var travelPackage = await _context.TravelPackage.FindAsync(id);
-            _context.TravelPackage.Remove(travelPackage);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var travelPackage = await _context.TravelPackage.FindAsync(id);
+                travelPackage.IsInstock = false;
+                _context.TravelPackage.Update(travelPackage); 
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("TravelPackageController => Index", ex); 
+            }          
+
             return RedirectToAction(nameof(Index));
         }
 

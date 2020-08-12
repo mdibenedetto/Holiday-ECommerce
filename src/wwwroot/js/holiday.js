@@ -82,35 +82,13 @@ function filterHolidays() {
     // ==================================================
 
     url += buildListFilter(ddDestinations, chkAllDestination);
-
-    //if (!chkAllDestination.checked) { 
-
-    //    const destList = Array.prototype.map.call(
-    //        destinations.selectedOptions,
-    //        (opt) => "destinations=" + opt.value
-    //    );
-
-    //    if (destList && destList.length > 0) {
-    //        url += "&" + destList.join("&");
-    //    }
-    //}   
+ 
     // ==================================================
     // set query param: categories
     // ==================================================
 
     url += buildListFilter(ddCategories, chkAllCategories);
-
-    //if (!chkAllCategories.checked) {
-    //    const categoryList = Array.prototype.map.call(
-    //        categories.selectedOptions,
-    //        (opt) => "categories=" + opt.value
-    //    );
-
-    //    if (categoryList && categoryList.length > 0) {
-    //        url += "&" + categoryList.join("&");
-    //    }
-    //}
-
+     
     // ==================================================
 
     fetch(url)

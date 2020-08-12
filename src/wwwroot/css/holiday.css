@@ -92,6 +92,7 @@ form#formFilter div:not(:last-child) {
 
 .item-link.image-link.detail-link {
     color: transparent;
+    display: table-cell;
 }
 
 div#holiday-container {
@@ -115,9 +116,9 @@ div#holiday-container {
     margin: 0;
 }
 
-    .alert-no-result h1 {
-        font-size: 5em;
-    }
+.alert-no-result h1 {
+    font-size: 5em;
+}
 
 
 @media (max-width: 768px) {

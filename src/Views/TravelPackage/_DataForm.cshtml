@@ -4,6 +4,12 @@
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <input type="hidden" asp-for="Id" />
 
+<div class="form-group col-3">
+    <label asp-for="IsInstock" class="control-label">Is In stock</label>
+    <input asp-for="IsInstock" class="form-control" />
+    <span asp-validation-for="IsInstock" class="text-danger"></span>
+</div>
+ 
 <div class="form-group">
     <label asp-for="Country" class="control-label"></label>
     <input asp-for="Country" class="form-control" />
@@ -26,12 +32,12 @@
 
 <div class="form-group row">
     @*
-        Quantity is not really needed for Travel Packages
-        <div class="form-group col-3">
-        <label asp-for="Qty" class="control-label"></label>
-        <input asp-for="Qty" class="form-control" />
-        <span asp-validation-for="Qty" class="text-danger"></span>
-    </div>*@
+            Quantity is not really needed for Travel Packages
+            <div class="form-group col-3">
+            <label asp-for="Qty" class="control-label"></label>
+            <input asp-for="Qty" class="form-control" />
+            <span asp-validation-for="Qty" class="text-danger"></span>
+        </div>*@
     <div class="form-group col-3">
         <label asp-for="Price" class="control-label"></label>
         <input asp-for="Price" class="form-control" />

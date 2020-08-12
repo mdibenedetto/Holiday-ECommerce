@@ -29,7 +29,8 @@ namespace dream_holiday.Models.EntityServices
         public async Task<List<TravelPackageViewModel>> FindAllTravelPackagesAsync(
                         string[] destinations, int[] categories, decimal price)
         {
-            var list = await this.FindAllUserTravelPackagesAsync();
+            var list = await this.FindAllUserTravelPackagesAsync();          
+
             // filter by destination
             if (destinations != null && destinations.Length > 0)
             {
@@ -66,6 +67,7 @@ namespace dream_holiday.Models.EntityServices
             if (user == null)
             {
                 return _context.TravelPackage
+                    .Where(tp => tp.IsInstock == true)
                     .Select(tp => new TravelPackageViewModel
                     {
                         TravelPackage = tp,
@@ -77,6 +79,7 @@ namespace dream_holiday.Models.EntityServices
             var userAccount = await _userAccountService.GetCurrentUserAccountAsync();
             // userAccount == null if the current user is an Admin
             var query = (from tp in _context.TravelPackage
+                         where tp.IsInstock == true
                          select new TravelPackageViewModel
                          {
                              TravelPackage = tp,

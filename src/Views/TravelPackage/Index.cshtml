@@ -27,14 +27,17 @@
                     Description
                 </th>
                 @*<th class="col-qty">
-                    Quantity
-                </th>*@
+                        Quantity
+                    </th>*@
                 <th class="col-price">
                     Price
                 </th>
                 <th class="col-image">
                     Image
                 </th>
+                <th class="col-in-stock">
+                    In Stock
+                </th> 
                 <th class="col-action-buttons">
                     <a role="button" href="/TravelPackage/Create"
                        class="btn btn-primary">Create New</a>
@@ -58,19 +61,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.Qty)
-                </td>*@
+                @*<td>  @Html.DisplayFor(modelItem => item.Qty) </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
                     <img src="@item.Image" />
                 </td>
+                <td class="col-in-stock">
+                    @Html.DisplayFor(modelItem => item.IsInstock)
+                </td>
                 <td>
                     <span class="cell-action-buttons">
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     </span>
 
                 </td>

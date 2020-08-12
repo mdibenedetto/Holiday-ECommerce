@@ -33,5 +33,10 @@ namespace dream_holiday.Models
         [NotMapped]
         public IFormFile ImageFile { get; set; }
 
+        public TravelPackage()
+        {
+            IsInstock = true; 
+        }
+
     }
 }
