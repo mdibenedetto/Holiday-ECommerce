@@ -27,6 +27,10 @@
                     </a>
                 </section>
             }
+            else
+            {
+                <br />
+            }
 
             <section class="container body-content">
                 <h2>
@@ -40,15 +44,17 @@
                 </h4>
 
                 <p>
-                    @{
-                        var textblocks = Model.Description.Split(Environment.NewLine);
+                    @if (Model?.Description != null)
+                    {
+                        var textblocks = Model?.Description?.Split(Environment.NewLine);
                         foreach (var text in textblocks)
                         {
-                        <p>
-                            @text
-                        </p>
+                            <p>
+                                @text
+                            </p>
+                        }
                     }
-                    }
+
                     </p>
                 </section>
             </section>

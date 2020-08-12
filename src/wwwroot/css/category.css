@@ -1,13 +1,12 @@
 ﻿@import url("./custom-table.css");
 
 .main-container {
-    margin: 20px auto;
-    width: fit-content;
+    margin: 20px auto;    
 }
 
 
- textarea[name="Description"] {
-    height: 400px;
+textarea[name="Description"] {
+    height: 250px;
     resize: none;
 }
 
@@ -15,17 +14,26 @@
     max-width: 900px;
 }
 
-    .table td:nth-of-type(n+1) {
-        width: 200px;
-    }
 
-    .table th:nth-of-type(n+2) {
-        width: 200px;
-    }
+.table th:first-child {
+    width: 200px;
+}
 
-    .table td:nth-of-type(n+3) {
-        width: 200px;
-    }
+.table th:nth-of-type(n+1) {
+    width: 200px;
+}
+
+ 
+
+.col-action-buttons {
+    width: 200px;
+}
+
+
+section.main-container.category-create,
+section.main-container.category-edit {
+    max-width: fit-content;
+}
 
 
 section.main-container.category-delete,

@@ -47,40 +47,38 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Nr</th>
-                        <th scope="col">Package Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
+                        <th scope="col" class="col-id">Nr</th>
+                        <th scope="col" class="col-package-name">Package Name</th>
+                        <th scope="col" class="col-package-qty">Quantity</th>
+                        <th scope="col" class="col-price">Price</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var detail in Model)
-                    {
+                    @{
+                        decimal totPrice = 0;
+                        foreach (var detail in Model)
+                        {
+                            totPrice += detail.OrderDetail.Price;
+
+                            <tr>
+                                <th scope="row" class="cell-id"> @detail.OrderDetail.Id </th>
+                                <td class="cell-package-name">
+                                    <div class="bold"> @detail.TravelPackage?.Name </div>
+                                    <p> @detail.TravelPackage?.Description </p>
+                                </td>
+
+                                <td class="cell-qty"> @detail.OrderDetail.Qty</td>
+                                <td class="cell-price"> &euro; @(Math.Round (detail.OrderDetail.Price)) </td>
+                            </tr>
+                        }
+
                         <tr>
-                            <th scope="row"> @detail.OrderDetail.Id </th>
-
-                            <td>
-                                <div class="bold"> @detail.TravelPackage?.Name </div>
-                                <p> @detail.TravelPackage?.Description </p>
-
-                            </td>
-
-                            <td> @detail.OrderDetail.Qty</td>
-                            <td> &euro; @detail.OrderDetail.Price </td>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col">Total</th>
+                            <th scope="col"> &euro; @Math.Round(totPrice)</th>
                         </tr>
                     }
-
-
-
-
-
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col">Total</th>
-                        <th scope="col"> &euro; 1548.99</th>
-                    </tr>
-
 
                 </tbody>
             </table>

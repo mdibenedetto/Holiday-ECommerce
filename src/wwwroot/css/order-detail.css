@@ -17,6 +17,22 @@ h3 {
     opacity: 0.6;
 }
 
-    .img:hover {
-        opacity: 0.8;
-    }
+.img:hover {
+    opacity: 0.8;
+}
+
+
+th.col-price {
+    width: 100px;
+}
+
+.badge-danger { 
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.cell-action-button > span {
+    display: flex;
+    gap: 10px;
+}
+

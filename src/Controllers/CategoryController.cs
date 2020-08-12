@@ -143,8 +143,9 @@ namespace dream_holiday.Controllers
             _context.Category.Remove(category);
 
             //===============================================================
-            // If any travel package has assigned the category id 
-            // we want to remove we need to update the TravelPackage table
+            // If we want to remove a category which has been assigned 
+            // already to any TravelPackage, we need to update the 
+            // TravelPackage table as well
             //===============================================================
             var travelPackages = _context
                                 .TravelPackage

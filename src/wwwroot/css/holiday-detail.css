@@ -26,14 +26,13 @@ figure {
     margin: 0;
 }
 
- 
+
     figure .item-image {
         display: inline-flex;
         flex-direction: column;
-        background-color: #fff;
-        width: 100%;
-        max-width: 400px;
-        border-radius: 1%;
+        background-color: #fff; 
+        border-radius: 1%; 
+        height: 400px;
     }
 
 figure figcaption{

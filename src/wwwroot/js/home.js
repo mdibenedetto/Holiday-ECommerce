@@ -8,22 +8,22 @@ function loadSlider() {
     const sliderItems = [
         {
             imageUrl: sliderBaseImage + "/slide1.jpg",
-            title: "Maldives",
-            price: 2000,
-            content: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
+            title: "Spain",
+            price: 1500,
+            content: "Dive into the sunny weather of Spain.",
         },
         {
             imageUrl: sliderBaseImage + "/slide2.jpg",
             title: "Venice",
-            price: 1600,
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 1300,
+            content: "Get lost into the charming history of Italy.",
         },
         {
             imageUrl: sliderBaseImage + "/slide3.jpg",
             title: "London",
-            price: 1000,
+            price: 350,
             content:
-                "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
+                "Come to visit the stunning actrations of the city which never sleeps.",
         },
     ];
 
@@ -43,7 +43,7 @@ function loadSlider() {
 function loadBanner() {
     const bannerBaseImage = `./img/banner`;
 
-    const min = 0, max = holidayItems.length - 3;
+    const min = 0, max = holidayItems.length - 4;
     const randomIndex = Math.floor(Math.random() * max) + min;
     
     const bannerItems = holidayItems.slice(randomIndex, randomIndex + 3).map(h => h.travelPackage);
@@ -52,8 +52,6 @@ function loadBanner() {
     const temp = document.querySelector("template#card-holiday-item");
 
     bannerItems.forEach((item, index) => {
-
-
 
         const clone = temp.content.cloneNode(true);
         clone.querySelector(".item-image").src = item.image;

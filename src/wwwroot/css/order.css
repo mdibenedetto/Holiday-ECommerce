@@ -26,7 +26,12 @@ section.filters {
     gap: 3em;
 }
 
-    section.filters form section {
-        display: flex;
-        gap: 4px;
-    }
+section.filters form section {
+    display: flex;
+    gap: 4px;
+}
+
+
+a.btn.btn-danger.link-detail {
+    font-size: 75%; 
+}

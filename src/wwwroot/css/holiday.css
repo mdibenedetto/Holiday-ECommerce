@@ -28,11 +28,13 @@
     content: '|'
 }
 
-.card img {
-    width: 100%;
-    max-height: 174px;
-    border: 1px solid;
-    display: inline-block;
+.card img { 
+    width: 100%;  
+    max-height: 174px;    
+    height: 100%;
+    object-fit: cover;
+    object-position: 100% 0;
+   
 }
 
 .card-text {
@@ -116,3 +118,12 @@ div#holiday-container {
     .alert-no-result h1 {
         font-size: 5em;
     }
+
+
+@media (max-width: 768px) {
+    .col-sm-6 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}
+

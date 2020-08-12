@@ -41,7 +41,8 @@ function setLinkListener() {
     );
     links.forEach((a) =>
         a.addEventListener("click", (e) => {
-            document.body.setAttribute("data-loading", "true");
+           if(!e.metaKey)
+                document.body.setAttribute("data-loading", "true");
         })
     );
 }

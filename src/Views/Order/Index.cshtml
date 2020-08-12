@@ -75,7 +75,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Order Status </th>
-                        <th scope="col">&nbsp;</th>
+                        <th scope="col" class="col-action-buttons">&nbsp;</th>
                     </tr>
                 </thead>
 
@@ -104,8 +104,15 @@
                             <td> &euro; @(Math.Round(order.Price)) </td>
                             <td>@order.Qty </td>
                             <td>@(order.Status) </td>
-                            <td>
-                                <a href="/order/delete?orderId=@order.Id">Delete</a>
+                            <td class="cell-action-buttons">
+                                <span>
+                                    <a href="/order/detail?orderId=@order.Id"
+                                       class="btn btn-danger link-detail"
+                                       >Detail</a>
+                                    |
+                                    <a href="/order/delete?orderId=@order.Id">Delete</a>
+                                </span>
+                               
                             </td>
                         </tr>
                     }
