@@ -17,10 +17,10 @@ namespace dream_holiday
             RoleManager<ApplicationRole> roleManager,
             Data.ApplicationDbContext context)
         {
-            CleanAdminUser(context);
+            // CleanAdminUser(context);
 
-            CreateRoles(roleManager);
-            CreateDefaultUsers(userManager, context);
+            // CreateRoles(roleManager);
+            // CreateDefaultUsers(userManager, context);
         }
 
         private static void CleanAdminUser(Data.ApplicationDbContext context)
@@ -46,13 +46,13 @@ namespace dream_holiday
         {
             if (!roleManager.RoleExistsAsync(Roles.ADMIN).Result)
             {
-                ApplicationRole role = new ApplicationRole { Name = Roles.ADMIN }; 
+                ApplicationRole role = new ApplicationRole { Name = Roles.ADMIN };
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
 
             if (!roleManager.RoleExistsAsync(Roles.SUPER_USER).Result)
             {
-                ApplicationRole role = new ApplicationRole { Name = Roles.SUPER_USER };              
+                ApplicationRole role = new ApplicationRole { Name = Roles.SUPER_USER };
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
         }
@@ -79,9 +79,9 @@ namespace dream_holiday
                 {
                     userManager.AddToRoleAsync(user, Roles.ADMIN).Wait();
                     userManager.AddToRoleAsync(user, Roles.SUPER_USER).Wait();
-                } 
-            }          
-          
+                }
+            }
+
         }
 
     }
