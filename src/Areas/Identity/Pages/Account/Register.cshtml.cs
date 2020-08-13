@@ -50,8 +50,8 @@ namespace dream_holiday.Areas.Identity.Pages.Account
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public class InputModel
-        {            
-            [Required]            
+        {
+            [Required]
             [Display(Name = "UserName")]
             public string UserName { get; set; }
 
@@ -84,6 +84,32 @@ namespace dream_holiday.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            //================================================================
+            // Check that usernama and email are unique
+            //================================================================
+            ModelState.Clear();
+
+            var foundUser = _context.Users.Where(u => u.UserName == Input.UserName.Trim()).FirstOrDefault();
+
+            if (foundUser != null)
+            {
+                ModelState.AddModelError(string.Empty, "User name '" + Input.UserName + "' is already taken.");
+            }
+
+            foundUser = _context.Users.Where(u => u.Email == Input.Email.Trim()).FirstOrDefault();
+            
+            if (foundUser != null)
+            {
+                ModelState.AddModelError(string.Empty, "User email '" + Input.Email + "' is already taken.");
+            }
+
+            if(ModelState.Count > 0)
+            {
+                return Page();
+            }
+            //================================================================
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };

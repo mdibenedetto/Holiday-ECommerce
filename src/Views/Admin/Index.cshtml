@@ -1,4 +1,4 @@
-@model List<(ApplicationUser user, bool isAdmin)>
+@model List<(ApplicationUser user, bool IsAdmin, bool IsSuperUser)>
 
 @inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager
 @{
@@ -34,7 +34,7 @@
 
                 <tr>
                     <td>
-                        @elem.isAdmin
+                        @elem.IsAdmin
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserName)
@@ -47,26 +47,32 @@
                         @Html.DisplayFor(modelItem => item.AccessFailedCount)
                     </td>
                     <td>
-                        @if (userId == item.Id)
+                        @if (elem.IsSuperUser)
                         {
                             <span>
-                                No action for this user
+                                No action allowed for the <strong>Super User</strong>
+                            </span>
+                        }
+                        else if (userId == item.Id)
+                        {
+                            <span>
+                                No action allowed for the <strong>current user</strong>
                             </span>
                         }
                         else
                         {
-                            if (elem.isAdmin)
+                            if (elem.IsAdmin)
                             {
                                 <form asp-action="Downgrade" method="post">
                                     <input type="hidden" name="Id" value="@item.Id" />
-                                    <input type="submit" value="Downgrade" class="btn btn-danger" /> 
+                                    <input type="submit" value="Downgrade" class="btn btn-danger" />
                                 </form>
                             }
                             else
                             {
                                 <form asp-action="Upgrade" method="post">
-                                    <input type="hidden" name="Id" value="@item.Id"  />
-                                    <input type="submit" value="Upgrade" class="btn btn-success" /> 
+                                    <input type="hidden" name="Id" value="@item.Id" />
+                                    <input type="submit" value="Upgrade" class="btn btn-success" />
                                 </form>
                             }
                             <span>|</span>

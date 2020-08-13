@@ -31,17 +31,35 @@ namespace dream_holiday.Controllers
         // GET: /Admin
         public async Task<IActionResult> Index()
         {
+            // load all roles
+            // var roles = (from ur in _context.UserRoles
+            //              join r in _context.Roles
+            //              on ur.RoleId equals r.Id
+            //              select new { ur.RoleId, ur.UserId, r.Name });
 
+            // Func<Guid, String, bool> inInRole = (userId, roleName) =>
+            //{
+            //    var res = roles.Where(r => r.UserId == userId
+            //                && r.Name == roleName).Count() > 0;
+            //    return res;
+            //};
+
+            // find all users
             var users = await _context
                       .ApplicationUser
                       .Select(u => new
                       {
                           User = u,
-                          IsAdmin = _context.UserRoles.Count(ur => ur.UserId == u.Id) > 0
+                          IsSuperUser = _userManager.IsInRoleAsync(u, Roles.SUPER_USER).Result,
+                          IsAdmin = _userManager.IsInRoleAsync(u, Roles.ADMIN).Result
                       })
                     .ToListAsync();
 
-            var list = users.Select(u => (u.User, u.IsAdmin)).ToList();
+            var list = users.Select(u => (u.User, u.IsAdmin, u.IsSuperUser))
+                .OrderBy(u => u.IsSuperUser)
+                .OrderBy(u => u.IsAdmin)
+                .OrderBy(u => u.User.UserName)
+                .ToList() ;
 
             return View(list);
         }

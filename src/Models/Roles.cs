@@ -10,5 +10,6 @@ namespace dream_holiday.Models
     public static class Roles
     {
         public const string ADMIN = "Administrator";
+        public const string SUPER_USER = "SUPER_USER";
     }
 }

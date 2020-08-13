@@ -5,3 +5,9 @@
 table form {
     display: inline-block;
 }
+
+
+strong {
+    font-weight: bold;
+    color: green;
+}

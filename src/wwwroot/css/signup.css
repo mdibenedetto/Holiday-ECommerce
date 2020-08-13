@@ -1,118 +1,125 @@
 ﻿body {
-    margin: 0;
-    padding: 0;
-    background: #efefef;
-    font-size: 16px;
-    color: #777;
-    font-family: sans-serif;
-    font-weight: 300;
+  margin: 0;
+  padding: 0;
+  background: #efefef;
+  font-size: 16px;
+  color: #777;
+  font-family: sans-serif;
+  font-weight: 300;
 }
 
 .login-box {
-    position: relative;
-    margin: 5% auto;
-    height: 400px;
-    width: 600px;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  position: relative;
+  height: 400px;
+  width: 600px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .left-box {
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    padding: 40px;
-    width: 300px;
-    height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 40px;
+  width: 300px;
+  height: 400px;
 }
 
 h1 {
-    margin: 0 0 20px 0;
-    font-weight: 300;
-    font-size: 28px;
+  margin: 0 0 20px 0;
+  font-weight: 300;
+  font-size: 28px;
 }
 
 input[type="email"],
 input[type="password"],
 input[type="text"] {
-    display: block;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    padding: 4px;
-    width: 220px;
-    height: 32px;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #aaa;
-    font-family: sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    transition: 0.2s ease;
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 4px;
+  width: 220px;
+  height: 32px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #aaa;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.2s ease;
 }
 
 input[type="submit"] {
-    margin-bottom: 28px;
-    width: 120px;
-    height: 32px;
-    background: #236ee0;
-    border: none;
-    border-radius: 2px;
-    color: #fff;
-    font-family: sans-serif;
-    font-weight: 500;
-    text-transform: uppercase;
-    transition: 0.2s ease;
-    cursor: pointer;
+  margin-bottom: 28px;
+  width: 120px;
+  height: 32px;
+  background: #236ee0;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover,
 input[type="submit"]:focus {
-    background: #71aceb;
-    transition: 0.2s ease;
+  background: #71aceb;
+  transition: 0.2s ease;
 }
 
 .right-box {
-    position: absolute;
-    top: 0;
-    right: 0;
-    box-sizing: border-box;
-    padding: 40px;
-    width: 300px;
-    height: 400px;
-    background-image: url(../img/images/sign-up.jpg);
-    background-size: cover;
-    background-position: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 40px;
+  width: 300px;
+  height: 400px;
+  background-image: url(../img/images/sign-up.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
 .right-box {
-    display: block;
-    margin-bottom: 40px;
-    font-size: 28px;
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  display: block;
+  margin-bottom: 40px;
+  font-size: 28px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-.text-danger.validation-summary-errors{
-    display: none;
+.text-danger.validation-summary-errors[data-error-count="0"] {
+  display: none;
 }
 
-input.input-validation-error{
-    margin: 0;
+.text-danger.validation-summary-errors {
+  width: 600px;
+}
+.text-danger.validation-summary-errors ul {
+  margin: 0;
+  padding: 0 10px;
+}
+
+input.input-validation-error {
+  margin: 0;
 }
 
 form:not(valid) .form-group {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-.form-control{
-    border-radius: 0;
-    outline: none;
+.form-control {
+  border-radius: 0;
+  outline: none;
 }
 
-.form-control:focus { 
-    border-bottom-color: #80bdff;
-    outline: 0;
-    box-shadow: unset;
+.form-control:focus {
+  border-bottom-color: #80bdff;
+  outline: 0;
+  box-shadow: unset;
 }
