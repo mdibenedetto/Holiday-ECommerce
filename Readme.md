@@ -1,6 +1,6 @@
 # VERSION 1
 
-## RIGHT NOW THIS LINK DOES NOT WORK
+## Right now this link is offline
 
  
 ~~[ASP.NET WEB SITE - V1 -Dream Holidays - Demo link](https://dreamholiday.azurewebsites.net/)~~
